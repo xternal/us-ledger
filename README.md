@@ -37,7 +37,7 @@ pnpm preview         # the same with drafts, in public-preview/, never deployed
 - The home page leads with the twenty: a chart of how far each has climbed, then one entry each with the platform's words, its step and the latest dated evidence. Each person's page has the engine's key promises, timeline, promises by month and every area.
 - Every page has its own title, description, canonical address and a 1200x630 share image drawn from its content (`scripts/share-image.ts`); `robots.txt` welcomes search and AI crawlers, with `sitemap.xml` and `llms.txt`.
 - The mark is the Capitol's dome in a few lines, with a dot in the ladder's colour (`scripts/mark.ts`): in the header, the favicon, the home-screen icon and every share image.
-- Not yet deployed: usledger.org does not resolve.
+- Live at [usledger.org](https://usledger.org) since 20 October 2026, on Vercel (team GUZH, project `us-ledger`, settings in `vercel.json`): every push to `main` deploys. The domain is registered at Cloudflare, with A records for `@` and `www` pointing at Vercel, DNS only; `www` redirects to the bare address.
 - Actors: the President, the Vice President, the Secretaries of State, Defense and the Treasury, the envoys and ambassadors, with their roles from official pages; the Republican and Democratic parties; the Administration and Congress as the bodies that deliver.
 
 ## Add a promise
