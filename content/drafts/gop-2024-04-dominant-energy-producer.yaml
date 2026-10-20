@@ -8,13 +8,19 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 4 of 20
 area: energy
-status: promised
+status: delivering
+status_note:
+  en: "EIA: US crude oil production averaged a record 13.6 million barrels a day in 2025, about 40% more than Russia or Saudi Arabia, and US dry natural gas production reached a record 113.7 billion cubic feet a day in July 2026 (released 30 September 2026). The US already led the world in crude oil (since 2018) and natural gas (since 2009) before 2025. In total primary energy, China produced more: 126.6 quadrillion Btu in 2023, against 102.8 for the US that year (107.2 in 2025, EIA)."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "EIA: China country analysis (2025), total primary energy production"
+    url: https://www.eia.gov/international/content/analysis/countries_long/china/pdf/China-2025.pdf
+  - title: "EIA Monthly Energy Review, table 1.1: US primary energy production"
+    url: https://www.eia.gov/totalenergy/data/browser/?tbl=T01.01
 versions:
   - version: 1
     text: "MAKE AMERICA THE DOMINANT ENERGY PRODUCER IN THE WORLD, BY FAR!"
@@ -34,6 +40,31 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-01-20"
+    type: in_plan
+    text:
+      en: "Executive Order 14154 sets a policy to expand energy production on federal lands and waters and orders agencies to review rules that burden it"
+    evidence_url: https://www.federalregister.gov/documents/2025/01/29/2025-01956/unleashing-american-energy
+  - date: "2025-01-20"
+    type: in_plan
+    text:
+      en: "Executive Order 14156 declares a national energy emergency and directs agencies to use emergency and other powers to speed energy production and infrastructure"
+    evidence_url: https://www.federalregister.gov/documents/2025/01/29/2025-02003/declaring-a-national-energy-emergency
+  - date: "2025-07-04"
+    type: legislated
+    text:
+      en: "Public Law 119-21 requires at least 4 onshore oil and gas lease sales a year in each of nine states (section 50101) and at least 30 offshore lease sales in the Gulf of America region (section 50102)"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2026-07-09"
+    type: delivering
+    text:
+      en: "EIA reports US crude oil production averaged a record 13.6 million barrels a day in 2025, about 40% more than Russia or Saudi Arabia"
+    evidence_url: https://www.eia.gov/todayinenergy/detail.php?id=67844
+  - date: "2026-09-30"
+    type: delivering
+    text:
+      en: "EIA data show US dry natural gas production of 3.52 trillion cubic feet in July 2026, about 113.7 billion cubic feet a day, the highest month on record"
+    evidence_url: https://www.eia.gov/dnav/ng/hist/n9070us2m.htm
 replies: []
 corrections: []
 reviews: []

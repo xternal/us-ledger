@@ -8,13 +8,17 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 3 of 20
 area: inflation
-status: promised
+status: in_plan
+status_note:
+  en: "The consumer price index for all urban consumers (CPI-U) rose 3.7% in the 12 months to September 2026 (BLS, 14 October 2026), against 3.0% in the 12 months to January 2025. The words set no figure; the Federal Reserve's longer-run goal is inflation of 2% a year, measured by a different index (PCE)."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "Federal Reserve: Statement on Longer-Run Goals and Monetary Policy Strategy"
+    url: https://www.federalreserve.gov/monetarypolicy/files/FOMC_LongerRunGoals.pdf
 versions:
   - version: 1
     text: "END INFLATION, AND MAKE AMERICA AFFORDABLE AGAIN"
@@ -34,6 +38,31 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-01-20"
+    type: in_plan
+    text:
+      en: "A presidential memorandum directs all executive departments and agencies to deliver emergency price relief, including on housing, health care, food and fuel, and to report every 30 days"
+    evidence_url: https://www.federalregister.gov/documents/2025/01/28/2025-01904/delivering-emergency-price-relief-for-american-families-and-defeating-the-cost-of-living-crisis
+  - date: "2025-11-14"
+    type: in_plan
+    text:
+      en: "Executive Order 14360 removes certain agricultural products from the reciprocal tariffs, from 13 November 2025"
+    evidence_url: https://www.federalregister.gov/documents/2025/11/25/2025-21203/modifying-the-scope-of-the-reciprocal-tariffs-with-respect-to-certain-agricultural-products
+  - date: "2026-03-13"
+    type: in_plan
+    text:
+      en: "Executive Order 14394 directs agencies to revise wetland, stormwater, permitting and energy-code rules to lower the cost of building homes"
+    evidence_url: https://www.federalregister.gov/documents/2026/03/18/2026-05388/removing-regulatory-barriers-to-affordable-home-construction
+  - date: "2026-08-26"
+    type: in_plan
+    text:
+      en: "Proclamation 11059 raises the 2026 tariff-rate quota for imported beef by 300,000 metric tons"
+    evidence_url: https://www.federalregister.gov/documents/2026/08/31/2026-17842/further-ensuring-affordable-beef-for-the-american-consumer
+  - date: "2026-10-05"
+    type: in_plan
+    text:
+      en: "Executive Order 14435 directs the Treasury to defer certain federal excise taxes on diesel fuel due from 5 October to 31 December 2026"
+    evidence_url: https://www.federalregister.gov/documents/2026/10/09/2026-20855/emergency-tax-relief-on-diesel-fuel
 replies: []
 corrections: []
 reviews: []

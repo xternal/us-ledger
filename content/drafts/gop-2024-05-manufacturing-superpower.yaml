@@ -8,13 +8,19 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 5 of 20
 area: manufacturing
-status: promised
+status: legislated
+status_note:
+  en: "BLS: 12,652,000 people worked in manufacturing in September 2026 (preliminary, released 2 October 2026), against 12,673,000 in January 2025 and a low of 12,580,000 in December 2025. The words set no figure for a manufacturing superpower."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "Supreme Court: Learning Resources, Inc. v. Trump, No. 24-1287 (20 February 2026)"
+    url: https://www.supremecourt.gov/opinions/25pdf/24-1287_4gcj.pdf
+  - title: "BLS: all employees, manufacturing (series CES3000000001)"
+    url: https://data.bls.gov/timeseries/CES3000000001
 versions:
   - version: 1
     text: "STOP OUTSOURCING, AND TURN THE UNITED STATES INTO A MANUFACTURING SUPERPOWER"
@@ -34,6 +40,36 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-02-10"
+    type: in_plan
+    text:
+      en: "Proclamation 10896 sets a 25% tariff on steel imports from all countries and ends country exemptions"
+    evidence_url: https://www.federalregister.gov/documents/2025/02/18/2025-02833/adjusting-imports-of-steel-into-the-united-states
+  - date: "2025-04-02"
+    type: in_plan
+    text:
+      en: "Executive Order 14257 adds a 10% tariff on imports from all trading partners from 5 April 2025, with higher rates for listed countries, citing \"the hollowing out of our manufacturing base\""
+    evidence_url: https://www.federalregister.gov/documents/2025/04/07/2025-06063/regulating-imports-with-a-reciprocal-tariff-to-rectify-trade-practices-that-contribute-to-large-and
+  - date: "2025-06-03"
+    type: in_plan
+    text:
+      en: "Proclamation 10947 raises the tariffs on steel and aluminum imports from 25% to 50%, from 4 June 2025"
+    evidence_url: https://www.federalregister.gov/documents/2025/06/09/2025-10524/adjusting-imports-of-aluminum-and-steel-into-the-united-states
+  - date: "2025-07-04"
+    type: legislated
+    text:
+      en: "Public Law 119-21 lets factories whose construction begins after 19 January 2025 and before 1 January 2029, and that are in service before 2031, be written off in full in their first year (section 70307)"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2026-02-20"
+    type: in_plan
+    text:
+      en: "After the Supreme Court holds that the International Emergency Economic Powers Act does not authorize tariffs, Executive Order 14389 ends the tariffs set under that Act, and Proclamation 11012 imposes a 10% import surcharge under section 122 of the Trade Act of 1974 for 150 days from 24 February 2026"
+    evidence_url: https://www.federalregister.gov/documents/2026/02/25/2026-03824/imposing-a-temporary-import-surcharge-to-address-fundamental-international-payments-problems
+  - date: "2026-07-23"
+    type: in_plan
+    text:
+      en: "A presidential memorandum imposes section 301 tariffs of 10% or 12.5% on goods from economies that the Trade Representative found do not enforce bans on imports made with forced labor"
+    evidence_url: https://www.federalregister.gov/documents/2026/07/28/2026-15274/actions-by-the-united-states-in-the-investigations-under-section-301-of-the-trade-act-of-1974-of-the
 replies: []
 corrections: []
 reviews: []
