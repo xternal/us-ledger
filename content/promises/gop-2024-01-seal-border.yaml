@@ -63,4 +63,8 @@ events:
     evidence_url: https://www.cbp.gov/newsroom/national-media-release/under-president-trump-and-secretary-mullin-dhs-announces-lowest
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-20"
+    approves: true

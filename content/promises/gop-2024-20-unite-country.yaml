@@ -1,34 +1,32 @@
 format: openpromises/1
-id: gop-2024-09-end-weaponization
+id: gop-2024-20-unite-country
 headline:
-  en: "End the use of government against Americans"
+  en: "Unite the country with record success"
 actor_id: republican-party
 made_on: "2024-07-15"
 venue: platform
 venue_label:
-  en: 2024 Republican Platform, promise 9 of 20
-area: government
+  en: 2024 Republican Platform, promise 20 of 20
+area: unity
 status: unscoreable
 status_note:
-  en: "The words name no outcome that an official document or statistic could show as reached, and they state no cost or deadline beyond acting \"very quickly\" (page 6). Executive Order 14147 (20 January 2025) uses the same words in its title; it is listed under sources and recorded here, not scored."
+  en: "The words name no outcome that an official document or statistic could show as reached, and they state no cost or deadline beyond acting \"very quickly\" (page 6)."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
-  - title: "Executive Order 14147: Ending the Weaponization of the Federal Government (20 January 2025)"
-    url: https://www.federalregister.gov/documents/2025/01/28/2025-01900/ending-the-weaponization-of-the-federal-government
 versions:
   - version: 1
-    text: "END THE WEAPONIZATION OF GOVERNMENT AGAINST THE AMERICAN PEOPLE"
+    text: "UNITE OUR COUNTRY BY BRINGING IT TO NEW AND RECORD LEVELS OF SUCCESS"
     recorded_on: "2026-10-20"
     source_url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
-    page: 6
+    page: 7
     quote_checked_on: null
     source_text:
       file: rnc-2024-platform.txt
-      span: [1266, 1329]
+      span: [2314, 2382]
     parameters: null
 events:
   - date: "2024-07-15"
@@ -41,4 +39,8 @@ events:
       en: "Recorded as unscoreable: the words set no measurable outcome, cost or deadline"
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-20"
+    approves: true
