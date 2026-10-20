@@ -8,13 +8,17 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 12 of 20
 area: military
-status: promised
+status: funded
+status_note:
+  en: "The words set no measure of \"the strongest and most powerful\". OMB puts the defense topline at about $1 trillion for fiscal year 2026, including Public Law 119-21, and the fiscal year 2027 request at $1.5 trillion (budget fact sheet, April 2026)."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "OMB: fiscal year 2027 budget, topline fact sheet (April 2026)"
+    url: https://www.whitehouse.gov/wp-content/uploads/2026/04/fiscal-year-2027-topline-fact-sheet.pdf
 versions:
   - version: 1
     text: "STRENGTHEN AND MODERNIZE OUR MILITARY, MAKING IT, WITHOUT QUESTION, THE STRONGEST AND MOST POWERFUL IN THE WORLD"
@@ -34,6 +38,21 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-07-04"
+    type: funded
+    text:
+      en: "Public Law 119-21 appropriates defense funds available until 30 September 2029, including $29.2 billion for shipbuilding (section 20002) and $24.4 billion for air and missile defense (section 20003)"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2025-12-18"
+    type: legislated
+    text:
+      en: "The National Defense Authorization Act for Fiscal Year 2026 becomes Public Law 119-60"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ60/html/PLAW-119publ60.htm
+  - date: "2026-02-03"
+    type: funded
+    text:
+      en: "The Department of Defense Appropriations Act, 2026 is enacted as part of Public Law 119-75"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ75/html/PLAW-119publ75.htm
 replies: []
 corrections: []
 reviews: []

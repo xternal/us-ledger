@@ -8,13 +8,19 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 11 of 20
 area: cities
-status: promised
+status: delivering
+status_note:
+  en: "DC police data: violent crime fell 29% in 2025 (2,475 offenses, against 3,475 in 2024), but from 1 January to 19 October 2026 it is 12% higher than a year earlier (2,294 against 2,050), with homicides down 27% and assaults with a dangerous weapon up 41% (MPD, as of 20 October 2026, preliminary, DC Code definitions). On 20 November 2025 a federal court found the National Guard deployment in Washington unlawful and stayed its own order. \"Clean\" and \"beautiful\" have no official measure, and no city other than Washington has comparable federal steps on this card."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "Metropolitan Police Department: District crime data at a glance"
+    url: https://mpdc.dc.gov/dailycrime
+  - title: "District of Columbia v. Trump, D.D.C.: memorandum opinion on the National Guard deployment (20 November 2025)"
+    url: https://oag.dc.gov/sites/default/files/2025-11/National_Guard_Ruling.pdf
 versions:
   - version: 1
     text: "REBUILD OUR CITIES, INCLUDING WASHINGTON DC, MAKING THEM SAFE, CLEAN, AND BEAUTIFUL AGAIN"
@@ -34,6 +40,31 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-03-27"
+    type: in_plan
+    text:
+      en: "Executive Order 14252 sets a policy to make Washington, DC \"safe, beautiful, and prosperous\" and creates the D.C. Safe and Beautiful Task Force"
+    evidence_url: https://www.federalregister.gov/documents/2025/04/03/2025-05837/making-the-district-of-columbia-safe-and-beautiful
+  - date: "2025-08-11"
+    type: in_plan
+    text:
+      en: "Executive Order 14333 declares a crime emergency in Washington, DC and directs the Mayor to provide the Metropolitan Police for federal purposes under section 740 of the Home Rule Act"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500843/html/DCPD-202500843.htm
+  - date: "2025-08-11"
+    type: delivering
+    text:
+      en: "A presidential memorandum mobilizes the DC National Guard; a federal court later records more than 2,000 Guard troops on the city's streets"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500845/html/DCPD-202500845.htm
+  - date: "2025-08-25"
+    type: in_plan
+    text:
+      en: "Executive Order 14339 orders more Park Police and prosecutors for Washington, a specialized DC National Guard unit and a standing National Guard quick reaction force for use across the country"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500866/html/DCPD-202500866.htm
+  - date: "2025-09-15"
+    type: in_plan
+    text:
+      en: "A presidential memorandum creates the Memphis Safe Task Force and asks Tennessee's governor to provide National Guard units"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500916/html/DCPD-202500916.htm
 replies: []
 corrections: []
 reviews: []

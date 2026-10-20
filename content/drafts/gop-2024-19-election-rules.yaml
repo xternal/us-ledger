@@ -8,13 +8,23 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 19 of 20
 area: elections
-status: promised
+status: in_plan
+status_note:
+  en: "No law has been enacted. The House passed the SAVE Act, requiring proof of citizenship to register, on 10 April 2025 (220 to 208), and a revised version on 11 February 2026 (218 to 213); the Senate has held no final vote. A federal court permanently barred the proof-of-citizenship requirement in Executive Order 14248 on 31 October 2025. On 29 June 2026 the Supreme Court ruled, 5 to 4, in Watson v. RNC that federal Election Day law does not stop states counting mail ballots that arrive after Election Day. Over 98% of jurisdictions already used voting systems with a paper record of every vote (EAC, May 2025)."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "H.R. 22, SAVE Act: bill status"
+    url: https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr22.xml
+  - title: "S. 1383: bill status (House amendment of 11 February 2026 and Senate action)"
+    url: https://www.govinfo.gov/bulkdata/BILLSTATUS/119/s/BILLSTATUS-119s1383.xml
+  - title: "LULAC v. Executive Office of the President, D.D.C.: order of 31 October 2025"
+    url: https://storage.courtlistener.com/recap/gov.uscourts.dcd.279032/gov.uscourts.dcd.279032.217.0_1.pdf
+  - title: "Supreme Court docket 24-1260: Watson v. Republican National Committee"
+    url: https://www.supremecourt.gov/search.aspx?filename=/docket/docketfiles/html/public/24-1260.html
 versions:
   - version: 1
     text: "SECURE OUR ELECTIONS, INCLUDING SAME DAY VOTING, VOTER IDENTIFICATION, PAPER BALLOTS, AND PROOF OF CITIZENSHIP"
@@ -34,6 +44,21 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-03-25"
+    type: in_plan
+    text:
+      en: "Executive Order 14248 directs the Election Assistance Commission to require documentary proof of US citizenship on the federal voter registration form, sets standards for voter-verifiable paper records, and directs enforcement against states that count ballots received after Election Day"
+    evidence_url: https://www.federalregister.gov/documents/2025/03/28/2025-05523/preserving-and-protecting-the-integrity-of-american-elections
+  - date: "2025-05-28"
+    type: in_plan
+    text:
+      en: "The Election Assistance Commission adopts a policy in support of fully paper-based, auditable voting systems"
+    evidence_url: https://www.eac.gov/news/2025/05/28/eac-commissioners-issue-policy-support-paper-based-and-auditable-voting-systems
+  - date: "2026-03-31"
+    type: in_plan
+    text:
+      en: "Executive Order 14399 directs Homeland Security to compile state citizenship lists for election officials and orders a Postal Service rulemaking on mail ballots"
+    evidence_url: https://www.federalregister.gov/documents/2026/04/03/2026-06601/ensuring-citizenship-verification-and-integrity-in-federal-elections
 replies: []
 corrections: []
 reviews: []
