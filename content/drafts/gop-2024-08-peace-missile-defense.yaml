@@ -8,13 +8,23 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 8 of 20
 area: peace
-status: promised
+status: funded
+status_note:
+  en: "Missile shield: Public Law 119-21 provides $24.4 billion for air and missile defense, including space-based interceptors; no shield is in service. Middle East: the Gaza ceasefire agreed in October 2025 holds; the US and Iran fought from 28 February to 7 April 2026 (OMB), and the US struck Iran again from 1 September 2026 (presidential notice to Congress). Europe: there is no ceasefire or peace agreement between Russia and Ukraine; on 23 September 2026 the Secretary of State said a limited energy and grain ceasefire \"doesn't end the war\". \"Prevent World War Three\" has no measure."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "Presidential statement on the US strikes on Fordow, Natanz and Esfahan (21 June 2025)"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202500711/html/DCPD-202500711.htm
+  - title: "OMB: Statement of Administration Policy on S.J. Res. 172 (June 2026)"
+    url: https://www.whitehouse.gov/wp-content/uploads/2026/06/SAP-SJR172.pdf
+  - title: "House Document 119-193: notification of military action against Iran commenced on 1 September 2026"
+    url: https://www.govinfo.gov/content/pkg/CDOC-119hdoc193/html/CDOC-119hdoc193.htm
+  - title: "Secretary of State Marco Rubio: remarks to the press (23 September 2026)"
+    url: https://www.state.gov/releases/office-of-the-spokesman/2026/09/secretary-of-state-marco-rubio-remarks-to-press-16
 versions:
   - version: 1
     text: "PREVENT WORLD WAR THREE, RESTORE PEACE IN EUROPE AND IN THE MIDDLE EAST, AND BUILD A GREAT IRON DOME MISSILE DEFENSE SHIELD OVER OUR ENTIRE COUNTRY -- ALL MADE IN AMERICA"
@@ -34,6 +44,26 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-01-27"
+    type: in_plan
+    text:
+      en: "Executive Order 14186 directs the Secretary of Defense to submit within 60 days a plan for a missile defense shield over the US, including space-based interceptors"
+    evidence_url: https://www.federalregister.gov/documents/2025/02/03/2025-02182/the-iron-dome-for-america
+  - date: "2025-05-20"
+    type: in_plan
+    text:
+      en: "The President announces a chosen \"Golden Dome\" missile defense architecture, puts its cost at about $175 billion and says it should be in operation before the end of his term"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500622/html/DCPD-202500622.htm
+  - date: "2025-07-04"
+    type: funded
+    text:
+      en: "Public Law 119-21 appropriates $24.4 billion for air and missile defense (section 20003), including $5.6 billion for space-based and boost-phase interceptors and $7.2 billion for space-based sensors, available until 30 September 2029"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2025-10-13"
+    type: delivering
+    text:
+      en: "Leaders sign the Trump Declaration for Enduring Peace and Prosperity, welcoming the agreement that ends more than two years of war in Gaza"
+    evidence_url: https://www.whitehouse.gov/presidential-actions/2025/10/the-trump-declaration-for-enduring-peace-and-prosperity/
 replies: []
 corrections: []
 reviews: []
