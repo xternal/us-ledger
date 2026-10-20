@@ -1,0 +1,39 @@
+format: openpromises/1
+id: gop-2024-07-defend-constitution
+headline:
+  en: "Defend the Constitution and the Bill of Rights"
+actor_id: republican-party
+made_on: "2024-07-15"
+venue: platform
+venue_label:
+  en: 2024 Republican Platform, promise 7 of 20
+area: rights
+status: promised
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "The 2024 Republican Platform: Make America Great Again!"
+    url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+versions:
+  - version: 1
+    text: "DEFEND OUR CONSTITUTION, OUR BILL OF RIGHTS, AND OUR FUNDAMENTAL FREEDOMS, INCLUDING FREEDOM OF SPEECH, FREEDOM OF RELIGION, AND THE RIGHT TO KEEP AND BEAR ARMS"
+    recorded_on: "2026-10-20"
+    source_url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+    page: 6
+    quote_checked_on: null
+    source_text:
+      file: rnc-2024-platform.txt
+      span: [930, 1090]
+    parameters:
+      when:
+        en: '"Very quickly" after winning the White House and Republican majorities in the House and Senate (page 6)'
+      deadline: null
+events:
+  - date: "2024-07-15"
+    type: promised
+    text:
+      en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+replies: []
+corrections: []
+reviews: []

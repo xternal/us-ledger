@@ -1,0 +1,10 @@
+format: openpromises/1
+id: us-administration
+kind: government
+name:
+  en: The Administration
+short_name:
+  en: Administration
+standing: in_power
+same_as:
+  - https://www.whitehouse.gov

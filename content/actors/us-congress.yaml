@@ -1,0 +1,8 @@
+format: openpromises/1
+id: us-congress
+kind: legislature
+name:
+  en: Congress
+standing: public_body
+same_as:
+  - https://www.congress.gov

@@ -1,0 +1,39 @@
+format: openpromises/1
+id: gop-2024-14-social-security-medicare
+headline:
+  en: "No cuts to Social Security or Medicare"
+actor_id: republican-party
+made_on: "2024-07-15"
+venue: platform
+venue_label:
+  en: 2024 Republican Platform, promise 14 of 20
+area: social_security
+status: promised
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "The 2024 Republican Platform: Make America Great Again!"
+    url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+versions:
+  - version: 1
+    text: "FIGHT FOR AND PROTECT SOCIAL SECURITY AND MEDICARE WITH NO CUTS, INCLUDING NO CHANGES TO THE RETIREMENT AGE"
+    recorded_on: "2026-10-20"
+    source_url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+    page: 7
+    quote_checked_on: null
+    source_text:
+      file: rnc-2024-platform.txt
+      span: [1720, 1827]
+    parameters:
+      when:
+        en: '"Very quickly" after winning the White House and Republican majorities in the House and Senate (page 6)'
+      deadline: null
+events:
+  - date: "2024-07-15"
+    type: promised
+    text:
+      en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+replies: []
+corrections: []
+reviews: []

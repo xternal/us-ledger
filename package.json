@@ -1,0 +1,29 @@
+{
+  "name": "us-ledger",
+  "private": true,
+  "description": "What the US President and senior officials promise, starting with the 20 promises of the 2024 Republican Platform: the exact words, the deadline, the cost, and a timeline that moves only on evidence",
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "validate": "openpromises validate",
+    "lint:words": "openpromises lint",
+    "stats": "openpromises stats",
+    "build": "node scripts/build.ts",
+    "openpromises:provenance": "node scripts/openpromises-provenance.ts",
+    "check": "pnpm validate && pnpm lint:words && pnpm build",
+    "preview": "node scripts/build.ts --preview"
+  },
+  "devDependencies": {
+    "@openpromises/cli": "0.11.0",
+    "@openpromises/core": "0.11.0",
+    "@openpromises/files": "0.11.0",
+    "@openpromises/publish": "0.11.0",
+    "@openpromises/react": "0.11.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  }
+}
