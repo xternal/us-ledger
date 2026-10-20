@@ -1,23 +1,158 @@
-/* The site's own layout around the engine's components; colours come from the engine's tokens (styles.css). */
-body { margin: 0; background: var(--op-bg); color: var(--op-ink); font-family: system-ui, sans-serif; line-height: 1.5; }
-.site-header, main, .site-footer { max-width: 46rem; margin: 0 auto; padding: 0 16px; }
-.site-header { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: baseline; padding-top: 1rem; padding-bottom: 1rem; }
-.site-name { font-weight: 700; text-decoration: none; color: inherit; }
-.site-header nav a { margin-right: 1rem; }
-.site-footer { margin-top: 3rem; padding-bottom: 2rem; font-size: 0.9rem; }
-.lede { font-size: 1.1rem; }
-.coverage { border-collapse: collapse; width: 100%; margin: 1.5rem 0; }
-.coverage caption { text-align: left; font-weight: 600; padding-bottom: 0.5rem; }
-.coverage th, .coverage td { text-align: left; padding: 0.3rem 0.5rem; border-bottom: 1px solid currentColor; border-bottom-color: color-mix(in srgb, currentColor 15%, transparent); }
-.coverage td { text-align: right; white-space: nowrap; }
-.coverage__none td { opacity: 0.75; }
-.platform { margin: 2rem 0; }
-.platform__promise { margin: 0 0 1.5rem; padding: 1rem 1.25rem; border-left: 4px solid var(--op-accent); background: color-mix(in srgb, var(--op-accent) 6%, transparent); }
-.platform__promise blockquote { margin: 0 0 0.75rem; font-size: 1.15rem; font-weight: 600; }
-.platform__promise blockquote p { margin: 0; }
-.platform__promise figcaption { font-size: 0.95rem; }
-.platform__grid { list-style: none; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
-.platform__grid .platform__promise { margin: 0; }
-.platform__label { display: block; font-weight: 700; margin-bottom: 0.5rem; }
-.platform__grid blockquote { font-size: 0.95rem; }
-.preview-banner { max-width: 46rem; margin: 0 auto 1rem; padding: 0.5rem 16px; background: color-mix(in srgb, var(--op-accent) 12%, transparent); font-weight: 600; }
+/*
+ * USLedger.org's own layout around the engine's components. Colours are tokens (tokens.css, generated from
+ * scripts/palette.ts and checked by scripts/contrast.ts); the engine's components read the same --op-* tokens.
+ * Source Serif 4 (SIL Open Font Licence) is served from this site; body text uses the reader's system font.
+ */
+@font-face { font-family: "Source Serif 4"; src: url("/fonts/source-serif-4-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Serif 4"; src: url("/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+
+:root {
+  --serif: "Source Serif 4", "Iowan Old Style", Charter, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --wrap: 46rem;
+  --wide: 72rem;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--op-bg); color: var(--op-ink); font: 1rem/1.55 var(--sans); }
+a { color: var(--op-accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--op-accent); outline-offset: 2px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; }
+h1 { font-size: clamp(2rem, 1.35rem + 2.6vw, 3.1rem); margin: 0.35rem 0 1rem; }
+h2 { font-size: clamp(1.45rem, 1.2rem + 1vw, 1.9rem); margin: 2.5rem 0 1rem; }
+h3 { font-size: 1.2rem; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: -9999px; top: 0.5rem; z-index: 20; padding: 0.5rem 0.75rem; background: var(--op-bg); }
+.skip:focus { left: 16px; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
+.wrap--wide { max-width: var(--wide); }
+main { padding-bottom: 1rem; }
+.lede { font-size: 1.15rem; max-width: 42rem; }
+.note, .updated, .section-lede { color: var(--op-muted); max-width: 42rem; }
+.updated { font-size: 0.9rem; margin: 1rem 0 0; }
+
+/* Header: the site's name and the menu, the current section marked (aria-current). */
+.site-header { border-bottom: 1px solid var(--op-line); }
+.site-header .wrap { max-width: var(--wide); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.35rem 1.5rem; padding-top: 0.8rem; padding-bottom: 0.8rem; }
+.brand { color: var(--op-ink); text-decoration: none; font-family: var(--serif); font-weight: 600; font-size: 1.4rem; letter-spacing: -0.015em; }
+.brand__tld { color: var(--op-accent); }
+.site-nav { max-width: 100%; }
+.site-nav ul, .onpage ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.2rem; overflow-x: auto; scrollbar-width: none; }
+.site-nav ul::-webkit-scrollbar, .onpage ul::-webkit-scrollbar { display: none; }
+.site-nav a, .onpage a { display: block; padding: 0.4rem 0.75rem; border-radius: 999px; color: var(--op-muted); text-decoration: none; white-space: nowrap; }
+.site-nav a:hover, .onpage a:hover { color: var(--op-ink); background: var(--op-surface); }
+.site-nav a[aria-current] { color: var(--op-ink); background: var(--op-sunk); font-weight: 600; }
+.preview-banner { max-width: var(--wide); margin: 0 auto; padding: 0.5rem 16px; background: var(--op-sunk); font-weight: 600; font-size: 0.9rem; }
+
+/* Home: the hero, with the climb chart beside the words on wide screens. */
+.hero { display: grid; gap: 1.5rem 3rem; padding: 2.25rem 0 0.5rem; }
+@media (min-width: 62rem) {
+  .hero { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); align-items: center; }
+  .hero .tally, .hero .updated { grid-column: 1 / -1; }
+}
+.kicker { margin: 0; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--op-muted); }
+.hero h1 { font-size: clamp(2.2rem, 1.5rem + 2.2vw, 3.1rem); line-height: 1.05; }
+
+/* The climb chart: a bar for each of the twenty, as tall as the step it has reached. */
+.climb { margin: 0; padding: 1.25rem 1.25rem 1rem; background: var(--op-surface); border: 1px solid var(--op-line); border-radius: var(--op-radius); }
+.climb__plot { --row: 2rem; --num: 1.5rem; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.75rem; }
+.climb__axis { list-style: none; margin: 0; padding: 0; display: grid; grid-template-rows: repeat(var(--rows), var(--row)); font-size: 0.75rem; color: var(--op-muted); }
+.climb__axis li { display: flex; align-items: center; justify-content: flex-end; white-space: nowrap; }
+.climb__bars {
+  list-style: none; margin: 0 0 var(--num); padding: 0; position: relative;
+  display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 3px;
+  height: calc(var(--rows) * var(--row));
+  background: repeating-linear-gradient(to top, var(--ul-grid) 0 1px, transparent 1px var(--row));
+  border-bottom: 2px solid var(--op-line-strong);
+}
+.climb__bars li { position: relative; }
+.climb__bars a { position: absolute; inset: 0 0 calc(-1 * var(--num)); display: block; color: inherit; text-decoration: none; border-radius: 3px; }
+.climb__bar { position: absolute; left: 0; right: 0; bottom: var(--num); height: calc(var(--h) * var(--row) - 4px); background: var(--ul-bar); border-radius: 3px 3px 0 0; transition: filter 0.15s; }
+.climb__bars li[data-kind="top"] .climb__bar { background: var(--op-good); }
+.climb__bars li[data-kind="ended"] .climb__bar { background: var(--op-bad); }
+.climb__bars li[data-kind="off"] .climb__bar { background: transparent; border: 1.5px dashed var(--op-faint); border-bottom: 0; }
+.climb__n { position: absolute; left: 0; right: 0; bottom: 0; height: var(--num); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--op-muted); font-variant-numeric: tabular-nums; }
+.climb__bars a:hover .climb__bar, .climb__bars a:focus-visible .climb__bar { filter: brightness(1.15) saturate(1.1); }
+.climb__bars a:hover .climb__n, .climb__bars a:focus-visible .climb__n { color: var(--op-ink); font-weight: 700; }
+.climb figcaption { font-size: 0.85rem; color: var(--op-muted); margin-top: 0.25rem; }
+@media (max-width: 34rem) {
+  .climb { padding: 1rem 0.75rem 0.75rem; }
+  .climb__plot { --row: 1.7rem; gap: 0.4rem; }
+  .climb__axis { font-size: 0.66rem; }
+  .climb__bars { gap: 2px; }
+  .climb__plot { --num: 2.1rem; }
+  .climb__n { font-size: 0.66rem; height: 1.2rem; bottom: 0.9rem; }
+  .climb__bars li:nth-child(even) .climb__n { bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .climb__bar { transition: none; } }
+
+/* The tally: how many of the twenty are at each status, zeros included. */
+.tally { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tally li { display: inline-flex; align-items: baseline; gap: 0.4rem; padding: 0.3rem 0.8rem; border: 1px solid var(--op-line); border-radius: 999px; background: var(--op-surface); font-size: 0.9rem; }
+.tally strong { font-family: var(--serif); font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.tally .tally__none { background: transparent; color: var(--op-muted); }
+
+/* "On this page": sticks to the top while the reader scrolls; the section in view is marked. */
+.onpage { position: sticky; top: 0; z-index: 5; margin: 2rem -16px 1.5rem; padding: 0.45rem 16px; background: var(--op-bg); border-bottom: 1px solid var(--op-line); }
+.onpage a { font-size: 0.92rem; padding: 0.3rem 0.75rem; }
+.onpage a[aria-current] { background: var(--op-ink); color: var(--op-bg); }
+.home-section { scroll-margin-top: 4rem; margin-bottom: 3.5rem; }
+.home-section > h2 { margin-top: 0; }
+
+/* The ledger: one entry for each of the twenty. */
+.ledger { list-style: none; margin: 1.25rem 0 1rem; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); }
+.entry { position: relative; display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 0 0.9rem; padding: 1.1rem 1.2rem 1.15rem; background: var(--op-surface); border: 1px solid var(--op-line); border-radius: var(--op-radius); scroll-margin-top: 4.5rem; transition: border-color 0.15s; }
+.entry:hover { border-color: var(--op-line-strong); }
+.entry:target { outline: 2px solid var(--op-accent); outline-offset: 2px; }
+.entry__n { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 2.1rem; line-height: 1; color: var(--op-accent); font-variant-numeric: lining-nums tabular-nums; }
+.entry__title { margin: 0.1rem 0 0.4rem; font-size: 1.25rem; }
+.entry__title a { color: var(--op-ink); text-decoration: none; }
+.entry__title a::after { content: ""; position: absolute; inset: 0; border-radius: var(--op-radius); }
+.entry__title a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+.entry__title a:focus-visible { outline: none; }
+.entry:has(.entry__title a:focus-visible) { outline: 2px solid var(--op-accent); outline-offset: 2px; }
+.entry__words { margin: 0 0 0.9rem; font-family: var(--serif); font-variant-caps: all-small-caps; letter-spacing: 0.035em; font-size: 1.08rem; line-height: 1.3; color: var(--op-muted); }
+.entry__words p { margin: 0; }
+.entry__latest { margin: 0.8rem 0 0; font-size: 0.9rem; color: var(--op-muted); }
+.entry__latest time { color: var(--op-ink); font-weight: 600; margin-right: 0.2rem; }
+.entry__later { position: relative; z-index: 1; margin: 0.5rem 0 0; font-size: 0.9rem; }
+@media (prefers-reduced-motion: reduce) { .entry { transition: none; } }
+
+/* A promise's meter: six short bars filled up to its step, its status in words beside them. */
+.meter { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.7rem; }
+.meter__steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--steps), 1fr); gap: 3px; width: 9rem; }
+.meter__steps li { height: 0.5rem; border-radius: 2px; background: var(--op-line-strong); }
+.meter__steps li[data-on] { background: var(--ul-bar); }
+.meter[data-kind="top"] .meter__steps li[data-on] { background: var(--op-good); }
+.meter__of { font-size: 0.82rem; color: var(--op-muted); }
+
+/* How a status moves. */
+.steps { list-style: none; padding: 0; margin: 1.25rem 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr)); }
+.steps li { padding: 0.85rem 1rem 1rem; background: var(--op-surface); border-top: 3px solid var(--ul-bar); border-radius: 0 0 var(--op-radius-small) var(--op-radius-small); font-size: 0.93rem; }
+.steps li[data-top] { border-top-color: var(--op-good); }
+.steps strong { display: block; font-family: var(--serif); font-size: 1.1rem; margin-bottom: 0.2rem; }
+
+/* Questions. */
+.faq { margin: 0; max-width: 46rem; }
+.faq dt { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; margin-top: 1.4rem; }
+.faq dt:first-child { margin-top: 0; }
+.faq dd { margin: 0.35rem 0 0; }
+
+/* People. */
+.people { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
+.people a { display: flex; flex-direction: column; gap: 0.15rem; height: 100%; padding: 0.9rem 1rem; background: var(--op-surface); border: 1px solid var(--op-line); border-radius: var(--op-radius); color: var(--op-ink); text-decoration: none; }
+.people a:hover { border-color: var(--op-line-strong); }
+.people strong { font-family: var(--serif); font-size: 1.12rem; }
+.people span { color: var(--op-muted); font-size: 0.9rem; }
+.people .people__count { margin-top: auto; padding-top: 0.35rem; color: var(--op-ink); }
+.roles { padding-left: 1.2rem; color: var(--op-muted); }
+.rules li { margin-bottom: 0.6rem; }
+
+/* Footer, with the credit. */
+.site-footer { margin-top: 4rem; border-top: 1px solid var(--op-line); background: var(--op-surface); }
+.site-footer .wrap { max-width: var(--wide); padding-top: 2rem; padding-bottom: 2.5rem; display: grid; gap: 0.55rem; font-size: 0.9rem; color: var(--op-muted); }
+.site-footer p { margin: 0; }
+.site-footer__about { max-width: 40rem; color: var(--op-ink); }
+.site-footer__credit { margin-top: 0.6rem; }
