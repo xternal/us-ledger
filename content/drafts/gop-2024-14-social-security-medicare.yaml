@@ -8,13 +8,19 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 14 of 20
 area: social_security
-status: promised
+status: delivering
+status_note:
+  en: "The full retirement age remains 67 for people born in 1960 or later (42 U.S.C. 416(l)), and benefits rose by a 2.8% cost-of-living adjustment for 2026 (SSA). OMB found that no statutory PAYGO sequester, which would cut Medicare, was required for fiscal year 2026, after Congress reset the scorecards. Public Law 119-21 (section 71201) ends Medicare coverage for some lawfully present non-citizens 18 months after enactment, in January 2027."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "42 U.S.C. 416(l): retirement age (US Code, 2023 edition)"
+    url: https://www.govinfo.gov/content/pkg/USCODE-2023-title42/html/USCODE-2023-title42-chap7-subchapII-sec416.htm
+  - title: "Public Law 119-21, section 71201: limiting Medicare coverage of certain individuals"
+    url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
 versions:
   - version: 1
     text: "FIGHT FOR AND PROTECT SOCIAL SECURITY AND MEDICARE WITH NO CUTS, INCLUDING NO CHANGES TO THE RETIREMENT AGE"
@@ -34,6 +40,21 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-11-03"
+    type: delivering
+    text:
+      en: "The Social Security Administration sets a 2.8% cost-of-living increase in benefits, effective December 2025"
+    evidence_url: https://www.federalregister.gov/documents/2025/11/03/2025-19763/cost-of-living-increase-and-other-determinations-for-2026
+  - date: "2025-11-12"
+    type: legislated
+    text:
+      en: "Public Law 119-37 sets the balances on both statutory PAYGO scorecards to zero after the session ends"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ37/html/PLAW-119publ37.htm
+  - date: "2026-01-28"
+    type: delivering
+    text:
+      en: "OMB's annual PAYGO report finds no debit on either scorecard for fiscal year 2026, so no sequestration order is required"
+    evidence_url: https://www.federalregister.gov/documents/2026/01/28/2026-01651/notice-2025-statutory-pay-as-you-go-act-annual-report
 replies: []
 corrections: []
 reviews: []

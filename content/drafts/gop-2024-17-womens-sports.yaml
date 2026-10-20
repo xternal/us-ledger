@@ -8,13 +8,21 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 17 of 20
 area: sports
-status: promised
+status: delivering
+status_note:
+  en: "No official statistic counts transgender athletes in women's sports. On 30 June 2026 the Supreme Court held that Title IX allows schools to keep women's and girls' teams for biological females (West Virginia v. B.P.J.); the ruling allows such rules but does not require them. No federal law was enacted: the House passed H.R. 28 by 218 to 206 in January 2025, and a Senate motion to end debate on S. 9 failed, 51 to 45, in March 2025."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "Supreme Court: West Virginia v. B.P.J., No. 24-43 (30 June 2026)"
+    url: https://www.supremecourt.gov/opinions/25pdf/24-43_2b35.pdf
+  - title: "House roll call 12: Protection of Women and Girls in Sports Act, H.R. 28 (14 January 2025)"
+    url: https://clerk.house.gov/Votes/2025012
+  - title: "Congressional Record daily digest, 3 March 2025: Senate cloture vote on S. 9"
+    url: https://www.govinfo.gov/content/pkg/CREC-2025-03-03/pdf/CREC-2025-03-03-dailydigest.pdf
 versions:
   - version: 1
     text: "KEEP MEN OUT OF WOMEN’S SPORTS"
@@ -34,6 +42,16 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-02-05"
+    type: in_plan
+    text:
+      en: "Executive Order 14201 sets a policy to rescind all funds from education programs that let males compete in women's sports, and directs the Education Department to give priority to Title IX enforcement"
+    evidence_url: https://www.whitehouse.gov/presidential-actions/2025/02/keeping-men-out-of-womens-sports/
+  - date: "2025-04-16"
+    type: delivering
+    text:
+      en: "The Justice Department sues Maine's Department of Education under Title IX over its policy on transgender girls in girls' sports"
+    evidence_url: https://www.justice.gov/opa/gallery/attorney-general-pamela-bondi-announces-enforcement-actions-against-state-maine
 replies: []
 corrections: []
 reviews: []
