@@ -1,0 +1,69 @@
+format: openpromises/1
+id: hegseth-drones-2025
+headline:
+  en: "Tens of thousands of small drones in 2026"
+actor_id: pete-hegseth
+made_on: "2025-12-02"
+venue: social
+venue_label:
+  en: Video posted to social media, quoted by the War Department
+area: military
+status: delivering
+status_note:
+  en: "The War Department had ordered 30,000 small drones and shipped nearly 2,000 to the services by 17 June 2026, with 60,000 more to be ordered in September (Defense Innovation Unit). The department now aims to field more than 200,000 by 2027. No official count of drones delivered in 2026 as a whole has been published by 20 October 2026."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "War Department: As Promised, War Department Moving Out Fast on Drone Dominance (6 February 2026)"
+    url: https://www.war.gov/News/News-Stories/Article/Article/4399192/as-promised-war-department-moving-out-fast-on-drone-dominance/
+  - title: "War Department: Drone Dominance Program Receives First Order, Gauntlet II Gets Underway (17 June 2026)"
+    url: https://www.war.gov/News/News-Stories/Article/Article/4520698/drone-dominance-program-receives-first-order-gauntlet-ii-gets-underway/
+versions:
+  - version: 1
+    text: "We will deliver tens of thousands of small drones to our force in 2026, and hundreds of thousands of them by 2027."
+    recorded_on: "2026-10-20"
+    source_url: https://www.war.gov/News/News-Stories/Article/Article/4346822/war-department-asks-industry-to-make-more-than-300k-drones-quickly-cheaply/
+    quote_checked_on: null
+    source_text:
+      file: war-gov-4346822.txt
+      span: [721, 835]
+    parameters:
+      who:
+        en: Combat units of the armed forces
+      cost:
+        range: [0.9, 1, 1.1]
+        quality: sourced
+        by:
+          kind: official
+          name: War Department
+        note:
+          en: "The $1 billion from Public Law 119-21 the department says funds about 340,000 small drones over two years; low–high is an editorial ±10% because the source gives a single figure. The department put the programme at $1.1 billion in June 2026."
+        sources:
+          - title: "War Department Asks Industry to Make More Than 300K Drones, Quickly, Cheaply (2 December 2025)"
+            url: https://www.war.gov/News/News-Stories/Article/Article/4346822/war-department-asks-industry-to-make-more-than-300k-drones-quickly-cheaply/
+      when:
+        en: "Tens of thousands during 2026; hundreds of thousands \"by 2027\""
+      deadline: "2026-12-31"
+events:
+  - date: "2025-12-02"
+    type: promised
+    text:
+      en: "In a video posted to social media, the Secretary says tens of thousands of small drones will reach the force in 2026 and hundreds of thousands by 2027"
+  - date: "2026-02-03"
+    type: in_plan
+    text:
+      en: "The War Department selects 25 vendors; up to 12 of them are to make 30,000 drones at about $5,000 each, for delivery by July"
+    evidence_url: https://www.war.gov/News/News-Stories/Article/Article/4399192/as-promised-war-department-moving-out-fast-on-drone-dominance/
+  - date: "2026-06-17"
+    type: delivering
+    text:
+      en: "The Defense Innovation Unit says 30,000 drones have been ordered and are being delivered, with nearly 2,000 units shipped to the services"
+    evidence_url: https://www.war.gov/News/News-Stories/Article/Article/4520698/drone-dominance-program-receives-first-order-gauntlet-ii-gets-underway/
+  - date: "2026-12-31"
+    type: deadline
+    text:
+      en: "The end of 2026, when tens of thousands of drones are to have been delivered"
+replies: []
+corrections: []
+reviews: []

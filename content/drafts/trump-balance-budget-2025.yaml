@@ -1,0 +1,44 @@
+format: openpromises/1
+id: trump-balance-budget-2025
+headline:
+  en: "Balance the federal budget"
+actor_id: donald-trump
+made_on: "2025-03-04"
+venue: speech
+venue_label:
+  en: Address to a joint session of Congress, 4 March 2025
+area: other
+status: promised
+status_note:
+  en: "The federal deficit was $1,992 billion in fiscal year 2026, October 2025 to September 2026, against $1,775 billion in fiscal year 2025 (Monthly Treasury Statement, September 2026). The words set no date beyond \"the near future\"."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "Spending and tax laws that would balance the budget are passed by Congress."
+origin: manual
+sources:
+  - title: "Monthly Treasury Statement: summary of receipts and outlays (Bureau of the Fiscal Service)"
+    url: https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/summary-of-receipts-and-outlays-of-the-u-s-government
+versions:
+  - version: 1
+    text: "And, in the near future, I want to do what has not been done in 24 years: balance the Federal budget. We're going to balance it."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500325/html/DCPD-202500325.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500325.txt
+      span: [305, 433]
+    parameters:
+      who:
+        en: Federal taxpayers
+      when:
+        en: "\"In the near future\""
+      deadline: null
+events:
+  - date: "2025-03-04"
+    type: promised
+    text:
+      en: "In his address to Congress, the President says he will balance the federal budget \"in the near future\""
+replies: []
+corrections: []
+reviews: []

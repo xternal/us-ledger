@@ -1,0 +1,59 @@
+format: openpromises/1
+id: waltz-haiti-force-2025
+headline:
+  en: "A Haiti gang force of more than 5,000"
+actor_id: mike-waltz
+made_on: "2025-09-30"
+venue: speech
+venue_label:
+  en: UN Security Council, after the vote on resolution 2793 on Haiti
+area: other
+status: delivering
+status_note:
+  en: "On 19 October 2026 the Ambassador said 2,000 troops of the Gang Suppression Force were on the ground in Haiti and 3,500 more were due in the coming months, against 5,500 authorized places; the Security Council renewed the mandate on 29 September 2026. The figures are the US Mission's; no UN deployment count was read."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "Troops come from contributing countries under a UN Security Council mandate drafted by the US and Panama."
+origin: manual
+sources:
+  - title: "Ambassador Mike Waltz: remarks after the Security Council renewed the Gang Suppression Force mandate (29 September 2026)"
+    url: https://usun.usmission.gov/remarks-following-the-adoption-of-a-un-security-council-resolution-to-renew-the-gang-suppression-force-mandate/
+versions:
+  - version: 1
+    text: "Critically, this mission will have the ability to scale up to a more than 5,000-person mission, thanks to the logistics support from a UN Support Office in Haiti."
+    recorded_on: "2026-10-20"
+    source_url: https://usun.usmission.gov/explanation-of-vote-on-following-the-adoption-of-the-un-security-council-resolution-for-a-un-support-office-and-gang-suppression-force-in-haiti/
+    quote_checked_on: null
+    source_text:
+      file: usun-2025-09-30-haiti.txt
+      span: [508, 670]
+    parameters:
+      who:
+        en: People in Haiti, where gangs control much of the capital
+      when:
+        en: No date stated; the first mandate ran for 12 months
+      deadline: null
+events:
+  - date: "2025-09-30"
+    type: promised
+    text:
+      en: "After the Security Council creates the Gang Suppression Force for Haiti, the Ambassador says it will be able to grow to more than 5,000 people"
+  - date: "2026-04-23"
+    type: in_plan
+    text:
+      en: "The US Mission tells the Security Council the force, with military and police units, will grow to 5,500 personnel"
+    evidence_url: https://usun.usmission.gov/remarks-at-a-un-security-council-briefing-on-the-situation-in-haiti/
+  - date: "2026-09-29"
+    type: delivering
+    text:
+      en: "As the mandate is renewed, the Ambassador says more than 1,500 troops are on the ground and 4,000 more are due in the coming months"
+    evidence_url: https://usun.usmission.gov/remarks-following-the-adoption-of-a-un-security-council-resolution-to-renew-the-gang-suppression-force-mandate/
+  - date: "2026-10-19"
+    type: delivering
+    text:
+      en: "The Ambassador says 2,000 troops are on the ground and 3,500 more are due in the coming months"
+    evidence_url: https://usun.usmission.gov/remarks-at-a-un-security-council-briefing-on-haiti-12/
+replies: []
+corrections: []
+reviews: []

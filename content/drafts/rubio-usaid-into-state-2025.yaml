@@ -1,0 +1,47 @@
+format: openpromises/1
+id: rubio-usaid-into-state-2025
+headline:
+  en: "USAID functions into State by 1 July 2025"
+actor_id: marco-rubio
+made_on: "2025-03-28"
+venue: statement
+venue_label:
+  en: Secretary of State's press statement on foreign assistance, with the note printed under it
+area: other
+status: delivered
+status_note:
+  en: "The USAID Office of Inspector General records that on 1 July 2025 the State Department took over many of USAID's functions and its active awards. On the same day the Secretary wrote that USAID would cease to implement foreign assistance from 1 July."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Marco Rubio: Making Foreign Aid Great Again (State Department, 1 July 2025)"
+    url: https://statedept.substack.com/p/making-foreign-aid-great-again
+  - title: "USAID Office of Inspector General: Evaluation of USAID's Transfer of Foreign Assistance Award Information to the Department of State (project announcement, 24 February 2026)"
+    url: https://oig.usaid.gov/node/8065
+versions:
+  - version: 1
+    text: "Today, the Department of State and the U.S. Agency for International Development (USAID) have notified Congress on their intent to undertake a reorganization that would involve realigning certain USAID functions to the Department by July 1, 2025, and discontinuing the remaining USAID functions that do not align with Administration priorities."
+    recorded_on: "2026-10-20"
+    source_url: https://www.state.gov/on-delivering-an-america-first-foreign-assistance-program
+    quote_checked_on: null
+    source_text:
+      file: state-2025-03-28-foreign-assistance.txt
+      span: [804, 1148]
+    parameters:
+      when:
+        en: By 1 July 2025
+      deadline: "2025-07-01"
+events:
+  - date: "2025-03-28"
+    type: promised
+    text:
+      en: "The Secretary of State's statement says State and USAID have told Congress they intend to move some USAID functions into State by 1 July 2025 and end the rest"
+  - date: "2025-07-01"
+    type: delivered
+    text:
+      en: "The State Department takes over many of USAID's functions and its active awards, according to the USAID Office of Inspector General"
+    evidence_url: https://oig.usaid.gov/node/8065
+replies: []
+corrections: []
+reviews: []

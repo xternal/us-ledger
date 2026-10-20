@@ -1,0 +1,86 @@
+format: openpromises/1
+id: trump-golden-dome-2025
+headline:
+  en: "Golden Dome working before the term ends"
+actor_id: donald-trump
+made_on: "2025-05-20"
+venue: press_conference
+venue_label:
+  en: Announcement on missile defense in the Oval Office, with questions from reporters
+area: peace
+status: delivering
+status_note:
+  en: "Public Law 119-21 provides $24.4 billion for air and missile defense, including space-based interceptors. Space Force agreements with 12 companies, worth up to $3.2 billion, are to show a space-based interceptor \"by 2028\"; nothing official says the whole system will be in operation by 20 January 2029. The 2027 budget asks for $18 billion more, not yet appropriated. CBO estimated on 12 May 2026 that a system with the capabilities the January 2025 order describes would cost about $1.2 trillion to develop, deploy and operate for 20 years; the War Department has published no total cost or design."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Executive Order 14186: The Iron Dome for America (27 January 2025)"
+    url: https://www.federalregister.gov/documents/2025/02/03/2025-02182/the-iron-dome-for-america
+  - title: "CBO: Potential Costs of a National Missile Defense System (12 May 2026)"
+    url: https://www.cbo.gov/publication/62379
+  - title: "Department of War Releases the President's Fiscal Year 2027 Budget (21 April 2026)"
+    url: https://www.war.gov/News/Releases/Release/Article/4466038/department-of-war-releases-the-presidents-fiscal-year-2027-budget/
+versions:
+  - version: 1
+    text: "This design for the Golden Dome will integrate with our existing defense capabilities and should be fully operational before the end of my term. So we'll have it done in about 3 years."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500622/html/DCPD-202500622.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500622.txt
+      span: [329, 513]
+    parameters:
+      who:
+        en: Everyone in the United States, against missile attack
+      cost:
+        range: [157.5, 175, 192.5]
+        quality: sourced
+        by:
+          kind: official
+          name: The White House
+        note:
+          en: "The President's figure for the completed system, said in the same remarks (\"$175 billion total cost of this, when it's completed\"). Low–high is an editorial ±10% because he gave a single figure. CBO's estimate of about $1.2 trillion over 20 years covers a notional system and its operation, so it is not the same measure."
+        sources:
+          - title: "Remarks on United States Missile Defense, 20 May 2025"
+            url: https://www.govinfo.gov/content/pkg/DCPD-202500622/html/DCPD-202500622.htm
+      when:
+        en: "Before the end of the President's term on 20 January 2029; \"in about 3 years\" from May 2025"
+      deadline: "2029-01-20"
+events:
+  - date: "2025-05-20"
+    type: promised
+    text:
+      en: "The President announces a chosen Golden Dome design, says it should be fully operational before the end of his term, in about three years, and puts its completed cost at about $175 billion"
+  - date: "2025-05-24"
+    type: restated
+    text:
+      en: "At the West Point commencement, the President says the Golden Dome will be completed before he leaves office"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500639/html/DCPD-202500639.htm
+  - date: "2025-07-04"
+    type: funded
+    text:
+      en: "Public Law 119-21 appropriates $24.4 billion for air and missile defense (section 20003), including $5.6 billion for space-based and boost-phase interceptors and $7.2 billion for space-based sensors, available until 30 September 2029"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2025-12-18"
+    type: legislated
+    text:
+      en: "The 2026 defense authorization law, Public Law 119-60, requires a yearly report to Congress with a cost estimate and a schedule for the Golden Dome's initial and full operational capability (section 1652)"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ60/html/PLAW-119publ60.htm
+  - date: "2026-04-21"
+    type: in_plan
+    text:
+      en: "The 2027 budget request includes $18 billion \"to begin operationalizing\" the Golden Dome"
+    evidence_url: https://www.war.gov/News/Releases/Release/Article/4466038/department-of-war-releases-the-presidents-fiscal-year-2027-budget/
+  - date: "2026-04-24"
+    type: delivering
+    text:
+      en: "Space Systems Command reports 20 agreements with 12 companies, worth up to $3.2 billion, for space-based interceptors to be shown working in the Golden Dome by 2028"
+    evidence_url: https://www.ssc.spaceforce.mil/Newsroom/Article-Display/Article/4470337/space-forces-space-based-interceptor-program-to-counter-growing-speed-and-maneu
+  - date: "2029-01-20"
+    type: deadline
+    text:
+      en: "The end of the President's term"
+replies: []
+corrections: []
+reviews: []

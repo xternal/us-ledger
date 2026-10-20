@@ -1,0 +1,61 @@
+format: openpromises/1
+id: trump-ten-for-one-regulations-2025
+headline:
+  en: "Ten regulations repealed for each new one"
+actor_id: donald-trump
+made_on: "2025-01-31"
+venue: executive_order
+venue_label:
+  en: Executive Order 14192, Unleashing Prosperity Through Deregulation
+area: regulation
+status: delivering
+status_note:
+  en: "OMB's final accounting for fiscal year 2025 counts 646 deregulatory actions against 5 significant regulatory actions (\"129 to 1\"), and a net cost of new rules of −$211.8 billion in present value, below zero as the order required for that year. Under OMB's guidance (M-25-20), a new rule counts as a regulatory action only if it is significant and costs more than zero; a deregulatory action is any final action whose total costs are below zero. The order applies to every new regulation, with no end date; no accounting for fiscal year 2026 has been published by 20 October 2026."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Executive Order 14192 (Federal Register, 6 February 2025)"
+    url: https://www.federalregister.gov/documents/2025/02/06/2025-02345/unleashing-prosperity-through-deregulation
+  - title: "OMB memorandum M-25-20: guidance implementing section 3 of Executive Order 14192"
+    url: https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-20-Guidance-Implementing-Section-3-of-Executive-Order-14192-Titled-Unleashing-Prosperity-Through-Deregulation.pdf
+  - title: "OMB: Final Accounting for Fiscal Year 2025 under Executive Order 14192 (reginfo.gov)"
+    url: https://www.reginfo.gov/public/pdf/eo14192/Final_Accounting_for_Fiscal_Year_2025_under_EO_14192.pdf
+versions:
+  - version: 1
+    text: "(a) Unless prohibited by law, whenever an executive department or agency (agency) publicly proposes for notice and comment or otherwise promulgates a new regulation, it shall identify at least 10 existing regulations to be repealed."
+    recorded_on: "2026-10-20"
+    source_url: https://www.federalregister.gov/documents/full_text/html/2025/02/06/2025-02345.html
+    quote_checked_on: null
+    source_text:
+      file: fr-2025-02345.txt
+      span: [332, 564]
+    parameters:
+      who:
+        en: Federal agencies that issue regulations, and the people and businesses the rules apply to
+      when:
+        en: "For every new regulation from 31 January 2025. For fiscal year 2025 the same order also requires the total cost of new regulations to be \"significantly less than zero\"."
+      deadline: null
+events:
+  - date: "2025-01-31"
+    type: promised
+    text:
+      en: "Executive Order 14192 requires agencies to identify at least 10 existing regulations to repeal for each new one, and a net cost below zero for new rules in fiscal year 2025"
+  - date: "2025-03-04"
+    type: restated
+    text:
+      en: "In his address to Congress, the President says he has directed that 10 old regulations be eliminated for every new one"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500325/html/DCPD-202500325.htm
+  - date: "2025-03-26"
+    type: in_plan
+    text:
+      en: "OMB memorandum M-25-20 tells agencies how to apply the ten-for-one rule and the fiscal year 2025 cost cap"
+    evidence_url: https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-20-Guidance-Implementing-Section-3-of-Executive-Order-14192-Titled-Unleashing-Prosperity-Through-Deregulation.pdf
+  - date: "2025-12-22"
+    type: delivering
+    text:
+      en: "OMB's final accounting for fiscal year 2025 reports 646 deregulatory actions and 5 significant regulatory actions, with a net cost of −$211.8 billion in present value"
+    evidence_url: https://www.reginfo.gov/public/pdf/eo14192/Final_Accounting_for_Fiscal_Year_2025_under_EO_14192.pdf
+replies: []
+corrections: []
+reviews: []

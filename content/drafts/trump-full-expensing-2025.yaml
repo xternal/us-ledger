@@ -1,0 +1,54 @@
+format: openpromises/1
+id: trump-full-expensing-2025
+headline:
+  en: "100% expensing, back to 20 January 2025"
+actor_id: donald-trump
+made_on: "2025-03-04"
+venue: speech
+venue_label:
+  en: Address to a joint session of Congress, 4 March 2025
+area: manufacturing
+status: delivered
+status_note:
+  en: "Public Law 119-21 (4 July 2025) makes 100% first-year expensing permanent for business property acquired after 19 January 2025 (section 70301), and allows 100% expensing of new factory buildings whose construction begins after 19 January 2025 and before 2029 (section 70307). IRS Notice 2026-11 (14 January 2026) sets out how to claim it."
+responsible:
+  actor_id: us-congress
+origin: manual
+sources:
+  - title: "Public Law 119-21, sections 70301 and 70307"
+    url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - title: "IRS Notice 2026-11: Interim Guidance on Additional First Year Depreciation Deduction under § 168(k)"
+    url: https://www.irs.gov/pub/irs-drop/n-26-11.pdf
+versions:
+  - version: 1
+    text: "In addition, as part of our tax cuts, we want to cut taxes on domestic production and all manufacturing. And just as we did before, we will provide 100-percent expensing. It will be retroactive to January 20, 2025"
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500325/html/DCPD-202500325.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500325.txt
+      span: [435, 648]
+    parameters:
+      who:
+        en: Businesses that buy equipment and other property, manufacturers among them
+      when:
+        en: "In the tax cuts then before Congress, applying back to 20 January 2025"
+      deadline: null
+events:
+  - date: "2025-03-04"
+    type: promised
+    text:
+      en: "In his address to Congress, the President says the tax cuts will provide 100% expensing, retroactive to 20 January 2025"
+  - date: "2025-07-04"
+    type: legislated
+    text:
+      en: "Public Law 119-21 makes 100% first-year expensing permanent for property acquired after 19 January 2025 (section 70301) and adds 100% expensing for qualified production property (section 70307)"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2026-01-14"
+    type: delivered
+    text:
+      en: "The Treasury and the IRS issue Notice 2026-11, interim rules for claiming the 100% deduction on property acquired and placed in service after 19 January 2025"
+    evidence_url: https://www.irs.gov/pub/irs-drop/n-26-11.pdf
+replies: []
+corrections: []
+reviews: []

@@ -1,0 +1,59 @@
+format: openpromises/1
+id: trump-dc-national-guard-2025
+headline:
+  en: "800 National Guard members for Washington DC"
+actor_id: donald-trump
+made_on: "2025-08-11"
+venue: press_conference
+venue_label:
+  en: The President's news conference on crime in Washington DC
+area: cities
+status: delivered
+status_note:
+  en: "About 800 Army and Air National Guard members were activated in Washington DC by 14 August 2025 (War Department). About 4,700 Guard members from 19 states were serving in the DC task force on 25 June 2026; legislation before Congress would extend the mission to 2 January 2029. The memorandum keeps the mobilization in place until the President decides that law and order have been restored."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Memorandum on Restoring Law and Order in the District of Columbia (11 August 2025)"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202500845/html/DCPD-202500845.htm
+  - title: "War Department: National Guard Says Domestic Missions Improving Troop Readiness (25 June 2026)"
+    url: https://www.war.gov/News/News-Stories/Article/Article/4527133/national-guard-says-domestic-missions-improving-troop-readiness/
+versions:
+  - version: 1
+    text: "The 800 DC National Guardsmen that we'll put on—and much more, if necessary. Much more."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500841/html/DCPD-202500841.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500841.txt
+      span: [408, 495]
+    parameters:
+      who:
+        en: People in Washington DC, with the Metropolitan Police Department and federal law enforcement
+      when:
+        en: From the day of the announcement, 11 August 2025
+      deadline: null
+events:
+  - date: "2025-08-11"
+    type: promised
+    text:
+      en: "Announcing a crime emergency in Washington DC, the President says 800 DC National Guard members will support the police, and much more if necessary"
+  - date: "2025-08-11"
+    type: in_plan
+    text:
+      en: "A presidential memorandum directs the Secretary of Defense to mobilize the DC National Guard and to coordinate with state governors for more"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500845/html/DCPD-202500845.htm
+  - date: "2025-08-14"
+    type: delivered
+    text:
+      en: "The War Department says about 800 Army and Air National Guard members have been called up and activated for the task force"
+    evidence_url: https://www.war.gov/News/News-Stories/Article/Article/4275149/national-guard-mobilizes-800-troops-in-dc-to-support-federal-local-law-enforcem/
+  - date: "2025-11-27"
+    type: restated
+    text:
+      en: "After two Guard members are shot in Washington, the President says 500 more are being sent"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202501150/html/DCPD-202501150.htm
+replies: []
+corrections: []
+reviews: []

@@ -1,0 +1,73 @@
+format: openpromises/1
+id: trump-gold-card-2025
+headline:
+  en: "A $5 million gold card in two weeks"
+actor_id: donald-trump
+made_on: "2025-02-25"
+venue: press_conference
+venue_label:
+  en: Exchange with reporters at a signing ceremony in the Oval Office
+area: other
+status: delivering
+status_note:
+  en: "Applications opened on 10 December 2025, about nine months after the \"about 2 weeks\" the President gave, at the amounts Executive Order 14351 set: $1 million for an individual and $2 million for a company paying for an individual, against \"about $5 million\" in the first words. No official count of applications or of cards approved has been published by 20 October 2026."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Executive Order 14351: The Gold Card (Federal Register, 24 September 2025)"
+    url: https://www.federalregister.gov/documents/2025/09/24/2025-18602/the-gold-card
+  - title: "Remarks during a roundtable with business leaders, 10 December 2025"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202501180/html/DCPD-202501180.htm
+versions:
+  - version: 1
+    text: "We're going to be putting a price on that card of about $5 million, and that's going to give you green card privileges plus."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500300/html/DCPD-202500300.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500300.txt
+      span: [490, 614]
+    parameters:
+      who:
+        en: Wealthy foreign nationals who buy the card
+      when:
+        en: "Asked when, the President said: \"About 2 weeks. The sale will start in about 2 weeks.\""
+      deadline: "2025-03-11"
+  - version: 2
+    text: "The requisite gift amount shall be $1 million for an individual donating on his or her own behalf and $2 million for a corporation or similar entity donating on behalf of an individual."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500932/html/DCPD-202500932.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500932.txt
+      span: [801, 986]
+    parameters:
+      who:
+        en: Foreign nationals who give $1 million, or for whom a company gives $2 million, to the Department of Commerce
+      when:
+        en: "The order gives the Secretaries of Commerce, State and Homeland Security 90 days to put the programme in place"
+      deadline: "2025-12-18"
+events:
+  - date: "2025-02-25"
+    type: promised
+    text:
+      en: "The President says a gold card giving green card privileges will be sold for about $5 million, with sales starting in about two weeks"
+  - date: "2025-03-04"
+    type: restated
+    text:
+      en: "In his address to Congress, the President says people will be able to buy a path to citizenship for $5 million"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500325/html/DCPD-202500325.htm
+  - date: "2025-09-19"
+    type: reworded
+    text:
+      en: "Executive Order 14351 sets the gift at $1 million for an individual and $2 million for a company, and gives agencies 90 days to start the programme"
+    evidence_url: https://www.federalregister.gov/documents/2025/09/24/2025-18602/the-gold-card
+  - date: "2025-12-10"
+    type: delivering
+    text:
+      en: "The President announces that the gold card site is going live and applications are open"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202501180/html/DCPD-202501180.htm
+replies: []
+corrections: []
+reviews: []

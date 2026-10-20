@@ -1,0 +1,63 @@
+format: openpromises/1
+id: trump-warrior-dividend-2025
+headline:
+  en: "$1,776 to service members before Christmas"
+actor_id: donald-trump
+made_on: "2025-12-17"
+venue: speech
+venue_label:
+  en: Address to the Nation on the economy
+area: military
+status: delivered
+status_note:
+  en: "The IRS confirms one-time payments of $1,776 made in December 2025, mainly to active-duty members in pay grades O-6 and below and to eligible reserve members on 30 November 2025, as a tax-free supplement to the housing allowance, paid from $2.9 billion appropriated in Public Law 119-21. The War Department said about 1.28 million active-duty and 174,000 reserve members would receive it before 20 December. The President named tariffs and the law as the source; the IRS names the appropriation."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "IRS IR-2026-09: Supplemental basic allowance for housing payments to members of the military are not taxable (16 January 2026)"
+    url: https://www.irs.gov/node/154171
+versions:
+  - version: 1
+    text: "one million four hundred and fifty thousand military servicemembers will receive a special, we call, \"warrior dividend\" before Christmas—so, warrior dividend. In honor of our Nation's founding in 1776, we are sending every soldier $1,776."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202501204/html/DCPD-202501204.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202501204.txt
+      span: [483, 721]
+    parameters:
+      who:
+        en: "1,450,000 service members, in the President's words"
+      cost:
+        range: [2.61, 2.9, 3.19]
+        quality: sourced
+        by:
+          kind: official
+          name: Congress (Public Law 119-21), as reported by the IRS
+        note:
+          en: "The $2.9 billion appropriated to supplement the housing allowance, which the IRS says paid for the $1,776 payments. Low–high is an editorial ±10% because the source gives a single figure."
+        sources:
+          - title: "IRS IR-2026-09 (16 January 2026)"
+            url: https://www.irs.gov/node/154171
+      when:
+        en: Before Christmas 2025
+      deadline: "2025-12-25"
+events:
+  - date: "2025-12-17"
+    type: promised
+    text:
+      en: "In an address to the nation, the President says 1,450,000 service members will receive a $1,776 \"warrior dividend\" before Christmas"
+  - date: "2025-12-18"
+    type: delivering
+    text:
+      en: "The War Department says about 1.28 million active-duty and 174,000 reserve members in pay grades O-6 and below will receive the payment before 20 December, as a supplement to the housing allowance"
+    evidence_url: https://www.army.mil/article/289703/
+  - date: "2026-01-16"
+    type: delivered
+    text:
+      en: "The IRS confirms the one-time $1,776 housing allowance payments made in December 2025 are not taxable, and that they were paid from $2.9 billion appropriated in Public Law 119-21"
+    evidence_url: https://www.irs.gov/node/154171
+replies: []
+corrections: []
+reviews: []

@@ -1,0 +1,52 @@
+format: openpromises/1
+id: trump-credit-card-cap-2026
+headline:
+  en: "One-year 10% cap on credit card interest"
+actor_id: donald-trump
+made_on: "2026-01-11"
+venue: press_conference
+venue_label:
+  en: Exchange with reporters aboard Air Force One
+area: inflation
+status: promised
+status_note:
+  en: "No law, rule or order capping credit card interest rates at 10% has been published by 20 October 2026. The two bills that would set the cap, S. 381 and H.R. 1944, were introduced in February and March 2025 and are still with the Senate Banking and House Financial Services committees (Congress.gov). On 22 January 2026 the President said of the cap: \"I'd like to see it.\""
+responsible:
+  actor_id: us-administration
+  note:
+    en: "The words say the Administration is putting the cap in place; bills that would set it in law (S. 381, H.R. 1944) are before Congress."
+origin: manual
+sources:
+  - title: "Daily Compilation of Presidential Documents, 2026 digest: on 9 January the President announced he was calling for a 1-year cap of 10 percent, effective 20 January"
+    url: https://www.govinfo.gov/content/pkg/DCPD-2026DIGEST/html/DCPD-2026DIGEST.htm
+  - title: "Remarks to the Detroit Economic Club, 13 January 2026"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202600020/html/DCPD-202600020.htm
+  - title: "Remarks aboard Air Force One, 22 January 2026"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202600051/html/DCPD-202600051.htm
+  - title: "S. 381, 10 Percent Credit Card Interest Rate Cap Act (Congress.gov)"
+    url: https://www.congress.gov/bill/119th-congress/senate-bill/381
+  - title: "H.R. 1944, 10 Percent Credit Card Interest Rate Cap Act (Congress.gov)"
+    url: https://www.congress.gov/bill/119th-congress/house-bill/1944
+versions:
+  - version: 1
+    text: "I—we're putting a 1-year cap at 10 percent, and that's it."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202600015/html/DCPD-202600015.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202600015.txt
+      span: [648, 706]
+    parameters:
+      who:
+        en: People who pay interest on credit card balances
+      when:
+        en: "One year. The President's announcement of 9 January 2026, recorded in the Daily Compilation of Presidential Documents, names 20 January 2026 as the start."
+      deadline: "2026-01-20"
+events:
+  - date: "2026-01-11"
+    type: promised
+    text:
+      en: "Asked about the cap, the President says a one-year cap on credit card interest of 10 percent is being put in place"
+replies: []
+corrections: []
+reviews: []
