@@ -8,7 +8,9 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 6 of 20
 area: taxes
-status: promised
+status: delivering
+status_note:
+  en: "Treasury: more than 6 million filers claimed the new deduction for tips on their 2025 returns, averaging more than $7,100 (as of 14 April 2026). It is a deduction from federal income tax only, so Social Security and Medicare payroll taxes still apply to tips; it is capped at $25,000, reduced above $150,000 of income ($300,000 joint), and ends after 2028."
 responsible:
   actor_id: us-congress
 origin: manual
@@ -34,6 +36,21 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-07-04"
+    type: legislated
+    text:
+      en: "Public Law 119-21 creates a federal income tax deduction for tips of up to $25,000 a year, reduced above $150,000 of income ($300,000 for joint returns), for 2025 to 2028 (section 70201), and a deduction for overtime pay (section 70202)"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2025-07-04"
+    type: legislated
+    text:
+      en: "Public Law 119-21 makes the 2017 law's lower income tax rates permanent (section 70101) and raises the standard deduction (section 70102)"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2026-04-15"
+    type: delivering
+    text:
+      en: "Treasury reports that more than 53 million filers claimed at least one of the law's new deductions on 2025 returns, including more than 6 million for tips, averaging more than $7,100"
+    evidence_url: https://home.treasury.gov/news/press-releases/sb0441
 replies: []
 corrections: []
 reviews: []
