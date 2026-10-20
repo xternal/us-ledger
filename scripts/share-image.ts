@@ -8,6 +8,7 @@ import { createRequire } from "node:module";
 import { Resvg } from "@resvg/resvg-js";
 import { createElement as h, type ReactNode } from "react";
 import satori from "satori";
+import { markOnDark } from "./mark.ts";
 import { dark as c } from "./palette.ts";
 
 export const WIDTH = 1200;
@@ -43,6 +44,7 @@ export function clip(text: string, max: number): string {
   return `${cut.replace(/[\s,;:.–-]+$/, "")}…`;
 }
 
+const MARK = `data:image/svg+xml;base64,${Buffer.from(markOnDark(46)).toString("base64")}`;
 const box = (style: Record<string, unknown>, ...children: ReactNode[]) => h("div", { style: { display: "flex", ...style } }, ...children);
 const text = (style: Record<string, unknown>, s: string) => h("div", { style: { display: "flex", ...style } }, s);
 
@@ -50,8 +52,12 @@ function frame(kicker: string, footer: string, ...body: ReactNode[]) {
   return box(
     { width: WIDTH, height: HEIGHT, flexDirection: "column", justifyContent: "space-between", padding: "56px 64px", background: c.bg, color: c.ink, fontFamily: "Sans" },
     box(
-      { justifyContent: "space-between", alignItems: "baseline", gap: 24 },
-      box({ alignItems: "baseline" }, text({ fontFamily: "Serif", fontSize: 34, fontWeight: 600, color: c.ink }, "USLedger"), text({ fontFamily: "Serif", fontSize: 34, fontWeight: 600, color: c.accent }, ".org")),
+      { justifyContent: "space-between", alignItems: "center", gap: 24 },
+      box(
+        { alignItems: "center", gap: 14 },
+        h("img", { src: MARK, width: 46, height: 46 }),
+        box({ alignItems: "baseline" }, text({ fontFamily: "Serif", fontSize: 34, fontWeight: 600, color: c.ink }, "USLedger"), text({ fontFamily: "Serif", fontSize: 34, fontWeight: 600, color: c.accent }, ".org")),
+      ),
       text({ fontSize: 24, color: c.muted, textAlign: "right" }, kicker),
     ),
     box({ flexDirection: "column", flexGrow: 1, justifyContent: "center", gap: 22 }, ...body),
