@@ -8,7 +8,9 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 13 of 20
 area: dollar
-status: promised
+status: delivering
+status_note:
+  en: "The US dollar's share of the world's foreign exchange reserves was 56.70% in the second quarter of 2026, against 20.60% for the euro, the next largest (IMF COFER, 30 September 2026). At the end of 2024 the dollar's share was 57.80% (IMF, 2 April 2025). The words set no threshold."
 responsible:
   actor_id: us-administration
 origin: manual
@@ -34,6 +36,21 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-01-23"
+    type: in_plan
+    text:
+      en: "Executive Order 14178 sets a policy of protecting the sovereignty of the US dollar, including through dollar-backed stablecoins, and bars agencies from establishing a central bank digital currency"
+    evidence_url: https://www.federalregister.gov/documents/2025/01/31/2025-02123/strengthening-american-leadership-in-digital-financial-technology
+  - date: "2025-07-18"
+    type: legislated
+    text:
+      en: "The GENIUS Act, Public Law 119-27, sets federal rules for payment stablecoins, which must hold reserves of at least one to one, such as Treasury bills maturing in 93 days or less; it takes effect by 18 January 2027 at the latest"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ27/html/PLAW-119publ27.htm
+  - date: "2026-09-30"
+    type: delivering
+    text:
+      en: "IMF data put the US dollar's share of the world's foreign exchange reserves at 56.70% in the second quarter of 2026, against 20.60% for the euro"
+    evidence_url: https://data.imf.org/en/news/imf%20data%20brief%20september%2030
 replies: []
 corrections: []
 reviews: []

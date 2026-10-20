@@ -8,13 +8,17 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 15 of 20
 area: regulation
-status: promised
+status: delivering
+status_note:
+  en: "Federal greenhouse gas standards for vehicles are repealed from 20 April 2026 (EPA), California's waivers for its vehicle rules were disapproved by law in June 2025, and federal tax credits for electric vehicles ended for vehicles acquired after 30 September 2025. OMB counts 646 deregulatory actions and 5 significant new regulations in fiscal year 2025, with $211.8 billion in estimated savings (EO 14192 accounting). The words do not define the \"electric vehicle mandate\" or set a number of regulations to cut."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "OMB/OIRA: final accounting for fiscal year 2025 under Executive Order 14192"
+    url: https://www.reginfo.gov/public/pdf/eo14192/Final_Accounting_for_Fiscal_Year_2025_under_EO_14192.pdf
 versions:
   - version: 1
     text: "CANCEL THE ELECTRIC VEHICLE MANDATE AND CUT COSTLY AND BURDENSOME REGULATIONS"
@@ -34,6 +38,36 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-01-20"
+    type: in_plan
+    text:
+      en: "Executive Order 14154 sets a policy to \"eliminate the 'electric vehicle (EV) mandate'\""
+    evidence_url: https://www.federalregister.gov/documents/2025/01/29/2025-01956/unleashing-american-energy
+  - date: "2025-01-31"
+    type: in_plan
+    text:
+      en: "Executive Order 14192 requires agencies to identify at least 10 existing regulations to repeal for each new one"
+    evidence_url: https://www.federalregister.gov/documents/2025/02/06/2025-02345/unleashing-prosperity-through-deregulation
+  - date: "2025-06-12"
+    type: legislated
+    text:
+      en: "Public Laws 119-15, 119-16 and 119-17 disapprove EPA's waivers for California's Advanced Clean Trucks, Advanced Clean Cars II and \"Omnibus\" low-NOx rules"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ16/html/PLAW-119publ16.htm
+  - date: "2025-07-04"
+    type: legislated
+    text:
+      en: "Public Law 119-21 ends the tax credits for new, used and commercial clean vehicles acquired after 30 September 2025 (sections 70501 to 70503) and sets the civil penalty for missing fuel economy standards to zero (section 40006)"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2026-02-18"
+    type: delivering
+    text:
+      en: "EPA's final rule rescinds the 2009 greenhouse gas endangerment finding and repeals the greenhouse gas standards for cars, trucks and their engines, from 20 April 2026"
+    evidence_url: https://www.federalregister.gov/documents/2026/02/18/2026-03157/rescission-of-the-greenhouse-gas-endangerment-finding-and-motor-vehicle-greenhouse-gas-emission
+  - date: "2026-09-30"
+    type: in_plan
+    text:
+      en: "NHTSA's final rule resets fuel economy standards for model year 2022 to 2031 cars and light trucks, from 30 November 2026"
+    evidence_url: https://www.federalregister.gov/documents/2026/09/30/2026-19964/the-safer-affordable-fuel-efficient-safe-vehicles-rule-iii-for-model-years-2022-to-2031-passenger
 replies: []
 corrections: []
 reviews: []

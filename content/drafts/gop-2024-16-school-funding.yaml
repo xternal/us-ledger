@@ -8,13 +8,19 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 16 of 20
 area: schools
-status: promised
+status: in_plan
+status_note:
+  en: "No official statistic counts schools whose federal funding was cut on these grounds, and no such case was found in official sources. A federal court vacated the Education Department's April 2025 demand that schools certify compliance as a condition of federal funds (AFT v. Department of Education, D. Md., 2025). On 15 October 2026 the Fourth Circuit recorded that Northern Virginia school districts the Department had designated \"high-risk\" over gender-identity policies \"have not been denied any funds\"."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "AFT v. Department of Education, D. Md. No. 1:25-cv-00628: order vacating the Title VI certification"
+    url: https://storage.courtlistener.com/recap/gov.uscourts.mdd.577437/gov.uscourts.mdd.577437.84.0_3.pdf
+  - title: "Fourth Circuit: Fairfax County School Board v. McMahon, No. 25-2087 (15 October 2026)"
+    url: https://www.ca4.uscourts.gov/opinions/252087.P.pdf
 versions:
   - version: 1
     text: "CUT FEDERAL FUNDING FOR ANY SCHOOL PUSHING CRITICAL RACE THEORY, RADICAL GENDER IDEOLOGY, AND OTHER INAPPROPRIATE RACIAL, SEXUAL, OR POLITICAL CONTENT ON OUR CHILDREN"
@@ -34,6 +40,11 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-01-29"
+    type: in_plan
+    text:
+      en: "Executive Order 14190 directs the Secretaries of Education, Defense and Health and Human Services to deliver within 90 days a strategy that includes eliminating federal funding or support for what the order calls indoctrination in K-12 schools"
+    evidence_url: https://www.federalregister.gov/documents/2025/02/03/2025-02232/ending-radical-indoctrination-in-k-12-schooling
 replies: []
 corrections: []
 reviews: []
