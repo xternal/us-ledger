@@ -8,13 +8,17 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 2 of 20
 area: deportation
-status: promised
+status: delivering
+status_note:
+  en: "ICE recorded 356,389 removals in fiscal year 2026 up to 11 July 2026 (ICE detention statistics, 20 July 2026), more than the 319,980 it recorded in fiscal year 2025 up to 20 September 2025; ICE counts returns and expulsions as removals. The highest yearly count of removals in DHS's records, which list returns separately, is 432,334, in fiscal year 2013 (Yearbook of Immigration Statistics, table 39). No full-year figure for fiscal year 2026 is published yet."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "DHS Yearbook of Immigration Statistics 2022, table 39: removals, returns and expulsions, fiscal years 1892 to 2022"
+    url: https://ohss.dhs.gov/topics/immigration/yearbook/2022/table39
 versions:
   - version: 1
     text: "CARRY OUT THE LARGEST DEPORTATION OPERATION IN AMERICAN HISTORY"
@@ -34,6 +38,26 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-01-20"
+    type: in_plan
+    text:
+      en: "Executive Order 14159 directs agencies to give priority to immigration enforcement, widen expedited removal, add detention facilities and expand 287(g) agreements with state and local police"
+    evidence_url: https://www.whitehouse.gov/presidential-actions/2025/01/protecting-the-american-people-against-invasion/
+  - date: "2025-07-04"
+    type: funded
+    text:
+      en: "Public Law 119-21 appropriates $45 billion for ICE detention capacity (section 90003) and $29.85 billion for ICE, starting with hiring and training (section 100052), available until 30 September 2029"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2025-09-24"
+    type: delivering
+    text:
+      en: "ICE's detention statistics record 319,980 removals in fiscal year 2025 up to 20 September 2025"
+    evidence_url: https://www.ice.gov/doclib/detention/FY25_detentionStats09242025.xlsx
+  - date: "2026-07-20"
+    type: delivering
+    text:
+      en: "ICE's detention statistics record 356,389 removals in fiscal year 2026 up to 11 July 2026"
+    evidence_url: https://www.ice.gov/doclib/detention/FY26_detentionStats07202026.xlsx
 replies: []
 corrections: []
 reviews: []

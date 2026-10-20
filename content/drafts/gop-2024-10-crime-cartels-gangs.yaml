@@ -8,7 +8,9 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 10 of 20
 area: crime
-status: promised
+status: delivering
+status_note:
+  en: "The FBI estimates 327.6 violent crimes per 100,000 people in 2025, a rate 9.7% lower than in 2024, and 14,085 murders, 18.1% fewer (Reported Crimes in the Nation 2025, August 2026). No official statistic counts crimes by immigration status or measures cartel activity, and the words set no target figure."
 responsible:
   actor_id: us-administration
 origin: manual
@@ -34,6 +36,31 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-01-29"
+    type: legislated
+    text:
+      en: "The Laken Riley Act, Public Law 119-1, requires Homeland Security to detain inadmissible non-citizens who are charged with, arrested for or convicted of burglary, theft, shoplifting, assaulting a police officer, or a crime that causes death or serious bodily injury"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ1/html/PLAW-119publ1.htm
+  - date: "2025-02-20"
+    type: in_plan
+    text:
+      en: "The State Department designates Tren de Aragua, MS-13 and six Mexico-based cartels, including Sinaloa and Jalisco New Generation, as Foreign Terrorist Organizations"
+    evidence_url: https://www.federalregister.gov/documents/2025/02/20/2025-02873/foreign-terrorist-organization-designations-of-tren-de-aragua-mara-salvatrucha-cartel-de-sinaloa
+  - date: "2025-03-14"
+    type: in_plan
+    text:
+      en: "Proclamation 10903 invokes the Alien Enemies Act against Venezuelan members of Tren de Aragua aged 14 or older who are not US citizens or permanent residents"
+    evidence_url: https://www.federalregister.gov/documents/2025/03/20/2025-04865/invocation-of-the-alien-enemies-act-regarding-the-invasion-of-the-united-states-by-tren-de-aragua
+  - date: "2025-09-02"
+    type: delivering
+    text:
+      en: "The President states that a US strike in international waters killed 11 people on a vessel the White House says Tren de Aragua operated: the first of a series of strikes on boats"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500886/html/DCPD-202500886.htm
+  - date: "2026-08-14"
+    type: delivering
+    text:
+      en: "FBI estimates for 2025: 1,119,768 violent crimes, 9.3% fewer than in 2024 (a rate of 327.6 per 100,000, down 9.7%), and 14,085 murders, down 18.1%"
+    evidence_url: https://cde.ucr.cjis.gov/LATEST/resources/reports/Reported%20Crimes%20in%20the%20Nation%202025%20Quick%20Stats.pdf
 replies: []
 corrections: []
 reviews: []
