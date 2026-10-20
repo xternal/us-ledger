@@ -8,13 +8,17 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 9 of 20
 area: government
-status: promised
+status: unscoreable
+status_note:
+  en: "The words name no outcome that an official document or statistic could show as reached, and they state no cost or deadline beyond acting \"very quickly\" (page 6). Executive Order 14147 (20 January 2025) uses the same words in its title; it is listed under sources and recorded here, not scored."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "Executive Order 14147: Ending the Weaponization of the Federal Government (20 January 2025)"
+    url: https://www.federalregister.gov/documents/2025/01/28/2025-01900/ending-the-weaponization-of-the-federal-government
 versions:
   - version: 1
     text: "END THE WEAPONIZATION OF GOVERNMENT AGAINST THE AMERICAN PEOPLE"
@@ -25,15 +29,16 @@ versions:
     source_text:
       file: rnc-2024-platform.txt
       span: [1266, 1329]
-    parameters:
-      when:
-        en: '"Very quickly" after winning the White House and Republican majorities in the House and Senate (page 6)'
-      deadline: null
+    parameters: null
 events:
   - date: "2024-07-15"
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2026-10-20"
+    type: unscoreable
+    text:
+      en: "Recorded as unscoreable: the words set no measurable outcome, cost or deadline"
 replies: []
 corrections: []
 reviews: []

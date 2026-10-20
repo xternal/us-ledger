@@ -8,13 +8,21 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 7 of 20
 area: rights
-status: promised
+status: unscoreable
+status_note:
+  en: "The words name freedoms to defend but no outcome that an official document or statistic could show as reached, and they state no cost or deadline beyond acting \"very quickly\" (page 6). Executive orders on each of the three freedoms the words name are listed under sources; they are recorded here, not scored."
 responsible:
   actor_id: us-administration
 origin: manual
 sources:
   - title: "The 2024 Republican Platform: Make America Great Again!"
     url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
+  - title: "Executive Order 14149: Restoring Freedom of Speech and Ending Federal Censorship (20 January 2025)"
+    url: https://www.federalregister.gov/documents/2025/01/28/2025-01902/restoring-freedom-of-speech-and-ending-federal-censorship
+  - title: "Executive Order 14291: Establishment of the Religious Liberty Commission (1 May 2025)"
+    url: https://www.federalregister.gov/documents/2025/05/07/2025-08134/establishment-of-the-religious-liberty-commission
+  - title: "Executive Order 14206: Protecting Second Amendment Rights (7 February 2025)"
+    url: https://www.federalregister.gov/documents/2025/02/12/2025-02636/protecting-second-amendment-rights
 versions:
   - version: 1
     text: "DEFEND OUR CONSTITUTION, OUR BILL OF RIGHTS, AND OUR FUNDAMENTAL FREEDOMS, INCLUDING FREEDOM OF SPEECH, FREEDOM OF RELIGION, AND THE RIGHT TO KEEP AND BEAR ARMS"
@@ -25,15 +33,16 @@ versions:
     source_text:
       file: rnc-2024-platform.txt
       span: [930, 1090]
-    parameters:
-      when:
-        en: '"Very quickly" after winning the White House and Republican majorities in the House and Senate (page 6)'
-      deadline: null
+    parameters: null
 events:
   - date: "2024-07-15"
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2026-10-20"
+    type: unscoreable
+    text:
+      en: "Recorded as unscoreable: the words set no measurable outcome, cost or deadline"
 replies: []
 corrections: []
 reviews: []

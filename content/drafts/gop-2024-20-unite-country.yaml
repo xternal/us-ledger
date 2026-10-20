@@ -8,7 +8,9 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 20 of 20
 area: unity
-status: promised
+status: unscoreable
+status_note:
+  en: "The words name no outcome that an official document or statistic could show as reached, and they state no cost or deadline beyond acting \"very quickly\" (page 6)."
 responsible:
   actor_id: us-administration
 origin: manual
@@ -25,15 +27,16 @@ versions:
     source_text:
       file: rnc-2024-platform.txt
       span: [2314, 2382]
-    parameters:
-      when:
-        en: '"Very quickly" after winning the White House and Republican majorities in the House and Senate (page 6)'
-      deadline: null
+    parameters: null
 events:
   - date: "2024-07-15"
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2026-10-20"
+    type: unscoreable
+    text:
+      en: "Recorded as unscoreable: the words set no measurable outcome, cost or deadline"
 replies: []
 corrections: []
 reviews: []
