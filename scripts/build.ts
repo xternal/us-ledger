@@ -38,6 +38,8 @@ import {
 import { ActorTimeline, AreaCoverage, Breadcrumbs, JsonLd, KeyPromises, PromiseCard, PromiseList, PromisesByMonth, PromiseSpotlight, PromiseStory, StatusPill } from "@openpromises/react";
 import { createElement as h, Fragment, type ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { Resvg } from "@resvg/resvg-js";
+import { faviconSvg, MARK_DOT, MARK_PATH, tileSvg } from "./mark.ts";
 import { dark, light, tokensCss } from "./palette.ts";
 import { clip, HEIGHT, shareImage, WIDTH, type Climb, type Share } from "./share-image.ts";
 
@@ -189,6 +191,9 @@ async function main() {
               named("twitter:description", pg.description),
               named("twitter:image", absolute(config, image)),
               named("twitter:image:alt", pg.alt),
+              h("link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }),
+              h("link", { rel: "icon", href: "/favicon-32.png", sizes: "32x32", type: "image/png" }),
+              h("link", { rel: "apple-touch-icon", href: "/apple-touch-icon.png" }),
               h("link", { rel: "preload", href: "/fonts/source-serif-4-latin-600-normal.woff2", as: "font", type: "font/woff2", crossOrigin: "" }),
               h("link", { rel: "stylesheet", href: "/styles.css" }),
               h("link", { rel: "stylesheet", href: "/tokens.css" }),
@@ -206,7 +211,17 @@ async function main() {
                 h(
                   "div",
                   { className: "wrap" },
-                  h("a", { href: "/", className: "brand", "aria-current": pg.path === "/" ? "page" : undefined }, "USLedger", h("span", { className: "brand__tld" }, ".org")),
+                  h(
+                    "a",
+                    { href: "/", className: "brand", "aria-current": pg.path === "/" ? "page" : undefined },
+                    h(
+                      "svg",
+                      { className: "brand__mark", viewBox: "0 0 32 32", width: 30, height: 30, "aria-hidden": "true", focusable: "false" },
+                      h("path", { d: MARK_PATH, fill: "none", stroke: "currentColor", strokeWidth: 2.2, strokeLinecap: "round" }),
+                      h("circle", { ...MARK_DOT, r: 2, style: { fill: "var(--ul-bar)" } }),
+                    ),
+                    h("span", null, "USLedger", h("span", { className: "brand__tld" }, ".org")),
+                  ),
                   h(
                     "nav",
                     { className: "site-nav", "aria-label": "Site" },
@@ -676,6 +691,11 @@ async function main() {
   const require = createRequire(import.meta.url);
   copyFileSync(require.resolve("@openpromises/react/styles.css"), join(OUT, "styles.css"));
   write("/tokens.css", tokensCss());
+  // The mark (scripts/mark.ts): an SVG favicon that follows the reader's light or dark setting, a PNG for browsers
+  // without SVG icons, and the home-screen icon.
+  write("/favicon.svg", faviconSvg());
+  write("/favicon-32.png", new Resvg(tileSvg(32, true)).render().asPng());
+  write("/apple-touch-icon.png", new Resvg(tileSvg(180, false)).render().asPng());
   copyFileSync(join(ROOT, "scripts", "site.css"), join(OUT, "site.css"));
   for (const weight of [400, 600]) {
     const file = `source-serif-4-latin-${weight}-normal.woff2`;

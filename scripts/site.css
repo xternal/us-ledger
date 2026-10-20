@@ -36,7 +36,8 @@ main { padding-bottom: 1rem; }
 /* Header: the site's name and the menu, the current section marked (aria-current). */
 .site-header { border-bottom: 1px solid var(--op-line); }
 .site-header .wrap { max-width: var(--wide); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.35rem 1.5rem; padding-top: 0.8rem; padding-bottom: 0.8rem; }
-.brand { color: var(--op-ink); text-decoration: none; font-family: var(--serif); font-weight: 600; font-size: 1.4rem; letter-spacing: -0.015em; }
+.brand { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--op-ink); text-decoration: none; font-family: var(--serif); font-weight: 600; font-size: 1.4rem; letter-spacing: -0.015em; }
+.brand__mark { flex: none; margin-top: -0.2rem; }
 .brand__tld { color: var(--op-accent); }
 .site-nav { max-width: 100%; }
 .site-nav ul, .onpage ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.2rem; overflow-x: auto; scrollbar-width: none; }
