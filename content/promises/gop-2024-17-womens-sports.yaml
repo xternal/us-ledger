@@ -54,4 +54,8 @@ events:
     evidence_url: https://www.justice.gov/opa/gallery/attorney-general-pamela-bondi-announces-enforcement-actions-against-state-maine
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-20"
+    approves: true

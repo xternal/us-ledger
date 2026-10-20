@@ -45,4 +45,8 @@ events:
       en: "Recorded as unscoreable: the words set no measurable outcome, cost or deadline"
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-20"
+    approves: true

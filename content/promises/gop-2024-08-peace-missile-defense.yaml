@@ -66,4 +66,8 @@ events:
     evidence_url: https://www.whitehouse.gov/presidential-actions/2025/10/the-trump-declaration-for-enduring-peace-and-prosperity/
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-20"
+    approves: true

@@ -60,4 +60,8 @@ events:
     evidence_url: https://www.ice.gov/doclib/detention/FY26_detentionStats07202026.xlsx
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-20"
+    approves: true

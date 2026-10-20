@@ -53,4 +53,8 @@ events:
     evidence_url: https://home.treasury.gov/news/press-releases/sb0441
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-20"
+    approves: true
