@@ -8,7 +8,9 @@ venue: platform
 venue_label:
   en: 2024 Republican Platform, promise 1 of 20
 area: border
-status: promised
+status: delivering
+status_note:
+  en: "Border Patrol apprehensions at the southwest border were 98,708 in fiscal year 2026, October 2025 to September 2026 (CBP, preliminary, 16 October 2026), about 8,200 a month on average, against 237,565 in fiscal year 2025. The words set no figure for a sealed border."
 responsible:
   actor_id: us-administration
 origin: manual
@@ -34,6 +36,31 @@ events:
     type: promised
     text:
       en: Delegates at the Republican National Convention adopt the 2024 platform, which opens with twenty promises
+  - date: "2025-01-20"
+    type: in_plan
+    text:
+      en: "Proclamation 10886 declares a national emergency at the southern border, makes the armed forces available to support the Department of Homeland Security and orders more physical barriers"
+    evidence_url: https://www.federalregister.gov/documents/2025/01/29/2025-01948/declaring-a-national-emergency-at-the-southern-border-of-the-united-states
+  - date: "2025-01-20"
+    type: in_plan
+    text:
+      en: "Executive Order 14165 directs Homeland Security to resume the Migrant Protection Protocols, stop paroling migrants through the CBP One app, end categorical parole programs and end \"catch-and-release\""
+    evidence_url: https://www.whitehouse.gov/presidential-actions/2025/01/securing-our-borders/
+  - date: "2025-07-04"
+    type: funded
+    text:
+      en: "Public Law 119-21 appropriates $46.55 billion for the border wall system (section 90001), $6.17 billion for border technology and screening (section 90004) and $10 billion to reimburse border support (section 90007), available until 30 September 2029"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2025-10-07"
+    type: delivering
+    text:
+      en: "CBP reports 237,565 Border Patrol apprehensions at the southwest border in fiscal year 2025, October 2024 to September 2025; 172,026 of them were in the year's first 111 days, before 20 January 2025"
+    evidence_url: https://www.cbp.gov/newsroom/national-media-release/lowest-fiscal-year-border-patrol-apprehensions-1970
+  - date: "2026-10-16"
+    type: delivering
+    text:
+      en: "CBP reports 98,708 Border Patrol apprehensions at the southwest border in fiscal year 2026, October 2025 to September 2026 (preliminary)"
+    evidence_url: https://www.cbp.gov/newsroom/national-media-release/under-president-trump-and-secretary-mullin-dhs-announces-lowest
 replies: []
 corrections: []
 reviews: []
