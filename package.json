@@ -14,16 +14,21 @@
     "stats": "openpromises stats",
     "build": "node scripts/build.ts",
     "openpromises:provenance": "node scripts/openpromises-provenance.ts",
-    "check": "pnpm validate && pnpm lint:words && pnpm build",
+    "contrast": "node scripts/contrast.ts",
+    "check": "pnpm validate && pnpm lint:words && pnpm contrast && pnpm build",
     "preview": "node scripts/build.ts --preview"
   },
   "devDependencies": {
-    "@openpromises/cli": "0.13.0",
-    "@openpromises/core": "0.13.0",
-    "@openpromises/files": "0.13.0",
-    "@openpromises/publish": "0.13.0",
-    "@openpromises/react": "0.13.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/source-serif-4": "5.3.0",
+    "@openpromises/cli": "0.14.0",
+    "@openpromises/core": "0.14.0",
+    "@openpromises/files": "0.14.0",
+    "@openpromises/publish": "0.14.0",
+    "@openpromises/react": "0.14.0",
+    "@resvg/resvg-js": "2.6.2",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "satori": "0.33.5"
   }
 }

@@ -4,7 +4,7 @@
 
 The 2024 Republican Platform, "Make America Great Again!", opens with twenty promises "that we will accomplish very quickly when we win the White House and Republican Majorities in the House and Senate". Republicans won all three in November 2024. This site takes the platform at its word: the twenty are its areas, in the platform's order, so the yardstick is the platform's own, never ours. Every later promise by the President, the Vice President or the officials who speak for the Administration is filed under the one it serves, or under "Not among the 20".
 
-It runs on [OpenPromises](https://github.com/xternal/openpromises) 0.13, the engine behind [LedgerGov.UK](https://ledgergov.uk), [BoroughBook.UK](https://boroughbook.uk) and [RussiaLedger.com](https://russialedger.com), with the same rules:
+It runs on [OpenPromises](https://github.com/xternal/openpromises) 0.14, the engine behind [LedgerGov.UK](https://ledgergov.uk), [BoroughBook.UK](https://boroughbook.uk) and [RussiaLedger.com](https://russialedger.com), with the same rules:
 
 1. **Exact words.** A promise is what the speaker said, copied from the transcript, the order, the post or the platform, with a link to it. Opinions and insults are not promises.
 2. **Evidence moves status.** Every step after "promised" links to its document: a signed order, a law, a budget line, an official statistic. A deadline that passes with no evidence of delivery is recorded automatically (`openpromises deadlines`).
@@ -25,14 +25,18 @@ Node 22.18 or later and pnpm 12.
 pnpm install
 pnpm validate        # every card, draft, actor and the editors list against format v1
 pnpm lint:words      # judgement words in our own text
-pnpm build           # the static site in public/, published cards only
+pnpm contrast        # every colour in scripts/palette.ts against WCAG AA
+pnpm build           # the static site in public/, published cards only, with a share image for every page
 pnpm preview         # the same with drafts, in public-preview/, never deployed
 ```
 
 ## Where things stand (20 October 2026)
 
-- The twenty platform promises are draft cards. Each quote is matched character for character against a stored copy of the official PDF (`content/sources/rnc-2024-platform.txt`, a `source_text` span on every card), so the quote check passes by machine.
-- Every status is still "promised": the evidence for each (orders, laws, official statistics) comes next, as events with their documents.
+- The twenty platform promises are approved by the editor and published. Each quote is matched character for character against a stored copy of the official PDF (`content/sources/rnc-2024-platform.txt`, a `source_text` span on every card), so the quote check passes by machine.
+- Every card has a status with its evidence: 10 delivering, 2 funded, 1 legislated, 3 in plan and 4 unscoreable. No later promise by the President or an official is recorded yet.
+- The home page leads with the twenty: a chart of how far each has climbed, then one entry each with the platform's words, its step and the latest dated evidence. Each person's page has the engine's key promises, timeline, promises by month and every area.
+- Every page has its own title, description, canonical address and a 1200x630 share image drawn from its content (`scripts/share-image.ts`); `robots.txt` welcomes search and AI crawlers, with `sitemap.xml` and `llms.txt`.
+- Not yet deployed: usledger.org does not resolve.
 - Actors: the President, the Vice President, the Secretaries of State, Defense and the Treasury, the envoys and ambassadors, with their roles from official pages; the Republican and Democratic parties; the Administration and Congress as the bodies that deliver.
 
 ## Add a promise

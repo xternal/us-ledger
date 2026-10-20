@@ -118,6 +118,10 @@ export default defineConfig({
   // President is where a mistake costs most, so publishing by checks alone is not used here. The editor declares
   // no US party, and never approves a card about their own party.
   editorial: { approvals: 1, publish: "approved", partyConflict: true },
+  // The engine's method line says two editors; here it is one (above), so llms.txt and the Markdown say so.
+  messages: {
+    en: { "md.method.editors": "One editor, named on every card and declaring no US party, approves each card before it is published; no editor approves a card about their own party." },
+  },
   quotes: {
     archive: "optional",
     require: "editor",
