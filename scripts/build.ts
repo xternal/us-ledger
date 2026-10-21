@@ -281,7 +281,7 @@ async function main() {
                   h("p", null, h("a", { href: "/data/promises.json" }, "Open data (JSON)"), " · ", h("a", { href: "/data/promises.csv" }, "CSV"), " · ", h("a", { href: "/feeds/all.xml" }, "Every change (Atom)"), " · ", h("a", { href: "/llms.txt" }, "llms.txt")),
                   h("p", null, "Our writing is under ", h("a", { href: config.publish.licence!.url }, config.publish.licence!.name), ". Quotes keep their own terms, named beside each source."),
                   h("p", null, "Built on ", h("a", { href: "https://github.com/xternal/openpromises" }, "OpenPromises"), ", like ", h("a", { href: "https://ledgergov.uk" }, "LedgerGov.UK"), ", ", h("a", { href: "https://boroughbook.uk" }, "BoroughBook.UK"), " and ", h("a", { href: "https://russialedger.com" }, "RussiaLedger.com"), "."),
-                  h("p", { className: "site-footer__credit" }, "Made by ", h("a", { href: "https://guzh.uk" }, "Pavel Guzhikov"), " · ", h("a", { href: "https://ko-fi.com/pavelg" }, "Buy me a coffee")),
+                  h("p", { className: "site-footer__credit" }, "Made by ", h("a", { href: "https://guzh.uk" }, "Pavel Guzhikov"), " · ", h("a", { href: "https://ko-fi.com/pavelg" }, "Buy me a matcha")),
                 ),
               ),
               h("script", { dangerouslySetInnerHTML: { __html: NAV_SCRIPT + (pg.script ?? "") } }),
