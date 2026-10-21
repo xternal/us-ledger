@@ -243,7 +243,7 @@ async function main() {
                 h(
                   "div",
                   { className: "wrap" },
-                  h("p", { className: "site-footer__about" }, `${name} records what the US President and senior officials promise, in their exact words, and moves a promise's status only when a document shows it moved.`),
+                  h("p", { className: "site-footer__about" }, `${name} records what the US President, senior officials and the party leaders in Congress promise, in their exact words, and moves a promise's status only when a document shows it moved.`),
                   h("p", null, h("a", { href: "/data/promises.json" }, "Open data (JSON)"), " · ", h("a", { href: "/data/promises.csv" }, "CSV"), " · ", h("a", { href: "/feeds/all.xml" }, "Every change (Atom)"), " · ", h("a", { href: "/llms.txt" }, "llms.txt")),
                   h("p", null, "Our writing is under ", h("a", { href: config.publish.licence!.url }, config.publish.licence!.name), ". Quotes keep their own terms, named beside each source."),
                   h("p", null, "Built on ", h("a", { href: "https://github.com/xternal/openpromises" }, "OpenPromises"), ", like ", h("a", { href: "https://ledgergov.uk" }, "LedgerGov.UK"), ", ", h("a", { href: "https://boroughbook.uk" }, "BoroughBook.UK"), " and ", h("a", { href: "https://russialedger.com" }, "RussiaLedger.com"), "."),
@@ -278,7 +278,8 @@ async function main() {
     const c = climbOf(config, v, numberOf.get(v.id) ?? 0);
     return {
       kind: "promise",
-      kicker: kicker ?? v.card.venue_label?.[L] ?? `${actorName(v.actor)}, ${longDate(w, v.card.made_on)}`,
+      // A platform's promise names its place in the platform; any other names who said it, in what role, and when.
+      kicker: kicker ?? (v.card.venue === "platform" && v.card.venue_label?.[L] ? v.card.venue_label[L]! : `${actorName(v.actor)}${v.role?.[L] ? `, ${v.role[L]}` : ""} · ${longDate(w, v.card.made_on).replace(/ /g, "\u00a0")}`),
       headline: headline(v),
       words: v.current.text,
       steps: ladderLabels,
@@ -314,11 +315,11 @@ async function main() {
   const faq: [string, string][] = [
     [
       `What is ${name}?`,
-      `An open record of what the US President and senior officials promise, starting with the twenty promises that open the 2024 Republican Platform. Each promise is in its exact words, with a link to where they were said or written, and a dated timeline of what has happened since, each step linked to its document.`,
+      `An open record of what the US President, senior officials and the party leaders in Congress promise, starting with the twenty promises that open the 2024 Republican Platform. Each promise is in its exact words, with a link to where they were said or written, and a dated timeline of what has happened since, each step linked to its document.`,
     ],
     [
       "Why the 2024 Republican Platform?",
-      "It is the written list of promises the party asked voters to hold it to, and Republicans won the White House and both chambers of Congress in November 2024. Its twenty are this site's areas, in the platform's order, so the yardstick is the platform's own. Later promises by the President, the Vice President and the officials who speak for the Administration are filed under the one they serve.",
+      "It is the written list of promises the party asked voters to hold it to, and Republicans won the White House and both chambers of Congress in November 2024. Its twenty are this site's areas, in the platform's order, so the yardstick is the platform's own. Later promises by the President, the Vice President, the officials who speak for the Administration and the party leaders in Congress, Republican and Democratic, are filed under the one they serve.",
     ],
     [
       "Who decides where a promise stands?",
@@ -331,7 +332,7 @@ async function main() {
     ["Can I use the data?", "Yes. Every card is open data in JSON and CSV, with an Atom feed of every change and Markdown beside every page. Our writing is under CC BY 4.0; quotes keep their own terms, named beside each source."],
     [
       "How is this different from PolitiFact's MAGA-Meter?",
-      "The MAGA-Meter rates 75 of Donald Trump's 2024 campaign promises. This site files promises by the President and the officials who speak for the Administration under the platform's twenty, with deadlines, costs and their sources, and a history of every change, as open data.",
+      "The MAGA-Meter rates 75 of Donald Trump's 2024 campaign promises. This site files promises by the President, the officials who speak for the Administration and the party leaders in Congress under the platform's twenty, with deadlines, costs and their sources, and a history of every change, as open data.",
     ],
   ];
   const homeDescription = `The twenty promises of the 2024 Republican Platform, in their exact words, and where each one stands, shown by orders, laws, budgets and official statistics: ${tally(platform)}.`;
@@ -442,7 +443,7 @@ async function main() {
           { className: "note" },
           laterTotal
             ? h(Fragment, null, `${laterTotal} later ${laterTotal === 1 ? "promise is" : "promises are"} filed under the twenty, or under `, h("a", { href: p.area("other", L) }, "Not among the 20"), ".")
-            : "Later promises by the President, the Vice President and the officials who speak for the Administration are filed under the one they serve. None is recorded yet.",
+            : "Later promises by the President, the Vice President, the officials who speak for the Administration and the party leaders in Congress, Republican and Democratic, are filed under the one they serve. None is recorded yet.",
         ),
       ),
       h(
@@ -551,15 +552,15 @@ async function main() {
   page({
     path: "/actor/",
     title: "People",
-    description: `The President, the Vice President and the officials who speak for the Administration, the parties and the bodies that must deliver, each with every promise on record and where it stands.`,
-    share: pageShare("People", "Who promised what", "The President, the Vice President and the officials who speak for the Administration, each with every area listed, empty ones too."),
-    alt: "Who promised what: the President, the Vice President and senior officials on USLedger.org.",
+    description: `The President, the Vice President, the officials who speak for the Administration, the party leaders in Congress, the parties and the bodies that must deliver, each with every promise on record and where it stands.`,
+    share: pageShare("People", "Who promised what", "The President, the Vice President, the officials who speak for the Administration and the party leaders in Congress, each with every area listed, empty ones too."),
+    alt: "Who promised what: the President, the Vice President, senior officials and the party leaders in Congress on USLedger.org.",
     body: h(
       Fragment,
       null,
       h("h1", null, "People"),
       h("p", { className: "lede" }, "Every page lists all twenty-one areas, so what has not been promised shows as plainly as what has."),
-      h("h2", null, "The Administration"),
+      h("h2", null, "Officials and leaders"),
       actorList(people),
       h("h2", null, "Parties"),
       actorList(parties),
@@ -659,7 +660,7 @@ async function main() {
         "p",
         null,
         h("a", { href: "https://www.politifact.com/truth-o-meter/promises/maga-meter-tracking-donald-trumps-2024-promises/" }, "PolitiFact's MAGA-Meter"),
-        " rates 75 of Donald Trump's 2024 campaign promises. This site files every promise by the President and the officials who speak for the Administration under the platform's twenty, as open data with a history that only grows. What every government has promised Ukraine is on ",
+        " rates 75 of Donald Trump's 2024 campaign promises. This site files every promise by the President, the officials who speak for the Administration and the party leaders in Congress under the platform's twenty, as open data with a history that only grows. What every government has promised Ukraine is on ",
         h("a", { href: "https://ukraineledger.com" }, "UkraineLedger.com"),
         ".",
       ),

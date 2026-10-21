@@ -2,7 +2,7 @@ import { defineConfig } from "@openpromises/core";
 
 /**
  * USLedger.org on the OpenPromises engine (github.com/xternal/openpromises), started on 20 October 2026: what the
- * US President and the officials who speak for the Administration promise. The first site the engine runs from day
+ * US President, the officials who speak for the Administration and the party leaders in Congress promise. The first site the engine runs from day
  * one rather than by migration; its sisters are LedgerGov.UK, BoroughBook.UK and RussiaLedger.com, and the rules
  * are the same.
  *
@@ -18,7 +18,7 @@ export default defineConfig({
     name: "USLedger.org",
     url: "https://usledger.org",
     description: {
-      en: "What the US President and senior officials promise, filed under the 20 promises of the 2024 Republican Platform: the exact words, the deadline, the cost, and a timeline that moves only on evidence.",
+      en: "What the US President, senior officials and the party leaders in Congress promise, filed under the 20 promises of the 2024 Republican Platform: the exact words, the deadline, the cost, and a timeline that moves only on evidence.",
     },
   },
   content: "content",

@@ -1,0 +1,44 @@
+format: openpromises/1
+id: jeffries-end-tariffs-2026
+headline:
+  en: "Reclaim tariff powers and end the President's tariffs"
+actor_id: hakeem-jeffries
+made_on: "2026-10-14"
+venue: interview
+venue_label:
+  en: "MS NOW, The Weeknight (transcript published by the House Democratic Leader's office)"
+area: manufacturing
+status: promised
+status_note:
+  en: "On 20 February 2026 the Supreme Court held that the International Emergency Economic Powers Act does not authorize tariffs (Learning Resources, Inc. v. Trump), and the tariffs set under that Act ended. Tariffs under other laws, such as section 301 of the Trade Act of 1974, continue. The words do not say which tariffs would end."
+responsible:
+  actor_id: us-congress
+  note:
+    en: "The words commit House Democrats if they win a majority in the House on 3 November 2026. A law needs both chambers and the President's signature, or two-thirds of each chamber to override a veto."
+origin: manual
+sources:
+  - title: "Leader Jeffries on MS NOW's The Weeknight, 14 October 2026 (transcript, Office of the Democratic Leader)"
+    url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-ms-now-were-going-relentlessly-focus-our-affordability-agenda
+  - title: "Supreme Court: Learning Resources, Inc. v. Trump, No. 24-1287 (20 February 2026)"
+    url: https://www.supremecourt.gov/opinions/25pdf/24-1287_4425.pdf
+versions:
+  - version: 1
+    text: "And we also need to make sure we reclaim congressional authority in terms of tariffs so we can end these Trump Tariffs, which have also increased costs on everyday Americans in terms of groceries and goods by thousands of dollars per year."
+    recorded_on: "2026-10-21"
+    source_url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-ms-now-were-going-relentlessly-focus-our-affordability-agenda
+    quote_checked_on: null
+    source_text:
+      file: jeffries-2026-10-14-ms-now.txt
+      span: [2620, 2859]
+    parameters:
+      when:
+        en: "If Democrats win a majority in the House on 3 November 2026: among the things \"we are going to have to do immediately\", said in answer to a question about the first 100 days of that majority. The new Congress meets on 3 January 2027."
+      deadline: null
+events:
+  - date: "2026-10-14"
+    type: promised
+    text:
+      en: "Asked what a Democratic House majority would do in its first 100 days, Jeffries says Congress should reclaim its authority over tariffs so the tariffs can end"
+replies: []
+corrections: []
+reviews: []

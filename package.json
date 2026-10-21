@@ -1,7 +1,7 @@
 {
   "name": "us-ledger",
   "private": true,
-  "description": "What the US President and senior officials promise, starting with the 20 promises of the 2024 Republican Platform: the exact words, the deadline, the cost, and a timeline that moves only on evidence",
+  "description": "What the US President, senior officials and the party leaders in Congress promise, starting with the 20 promises of the 2024 Republican Platform: the exact words, the deadline, the cost, and a timeline that moves only on evidence",
   "license": "AGPL-3.0-only",
   "type": "module",
   "packageManager": "pnpm@12.9.1",

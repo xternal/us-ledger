@@ -1,6 +1,6 @@
 # USLedger.org
 
-**What the US President and senior officials promise, filed under the 20 promises of the 2024 Republican Platform: the exact words, the deadline, the cost, and a timeline that moves only on evidence.**
+**What the US President, senior officials and the party leaders in Congress promise, filed under the 20 promises of the 2024 Republican Platform: the exact words, the deadline, the cost, and a timeline that moves only on evidence.**
 
 The 2024 Republican Platform, "Make America Great Again!", opens with twenty promises "that we will accomplish very quickly when we win the White House and Republican Majorities in the House and Senate". Republicans won all three in November 2024. This site takes the platform at its word: the twenty are its areas, in the platform's order, so the yardstick is the platform's own, never ours. Every later promise by the President, the Vice President or the officials who speak for the Administration is filed under the one it serves, or under "Not among the 20".
 
@@ -38,7 +38,7 @@ pnpm preview         # the same with drafts, in public-preview/, never deployed
 - Every page has its own title, description, canonical address and a 1200x630 share image drawn from its content (`scripts/share-image.ts`); `robots.txt` welcomes search and AI crawlers, with `sitemap.xml` and `llms.txt`.
 - The mark is the Capitol's dome in a few lines, with a dot in the ladder's colour (`scripts/mark.ts`): in the header, the favicon, the home-screen icon and every share image.
 - Live at [usledger.org](https://usledger.org) since 20 October 2026, on Vercel (team GUZH, project `us-ledger`, settings in `vercel.json`): every push to `main` deploys. The domain is registered at Cloudflare, with A records for `@` and `www` pointing at Vercel, DNS only; `www` redirects to the bare address.
-- Actors: the President, the Vice President, the Secretaries of State, Defense and the Treasury, the envoys and ambassadors, with their roles from official pages; the Republican and Democratic parties; the Administration and Congress as the bodies that deliver.
+- Actors: the President, the Vice President, the Secretaries of State, Defense and the Treasury, the envoys and ambassadors, and the House Democratic Leader, with their roles from official pages; the Republican and Democratic parties; the Administration and Congress as the bodies that deliver.
 
 ## Add a promise
 

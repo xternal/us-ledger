@@ -1,0 +1,28 @@
+format: openpromises/1
+id: hakeem-jeffries
+kind: person
+name:
+  en: Hakeem Jeffries
+short_name:
+  en: Jeffries
+party_id: democratic-party
+roles:
+# The leadership role comes first: on a day both hold, a card names the first.
+  - title:
+      en: House Democratic Leader
+    from: "2023-01-03"
+    source:
+      url: https://democraticleader.house.gov/about
+      quote: "Jeffries is the Democratic Leader, having been unanimously elected to that position by his colleagues in 2022 and 2024."
+  - title:
+      en: US Representative for New York's 8th district
+    from: "2013-01-03"
+    source:
+      url: https://democraticleader.house.gov/about
+      quote: "Hakeem Jeffries represents the diverse Eighth Congressional District of New York and is serving his seventh term in the United States Congress."
+identifiers:
+  bioguide_id: J000294
+same_as:
+  - https://democraticleader.house.gov/about
+  - https://jeffries.house.gov
+same_as_checked_on: "2026-10-21"
