@@ -53,7 +53,7 @@ Every figure is a line of the Monthly Treasury Statement, Table 9, as the Bureau
 
 ## Then again
 
-`/then-again/` holds pairs of statements by the same person, each in exact words with its date and a link to a published record, where the later one cannot be true or carried out at the same time as the earlier one, read as written. Both are on the record; the reader decides. The test is on the page, and it is the same for everyone with an actor file. A quote heard only on video is not used. If the speaker explained the change, the explanation is shown beside the pair.
+`/then-again/` holds pairs of statements by the same person, each in exact words with its date and a link to a published record, where the later one cannot be true or carried out at the same time as the earlier one, read as written. Both are on the record; the reader decides. The test is on the page, and it is the same for everyone with an actor file. A quote heard only on video is not used; a broadcaster's published transcript of a recording it played is, when an official page confirms the date. If the speaker explained the change, the explanation is shown beside the pair.
 
 Each pair is `content/then-again/<id>.yaml` (format in `scripts/then-again.ts`); its quotes are checked character for character against saved sources in `content/sources/`, like a card's. A pair is published once the editor approves it:
 

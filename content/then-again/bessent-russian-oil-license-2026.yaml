@@ -1,0 +1,34 @@
+format: usledger-then-again/1
+id: bessent-russian-oil-license-2026
+actor_id: scott-bessent
+subject: "Whether the general license for Russian oil would be renewed"
+first:
+  date: "2026-04-15"
+  venue: press_conference
+  where: "White House press briefing, as played and transcribed on NBC’s Meet the Press of 19 April 2026; the White House’s own record of the briefing is a video"
+  text: "We will not be renewing the general license on Russian oil."
+  source_url: https://www.nbcnews.com/meet-the-press/transcripts/meet-press-april-19-2026-rcna340866
+  source_text:
+    file: mtp-2026-04-19.txt
+    span: [536, 595]
+later:
+  date: "2026-05-18"
+  venue: social
+  where: "Post on X, @SecScottBessent"
+  text: ".@USTreasury is issuing a temporary 30-day general license to provide the most vulnerable nations with the ability to temporarily access Russian oil currently stranded at sea."
+  source_url: https://x.com/SecScottBessent/status/2056411947982115207
+  source_text:
+    file: x-bessent-2026-05-18.txt
+    span: [287, 462]
+explanation:
+  date: "2026-05-18"
+  venue: social
+  where: "The same post, its next paragraph"
+  text: "This extension will provide additional flexibility, and we will work with these nations to provide specific licenses as needed."
+  source_url: https://x.com/SecScottBessent/status/2056411947982115207
+  source_text:
+    file: x-bessent-2026-05-18.txt
+    span: [464, 591]
+note: "On 17 April 2026, two days after the briefing, the Treasury issued another 30-day general license for Russian oil, to mid-May; no words of the Secretary on that one were found."
+recorded_on: "2026-10-21"
+reviews: []
