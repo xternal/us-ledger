@@ -49,4 +49,8 @@ events:
       en: "Asked about the cap, the President says a one-year cap on credit card interest of 10 percent is being put in place"
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

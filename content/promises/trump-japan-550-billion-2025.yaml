@@ -48,4 +48,8 @@ events:
     evidence_url: https://www.whitehouse.gov/fact-sheets/2026/03/fact-sheet-president-donald-j-trump-strengthens-u-s-japan-alliance-for-the-benefit-of-all-americans/
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

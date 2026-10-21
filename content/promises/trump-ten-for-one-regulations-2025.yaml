@@ -58,4 +58,8 @@ events:
     evidence_url: https://www.reginfo.gov/public/pdf/eo14192/Final_Accounting_for_Fiscal_Year_2025_under_EO_14192.pdf
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

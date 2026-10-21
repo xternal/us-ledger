@@ -56,4 +56,8 @@ events:
     evidence_url: https://usun.usmission.gov/remarks-at-a-un-security-council-briefing-on-haiti-12/
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

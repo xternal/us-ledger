@@ -52,4 +52,8 @@ events:
       en: "The end of \"next year\""
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

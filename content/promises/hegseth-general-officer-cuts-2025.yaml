@@ -44,4 +44,8 @@ events:
     evidence_url: https://www.war.gov/News/Speeches/Speech/Article/4616486/secretary-of-war-pete-hegseths-state-of-the-force-address-as-delivered/
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

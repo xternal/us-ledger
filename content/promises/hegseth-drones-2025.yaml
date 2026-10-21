@@ -66,4 +66,8 @@ events:
       en: "The end of 2026, when tens of thousands of drones are to have been delivered"
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true
