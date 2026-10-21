@@ -1,0 +1,43 @@
+format: openpromises/1
+id: jeffries-hold-officials-to-account-2026
+headline:
+  en: "Hold officials who enrich themselves to account"
+actor_id: hakeem-jeffries
+made_on: "2026-10-14"
+venue: interview
+venue_label:
+  en: "MS NOW, The Weeknight (transcript published by the House Democratic Leader's office)"
+area: government
+status: unscoreable
+status_note:
+  en: "The words name no outcome that an official document or statistic could show as reached: they name no one, and \"accountable\" is not defined. In the same interview Jeffries says the oversight is to be led by the Democrats on the Judiciary and Oversight committees."
+responsible:
+  actor_id: us-congress
+  note:
+    en: "The words commit House Democrats if they win a majority in the House on 3 November 2026. A law needs both chambers and the President's signature, or two-thirds of each chamber to override a veto."
+origin: manual
+sources:
+  - title: "Leader Jeffries on MS NOW's The Weeknight, 14 October 2026 (transcript, Office of the Democratic Leader)"
+    url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-ms-now-were-going-relentlessly-focus-our-affordability-agenda
+versions:
+  - version: 1
+    text: "And so, we've made clear to anyone out there who's been stealing from the American people, shortchanging the American people or screwing over the American people that, beginning on day one, we're going to hold the crooks accountable and disrupt business as usual."
+    recorded_on: "2026-10-21"
+    source_url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-ms-now-were-going-relentlessly-focus-our-affordability-agenda
+    quote_checked_on: null
+    source_text:
+      file: jeffries-2026-10-14-ms-now.txt
+      span: [3118, 3381]
+    parameters: null
+events:
+  - date: "2026-10-14"
+    type: promised
+    text:
+      en: "Asked what a Democratic House majority would do in its first 100 days, Jeffries says that, beginning on day one, Democrats will hold to account those who have been taking from the public"
+  - date: "2026-10-21"
+    type: unscoreable
+    text:
+      en: "Recorded as unscoreable: the words set no measurable outcome, cost or deadline"
+replies: []
+corrections: []
+reviews: []
