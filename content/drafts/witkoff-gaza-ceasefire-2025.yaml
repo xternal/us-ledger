@@ -1,0 +1,49 @@
+format: openpromises/1
+id: witkoff-gaza-ceasefire-2025
+headline:
+  en: "A 60-day Gaza ceasefire deal within the week"
+actor_id: steve-witkoff
+made_on: "2025-07-08"
+venue: press_conference
+venue_label:
+  en: Cabinet meeting at the White House, with reporters present
+area: peace
+status: failed
+status_note:
+  en: "No agreement was reached that week. On 25 July 2025 the President said Hamas had pulled out of the negotiations. The 20 living hostages were released on 13 October 2025, and the remains of the last deceased hostage were returned by 27 January 2026, under the later plan the President announced on 29 September 2025. The words were a hope: \"we are hopeful\"."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "The agreement needed Israel and Hamas; the US took part as a mediator."
+origin: manual
+sources:
+  - title: "Remarks to the Knesset in Jerusalem, 13 October 2025"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202501005/html/DCPD-202501005.htm
+versions:
+  - version: 1
+    text: "So we are hopeful that by the end of this week, we will have an agreement that will bring us into a 60-day ceasefire."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500755/html/DCPD-202500755.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500755.txt
+      span: [536, 653]
+    parameters:
+      who:
+        en: "The hostages held in Gaza and the people of Gaza and Israel; the next words were: \"Ten live hostages will be released. Nine deceased will be released.\""
+      when:
+        en: "By the end of the week of 8 July 2025"
+      deadline: "2025-07-13"
+events:
+  - date: "2025-07-08"
+    type: promised
+    text:
+      en: "At a Cabinet meeting, the Special Envoy says he hopes for an agreement by the end of the week on a 60-day ceasefire, with 10 living hostages and 9 deceased released"
+  - date: "2025-07-25"
+    type: failed
+    text:
+      en: "No agreement having been reached, the President says Hamas has pulled out of the negotiations"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500795/html/DCPD-202500795.htm
+replies: []
+corrections: []
+reviews: []

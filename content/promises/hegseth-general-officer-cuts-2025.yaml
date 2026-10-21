@@ -1,0 +1,51 @@
+format: openpromises/1
+id: hegseth-general-officer-cuts-2025
+headline:
+  en: "Cut four-star posts by at least 20%"
+actor_id: pete-hegseth
+made_on: "2025-05-05"
+venue: statement
+venue_label:
+  en: "Memorandum to senior Pentagon leadership, \"General/Flag Officer Reductions\""
+area: military
+status: delivering
+status_note:
+  en: "On 30 September 2026 the Secretary said general officer posts had been cut by 10%, besides the 10% of generals and admirals he said had been dismissed. The War Department has published no count of four-star or National Guard general officer posts before and after the memo. The same speech created a new four-star command, Autonomous Warfare Command. The memo sets no deadline."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Secretary of War Pete Hegseth's State of the Force Address (as delivered, 30 September 2026)"
+    url: https://www.war.gov/News/Speeches/Speech/Article/4616486/secretary-of-war-pete-hegseths-state-of-the-force-address-as-delivered/
+versions:
+  - version: 1
+    text: "Therefore, I direct the following actions: • A minimum 20% reduction of 4-star positions across the Active Component; • A minimum 20% reduction of general officers in the National Guard; and • An additional minimum 10% reduction in general and flag officers with the realignment of the Unified Command Plan."
+    recorded_on: "2026-10-20"
+    source_url: https://media.defense.gov/2025/May/05/2003704210/-1/-1/1/MEMORANDUM-DIRECTING-GENERAL-AND-FLAG-OFFICER-REDUCTIONS.PDF
+    quote_checked_on: null
+    source_text:
+      file: dod-memo-2025-05-05-gofo.txt
+      span: [603, 910]
+    parameters:
+      who:
+        en: "Generals and admirals: four-star posts in the active forces, National Guard generals, and general and flag officers across the forces"
+      when:
+        en: No date stated
+      deadline: null
+events:
+  - date: "2025-05-05"
+    type: promised
+    text:
+      en: "The Secretary of Defense directs cuts of at least 20% in active four-star posts, at least 20% in National Guard generals, and at least a further 10% in general and flag officers"
+  - date: "2026-09-30"
+    type: delivering
+    text:
+      en: "In his State of the Force address, the Secretary says the overall number of general officer posts has been reduced by a further 10%"
+    evidence_url: https://www.war.gov/News/Speeches/Speech/Article/4616486/secretary-of-war-pete-hegseths-state-of-the-force-address-as-delivered/
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

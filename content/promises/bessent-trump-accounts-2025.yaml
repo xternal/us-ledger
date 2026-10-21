@@ -1,0 +1,63 @@
+format: openpromises/1
+id: bessent-trump-accounts-2025
+headline:
+  en: "Trump Accounts take deposits from 4 July 2026"
+actor_id: scott-bessent
+made_on: "2025-12-17"
+venue: speech
+venue_label:
+  en: Trump Accounts press conference at the Treasury
+area: taxes
+status: delivered
+status_note:
+  en: "The IRS says contributions to Trump Accounts began on 4 July 2026, up to $5,000 a year from individuals, with a one-time $1,000 federal contribution for each eligible child born from 2025 to 2028 (Public Law 119-21, section 70204). By 31 March 2026 more than 4 million children had been signed up, more than 1 million of them for the $1,000 contribution (IRS). No count of $1,000 deposits made since 4 July has been published by 20 October 2026."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "IRS: Working Families Tax Cuts, Trump Accounts (section 70204)"
+    url: https://www.irs.gov/newsroom/working-families-tax-cuts
+  - title: "Treasury: Launch of the Trump Accounts App and Next Steps for Trump Accounts (28 May 2026)"
+    url: https://home.treasury.gov/news/press-releases/sb0508
+versions:
+  - version: 1
+    text: "Starting on July 4—our nation’s 250th anniversary—parents, family members, employers, and friends will be able to contribute up to $5,000 to each Trump Account each year."
+    recorded_on: "2026-10-20"
+    source_url: https://home.treasury.gov/news/press-releases/sb0340
+    quote_checked_on: null
+    source_text:
+      file: treasury-sb0340.txt
+      span: [800, 970]
+    parameters:
+      who:
+        en: "Children with a Trump Account, and the parents, relatives, employers and friends who pay into it"
+      when:
+        en: "From 4 July 2026"
+      deadline: "2026-07-04"
+events:
+  - date: "2025-12-17"
+    type: promised
+    text:
+      en: "The Treasury Secretary says that from 4 July 2026 parents, relatives, employers and friends will be able to pay up to $5,000 a year into each Trump Account"
+  - date: "2026-03-31"
+    type: delivering
+    text:
+      en: "The IRS reports more than 4 million children signed up for Trump Accounts, more than 1 million of them for the $1,000 pilot contribution"
+    evidence_url: https://www.irs.gov/newsroom/4-million-children-have-been-signed-up-for-trump-accounts-with-1-million-claiming-the-1000-pilot-program-contribution
+  - date: "2026-05-28"
+    type: delivering
+    text:
+      en: "The Treasury launches the Trump Accounts app and starts account activation ahead of the launch on 4 July 2026"
+    evidence_url: https://home.treasury.gov/news/press-releases/sb0508
+  - date: "2026-07-04"
+    type: delivered
+    text:
+      en: "Contributions to Trump Accounts begin, according to the IRS"
+    evidence_url: https://www.irs.gov/newsroom/working-families-tax-cuts
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

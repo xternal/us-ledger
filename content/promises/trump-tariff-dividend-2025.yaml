@@ -1,0 +1,91 @@
+format: openpromises/1
+id: trump-tariff-dividend-2025
+headline:
+  en: "A tariff dividend of about $2,000"
+actor_id: donald-trump
+made_on: "2025-11-10"
+venue: press_conference
+venue_label:
+  en: Exchange with reporters at a swearing-in ceremony in the Oval Office
+area: other
+status: promised
+status_note:
+  en: "No law, appropriation or payment for a general tariff dividend exists among the public laws up to Public Law 119-121 (9 October 2026). On 20 February 2026 the Supreme Court held that the International Emergency Economic Powers Act does not allow the President to impose tariffs (Learning Resources v. Trump), and CBP is refunding those duties to importers. Since 9 September 2026 the President has put the dividend at $5,000 for every adult citizen, if Republicans win both the House and the Senate on 3 November 2026. The $1,776 paid to service members in December 2025 was a separate payment."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "On 20 January 2026 the President said: \"I believe we can do that without Congress.\""
+origin: manual
+sources:
+  - title: "Supreme Court: Learning Resources, Inc. v. Trump, No. 24-1287 (20 February 2026)"
+    url: https://www.supremecourt.gov/opinions/25pdf/607us2r12_8nj9.pdf
+  - title: "CBP: IEEPA duty refunds"
+    url: https://www.cbp.gov/trade/programs-administration/trade-remedies/ieepa-duty-refunds
+  - title: "Daily Compilation of Presidential Documents: Acts approved by the President, 2026"
+    url: https://www.govinfo.gov/content/pkg/DCPD-2026ACTSAPPROVED/html/DCPD-2026ACTSAPPROVED.htm
+versions:
+  - version: 1
+    text: "And one of the things we're going to do, we're going to issue a dividend to our middle-income people and lower-income people of about $2,000, and we're going to use the remaining tariffs to lower our debt."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202501109/html/DCPD-202501109.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202501109.txt
+      span: [423, 628]
+    parameters:
+      who:
+        en: Middle-income and lower-income people
+      when:
+        en: "Not stated in these words. Asked on 14 November 2025 whether the checks would come before Christmas, he said: \"No, no, not for this year. It will be next year sometime.\""
+      deadline: null
+  - version: 2
+    text: "And here is my promise: If the Republicans win the House of Representatives and the United States Senate—both of them—because of our economic—tremendous economic success—like, in—in history, we've never had anything like what's happening—but because of our tremendous strength and success economically, I will issue a dividend to every adult citizen in the United States of America for $5,000."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202600590/html/DCPD-202600590.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202600590.txt
+      span: [343, 736]
+    parameters:
+      who:
+        en: Every adult citizen
+      when:
+        en: "If Republicans win both the House and the Senate in the elections of 3 November 2026; no payment date stated"
+      deadline: null
+events:
+  - date: "2025-11-10"
+    type: promised
+    text:
+      en: "The President says middle- and lower-income people will get a dividend of about $2,000 from tariff revenue, and the rest will lower the debt"
+  - date: "2025-11-14"
+    type: restated
+    text:
+      en: "Asked when the checks would come, the President says \"next year sometime\""
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202501124/html/DCPD-202501124.htm
+  - date: "2025-11-19"
+    type: restated
+    text:
+      en: "At the US-Saudi Investment Forum, the President says the dividend will be \"at least $2,000\" for low-, middle- and moderate-income people"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202501132/html/DCPD-202501132.htm
+  - date: "2026-01-20"
+    type: restated
+    text:
+      en: "At a White House press briefing, the President says tariff revenue will allow \"at least a $2,000 dividend\" and that it can be done without Congress"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202600040/html/DCPD-202600040.htm
+  - date: "2026-09-09"
+    type: reworded
+    text:
+      en: "At the Republican National Committee's midterm convention, the President promises a dividend of $5,000 to every adult citizen if Republicans win both the House and the Senate"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202600590/html/DCPD-202600590.htm
+  - date: "2026-09-16"
+    type: restated
+    text:
+      en: "At a rally in Gastonia, North Carolina, the President repeats the $5,000 \"Trump dividend\" if Republicans win the House and the Senate"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202600614/html/DCPD-202600614.htm
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

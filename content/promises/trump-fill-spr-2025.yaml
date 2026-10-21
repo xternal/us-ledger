@@ -1,0 +1,58 @@
+format: openpromises/1
+id: trump-fill-spr-2025
+headline:
+  en: "Fill the Strategic Petroleum Reserve to the top"
+actor_id: donald-trump
+made_on: "2025-01-20"
+venue: speech
+venue_label:
+  en: Inaugural address, 20 January 2025
+area: energy
+status: funded
+status_note:
+  en: "The Strategic Petroleum Reserve held 282.2 million barrels on 16 October 2026 (Department of Energy), against an authorized capacity of 714 million barrels. It held 394.6 million barrels on 17 January 2025 and about 415 million in March 2026 (EIA, DOE). From March 2026 DOE lent oil from the reserve in emergency exchanges, as part of the International Energy Agency's collective release of 400 million barrels; companies are to return it with additional barrels as a premium."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Department of Energy: SPR Quick Facts (inventory and authorized capacity)"
+    url: https://www.energy.gov/hgeo/opr/spr-quick-facts
+  - title: "EIA: Weekly U.S. ending stocks of crude oil in the SPR"
+    url: https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=WCSSTUS1&f=W
+  - title: "Department of Energy: Energy Department Initiates Strategic Petroleum Reserve Emergency Exchange to Stabilize Global Oil Supply (13 March 2026)"
+    url: https://www.energy.gov/articles/energy-department-initiates-strategic-petroleum-reserve-emergency-exchange-stabilize
+versions:
+  - version: 1
+    text: "We will bring prices down, fill our strategic reserves up again right to the top, and export American energy all over the world."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500103/html/DCPD-202500103.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500103.txt
+      span: [279, 407]
+    parameters:
+      when:
+        en: No date stated
+      deadline: null
+events:
+  - date: "2025-01-20"
+    type: promised
+    text:
+      en: "In his inaugural address, the President says the strategic reserves will be filled \"right to the top\""
+  - date: "2025-07-04"
+    type: funded
+    text:
+      en: "Public Law 119-21 appropriates $171 million to buy oil for the reserve and $218 million for repairs to its sites, available until 30 September 2029, and repeals a sale of reserve oil required by a 2017 law (section 50401)"
+    evidence_url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+  - date: "2026-03-13"
+    type: delivering
+    text:
+      en: "The Department of Energy says the reserve holds about 415 million barrels, up from about 395 million a year earlier"
+    evidence_url: https://www.energy.gov/articles/energy-department-initiates-strategic-petroleum-reserve-emergency-exchange-stabilize
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

@@ -1,0 +1,59 @@
+format: openpromises/1
+id: trump-retirement-match-2026
+headline:
+  en: "Retirement plan with $1,000 match from 2027"
+actor_id: donald-trump
+made_on: "2026-02-24"
+venue: speech
+venue_label:
+  en: State of the Union address, 24 February 2026
+area: other
+status: in_plan
+status_note:
+  en: "Executive Order 14403 (30 April 2026) directs the Treasury to open TrumpIRA.gov by 1 January 2027, listing low-cost private IRAs that accept the Federal Saver's Match. That match, up to $1,000 a year for eligible savers, was enacted in 2022 (SECURE 2.0 Act, Public Law 117-328, section 103) and applies from tax years beginning after 31 December 2026. On 20 October 2026 TrumpIRA.gov shows a Treasury page saying \"Coming 2027\", with an official launch on 1 January 2027."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Executive Order 14403: Promoting Retirement-Savings Access for American Workers by Establishing TrumpIRA.gov"
+    url: https://www.federalregister.gov/documents/2026/05/05/2026-08908/promoting-retirement-savings-access-for-american-workers-by-establishing-trumpiragov
+  - title: "Public Law 117-328, Division T (SECURE 2.0 Act of 2022), section 103: Saver's Match"
+    url: https://www.govinfo.gov/content/pkg/PLAW-117publ328/html/PLAW-117publ328.htm
+  - title: "TrumpIRA.gov (US Department of the Treasury)"
+    url: https://www.trumpira.gov/
+versions:
+  - version: 1
+    text: "To remedy this gross disparity, I'm announcing that next year, my administration will give these often-forgotten American workers—great people; the people that built our country—access to the same type of retirement plan offered to every Federal worker. We will match your contribution with up to $1,000 each year."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202600136/html/DCPD-202600136.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202600136.txt
+      span: [697, 1011]
+    parameters:
+      who:
+        en: "Workers without a retirement plan with matching contributions from an employer, which the President put at half of all working Americans"
+      when:
+        en: "\"Next year\": during 2027"
+      deadline: "2027-12-31"
+events:
+  - date: "2026-02-24"
+    type: promised
+    text:
+      en: "In the State of the Union address, the President says that in 2027 workers without an employer plan will get access to a plan like federal workers', with a match of up to $1,000 a year"
+  - date: "2026-04-30"
+    type: in_plan
+    text:
+      en: "Executive Order 14403 directs the Treasury to set up TrumpIRA.gov by 1 January 2027, listing IRAs with costs of at most 0.15% a year that accept the Federal Saver's Match of up to $1,000"
+    evidence_url: https://www.federalregister.gov/documents/2026/05/05/2026-08908/promoting-retirement-savings-access-for-american-workers-by-establishing-trumpiragov
+  - date: "2027-12-31"
+    type: deadline
+    text:
+      en: "The end of \"next year\""
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

@@ -1,0 +1,59 @@
+format: openpromises/1
+id: trump-iran-agreement-two-weeks-2026
+headline:
+  en: "Iran agreement finalized within two weeks"
+actor_id: donald-trump
+made_on: "2026-04-07"
+venue: statement
+venue_label:
+  en: Statement on US military operations in Iran, announcing a two-week cease-fire
+area: peace
+status: failed
+status_note:
+  en: "No agreement was finalized by 21 April 2026; that day the President extended the cease-fire until Iran submits a proposal and talks conclude. On 24 June he said an agreement to end the conflict had been signed the week before; on 8 July he said \"As far as I'm concerned, it's over\"; on 2 August he called off planned strikes at the request of Saudi Arabia, the UAE, Qatar and Iran. The US struck Iran again from 1 September 2026 (presidential notice to Congress). No agreement text had been published by 20 October 2026. The cease-fire was conditional on Iran opening the Strait of Hormuz."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "An agreement needs Iran's consent; Pakistan's leaders asked for the pause."
+origin: manual
+sources:
+  - title: "Remarks at the Great American State Fair, 24 June 2026"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202600427/html/DCPD-202600427.htm
+  - title: "Remarks with NATO Secretary General Mark Rutte in Ankara, 8 July 2026"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202600449/html/DCPD-202600449.htm
+  - title: "Remarks aboard Air Force One, 2 August 2026"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202600511/html/DCPD-202600511.htm
+  - title: "House Document 119-193: notification of military action against Iran commenced on 1 September 2026"
+    url: https://www.govinfo.gov/content/pkg/CDOC-119hdoc193/html/CDOC-119hdoc193.htm
+versions:
+  - version: 1
+    text: "Almost all of the various points of past contention have been agreed to between the United States and Iran, but a two week period will allow the Agreement to be finalized and consummated."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202600236/html/DCPD-202600236.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202600236.txt
+      span: [1117, 1304]
+    parameters:
+      who:
+        en: The United States, Iran and the countries of the Middle East
+      when:
+        en: "Within the two-week cease-fire from 7 April 2026"
+      deadline: "2026-04-21"
+events:
+  - date: "2026-04-07"
+    type: promised
+    text:
+      en: "The President suspends attacks on Iran for two weeks, if Iran opens the Strait of Hormuz, and says the two weeks will allow the agreement to be finalized"
+  - date: "2026-04-21"
+    type: failed
+    text:
+      en: "With no agreement finalized, the President extends the cease-fire until Iran's leaders submit a unified proposal and talks conclude"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202600279/html/DCPD-202600279.htm
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

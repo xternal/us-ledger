@@ -1,0 +1,94 @@
+format: openpromises/1
+id: trump-drug-prices-2025
+headline:
+  en: "Drug prices down 30% to 80%, almost immediately"
+actor_id: donald-trump
+made_on: "2025-05-11"
+venue: statement
+venue_label:
+  en: Statement on prescription drug costs, the evening before the most-favored-nation order
+area: inflation
+status: delivering
+status_note:
+  en: "The consumer price index for prescription drugs (BLS, US city average) was 543.556 in September 2026, 4.1% below May 2025 (566.716) and 4.5% below September 2025. By 31 August 2026, 26 manufacturers covering 89% of the branded drug market had signed most-favored-nation agreements (White House); TrumpRx.gov has listed discounted cash prices since 5 February 2026; the GLOBE model for Medicare Part B drugs takes effect on 30 November 2026. No official index of the prices paid through TrumpRx has been published."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "BLS: consumer price index, prescription drugs (series CUUR0000SEMF01)"
+    url: https://data.bls.gov/timeseries/CUUR0000SEMF01
+  - title: "Executive Order 14297: Delivering Most-Favored-Nation Prescription Drug Pricing to American Patients"
+    url: https://www.federalregister.gov/documents/2025/05/15/2025-08876/delivering-most-favored-nation-prescription-drug-pricing-to-american-patients
+  - title: "CMS: Global Benchmark for Efficient Drug Pricing (GLOBE) Model, final rule (2 October 2026)"
+    url: https://www.federalregister.gov/documents/2026/10/02/2026-20281/global-benchmark-for-efficient-drug-pricing-globe-model
+versions:
+  - version: 1
+    text: "Prescription drug and pharmaceutical prices will be reduced, almost immediately, by 30 percent to 80 percent."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500589/html/DCPD-202500589.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500589.txt
+      span: [294, 403]
+    parameters:
+      who:
+        en: People who pay for prescription drugs in the US
+      when:
+        en: "\"Almost immediately\""
+      deadline: null
+  - version: 2
+    text: "Some prescription drug and pharmaceutical prices will be reduced almost immediately by 50 to 80 to 90 percent."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500590/html/DCPD-202500590.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500590.txt
+      span: [407, 517]
+    parameters:
+      who:
+        en: People who pay for prescription drugs in the US
+      when:
+        en: "\"Almost immediately\""
+      deadline: null
+events:
+  - date: "2025-05-11"
+    type: promised
+    text:
+      en: "The President says prescription drug prices will fall by 30% to 80% almost immediately, under a most-favored-nation policy"
+  - date: "2025-05-12"
+    type: reworded
+    text:
+      en: "Signing the order, the President says some prices will fall almost immediately by 50% to 80% to 90%"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500590/html/DCPD-202500590.htm
+  - date: "2025-05-12"
+    type: in_plan
+    text:
+      en: "Executive Order 14297 directs HHS to give drug makers most-favored-nation price targets within 30 days"
+    evidence_url: https://www.federalregister.gov/documents/2025/05/15/2025-08876/delivering-most-favored-nation-prescription-drug-pricing-to-american-patients
+  - date: "2025-07-31"
+    type: in_plan
+    text:
+      en: "The President sends letters to leading drug makers setting out the steps they must take to most-favored-nation prices"
+    evidence_url: https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-announces-actions-to-get-americans-the-best-prices-in-the-world-for-prescription-drugs/
+  - date: "2025-09-30"
+    type: delivering
+    text:
+      en: "Pfizer signs the first most-favored-nation agreement, covering Medicaid prices, prices of new medicines and direct-to-patient discounts"
+    evidence_url: https://www.whitehouse.gov/fact-sheets/2025/09/fact-sheet-president-donald-j-trump-announces-first-deal-to-bring-most-favored-nation-pricing-to-american-patients/
+  - date: "2026-02-05"
+    type: delivering
+    text:
+      en: "TrumpRx.gov opens, listing discounted cash prices for branded medicines"
+    evidence_url: https://www.whitehouse.gov/fact-sheets/2026/02/fact-sheet-president-donald-j-trump-launches-trumprx-gov-to-bring-lower-drug-prices-to-american-patients/
+  - date: "2026-08-31"
+    type: delivering
+    text:
+      en: "Nine more agreements bring the drug makers with most-favored-nation deals to 26, covering 89% of the branded drug market"
+    evidence_url: https://www.whitehouse.gov/fact-sheets/2026/08/fact-sheet-president-donald-j-trump-announces-deal-with-nine-additional-pharmaceutical-manufacturers-to-lower-drug-prices-for-americans/
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

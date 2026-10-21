@@ -1,0 +1,55 @@
+format: openpromises/1
+id: trump-japan-550-billion-2025
+headline:
+  en: "Japan to invest $550 billion in the US"
+actor_id: donald-trump
+made_on: "2025-09-04"
+venue: executive_order
+venue_label:
+  en: Executive Order 14345, Implementing the United States–Japan Agreement
+area: manufacturing
+status: in_plan
+status_note:
+  en: "By 19 March 2026 the White House had announced two tranches of Japanese investment under the agreement: three projects worth $36 billion in February 2026, then up to $40 billion for small modular reactors in Tennessee and Alabama and up to $33 billion for gas power plants in Pennsylvania and Texas. That is up to $109 billion selected, about a fifth of $550 billion. No official figure for money actually invested has been published by 20 October 2026, and the words give no end date."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "Under the words, the US Government selects the investments and the Government of Japan provides them."
+origin: manual
+sources:
+  - title: "Executive Order 14345 (Federal Register, 9 September 2025)"
+    url: https://www.federalregister.gov/documents/2025/09/09/2025-17389/implementing-the-united-states-japan-agreement
+  - title: "White House fact sheet: President Donald J. Trump Implements a Historic U.S.-Japan Framework Agreement (4 September 2025)"
+    url: https://www.whitehouse.gov/fact-sheets/2025/09/fact-sheet-president-donald-j-trump-implements-a-historic-u-s-japan-framework-agreement/
+versions:
+  - version: 1
+    text: "Critically, unlike any other agreement in American history, the Government of Japan has agreed to invest $550 billion in the United States. These investments—which will be selected by the United States Government—will generate hundreds of thousands of United States jobs, expand domestic manufacturing, and secure American prosperity for generations."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500893/html/DCPD-202500893.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500893.txt
+      span: [331, 681]
+    parameters:
+      who:
+        en: US industries and workers in the projects the US Government selects
+      when:
+        en: No date stated
+      deadline: null
+events:
+  - date: "2025-09-04"
+    type: promised
+    text:
+      en: "Executive Order 14345 says Japan has agreed to invest $550 billion in the United States, in projects the US Government selects"
+  - date: "2026-03-19"
+    type: in_plan
+    text:
+      en: "The White House lists a first tranche of three Japanese investments worth $36 billion, announced in February 2026, and a second tranche of up to $73 billion in power plants"
+    evidence_url: https://www.whitehouse.gov/fact-sheets/2026/03/fact-sheet-president-donald-j-trump-strengthens-u-s-japan-alliance-for-the-benefit-of-all-americans/
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

@@ -1,0 +1,56 @@
+format: openpromises/1
+id: waltz-gaza-hostage-remains-2025
+headline:
+  en: "Bring home the last three hostages' remains"
+actor_id: mike-waltz
+made_on: "2025-11-17"
+venue: speech
+venue_label:
+  en: UN Security Council, before the vote on resolution 2803 on Gaza
+area: peace
+status: delivered
+status_note:
+  en: "On 27 January 2026 the President said the remains of the last hostage had been returned and all hostages, living and dead, were back; on 28 January the Ambassador told the Security Council that Hamas and its affiliates no longer hold any hostages in Gaza. The words set no date."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Ambassador Mike Waltz: remarks at a UN Security Council briefing on the situation in the Middle East (28 January 2026)"
+    url: https://usun.usmission.gov/remarks-at-a-un-security-council-briefing-on-the-situation-in-the-middle-east-31/
+versions:
+  - version: 1
+    text: "And let me be clear—the United States remains committed to ensuring that the remains of the last three hostages held by Hamas must come home."
+    recorded_on: "2026-10-20"
+    source_url: https://usun.usmission.gov/explanation-of-position-before-the-vote-on-a-u-s-drafted-un-security-council-resolution-on-the-situation-in-the-middle-east/
+    quote_checked_on: null
+    source_text:
+      file: usun-2025-11-17-gaza-resolution.txt
+      span: [952, 1093]
+    parameters:
+      who:
+        en: The families of the three deceased hostages still held in Gaza
+      when:
+        en: No date stated
+      deadline: null
+events:
+  - date: "2025-11-17"
+    type: promised
+    text:
+      en: "Before the Security Council vote on resolution 2803, the Ambassador says the US remains committed to bringing home the remains of the last three hostages held by Hamas"
+  - date: "2025-12-12"
+    type: delivering
+    text:
+      en: "The US Mission tells the UN General Assembly that 47 of 48 hostages have returned home"
+    evidence_url: https://usun.usmission.gov/remarks-at-the-general-assembly-61st-plenary-meeting-80th-session/
+  - date: "2026-01-27"
+    type: delivered
+    text:
+      en: "The President says the body of the last hostage has been returned and all hostages, living and dead, are back"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202600057/html/DCPD-202600057.htm
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

@@ -1,0 +1,65 @@
+format: openpromises/1
+id: trump-venezuela-oil-2026
+headline:
+  en: "US to refine and sell Venezuelan crude"
+actor_id: donald-trump
+made_on: "2026-01-09"
+venue: speech
+venue_label:
+  en: Meeting with oil and gas executives at the White House, with reporters present
+area: other
+status: delivering
+status_note:
+  en: "US imports of Venezuelan crude oil were 92.3 million barrels in January to July 2026, against 34.2 million in January to July 2025, and passed 50 million in May (EIA). EIA counts imports into the US, not every barrel the US Government sold; no official total of barrels sold or of the proceeds has been published. On 24 February 2026 the President said more than 80 million barrels had been received; EIA counts 12.7 million imported in January and February."
+responsible:
+  actor_id: us-administration
+origin: manual
+sources:
+  - title: "Department of Energy fact sheet: President Trump restoring prosperity, safety and security to the United States and Venezuela (7 January 2026)"
+    url: https://www.energy.gov/articles/fact-sheet-president-trump-restoring-prosperity-safety-and-security-united-states-and
+  - title: "EIA: US imports from Venezuela of crude oil, monthly"
+    url: https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=MCRIMUSVE1&f=M
+  - title: "Address Before a Joint Session of the Congress on the State of the Union, 24 February 2026"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202600136/html/DCPD-202600136.htm
+versions:
+  - version: 1
+    text: "Venezuela has also agreed that the United States will immediately begin refining and selling up to 50 million barrels of Venezuelan crude oil, which will continue indefinitely."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202600012/html/DCPD-202600012.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202600012.txt
+      span: [357, 533]
+    parameters:
+      who:
+        en: "The American and Venezuelan people, for whose benefit the proceeds are to be paid out (Department of Energy)"
+      when:
+        en: "\"Immediately\", continuing \"indefinitely\""
+      deadline: null
+events:
+  - date: "2026-01-09"
+    type: promised
+    text:
+      en: "Meeting oil executives, the President says the US will immediately begin refining and selling up to 50 million barrels of Venezuelan crude, with sales continuing indefinitely"
+  - date: "2026-01-09"
+    type: in_plan
+    text:
+      en: "Executive Order 14373 protects the deposit funds that hold Venezuelan oil revenue from attachment and other court process"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202600013/html/DCPD-202600013.htm
+  - date: "2026-01-11"
+    type: restated
+    text:
+      en: "The President says Venezuela's interim President asked whether the US could take 50 million barrels of oil, and he said yes"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202600015/html/DCPD-202600015.htm
+  - date: "2026-05-31"
+    type: delivering
+    text:
+      en: "US imports of Venezuelan crude reach 51.7 million barrels for January to May 2026 (EIA)"
+    evidence_url: https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=MCRIMUSVE1&f=M
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

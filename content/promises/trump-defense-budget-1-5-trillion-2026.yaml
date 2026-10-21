@@ -1,0 +1,82 @@
+format: openpromises/1
+id: trump-defense-budget-1-5-trillion-2026
+headline:
+  en: "A $1.5 trillion defense budget for 2027"
+actor_id: donald-trump
+made_on: "2026-01-20"
+venue: press_conference
+venue_label:
+  en: White House press briefing, with an exchange with reporters
+area: military
+status: in_plan
+status_note:
+  en: "The 2027 budget, sent to Congress on 3 April 2026, requests $1.5 trillion for defense: $1.1 trillion in regular appropriations for the War Department and $350 billion through a reconciliation bill, $445 billion more than 2026 (OMB). No 2027 defense appropriations act and no reconciliation act had become law by 9 October 2026 (Public Law 119-121). Public Law 119-103 keeps defense funding at 2026 rates until 11 December 2026. On 30 September 2026 the Secretary of War said the department \"will deliver\" the $1.5 trillion budget."
+responsible:
+  actor_id: us-congress
+  note:
+    en: "Appropriations and a reconciliation bill are passed by Congress; the Administration requested the amount."
+origin: manual
+sources:
+  - title: "OMB: Fiscal Year 2027 Budget, topline fact sheet"
+    url: https://www.whitehouse.gov/wp-content/uploads/2026/04/fiscal-year-2027-topline-fact-sheet.pdf
+  - title: "Public Law 119-103: Continuing Appropriations and Extensions Act, 2027"
+    url: https://www.govinfo.gov/content/pkg/PLAW-119publ103/html/PLAW-119publ103.htm
+  - title: "Secretary of War Pete Hegseth's State of the Force Address (30 September 2026)"
+    url: https://www.war.gov/News/Speeches/Speech/Article/4616486/secretary-of-war-pete-hegseths-state-of-the-force-address-as-delivered/
+versions:
+  - version: 1
+    text: "Signed $1 trillion investment in U.S. military, and next year, we hopefully will go to a $1.5 trillion."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202600040/html/DCPD-202600040.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202600040.txt
+      span: [374, 477]
+    parameters:
+      who:
+        en: The armed forces
+      cost:
+        range: [1350, 1500, 1650]
+        quality: sourced
+        by:
+          kind: official
+          name: OMB
+        note:
+          en: "Fiscal year 2027 only, the year the words promise: $1.1 trillion in regular appropriations and $350 billion through reconciliation, as requested. Low–high is an editorial ±10% because OMB gives a single figure."
+        sources:
+          - title: "OMB: Fiscal Year 2027 Budget, topline fact sheet"
+            url: https://www.whitehouse.gov/wp-content/uploads/2026/04/fiscal-year-2027-topline-fact-sheet.pdf
+      when:
+        en: "\"Next year\": fiscal year 2027, 1 October 2026 to 30 September 2027"
+      deadline: "2027-09-30"
+events:
+  - date: "2026-01-20"
+    type: promised
+    text:
+      en: "At a press briefing, the President says the military budget will go from $1 trillion to $1.5 trillion next year"
+  - date: "2026-04-03"
+    type: in_plan
+    text:
+      en: "The 2027 budget requests $1.5 trillion for defense: $1.1 trillion in regular appropriations and $350 billion through reconciliation"
+    evidence_url: https://www.whitehouse.gov/wp-content/uploads/2026/04/fiscal-year-2027-topline-fact-sheet.pdf
+  - date: "2026-05-27"
+    type: restated
+    text:
+      en: "At a Cabinet meeting, the President says the Administration is asking for $1.5 trillion for the coming year"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202600370/html/DCPD-202600370.htm
+  - date: "2026-07-15"
+    type: restated
+    text:
+      en: "In Carlisle, Pennsylvania, the President says the budget is going up to $1.5 trillion next year"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202600465/html/DCPD-202600465.htm
+  - date: "2027-09-30"
+    type: deadline
+    text:
+      en: "The end of fiscal year 2027"
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

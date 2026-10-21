@@ -1,0 +1,63 @@
+format: openpromises/1
+id: trump-gaza-hostages-72-hours-2025
+headline:
+  en: "All Gaza hostages released within 72 hours"
+actor_id: donald-trump
+made_on: "2025-09-29"
+venue: press_conference
+venue_label:
+  en: Joint appearance with Prime Minister Netanyahu at the White House, announcing the cease-fire proposal
+area: peace
+status: failed
+status_note:
+  en: "The 20 living hostages were released on 13 October 2025, which the President called \"on time, on schedule\". The remains of the deceased hostages were not all returned then: that day the President said \"some were brought in and some were not\", and the last were returned by 27 January 2026, when he said all hostages, living and dead, were back. Later phases of the plan (the Board of Peace, an international stabilization force, the disarmament of Hamas) were still in progress on 20 October 2026."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "Hamas held the hostages; the US proposed the plan and mediated."
+origin: manual
+sources:
+  - title: "Remarks to the Knesset in Jerusalem, 13 October 2025"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202501005/html/DCPD-202501005.htm
+  - title: "Remarks and an exchange with reporters, 27 January 2026: \"we got all of the hostages back, both living and dead\""
+    url: https://www.govinfo.gov/content/pkg/DCPD-202600057/html/DCPD-202600057.htm
+  - title: "Statement on a Board of Peace Agreement Toward the Disarmament of Hamas (30 July 2026)"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202600506/html/DCPD-202600506.htm
+versions:
+  - version: 1
+    text: "But if accepted by Hamas, this proposal calls for the release of all remaining hostages immediately, but in no case, more than 72 hours."
+    recorded_on: "2026-10-20"
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500964/html/DCPD-202500964.htm
+    quote_checked_on: null
+    source_text:
+      file: dcpd-202500964.txt
+      span: [378, 514]
+    parameters:
+      who:
+        en: "All hostages still held in Gaza: in the President's words that day, 20 living and \"32 or so\" dead"
+      when:
+        en: "\"Immediately, but in no case, more than 72 hours\" after Hamas accepts. The President announced on 8 October 2025 that both sides had signed off on the first phase; the living hostages were released on 13 October."
+      deadline: "2025-10-13"
+events:
+  - date: "2025-09-29"
+    type: promised
+    text:
+      en: "Announcing his proposal with Israel's Prime Minister, the President says that if Hamas accepts, all remaining hostages will be released immediately, and in no case in more than 72 hours"
+  - date: "2025-10-08"
+    type: in_plan
+    text:
+      en: "The President announces that Israel and Hamas have both signed off on the first phase of the plan"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500990/html/DCPD-202500990.htm
+  - date: "2025-10-13"
+    type: delivering
+    text:
+      en: "The 20 living hostages are released; the President tells the Knesset they are returning to their families"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202501005/html/DCPD-202501005.htm
+  - date: "2025-10-13"
+    type: failed
+    text:
+      en: "At Sharm el-Sheikh the President says the living hostages were let go on schedule, but of the bodies of the dead \"some were brought in and some were not\""
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202501007/html/DCPD-202501007.htm
+replies: []
+corrections: []
+reviews: []
