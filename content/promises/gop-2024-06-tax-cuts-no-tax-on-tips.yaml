@@ -23,7 +23,7 @@ versions:
     recorded_on: "2026-10-20"
     source_url: https://prod-static.gop.com/media/RNC2024-Platform.pdf
     page: 6
-    quote_checked_on: null
+    quote_checked_on: "2026-10-20"
     source_text:
       file: rnc-2024-platform.txt
       span: [880, 927]
