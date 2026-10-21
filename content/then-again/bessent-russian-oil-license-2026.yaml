@@ -31,4 +31,8 @@ explanation:
     span: [464, 591]
 note: "On 17 April 2026, two days after the briefing, the Treasury issued another 30-day general license for Russian oil, to mid-May; no words of the Secretary on that one were found."
 recorded_on: "2026-10-21"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true
