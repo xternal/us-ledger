@@ -1133,7 +1133,7 @@ async function main() {
         h(
           "ul",
           { className: "rules" },
-          h("li", null, "Both statements are by the same person, in their own words, each with its date and a link to a published record: a transcript, an official document, the post itself. A quote heard only on video is not used."),
+          h("li", null, "Both statements are by the same person, in their own words, each with its date and a link to a published record: a transcript, an official document, the post itself. A quote heard only on video is not used; a broadcaster's published transcript of a recording it played is, when an official page confirms the date."),
           h("li", null, "Both are about the same thing: a policy, a commitment, a fact, or what the person said before. Opinions of people, and jokes flagged as jokes at the time, are left out."),
           h("li", null, "Read as written, with the paragraphs around them, the later one cannot be true or carried out at the same time as the earlier one. If the context gives a reading under which both stand, the pair is left out."),
           h("li", null, "If the person explained the change, the explanation is shown beside the pair, in their words."),
