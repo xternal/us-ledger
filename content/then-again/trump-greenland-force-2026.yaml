@@ -22,4 +22,8 @@ later:
     span: [682, 754]
 note: "NBC aired the interview on 4 May 2025; the words were recorded on 2 May, the day of the jobs report mentioned in it."
 recorded_on: "2026-10-21"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

@@ -22,4 +22,8 @@ later:
     span: [458, 576]
 note: "In the speech of 1 May he also said that if the United States left at once, it would take Iran 20 years or more to rebuild."
 recorded_on: "2026-10-21"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

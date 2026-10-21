@@ -30,4 +30,8 @@ explanation:
     file: dcpd-202500450.txt
     span: [607, 675]
 recorded_on: "2026-10-21"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

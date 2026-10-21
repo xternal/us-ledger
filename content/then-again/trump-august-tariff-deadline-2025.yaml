@@ -31,4 +31,8 @@ explanation:
     span: [1015, 1152]
 note: "On 7 July he had called the date firm, but not entirely firm (DCPD-202500754)."
 recorded_on: "2026-10-21"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

@@ -22,4 +22,8 @@ later:
     file: dcpd-202500720.txt
     span: [331, 358]
 recorded_on: "2026-10-21"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

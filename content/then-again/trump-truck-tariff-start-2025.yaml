@@ -22,4 +22,8 @@ later:
     span: [822, 972]
 note: "Proclamation 10984 set the tariff on medium and heavy trucks from 1 November 2025."
 recorded_on: "2026-10-21"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

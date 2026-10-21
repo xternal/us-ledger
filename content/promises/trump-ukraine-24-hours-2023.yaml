@@ -52,3 +52,8 @@ events:
     evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500166/html/DCPD-202500166.htm
 replies: []
 corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

@@ -31,4 +31,8 @@ explanation:
     span: [809, 869]
 note: "Asked about the post the same day, he said Powell would leave if he asked him to (Daily Compilation of Presidential Documents, DCPD-202500491)."
 recorded_on: "2026-10-21"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

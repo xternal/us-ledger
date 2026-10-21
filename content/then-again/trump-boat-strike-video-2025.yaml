@@ -22,4 +22,8 @@ later:
     span: [372, 431]
 note: "On 8 December he went on to say that whatever the Secretary of War wanted to do about the video was fine with him."
 recorded_on: "2026-10-21"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true
