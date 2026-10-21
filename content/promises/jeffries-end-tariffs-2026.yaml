@@ -41,4 +41,8 @@ events:
       en: "Asked what a Democratic House majority would do in its first 100 days, Jeffries says Congress should reclaim its authority over tariffs so the tariffs can end"
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

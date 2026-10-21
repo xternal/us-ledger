@@ -1,16 +1,16 @@
 format: openpromises/1
-id: jeffries-end-iran-war-2026
+id: jeffries-lower-cost-groceries-gas-housing-2026
 headline:
-  en: "End the war with Iran"
+  en: "Lower the cost of groceries, gas and housing"
 actor_id: hakeem-jeffries
 made_on: "2026-10-14"
 venue: interview
 venue_label:
   en: "MS NOW, The Weeknight (transcript published by the House Democratic Leader's office)"
-area: peace
+area: inflation
 status: promised
 status_note:
-  en: "The United States and Iran fought from 28 February to 7 April 2026 (OMB), and the United States struck Iran again from 1 September 2026 (presidential notice to Congress, House Document 119-193). The words set no date and no measure of an end."
+  en: "The consumer price index for all urban consumers (CPI-U) rose 3.7% in the 12 months to September 2026 (BLS, 14 October 2026). The words set no figure and no date."
 responsible:
   actor_id: us-congress
   note:
@@ -21,22 +21,28 @@ sources:
     url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-ms-now-were-going-relentlessly-focus-our-affordability-agenda
 versions:
   - version: 1
-    text: "We're going to fight to end this reckless and costly war of choice in Iran, which we know has skyrocketed gas prices on the American people."
+    text: "Like, when we've made clear that we are fighting for an affordable America, that we are committed to driving down the high cost of groceries and gas and housing, that we've committed to fighting to make healthcare affordable for every single American, we mean it when we say it and we want to be able to do it."
     recorded_on: "2026-10-21"
     source_url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-ms-now-were-going-relentlessly-focus-our-affordability-agenda
     quote_checked_on: null
     source_text:
       file: jeffries-2026-10-14-ms-now.txt
-      span: [2376, 2516]
+      span: [847, 1157]
     parameters:
+      who:
+        en: "Households"
       when:
-        en: "If Democrats win a majority in the House on 3 November 2026: among the things \"we are going to have to do immediately\", said in answer to a question about the first 100 days of that majority. The new Congress meets on 3 January 2027."
+        en: "No date given. Said of a Democratic House majority, if Democrats win one on 3 November 2026."
       deadline: null
 events:
   - date: "2026-10-14"
     type: promised
     text:
-      en: "Asked what a Democratic House majority would do in its first 100 days, Jeffries says Democrats will fight to end the war in Iran"
+      en: "Jeffries says Democrats are committed to driving down the cost of groceries, gas and housing, and to making health care affordable"
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true
