@@ -1,0 +1,25 @@
+format: usledger-then-again/1
+id: trump-boat-strike-video-2025
+actor_id: donald-trump
+subject: "Releasing the video of the 2 September 2025 strike on a boat in the Caribbean"
+first:
+  date: "2025-12-03"
+  venue: press_conference
+  where: "Oval Office, remarks on fuel efficiency standards, answering: \"Will you release video of that strike so that the American people can see for themselves what happened?\" (the second strike on 2 September)"
+  text: "I don't know what they have, but whatever they have, we'd certainly release. No problem."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202501158/html/DCPD-202501158.htm
+  source_text:
+    file: dcpd-202501158.txt
+    span: [344, 432]
+later:
+  date: "2025-12-08"
+  venue: press_conference
+  where: "Cabinet Room, roundtable on federal relief for farmers, answering: \"Mr. President, you said you would have no problem with releasing the full video of that strike on September 2 off the coast of Venezuela.\""
+  text: "I didn't say that. That's—you said that. I didn't say that."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202501176/html/DCPD-202501176.htm
+  source_text:
+    file: dcpd-202501176.txt
+    span: [372, 431]
+note: "On 8 December he went on to say that whatever the Secretary of War wanted to do about the video was fine with him."
+recorded_on: "2026-10-21"
+reviews: []

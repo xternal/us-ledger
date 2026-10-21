@@ -25,7 +25,22 @@ export interface Climb {
 export type Share =
   | { kind: "promise"; kicker: string; headline: string; words: string; steps: string[]; step: number; status: string; note?: string; latest?: string; footer: string }
   | { kind: "chart"; kicker: string; title: string; climb: Climb[]; steps: string[]; tally: string; footer: string }
-  | { kind: "page"; kicker: string; title: string; sub: string; footer: string };
+  | { kind: "page"; kicker: string; title: string; sub: string; footer: string }
+  /** The ledger: each year as a bar, receipts and the part borrowed. */
+  | { kind: "years"; kicker: string; title: string; years: { fy: number; receipts: number; borrowed: number }[]; sub: string; footer: string }
+  /** One year: money in and money out as two bars split into their largest parts. */
+  | { kind: "flow"; kicker: string; title: string; ins: Part[]; outs: Part[]; footer: string }
+  /** Two dated statements by one person, the later saying the opposite of the earlier. */
+  | { kind: "pair"; kicker: string; subject: string; first: Said; later: Said; gap: string; footer: string };
+export interface Part {
+  label: string;
+  amount: number;
+  kind: "in" | "gap" | "out" | "interest";
+}
+export interface Said {
+  date: string;
+  words: string;
+}
 
 const require = createRequire(import.meta.url);
 const font = (pkg: string, file: string) => readFileSync(require.resolve(`${pkg}/files/${file}`));
@@ -114,7 +129,70 @@ function numbers(climb: Climb[]) {
   return box({ gap: 18 }, box({ width: 150 }), box({ flexGrow: 1, gap: 8 }, ...climb.map((b) => text({ flexGrow: 1, flexBasis: 0, justifyContent: "center", fontSize: 18, color: c.muted }, String(b.n)))));
 }
 
+/** Years as bars, as tall as their outlays: receipts solid, borrowing in the gap colour on top. */
+function yearBars(years: { fy: number; receipts: number; borrowed: number }[]) {
+  const max = Math.max(...years.map((y) => y.receipts + y.borrowed));
+  const tall = 250;
+  return box(
+    { gap: 14, alignItems: "flex-end", height: tall + 34, borderBottom: `2px solid ${c.lineStrong}` },
+    ...years.map((y) =>
+      box(
+        { flexDirection: "column", flexGrow: 1, flexBasis: 0, alignItems: "stretch", justifyContent: "flex-end", height: tall + 34 },
+        box({ height: (tall * y.borrowed) / max, background: c.gap, borderRadius: "4px 4px 0 0" }),
+        box({ height: (tall * y.receipts) / max, background: c.moneyIn }),
+        text({ justifyContent: "center", fontSize: 19, color: c.muted, marginTop: 8 }, String(y.fy)),
+      ),
+    ),
+  );
+}
+
+/** A bar split into parts, each as wide as its money, the largest few named under it. */
+function split(title: string, parts: Part[]) {
+  const total = parts.reduce((t, p) => t + p.amount, 0);
+  const colour = (k: Part["kind"]) => (k === "in" ? c.moneyIn : k === "out" ? c.moneyOut : c.gap);
+  const named = parts.filter((p) => p.amount / total >= 0.12);
+  return box(
+    { flexDirection: "column", gap: 10 },
+    text({ fontSize: 24, fontWeight: 600, color: c.ink }, title),
+    box({ height: 40, gap: 3 }, ...parts.map((p) => box({ flexGrow: p.amount, flexBasis: 0, background: colour(p.kind), borderRadius: 3 }))),
+    box({ gap: 26 }, ...named.map((p) => text({ fontSize: 21, color: c.muted }, `${p.label} $${Math.round(p.amount / 1e9).toLocaleString("en-US")}bn`))),
+  );
+}
+
+function said(label: string, s: Said, accent: string) {
+  return box(
+    { flexDirection: "column", gap: 8, borderLeft: `6px solid ${accent}`, paddingLeft: 22 },
+    text({ fontSize: 22, fontWeight: 600, color: c.muted, letterSpacing: 0.5 }, `${label} · ${s.date}`),
+    text({ fontFamily: "Serif", fontSize: 34, fontWeight: 600, lineHeight: 1.22, color: c.ink }, `“${clip(s.words, 120)}”`),
+  );
+}
+
 function tree(s: Share) {
+  if (s.kind === "years")
+    return frame(
+      s.kicker,
+      s.footer,
+      text({ fontFamily: "Serif", fontSize: 52, fontWeight: 600, lineHeight: 1.08, letterSpacing: -0.5 }, clip(s.title, 80)),
+      yearBars(s.years),
+      text({ fontSize: 23, color: c.muted }, clip(s.sub, 120)),
+    );
+  if (s.kind === "flow")
+    return frame(
+      s.kicker,
+      s.footer,
+      text({ fontFamily: "Serif", fontSize: 54, fontWeight: 600, lineHeight: 1.08, letterSpacing: -0.5 }, clip(s.title, 80)),
+      split("Money in", s.ins),
+      split("Money out", s.outs),
+    );
+  if (s.kind === "pair")
+    return frame(
+      s.kicker,
+      s.footer,
+      text({ fontSize: 26, color: c.muted }, clip(s.subject, 90)),
+      said("Then", s.first, c.faint),
+      text({ fontSize: 24, fontWeight: 600, color: c.accent, paddingLeft: 28 }, s.gap),
+      said("Later", s.later, c.accent),
+    );
   if (s.kind === "promise")
     return frame(
       s.kicker,

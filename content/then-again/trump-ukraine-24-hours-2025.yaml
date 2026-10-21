@@ -1,0 +1,25 @@
+format: usledger-then-again/1
+id: trump-ukraine-24-hours-2025
+actor_id: donald-trump
+subject: "Whether the pledge to settle the war in Ukraine in 24 hours was meant seriously"
+promise_id: trump-ukraine-24-hours-2023
+first:
+  date: "2023-05-10"
+  venue: interview
+  where: "CNN town hall moderated by Kaitlan Collins, Saint Anselm College, Goffstown, New Hampshire, as a candidate, asked whether he would give Ukraine weapons and funding if re-elected"
+  text: "If I’m president, I will have that war settled in one day, 24 hours."
+  source_url: https://www.cnn.com/2023/05/11/politics/transcript-cnn-town-hall-trump/index.html
+  source_text:
+    file: cnn-2023-05-10-town-hall.txt
+    span: [456, 524]
+later:
+  date: "2025-06-25"
+  venue: press_conference
+  where: "News conference at the NATO summit, World Forum, The Hague, Netherlands, answering a reporter who said: \"You once said that you would end the Ukraine war in 24 hours. You later said you said that sarcastically.\""
+  text: "Of course it was sarcastic."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202500720/html/DCPD-202500720.htm
+  source_text:
+    file: dcpd-202500720.txt
+    span: [331, 358]
+recorded_on: "2026-10-21"
+reviews: []

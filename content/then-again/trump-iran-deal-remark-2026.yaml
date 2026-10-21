@@ -1,0 +1,25 @@
+format: usledger-then-again/1
+id: trump-iran-deal-remark-2026
+actor_id: donald-trump
+subject: "Whether he said the US might be better off without a deal with Iran"
+first:
+  date: "2026-05-01"
+  venue: speech
+  where: "Forum Club of the Palm Beaches dinner, Kravis Center, West Palm Beach, Florida, speaking about the talks with Iran"
+  text: "But—got to make a bad—they've got to make a bad deal, but—if they make a deal at all, because, frankly, maybe we're better off not making a deal at all, do you want to know the truth, because we can't let this thing go on."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202600303/html/DCPD-202600303.htm
+  source_text:
+    file: dcpd-202600303.txt
+    span: [478, 700]
+later:
+  date: "2026-05-02"
+  venue: press_conference
+  where: "Tarmac at Palm Beach International Airport before boarding Air Force One, answering: \"Mr. President, last night you said we might be better off not making a deal with Iran. Do you think that?\""
+  text: "Well, I wouldn't have to. I didn't say that. I said that if we left right now, it would take them 20 years to rebuild."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202600304/html/DCPD-202600304.htm
+  source_text:
+    file: dcpd-202600304.txt
+    span: [458, 576]
+note: "In the speech of 1 May he also said that if the United States left at once, it would take Iran 20 years or more to rebuild."
+recorded_on: "2026-10-21"
+reviews: []

@@ -1,0 +1,33 @@
+format: usledger-then-again/1
+id: trump-tariff-pause-2025
+actor_id: donald-trump
+subject: "Whether a pause in the April 2025 tariffs was being considered"
+first:
+  date: "2025-04-07"
+  venue: press_conference
+  where: "Oval Office, before a meeting with Prime Minister Benjamin Netanyahu of Israel, answering: \"would you be open to a pause in tariffs to allow for negotiations?\""
+  text: "Well, we're not looking at that."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202500438/html/DCPD-202500438.htm
+  source_text:
+    file: dcpd-202500438.txt
+    span: [382, 414]
+later:
+  date: "2025-04-09"
+  venue: press_conference
+  where: "Oval Office, at a document signing ceremony, after announcing a 90-day pause, answering whether the idea of a pause had come about that morning"
+  text: "I wouldn't say this morning. Over the last few days, I've been thinking about it."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202500451/html/DCPD-202500451.htm
+  source_text:
+    file: dcpd-202500451.txt
+    span: [365, 446]
+explanation:
+  date: "2025-04-09"
+  venue: press_conference
+  where: "Exchange with reporters at a photo opportunity with NASCAR, IndyCar and IMSA champions, South Portico, the White House, after a reporter said he had ruled out a pause on Monday and asked how people could believe his word"
+  text: "It's—yes, it's not a question of that. You have to have flexibility."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202500450/html/DCPD-202500450.htm
+  source_text:
+    file: dcpd-202500450.txt
+    span: [607, 675]
+recorded_on: "2026-10-21"
+reviews: []

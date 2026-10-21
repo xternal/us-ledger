@@ -1,0 +1,25 @@
+format: usledger-then-again/1
+id: trump-greenland-force-2026
+actor_id: donald-trump
+subject: "Whether military force to take Greenland is ruled out"
+first:
+  date: "2025-05-02"
+  venue: interview
+  where: "Interview with Kristen Welker for NBC's Meet the Press (aired 4 May 2025), answering: \"But you are not ruling out military force to take Greenland one day?\""
+  text: "I don’t rule it out. I don’t say I’m going to do it, but I don’t rule out anything."
+  source_url: https://www.nbcnews.com/politics/trump-administration/read-full-transcript-president-donald-trump-interviewed-meet-press-mod-rcna203514
+  source_text:
+    file: nbc-2025-05-04-meet-the-press.txt
+    span: [487, 570]
+later:
+  date: "2026-01-21"
+  venue: speech
+  where: "Speech and question-and-answer session at the World Economic Forum, Davos Congress Centre, Davos, Switzerland"
+  text: "I don't have to use force. I don't want to use force. I won't use force."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202600046/html/DCPD-202600046.htm
+  source_text:
+    file: dcpd-202600046.txt
+    span: [682, 754]
+note: "NBC aired the interview on 4 May 2025; the words were recorded on 2 May, the day of the jobs report mentioned in it."
+recorded_on: "2026-10-21"
+reviews: []

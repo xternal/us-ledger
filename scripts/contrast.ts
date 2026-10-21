@@ -38,7 +38,7 @@ for (const [name, m] of [["light", light], ["dark", dark]] as [string, Mode][]) 
   }
   for (const t of ["ink", "muted", "accent"] as const) need(name, `${t} text on sunk`, m[t], m.sunk, 4.5);
   need(name, "text on the accent", m.onAccent, m.accent, 4.5);
-  for (const bg of ["bg", "surface"] as const) for (const mark of ["bar", "good", "bad", "accent"] as const) need(name, `${mark} mark on ${bg}`, m[mark], m[bg], 3);
+  for (const bg of ["bg", "surface"] as const) for (const mark of ["bar", "good", "bad", "accent", "moneyIn", "moneyOut", "gap"] as const) need(name, `${mark} mark on ${bg}`, m[mark], m[bg], 3);
 }
 const body = ratio(dark.ink, dark.bg);
 if (body > 14) problems.push(`dark: body text is ${body.toFixed(2)}:1, above 14:1`);

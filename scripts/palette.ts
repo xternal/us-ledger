@@ -6,6 +6,8 @@
  * #241f1a, text #efe7da at about 13:1, amber links, blue only where it carries meaning (the top of the ladder).
  * A promise's bar on the climb chart is as tall as the step it has reached, so the height says how far it has gone
  * and the colour only repeats it: `bar` for a step on the way, `good` for the top, `bad` for an ending.
+ * The ledger's flows are blue for money in, a warm grey for money out, and orange for the gap, borrowing and the
+ * interest it costs (dark mode: the chart blue #6f9fe8 and the orange #e07a45).
  */
 
 export interface Mode {
@@ -27,6 +29,10 @@ export interface Mode {
   bar: string;
   /** An unreached step on a meter, and the chart's grid. */
   grid: string;
+  /** The ledger: money in (receipts), money out (outlays), and the gap (borrowing, and the interest it costs). */
+  moneyIn: string;
+  moneyOut: string;
+  gap: string;
 }
 
 export const light: Mode = {
@@ -45,6 +51,9 @@ export const light: Mode = {
   bad: "#b3261e",
   bar: "#9c6626",
   grid: "#e6dccb",
+  moneyIn: "#3a6bb3",
+  moneyOut: "#857a69",
+  gap: "#b5561b",
 };
 
 export const dark: Mode = {
@@ -63,6 +72,9 @@ export const dark: Mode = {
   bad: "#ec9286",
   bar: "#e2b26f",
   grid: "#3a3229",
+  moneyIn: "#6f9fe8",
+  moneyOut: "#9d9281",
+  gap: "#e07a45",
 };
 
 const vars = (m: Mode) =>
@@ -82,6 +94,9 @@ const vars = (m: Mode) =>
     `--ul-on-accent: ${m.onAccent};`,
     `--ul-bar: ${m.bar};`,
     `--ul-grid: ${m.grid};`,
+    `--ul-in: ${m.moneyIn};`,
+    `--ul-out: ${m.moneyOut};`,
+    `--ul-gap: ${m.gap};`,
   ]
     .map((l) => `  ${l}`)
     .join("\n");

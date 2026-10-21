@@ -2,7 +2,7 @@
 
 Every Sunday at 20:00 UK time the weekly ledger desk, a scheduled task on Pavel's Mac, works through each of his ledgers in turn, one at a time. For USLedger.org it reads this file on `main` and follows it. Pavel decided it on 20 October 2026 (one weekly desk for every ledger). To change what it does here, change this file by pull request.
 
-It does three things: new promises by the President, the officials who speak for the Administration and the party leaders in Congress, Republican and Democratic (only while the editor's queue has room), evidence on the published cards, and a check that the repository's checks and pull requests are healthy.
+It does four things: new promises by the President, the officials who speak for the Administration and the party leaders in Congress, Republican and Democratic (only while the editor's queue has room), evidence on the published cards, the ledger's numbers once the Treasury publishes a new monthly statement, and a check that the repository's checks and pull requests are healthy.
 
 ## Rules that never bend
 
@@ -53,6 +53,10 @@ Work on a new branch `desk/<today>-drafts` from `origin/main`. `pnpm check` must
 ## 2. Evidence on the published cards
 
 Pick at most 5 cards in `content/promises/` whose status is not final, those whose last event is oldest first. Search the official sites (rule 1's hosts, cbp.gov and the other agencies' statistics) for a document dated after the card's last event that shows a higher step: a signed order (`in_plan`), a law (`legislated`), money appropriated (`funded`), the work started (`delivering`), or a newer official figure for a card already `delivering`. The sentence that shows it must be in the saved document word for word (`grep -F`). Append one event at the end of `events`, in the published cards' shape (`content/promises/gop-2024-01-seal-border.yaml`): `date` the document's date, `type` the step, `text.en` one neutral line naming the document and what it shows, `evidence_url` the document. Update `status_note` only with that document's facts. Move `status` up to that step, never above `delivering`; a document showing delivery or failure goes in the pull request body for the editor, with no event. Branch `desk/<today>-evidence`, `pnpm check`, pull request "Evidence on N cards (<today>)", checks as in step 1.
+
+## 2b. The ledger's numbers
+
+The ledger (`/ledger/`) is built from `data/ledger.json`, which `pnpm ledger:fetch` writes from the Treasury's open data. The Monthly Treasury Statement comes out on the eighth business day of each month. Run `pnpm ledger:fetch` in the worktree. If `data/ledger.json` changed in more than `fetched_on` and `debt_now`, keep the change: branch `desk/<today>-ledger`, `pnpm check`, pull request "Ledger: the Monthly Treasury Statement for <month year>", saying in one line each what moved (receipts, outlays, borrowed, customs duties for the month), checks as in step 1. If only `fetched_on` and `debt_now` changed, drop it and say nothing. Never edit the numbers by hand: a figure that looks wrong goes under FOR THE EDITOR with the API address that gave it.
 
 ## 3. The repository's health
 

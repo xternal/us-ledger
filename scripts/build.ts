@@ -7,7 +7,7 @@
  *
  * Run: node scripts/build.ts (Node 22.18 or later strips the types).
  */
-import { copyFileSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { categoryOf, climb, statusLabel, todayIn, validateContent, type Actor, type Config } from "@openpromises/core";
@@ -42,6 +42,9 @@ import { Resvg } from "@resvg/resvg-js";
 import { faviconSvg, MARK_DOT, MARK_PATH, tileSvg } from "./mark.ts";
 import { dark, light, tokensCss } from "./palette.ts";
 import { clip, HEIGHT, shareImage, WIDTH, type Climb, type Share } from "./share-image.ts";
+import { bn, cents, fyName, fySpan, ledgerPath, promiseLines, readLedger, tn, type Year } from "./ledger.ts";
+import { customsChart, facts, flowChart, linesTable, longUk, yearFacts, yearNav, yearsChart, yearTable } from "./ledger-view.ts";
+import { approved, daysApart, readPairs, type Pair, type Said as PairSaid } from "./then-again.ts";
 
 const ROOT = join(import.meta.dirname, "..");
 /** `--preview` builds drafts too, into public-preview/, so the editor sees a page before approving it; never deployed. */
@@ -76,7 +79,20 @@ export function climbOf(config: Config, v: CardView, n: number): Climb {
 }
 
 /** The menu's sections, and which one a page belongs to: a card's page is under Promises, an area's under Areas. */
-const sectionOf = (path: string) => (path.startsWith("/promises/area") ? "areas" : path.startsWith("/promise") ? "promises" : path.startsWith("/actor") ? "people" : path.startsWith("/about") ? "about" : null);
+const sectionOf = (path: string) =>
+  path.startsWith("/promises/area")
+    ? "areas"
+    : path.startsWith("/promise")
+      ? "promises"
+      : path.startsWith("/ledger")
+        ? "ledger"
+        : path.startsWith("/then-again")
+          ? "then-again"
+        : path.startsWith("/actor")
+          ? "people"
+          : path.startsWith("/about")
+            ? "about"
+            : null;
 const trim = (path: string) => (path.length > 1 ? path.replace(/\/$/, "") : path);
 
 /** Keeps the menu's current item in view on narrow screens, without moving the page. */
@@ -131,6 +147,21 @@ async function main() {
   const latest = (v: CardView) => [...v.card.events].filter((e) => e.date <= today).sort((a, b) => a.date.localeCompare(b.date)).at(-1);
   const tally = (vs: readonly CardView[]) => statusCounts(vs, config).map(({ status, count }) => `${count} ${label(status).toLowerCase()}`).join(" · ");
 
+  // Then again's pairs (scripts/then-again.ts), loaded here because people's pages list theirs.
+  const pairChecks = readPairs(contentDir, config, new Set(result.actors.keys()));
+  const brokenPairs = pairChecks.filter((x) => x.problems.length);
+  if (brokenPairs.length) {
+    for (const x of brokenPairs) for (const m of x.problems) console.error(`${x.file}: ${m}`);
+    throw new Error(`${brokenPairs.length} pairs have problems: run node scripts/then-again.ts check`);
+  }
+  for (const x of pairChecks) if (x.pair.promise_id && !all.some((v) => v.id === x.pair.promise_id)) throw new Error(`${x.file}: no card "${x.pair.promise_id}" for promise_id`);
+  const pairs = pairChecks
+    .map((x) => x.pair)
+    .filter((x) => PREVIEW || approved(x))
+    .sort((a, b) => b.later.date.localeCompare(a.later.date) || a.id.localeCompare(b.id));
+  const pairPath = (id?: string) => (id ? `/then-again/${id}/` : "/then-again/");
+  const speaker = (x: Pair) => result.actors.get(x.actor_id)!;
+
   rmSync(OUT, { recursive: true, force: true });
   const write = (path: string, body: string | Buffer) => {
     const file = join(OUT, path.replace(/^\//, ""));
@@ -140,8 +171,11 @@ async function main() {
   const images: { path: string; share: Share }[] = [];
   const pages: string[] = [];
 
+  // Promises first: the current administration's. The ledger second: the money in and out since fiscal year 2018.
   const nav = [
     { key: "promises", href: p.promises(L), label: "Promises" },
+    { key: "ledger", href: ledgerPath(), label: "Ledger" },
+    { key: "then-again", href: "/then-again/", label: "Then again" },
     { key: "people", href: "/actor/", label: "People" },
     { key: "areas", href: "/promises/area/", label: "Areas" },
     { key: "about", href: "/about/", label: "How it works" },
@@ -588,6 +622,17 @@ async function main() {
         h("h1", null, actorName(a)),
         a.roles?.length ? h("ul", { className: "roles" }, a.roles.map((r, i) => h("li", { key: i }, r.title[L], r.from ? ` from ${longDate(w, r.from)}` : "", r.to ? ` to ${longDate(w, r.to)}` : ""))) : null,
         h("p", { className: "lede" }, summary),
+        pairs.some((x) => x.actor_id === a.id)
+          ? h(
+              "p",
+              { className: "note" },
+              `Then again: ${pairs.filter((x) => x.actor_id === a.id).length} of ${actorName(a)}'s statements and what was said later, in exact words with dates: `,
+              pairs
+                .filter((x) => x.actor_id === a.id)
+                .map((x, i) => h(Fragment, { key: x.id }, i ? "; " : "", h("a", { href: pairPath(x.id) }, x.subject))),
+              ".",
+            )
+          : null,
         own.length ? h(KeyPromises, { views: own, today, config, headingLevel: 2 }) : null,
         own.length ? h(ActorTimeline, { views: own, today, config, headingLevel: 2 }) : null,
         own.length ? h(PromisesByMonth, { views: own, today, config, headingLevel: 2 }) : null,
@@ -635,6 +680,524 @@ async function main() {
     });
   }
 
+  // The ledger: the money in and out, every fiscal year since 2018, from the Treasury's own statements
+  // (scripts/ledger.ts). One page for all the years, and one for each year.
+  const { file: ledgerFile, years } = readLedger(ROOT);
+  const fullYears = years.filter((y) => y.complete);
+  const lastYear = fullYears.at(-1)!;
+  const byId = new Map(views.map((v) => [v.id, v]));
+  const mtsSource = ledgerFile.sources.mts;
+  const yearShare = (y: Year, kicker: string): Share => ({
+    kind: "flow",
+    kicker,
+    title: `${bn(y.outlays)} spent, ${bn(y.receipts)} taken in, ${bn(y.borrowed)} borrowed`,
+    ins: y.ins.map((f) => ({ label: f.label, amount: f.amount, kind: f.kind })),
+    outs: y.outs.map((f) => ({ label: f.label, amount: f.amount, kind: f.kind })),
+    footer: `Monthly Treasury Statement, ${longUk(y.through)} · usledger.org`,
+  });
+  const yearAlt = (y: Year) =>
+    `Fiscal year ${y.fy}: ${bn(y.outlays)} spent; in: ${y.ins.map((f) => `${f.label.toLowerCase()} ${bn(f.amount)}`).join(", ")}; out: ${y.outs.map((f) => `${f.label.toLowerCase()} ${bn(f.amount)}`).join(", ")}.`;
+  /** The promises on this site about the year's lines, under each line. */
+  const onLines = (y: Year) => {
+    const rows = promiseLines(y)
+      .map((r) => ({ ...r, cards: r.ids.map((id) => byId.get(id)).filter((v): v is CardView => !!v) }))
+      .filter((r) => r.cards.length);
+    return rows.length
+      ? h(
+          "ul",
+          { className: "on-lines" },
+          rows.map((r) =>
+            h(
+              "li",
+              { key: r.key },
+              h("h3", null, r.label, r.note ? h("span", null, r.note) : null),
+              h(
+                "ul",
+                null,
+                r.cards.map((v) => h("li", { key: v.id }, h("a", { href: p.card(v.id, L) }, headline(v)), h("span", { className: "on-lines__who" }, actorName(v.actor), h(StatusPill, { status: v.card.status, config })))),
+              ),
+            ),
+          ),
+        )
+      : null;
+  };
+  const ledgerSources = h(
+    "p",
+    { className: "sources" },
+    "Source: ",
+    h("a", { href: mtsSource.url }, `${mtsSource.title}`),
+    `, ${mtsSource.publisher}, the September statement of each fiscal year; debt: `,
+    h("a", { href: ledgerFile.sources.debt.url }, ledgerFile.sources.debt.title),
+    `. Fetched on ${longUk(ledgerFile.fetched_on)} from the Treasury's open data and published here as `,
+    h("a", { href: "/data/ledger.json" }, "ledger.json"),
+    ". Figures are as the Treasury published them; groups only add its lines up.",
+  );
+  const ledgerFaq: [string, string][] = [
+    ["What is a fiscal year?", `The federal government's year runs from 1 October to 30 September and is named after the year it ends in: fiscal year ${lastYear.fy} ran from 1 October ${lastYear.fy - 1} to 30 September ${lastYear.fy}.`],
+    [
+      "Where do the numbers come from?",
+      "From the Monthly Treasury Statement, which the Treasury's Bureau of the Fiscal Service publishes on the eighth business day of each month: Table 9, receipts by source and outlays by budget function. The September statement gives the whole year. The debt is from Debt to the Penny, the Treasury's daily figure.",
+    ],
+    [
+      "Is “borrowed” the same as the deficit?",
+      "Here it is: outlays minus receipts. The debt grows by a different amount, because the Treasury also borrows for the loans it makes and moves its cash balance, and because part of the debt is owed to federal trust funds such as Social Security's.",
+    ],
+    [
+      "Who decides these numbers?",
+      "Congress writes the tax laws and the appropriations, and the President signs or vetoes them. Much of the spending, such as Social Security, Medicare and interest on the debt, runs under permanent laws, without a yearly vote. So a year's numbers follow laws passed in that year and in earlier ones; the President named under each year is who was in office, not who set its budget.",
+    ],
+    [
+      "Why is “Everything else” net?",
+      "Some Treasury lines are below zero: undistributed offsetting receipts (such as agencies' payments into federal staff's retirement funds, and oil and gas royalties), and in some years commerce and housing credit or education, when loan costs were re-estimated. A flow cannot be drawn below zero, so these are added into “Everything else”. Every line is shown as published in the table.",
+    ],
+  ];
+  const ledgerDescription = clip(
+    `Where ${tn(lastYear.outlays)} of federal spending went in fiscal year ${lastYear.fy}, and where it came from: ${bn(lastYear.receipts)} in taxes and other receipts, ${bn(lastYear.borrowed)} borrowed. Every year since ${years[0]!.fy}, from the Treasury's own statements.`,
+    200,
+  );
+  page({
+    path: ledgerPath(),
+    title: "The ledger: money in and out",
+    socialTitle: `Where ${tn(lastYear.outlays)} went, and where it came from`,
+    description: ledgerDescription,
+    share: {
+      kind: "years",
+      kicker: `The ledger · fiscal years ${years[0]!.fy} to ${lastYear.fy}`,
+      title: `Where ${tn(lastYear.outlays)} went in ${lastYear.fy}, and where it came from`,
+      years: fullYears.map((y) => ({ fy: y.fy, receipts: y.receipts, borrowed: Math.max(y.borrowed, 0) })),
+      sub: `${bn(lastYear.receipts)} taken in, ${bn(lastYear.borrowed)} borrowed: ${cents(lastYear.borrowed, lastYear.outlays)} of every dollar spent.`,
+      footer: `Monthly Treasury Statement · usledger.org`,
+    },
+    alt: `Federal spending by fiscal year, ${years[0]!.fy} to ${lastYear.fy}, each bar split into receipts and borrowing: ${fullYears.map((y) => `${y.fy} ${bn(y.outlays)}`).join(", ")}.`,
+    wide: true,
+    ld: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        name: `US federal receipts and outlays, fiscal years ${years[0]!.fy} to ${years.at(-1)!.fy}`,
+        description: "Receipts by source and outlays by budget function from the Monthly Treasury Statement, Table 9, and the debt from Debt to the Penny, as published by the Bureau of the Fiscal Service.",
+        url: absolute(config, ledgerPath()),
+        license: "https://creativecommons.org/publicdomain/zero/1.0/",
+        isBasedOn: mtsSource.url,
+        creator: { "@type": "Organization", name: mtsSource.publisher },
+        temporalCoverage: `${years[0]!.fy - 1}-10-01/${years.at(-1)!.through}`,
+        distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: absolute(config, "/data/ledger.json") }],
+      },
+      { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: ledgerFaq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+    ],
+    body: h(
+      Fragment,
+      null,
+      h(
+        "section",
+        { className: "ledger-hero", "aria-labelledby": "ledger-h" },
+        h("p", { className: "kicker" }, `The ledger · fiscal year ${lastYear.fy}, ${fySpan(lastYear)}`),
+        h("h1", { id: "ledger-h" }, `Where ${tn(lastYear.outlays)} went, and where it came from`),
+        h(
+          "p",
+          { className: "lede" },
+          `In fiscal year ${lastYear.fy} the federal government spent `,
+          h("strong", null, bn(lastYear.outlays)),
+          `. Taxes and other receipts covered ${bn(lastYear.receipts)}. The other `,
+          h("strong", null, `${bn(lastYear.borrowed)} was borrowed`),
+          `, ${cents(lastYear.borrowed, lastYear.outlays)} of every dollar, so every new promise either takes money from a line below or adds to that one.`,
+        ),
+      ),
+      yearNav(years),
+      flowChart(lastYear),
+      h(
+        "nav",
+        { className: "onpage", "aria-label": "On this page" },
+        h(
+          "ul",
+          null,
+          h("li", null, h("a", { href: "#years" }, "Every year")),
+          h("li", null, h("a", { href: "#tariffs" }, "Tariffs by month")),
+          h("li", null, h("a", { href: "#lines" }, "Every line")),
+          h("li", null, h("a", { href: "#promises-on-lines" }, "Promises on these lines")),
+          h("li", null, h("a", { href: "#ledger-questions" }, "Questions")),
+        ),
+      ),
+      h(
+        "section",
+        { id: "years", className: "home-section", "aria-labelledby": "years-h" },
+        h("h2", { id: "years-h" }, `Every year since ${years[0]!.fy}`),
+        h("ul", { className: "facts" }, facts(years, ledgerFile).map((f) => h("li", { key: f }, f))),
+        yearsChart(years),
+      ),
+      h(
+        "section",
+        { id: "tariffs", className: "home-section", "aria-labelledby": "tariffs-h" },
+        h("h2", { id: "tariffs-h" }, "Tariffs, month by month"),
+        h("p", { className: "section-lede" }, "Customs duties are the line that several promises on this site are about, from a tariff dividend to ending the tariffs. The Treasury records them net of refunds."),
+        customsChart(ledgerFile),
+      ),
+      h("section", { id: "lines", className: "home-section", "aria-labelledby": "lines-h" }, h("h2", { id: "lines-h" }, "Every line, every year"), linesTable(years), ledgerSources),
+      h(
+        "section",
+        { id: "promises-on-lines", className: "home-section", "aria-labelledby": "pol-h" },
+        h("h2", { id: "pol-h" }, "Promises on these lines"),
+        h("p", { className: "section-lede" }, "The promises on this site whose words name one of these taxes or spending lines, or the deficit, with where each stands."),
+        onLines(lastYear),
+      ),
+      h(
+        "section",
+        { id: "ledger-questions", className: "home-section", "aria-labelledby": "lq-h" },
+        h("h2", { id: "lq-h" }, "Questions"),
+        h("dl", { className: "faq" }, ledgerFaq.map(([q, a]) => h(Fragment, { key: q }, h("dt", null, q), h("dd", null, a)))),
+      ),
+    ),
+    script: ONPAGE_SCRIPT,
+  });
+  for (const [i, y] of years.entries()) {
+    const prev = years[i - 1];
+    const title = `Fiscal year ${y.fy}${y.complete ? "" : " so far"}`;
+    page({
+      path: ledgerPath(y.fy),
+      title: `${title}: money in and out`,
+      socialTitle: `${title}: ${bn(y.outlays)} spent, ${bn(y.borrowed)} borrowed`,
+      description: clip(
+        `Where the federal government's money came from and went in ${fyName(y)} (${fySpan(y)}): ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed. Every line of the Treasury's statement.`,
+        200,
+      ),
+      share: yearShare(y, `The ledger · ${title} · ${y.presidents.join(", then ")}`),
+      alt: yearAlt(y),
+      wide: true,
+      body: h(
+        Fragment,
+        null,
+        h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Ledger", href: ledgerPath() }, { name: title, href: ledgerPath(y.fy) }] }),
+        h(
+          "section",
+          { className: "ledger-hero", "aria-labelledby": "year-h" },
+          h("p", { className: "kicker" }, `${fySpan(y)} · President: ${y.presidents.join(", then ")}`),
+          h("h1", { id: "year-h" }, `${title}: ${bn(y.outlays)} spent, ${bn(y.borrowed)} borrowed`),
+          h("p", { className: "lede" }, `Taxes and other receipts brought in ${bn(y.receipts)}; the other ${bn(y.borrowed)}, ${cents(y.borrowed, y.outlays)} of every dollar spent, was borrowed.`),
+        ),
+        yearNav(years, y.fy),
+        flowChart(y),
+        h("h2", null, "What changed"),
+        h("ul", { className: "facts" }, yearFacts(y, prev).map((f) => h("li", { key: f }, f))),
+        h("h2", null, "Every line"),
+        yearTable(y, prev),
+        onLines(y) ? h(Fragment, null, h("h2", null, "Promises on these lines"), onLines(y)) : null,
+        ledgerSources,
+      ),
+    });
+  }
+
+  // Then again (scripts/then-again.ts): statements, and what the same person said later; then the dates promises
+  // set themselves, and the promises with no step since. The same test and the same lists for everyone.
+  const ago = (x: Pair) => daysApart(x.first.date, x.later.date);
+  const laterBy = (n: number) => {
+    if (n === 1) return "The next day";
+    if (n < 60) return `${n} days later`;
+    const months = Math.round(n / 30.44);
+    const [y, m] = [Math.floor(months / 12), months % 12];
+    const plural = (k: number, unit: string) => `${k} ${unit}${k === 1 ? "" : "s"}`;
+    return `${[y ? plural(y, "year") : "", m ? plural(m, "month") : ""].filter(Boolean).join(" and ")} later`;
+  };
+  const saidBlock = (s: PairSaid, label: string, cls: string) =>
+    h(
+      "article",
+      { className: `said said--${cls}` },
+      h("p", { className: "said__when" }, h("span", null, label), " ", h("time", { dateTime: s.date }, longDate(w, s.date))),
+      h("blockquote", { cite: s.source_url }, h("p", null, `“${s.text}”`)),
+      h("p", { className: "said__where" }, s.where, " · ", h("a", { href: s.source_url }, "Source")),
+    );
+  const pairItem = (x: Pair) =>
+    h(
+      "li",
+      { key: x.id, className: "pair-item" },
+      h("h3", null, h("a", { href: pairPath(x.id) }, x.subject)),
+      h("p", { className: "pair-item__who" }, actorName(speaker(x))),
+      h("p", { className: "pair-item__said" }, h("time", { dateTime: x.first.date }, longDate(w, x.first.date)), ` “${clip(x.first.text, 140)}”`),
+      h("p", { className: "pair-item__gap" }, laterBy(ago(x))),
+      h("p", { className: "pair-item__said pair-item__said--later" }, h("time", { dateTime: x.later.date }, longDate(w, x.later.date)), ` “${clip(x.later.text, 140)}”`),
+    );
+  const pairShare = (x: Pair): Share => ({
+    kind: "pair",
+    kicker: `Then again · ${actorName(speaker(x))}`,
+    subject: x.subject,
+    first: { date: longDate(w, x.first.date), words: x.first.text },
+    later: { date: longDate(w, x.later.date), words: x.later.text },
+    gap: laterBy(ago(x)),
+    footer: "Both on the record, with sources · usledger.org",
+  });
+
+  // The dates promises set themselves: the first deadline each was given, and where the promise stands now. An event's
+  // date is its document's date, which can come after the delivery it shows, so "by the date" is not judged here:
+  // a passed date is shown with the promise's status today, and "Not met" is the editor's status, never ours.
+  const dated = views
+    .map((v) => {
+      const first = v.card.versions[0]?.parameters?.deadline as string | null | undefined;
+      if (!first) return null;
+      const last = (v.card.versions.at(-1)?.parameters?.deadline as string | null | undefined) ?? first;
+      const category = categoryOf(config, v.card.status);
+      const outcome = v.card.status === ladder.at(-1) ? "delivered" : category === "finished" || category === "off_ladder" ? "ended" : first >= today ? "ahead" : "passed";
+      return { v, first, last, days: daysBetween(v.card.made_on, first), outcome };
+    })
+    .filter((d): d is NonNullable<typeof d> => !!d)
+    .sort((a, b) => a.days - b.days || a.first.localeCompare(b.first));
+  const passed = dated.filter((d) => d.first < today);
+  const undelivered = passed.filter((d) => d.outcome !== "delivered").length;
+  const span = (n: number) => (n <= 2 ? `${n * 24} hours` : n < 60 ? `${n} days` : n < 730 ? `${Math.round(n / 30.44)} months` : `${(n / 365.25).toFixed(1)} years`);
+
+  // Who has promised what, and how much of it has moved: the same columns for everyone with a promise on record.
+  const talk = [...result.actors.values()]
+    .filter((a) => a.kind === "person")
+    .map((a) => {
+      const own = views.filter((v) => v.actor.id === a.id);
+      return {
+        a,
+        total: own.length,
+        still: own.filter((v) => v.card.status === "promised").length,
+        vague: own.filter((v) => v.card.status === "unscoreable").length,
+        missed: passed.filter((d) => d.v.actor.id === a.id && d.outcome !== "delivered").length,
+        pairs: pairs.filter((x) => x.actor_id === a.id).length,
+      };
+    })
+    .filter((r) => r.total || r.pairs)
+    .sort((x, y) => y.total - x.total || actorName(x.a).localeCompare(actorName(y.a)));
+  const waiting = views.filter((v) => v.card.status === "promised").sort((a, b) => a.card.made_on.localeCompare(b.card.made_on));
+  const fastest = pairs.length ? pairs.reduce((a, b) => (ago(b) < ago(a) ? b : a)) : null;
+  const thenDescription = clip(
+    pairs.length
+      ? `${pairs.length} ${pairs.length === 1 ? "statement" : "statements"} and what the same person said later, in exact words with dates and sources; and the dates promises set themselves, ${undelivered} of ${passed.length} passed undelivered.`
+      : `Statements and what the same person said later, in exact words with dates and sources; and the dates promises set themselves, ${undelivered} of ${passed.length} passed undelivered.`,
+    200,
+  );
+  page({
+    path: pairPath(),
+    title: "Then again",
+    socialTitle: "Then again: what was said, and what was said later",
+    description: thenDescription,
+    share: fastest
+      ? { ...pairShare(fastest), kicker: `Then again · ${pairs.length} ${pairs.length === 1 ? "pair" : "pairs"} on record` }
+      : pageShare("Then again", "What was said, and what was said later", "Exact words, dates and sources, and the dates promises set themselves."),
+    alt: fastest ? `${actorName(speaker(fastest))}, ${longDate(w, fastest.first.date)}: “${clip(fastest.first.text, 120)}” ${laterBy(ago(fastest))}: “${clip(fastest.later.text, 120)}”` : "Then again on USLedger.org.",
+    wide: true,
+    script: ONPAGE_SCRIPT,
+    ld: pairs.length
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Then again",
+            url: absolute(config, pairPath()),
+            itemListElement: pairs.map((x, i) => ({ "@type": "ListItem", position: i + 1, url: absolute(config, pairPath(x.id)), name: x.subject })),
+          },
+        ]
+      : undefined,
+    body: h(
+      Fragment,
+      null,
+      h(
+        "section",
+        { className: "ledger-hero", "aria-labelledby": "then-h" },
+        h("p", { className: "kicker" }, "Exact words, dated, both on the record"),
+        h("h1", { id: "then-h" }, "Then again"),
+        h(
+          "p",
+          { className: "lede" },
+          "What was said, and what the same person said later. Each pair is in the speaker's exact words, with the date and a link to where they were said, and the later statement cannot be true, or carried out, at the same time as the earlier one, read as written. Both are on the record: the reader decides which to hold them to.",
+        ),
+        h(
+          "ul",
+          { className: "tally" },
+          h("li", null, h("strong", null, String(pairs.length)), pairs.length === 1 ? " pair" : " pairs"),
+          fastest ? h("li", null, h("strong", null, String(ago(fastest))), ` ${ago(fastest) === 1 ? "day" : "days"} apart, the closest`) : null,
+          h("li", null, h("strong", null, `${undelivered} of ${passed.length}`), " own dates passed, not delivered"),
+          h("li", null, h("strong", null, String(waiting.length)), ` ${waiting.length === 1 ? "promise" : "promises"} with no step since`),
+        ),
+      ),
+      h(
+        "nav",
+        { className: "onpage", "aria-label": "On this page" },
+        h(
+          "ul",
+          null,
+          h("li", null, h("a", { href: "#pairs" }, "Said, then said")),
+          h("li", null, h("a", { href: "#dates" }, "Dates they set")),
+          h("li", null, h("a", { href: "#by-person" }, "By person")),
+          h("li", null, h("a", { href: "#nothing-since" }, "Nothing since")),
+          h("li", null, h("a", { href: "#test" }, "The test")),
+        ),
+      ),
+      h(
+        "section",
+        { id: "pairs", className: "home-section", "aria-labelledby": "pairs-h" },
+        h("h2", { id: "pairs-h" }, "Said, then said"),
+        pairs.length ? h("ol", { className: "pairs" }, pairs.map(pairItem)) : h("p", null, "No pair is published yet. Each is checked against its sources and approved by the editor first."),
+      ),
+      h(
+        "section",
+        { id: "dates", className: "home-section", "aria-labelledby": "dates-h" },
+        h("h2", { id: "dates-h" }, "Dates they set themselves"),
+        h(
+          "p",
+          { className: "section-lede" },
+          `${dated.length} promises on this site name their own date. ${passed.length} of those dates have passed, and ${undelivered} of those promises are not delivered today. Shortest time first, with the first date set; a date moved later is shown beside it.`,
+        ),
+        h(
+          "div",
+          { className: "table-scroll" },
+          h(
+            "table",
+            { className: "nums dates" },
+            h(
+              "thead",
+              null,
+              h("tr", null, h("th", { scope: "col" }, "Promise"), h("th", { scope: "col" }, "Who"), h("th", { scope: "col" }, "Said on"), h("th", { scope: "col" }, "Time given"), h("th", { scope: "col" }, "Date set"), h("th", { scope: "col" }, "Where it stands")),
+            ),
+            h(
+              "tbody",
+              null,
+              dated.map((d) =>
+                h(
+                  "tr",
+                  { key: d.v.id, "data-outcome": d.outcome },
+                  h("th", { scope: "row" }, h("a", { href: p.card(d.v.id, L) }, headline(d.v))),
+                  h("td", null, actorName(d.v.actor)),
+                  h("td", null, longDate(w, d.v.card.made_on)),
+                  h("td", null, span(d.days)),
+                  h("td", null, longDate(w, d.first), d.last !== d.first ? h("span", { className: "dates__moved" }, `moved to ${longDate(w, d.last)}`) : null),
+                  h("td", null, h(StatusPill, { status: d.v.card.status, config }), d.outcome === "passed" ? h("span", { className: "dates__moved" }, "Date passed") : d.outcome === "ahead" ? h("span", { className: "dates__moved" }, "Date ahead") : null),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      h(
+        "section",
+        { id: "by-person", className: "home-section", "aria-labelledby": "person-h" },
+        h("h2", { id: "person-h" }, "By person"),
+        h("p", { className: "section-lede" }, "Everyone with a promise on this site, in the same columns. “No step since” means no document yet shows any step after the words; “too vague” means two or more of who, how much and when are missing."),
+        h(
+          "div",
+          { className: "table-scroll" },
+          h(
+            "table",
+            { className: "nums" },
+            h(
+              "thead",
+              null,
+              h("tr", null, h("th", { scope: "col" }, "Person"), h("th", { scope: "col" }, "Promises"), h("th", { scope: "col" }, "No step since"), h("th", { scope: "col" }, "Too vague to track"), h("th", { scope: "col" }, "Own dates passed, not delivered"), h("th", { scope: "col" }, "Pairs")),
+            ),
+            h(
+              "tbody",
+              null,
+              talk.map((r) =>
+                h(
+                  "tr",
+                  { key: r.a.id },
+                  h("th", { scope: "row" }, h("a", { href: p.actor(r.a.id, L) }, actorName(r.a))),
+                  h("td", null, String(r.total)),
+                  h("td", null, String(r.still)),
+                  h("td", null, String(r.vague)),
+                  h("td", null, String(r.missed)),
+                  h("td", null, String(r.pairs)),
+                ),
+              ),
+            ),
+          ),
+        ),
+        h("p", { className: "note" }, "Promises by the Republican Party's platform are counted under the party, not a person, and are on the home page."),
+      ),
+      h(
+        "section",
+        { id: "nothing-since", className: "home-section", "aria-labelledby": "since-h" },
+        h("h2", { id: "since-h" }, "Said, and nothing since"),
+        h("p", { className: "section-lede" }, `${waiting.length} ${waiting.length === 1 ? "promise is" : "promises are"} still at “Promised”: no order, law, budget line or statistic yet shows a step. Oldest first, with the days since the words.`),
+        waiting.length
+          ? h(
+              "ul",
+              { className: "since" },
+              waiting.map((v) =>
+                h(
+                  "li",
+                  { key: v.id },
+                  h("strong", null, `${daysBetween(v.card.made_on, today).toLocaleString("en-US")} days`),
+                  h("a", { href: p.card(v.id, L) }, headline(v)),
+                  h("span", null, `${actorName(v.actor)}, ${longDate(w, v.card.made_on)}`),
+                ),
+              ),
+            )
+          : null,
+      ),
+      h(
+        "section",
+        { id: "test", className: "home-section", "aria-labelledby": "test-h" },
+        h("h2", { id: "test-h" }, "The test"),
+        h(
+          "ul",
+          { className: "rules" },
+          h("li", null, "Both statements are by the same person, in their own words, each with its date and a link to a published record: a transcript, an official document, the post itself. A quote heard only on video is not used."),
+          h("li", null, "Both are about the same thing: a policy, a commitment, a fact, or what the person said before. Opinions of people, and jokes flagged as jokes at the time, are left out."),
+          h("li", null, "Read as written, with the paragraphs around them, the later one cannot be true or carried out at the same time as the earlier one. If the context gives a reading under which both stand, the pair is left out."),
+          h("li", null, "If the person explained the change, the explanation is shown beside the pair, in their words."),
+          h("li", null, "Every quote is checked character for character against a saved copy of its source, and the editor approves each pair before it is published. The same test applies to everyone on this site."),
+        ),
+      ),
+    ),
+  });
+  for (const x of pairs) {
+    const a = speaker(x);
+    const role = roleOf(a);
+    const others = pairs.filter((o) => o.actor_id === x.actor_id && o.id !== x.id);
+    const review = x.reviews?.find((r) => r.approves);
+    page({
+      path: pairPath(x.id),
+      title: `${x.subject}: then again`,
+      socialTitle: `${actorName(a)}: ${x.subject}`,
+      description: clip(`${actorName(a)}, ${longDate(w, x.first.date)}: “${x.first.text}” ${laterBy(ago(x))}: “${x.later.text}”`, 200),
+      share: pairShare(x),
+      alt: `${actorName(a)}, ${longDate(w, x.first.date)}: “${clip(x.first.text, 140)}” ${laterBy(ago(x))}, ${longDate(w, x.later.date)}: “${clip(x.later.text, 140)}”`,
+      type: "article",
+      ld: [
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: `${actorName(a)}: ${x.subject}`,
+          url: absolute(config, pairPath(x.id)),
+          datePublished: review?.on ?? x.recorded_on,
+          about: { "@type": "Person", name: actorName(a) },
+          hasPart: [x.first, x.later].map((s) => ({ "@type": "Quotation", text: s.text, dateCreated: s.date, spokenByCharacter: { "@type": "Person", name: actorName(a) }, isBasedOn: s.source_url })),
+        },
+      ],
+      body: h(
+        Fragment,
+        null,
+        h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Then again", href: pairPath() }, { name: x.subject, href: pairPath(x.id) }] }),
+        h("p", { className: "kicker" }, h("a", { href: p.actor(a.id, L) }, actorName(a)), role ? `, ${role}` : ""),
+        h("h1", null, x.subject),
+        h(
+          "div",
+          { className: "pair" },
+          saidBlock(x.first, "Then", "first"),
+          h("p", { className: "pair__gap" }, laterBy(ago(x))),
+          saidBlock(x.later, "Later", "later"),
+          x.explanation ? saidBlock(x.explanation, "In their words, on the change", "explanation") : null,
+        ),
+        x.note ? h("p", { className: "note" }, x.note) : null,
+        (() => {
+          const card = x.promise_id ? views.find((v) => v.id === x.promise_id) : undefined;
+          return card ? h("p", { className: "pair__promise" }, "The promise on this site: ", h("a", { href: p.card(card.id, L) }, headline(card)), " ", h(StatusPill, { status: card.card.status, config })) : null;
+        })(),
+        h(
+          "p",
+          { className: "updated" },
+          `Recorded on ${longDate(w, x.recorded_on)}`,
+          review ? `; approved by ${review.by} on ${longDate(w, review.on)}` : "; not yet approved",
+          ". Both quotes are checked character for character against saved copies of their sources. Both statements are on the record; the reader decides.",
+        ),
+        others.length ? h(Fragment, null, h("h2", null, `More by ${actorName(a)}`), h("ol", { className: "pairs" }, others.map(pairItem))) : null,
+        h("p", null, h("a", { href: pairPath() }, "Every pair, and the dates promises set themselves")),
+      ),
+    });
+  }
+
   page({
     path: "/about/",
     title: "How it works",
@@ -655,6 +1218,19 @@ async function main() {
         h("li", null, "The same rules and the same words apply to every person, party and government. Every area is listed on every person's page, so what has not been promised shows too."),
         h("li", null, "Each card is approved by an editor, named on the card, who declares no US party."),
         h("li", null, "Anyone a card is about may reply; the reply is published on the card."),
+        h(
+          "li",
+          null,
+          "The ",
+          h("a", { href: ledgerPath() }, "ledger"),
+          " shows the Treasury's own figures, every line of its monthly statement, from fiscal year 2018; our groups only add its lines up.",
+        ),
+        h(
+          "li",
+          null,
+          h("a", { href: "/then-again/" }, "Then again"),
+          " pairs a statement with what the same person said later, when the two cannot both stand as written. Both quotes are exact, dated and sourced; the editor approves each pair, and the test is the same for everyone.",
+        ),
         h("li", null, "We count page views: one number per page per day, published at ", h("a", { href: "/views.json" }, "/views.json"), ". Nothing about the reader is stored: not the address, country, device, browser or where they came from. Crawlers and link previews are not counted."),
       ),
       h(
@@ -670,7 +1246,17 @@ async function main() {
 
   if (!PREVIEW) {
     const files = publishFiles({ config, views, today, actors: result.actors });
-    for (const f of files) write(f.path, f.body);
+    for (const f of files) {
+      // The engine's llms.txt knows the promises; the ledger and Then again are this site's own, so they are added.
+      const body =
+        f.path === "/llms.txt"
+          ? String(f.body).replace(
+              /\n## Promise cards\n/,
+              `\n## The ledger\n\n- [The ledger: money in and out, fiscal years ${years[0]!.fy} to ${years.at(-1)!.fy}](${absolute(config, ledgerPath())}): receipts by source and outlays by function from the Monthly Treasury Statement, with what was borrowed\n${years.map((y) => `- [Fiscal year ${y.fy}${y.complete ? "" : " so far"}](${absolute(config, ledgerPath(y.fy))}): ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed`).join("\n")}\n- [The ledger as JSON](${absolute(config, "/data/ledger.json")})\n\n## Then again\n\n- [Then again](${absolute(config, pairPath())}): statements and what the same person said later, in exact words with dates and sources; the dates promises set themselves; promises with no step since\n${pairs.map((x) => `- [${x.subject}](${absolute(config, pairPath(x.id))}): ${actorName(speaker(x))}, ${x.first.date} and ${x.later.date}`).join("\n")}\n\n## Promise cards\n`,
+            )
+          : f.body;
+      write(f.path, body);
+    }
     // The engine's sitemap lists the promise pages; ours lists the rest, and sitemap.xml points to both.
     const listed = new Set(sitemapEntries(views, config, today).map((e) => e.loc));
     const rest = pages.map((pg) => absolute(config, pg)).filter((u) => !listed.has(u) && !listed.has(u.replace(/\/$/, "")));
@@ -699,6 +1285,7 @@ async function main() {
   write("/favicon-32.png", new Resvg(tileSvg(32, true)).render().asPng());
   write("/apple-touch-icon.png", new Resvg(tileSvg(180, false)).render().asPng());
   copyFileSync(join(ROOT, "scripts", "site.css"), join(OUT, "site.css"));
+  write("/data/ledger.json", readFileSync(join(ROOT, "data", "ledger.json")));
   for (const weight of [400, 600]) {
     const file = `source-serif-4-latin-${weight}-normal.woff2`;
     mkdirSync(join(OUT, "fonts"), { recursive: true });
