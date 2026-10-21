@@ -655,6 +655,7 @@ async function main() {
         h("li", null, "The same rules and the same words apply to every person, party and government. Every area is listed on every person's page, so what has not been promised shows too."),
         h("li", null, "Each card is approved by an editor, named on the card, who declares no US party."),
         h("li", null, "Anyone a card is about may reply; the reply is published on the card."),
+        h("li", null, "We count page views: one number per page per day, published at ", h("a", { href: "/views.json" }, "/views.json"), ". Nothing about the reader is stored: not the address, country, device, browser or where they came from. Crawlers and link previews are not counted."),
       ),
       h(
         "p",

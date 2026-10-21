@@ -30,5 +30,8 @@ jobs:
       - run: pnpm validate
       # Judgement words in our own text (quotes are skipped).
       - run: pnpm lint:words
+      # Every colour against WCAG AA, and what the page counter counts.
+      - run: pnpm contrast
+      - run: pnpm test
       # The static site, drafts never included.
       - run: pnpm build

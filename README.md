@@ -26,6 +26,7 @@ pnpm install
 pnpm validate        # every card, draft, actor and the editors list against format v1
 pnpm lint:words      # judgement words in our own text
 pnpm contrast        # every colour in scripts/palette.ts against WCAG AA
+pnpm test            # what the page counter counts (edge/)
 pnpm build           # the static site in public/, published cards only, with a share image for every page
 pnpm preview         # the same with drafts, in public-preview/, never deployed
 ```
@@ -36,6 +37,7 @@ pnpm preview         # the same with drafts, in public-preview/, never deployed
 - Every card has a status with its evidence: 10 delivering, 2 funded, 1 legislated, 3 in plan and 4 unscoreable. No later promise by the President or an official is recorded yet.
 - The home page leads with the twenty: a chart of how far each has climbed, then one entry each with the platform's words, its step and the latest dated evidence. Each person's page has the engine's key promises, timeline, promises by month and every area.
 - Every page has its own title, description, canonical address and a 1200x630 share image drawn from its content (`scripts/share-image.ts`); `robots.txt` welcomes search and AI crawlers, with `sitemap.xml` and `llms.txt`.
+- Page views are counted on the host (`edge/count.ts`, Routing Middleware): one number per page per UTC day in Upstash Redis, nothing about readers, crawlers and previews skipped. The totals for the last 30 days are public at `/views.json`, in the same format as the sister sites', and Pavel's visits report (the `site-visits` repository) reads them. Without the store connected, nothing is counted and `/views.json` lists no days.
 - The mark is the Capitol's dome in a few lines, with a dot in the ladder's colour (`scripts/mark.ts`): in the header, the favicon, the home-screen icon and every share image.
 - Live at [usledger.org](https://usledger.org) since 20 October 2026, on Vercel (team GUZH, project `us-ledger`, settings in `vercel.json`): every push to `main` deploys. The domain is registered at Cloudflare, with A records for `@` and `www` pointing at Vercel, DNS only; `www` redirects to the bare address.
 - Actors: the President, the Vice President, the Secretaries of State, Defense and the Treasury, the envoys and ambassadors, and the House Democratic Leader, with their roles from official pages; the Republican and Democratic parties; the Administration and Congress as the bodies that deliver.
