@@ -15,7 +15,8 @@
     "build": "node scripts/build.ts",
     "openpromises:provenance": "node scripts/openpromises-provenance.ts",
     "contrast": "node scripts/contrast.ts",
-    "check": "pnpm validate && pnpm lint:words && pnpm contrast && pnpm build",
+    "test": "node --test \"edge/*.test.ts\"",
+    "check": "pnpm validate && pnpm lint:words && pnpm contrast && pnpm test && pnpm build",
     "preview": "node scripts/build.ts --preview"
   },
   "devDependencies": {
@@ -30,5 +31,8 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "satori": "0.33.5"
+  },
+  "dependencies": {
+    "@vercel/functions": "3.9.9"
   }
 }
