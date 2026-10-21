@@ -2,7 +2,7 @@
 
 Every Sunday at 20:00 UK time the weekly ledger desk, a scheduled task on Pavel's Mac, works through each of his ledgers in turn, one at a time. For USLedger.org it reads this file on `main` and follows it. Pavel decided it on 20 October 2026 (one weekly desk for every ledger). To change what it does here, change this file by pull request.
 
-It does three things: new promises by the President and the officials who speak for the Administration (only while the editor's queue has room), evidence on the published cards, and a check that the repository's checks and pull requests are healthy.
+It does three things: new promises by the President, the officials who speak for the Administration and the party leaders in Congress, Republican and Democratic (only while the editor's queue has room), evidence on the published cards, and a check that the repository's checks and pull requests are healthy.
 
 ## Rules that never bend
 
@@ -35,7 +35,7 @@ At the end, remove the worktree (`git worktree remove --force`).
 
 **First, the queue.** Count the files in `content/drafts/`. With 20 or more waiting for the editor, draft nothing this week and say nothing.
 
-Otherwise, read what the President and the officials with an actor file (`content/actors/`) promised in the past 7 days: whitehouse.gov (presidential actions, fact sheets, remarks), and the departments' own sites for their secretaries. Congress.gov, govinfo.gov and federalregister.gov hold the documents. News sites are leads only.
+Otherwise, read what the President, the officials and the party leaders in Congress with an actor file (`content/actors/`) promised in the past 7 days: whitehouse.gov (presidential actions, fact sheets, remarks), the departments' own sites for their secretaries, and the leaders' own offices for their remarks and interview transcripts (democraticleader.house.gov for the House Democratic Leader; speaker.gov for the Speaker). Congress.gov, govinfo.gov and federalregister.gov hold the documents. News sites are leads only. Look at both parties' leaders the same way and for the same time (rule 5): a leader without an actor file goes under "Needs an actor".
 
 A sentence becomes a draft only if:
 
@@ -43,6 +43,8 @@ A sentence becomes a draft only if:
 - it names at least two of who, how much and when;
 - it is new: no card or draft has the same target (search `content/`). The same promise in new terms is a rewording for an editor to judge: list it, do not draft it;
 - its quote is in the saved source word for word (rule 3).
+
+A promise that depends on an election ("if we win the House") is drafted like any other: say the condition in the version's `parameters.when`, and set `responsible` to Congress, with a note that a law needs both chambers and the President's signature (the published `jeffries-*` cards show the shape).
 
 Draft at most **5** per run, the largest in money or reach first; list the rest under "Next week". Write each with `pnpm exec openpromises new` or by copying a published card's shape into `content/drafts/<id>.yaml`: `origin: llm_intake`, `status: promised`, one `promised` event on `made_on`, the venue from the config's list, and a cost only as announced or scored (CBO, JCT), saying who costed it, as the config requires (`costedBy: "required"`). A promise by someone with no actor file goes under "Needs an actor"; create no actor.
 
@@ -60,6 +62,8 @@ Read these with `gh` (repository `xternal/us-ledger`) and report only what is ne
 - pull requests that have waited more than 7 days, with what each waits for.
 
 Fix nothing here yourself.
+
+**On the run of Sunday 8 November 2026 only, the first after the midterm elections of 3 November:** for every published card whose `when` depends on that election, say under FOR THE EDITOR whether the condition held, from official results (each state's certified count, or the Clerk of the House once the new House meets), one line each, or that the results are not yet certified. Add no event: what it means for the card is the editor's call.
 
 ## 4. Hand back to the coordinator
 
