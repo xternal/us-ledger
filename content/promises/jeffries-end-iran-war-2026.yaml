@@ -1,16 +1,16 @@
 format: openpromises/1
-id: jeffries-extend-aca-tax-credits-2026
+id: jeffries-end-iran-war-2026
 headline:
-  en: "Extend the Affordable Care Act premium tax credits"
+  en: "End the war with Iran"
 actor_id: hakeem-jeffries
 made_on: "2026-10-14"
 venue: interview
 venue_label:
   en: "MS NOW, The Weeknight (transcript published by the House Democratic Leader's office)"
-area: inflation
+area: peace
 status: promised
 status_note:
-  en: "The enhanced premium tax credits applied to 2021 through 2025 (Public Law 117-169, section 12001) and ended after 2025. The words name no length for the extension."
+  en: "The United States and Iran fought from 28 February to 7 April 2026 (OMB), and the United States struck Iran again from 1 September 2026 (presidential notice to Congress, House Document 119-193). The words set no date and no measure of an end."
 responsible:
   actor_id: us-congress
   note:
@@ -19,20 +19,16 @@ origin: manual
 sources:
   - title: "Leader Jeffries on MS NOW's The Weeknight, 14 October 2026 (transcript, Office of the Democratic Leader)"
     url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-ms-now-were-going-relentlessly-focus-our-affordability-agenda
-  - title: "Public Law 117-169, section 12001: the enhanced credits for 2021 through 2025"
-    url: https://www.govinfo.gov/content/pkg/PLAW-117publ169/html/PLAW-117publ169.htm
 versions:
   - version: 1
-    text: "We're going to extend the Affordable Care Act tax credits, which will help make health insurance premiums more affordable for over 20 million Americans directly and tens of millions more whose premiums have increased indirectly, even if they may be on private insurance."
+    text: "We're going to fight to end this reckless and costly war of choice in Iran, which we know has skyrocketed gas prices on the American people."
     recorded_on: "2026-10-21"
     source_url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-ms-now-were-going-relentlessly-focus-our-affordability-agenda
     quote_checked_on: null
     source_text:
       file: jeffries-2026-10-14-ms-now.txt
-      span: [2078, 2348]
+      span: [2376, 2516]
     parameters:
-      who:
-        en: "People who buy health insurance through the Affordable Care Act marketplaces"
       when:
         en: "If Democrats win a majority in the House on 3 November 2026: among the things \"we are going to have to do immediately\", said in answer to a question about the first 100 days of that majority. The new Congress meets on 3 January 2027."
       deadline: null
@@ -40,7 +36,11 @@ events:
   - date: "2026-10-14"
     type: promised
     text:
-      en: "Asked what a Democratic House majority would do in its first 100 days, Jeffries says Democrats will extend the Affordable Care Act tax credits"
+      en: "Asked what a Democratic House majority would do in its first 100 days, Jeffries says Democrats will fight to end the war in Iran"
 replies: []
 corrections: []
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true
