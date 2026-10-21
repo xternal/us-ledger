@@ -25,6 +25,8 @@ Node 22.18 or later and pnpm 12.
 pnpm install
 pnpm validate        # every card, draft, actor and the editors list against format v1
 pnpm lint:words      # judgement words in our own text
+pnpm pairs check     # Then again: every quote at its span in the saved source
+pnpm ledger:fetch    # the ledger's numbers from the Treasury's open data, into data/ledger.json
 pnpm contrast        # every colour in scripts/palette.ts against WCAG AA
 pnpm test            # what the page counter counts (edge/)
 pnpm build           # the static site in public/, published cards only, with a share image for every page
@@ -35,12 +37,31 @@ pnpm preview         # the same with drafts, in public-preview/, never deployed
 
 - The twenty platform promises are approved by the editor and published. Each quote is matched character for character against a stored copy of the official PDF (`content/sources/rnc-2024-platform.txt`, a `source_text` span on every card), so the quote check passes by machine.
 - Every card has a status with its evidence: 10 delivering, 2 funded, 1 legislated, 3 in plan and 4 unscoreable. No later promise by the President or an official is recorded yet.
+- Menu: Promises (the current administration's), the Ledger (money in and out since fiscal year 2018), Then again, People, Areas, How it works.
 - The home page leads with the twenty: a chart of how far each has climbed, then one entry each with the platform's words, its step and the latest dated evidence. Each person's page has the engine's key promises, timeline, promises by month and every area.
 - Every page has its own title, description, canonical address and a 1200x630 share image drawn from its content (`scripts/share-image.ts`); `robots.txt` welcomes search and AI crawlers, with `sitemap.xml` and `llms.txt`.
 - Page views are counted on the host (`edge/count.ts`, Routing Middleware): one number per page per UTC day in Upstash Redis, nothing about readers, crawlers and previews skipped. The totals for the last 30 days are public at `/views.json`, in the same format as the sister sites', and Pavel's visits report (the `site-visits` repository) reads them. Without the store connected, nothing is counted and `/views.json` lists no days.
 - The mark is the Capitol's dome in a few lines, with a dot in the ladder's colour (`scripts/mark.ts`): in the header, the favicon, the home-screen icon and every share image.
 - Live at [usledger.org](https://usledger.org) since 20 October 2026, on Vercel (team GUZH, project `us-ledger`, settings in `vercel.json`): every push to `main` deploys. The domain is registered at Cloudflare, with A records for `@` and `www` pointing at Vercel, DNS only; `www` redirects to the bare address.
 - Actors: the President, the Vice President, the Secretaries of State, Defense and the Treasury, the envoys and ambassadors, and the House Democratic Leader, with their roles from official pages; the Republican and Democratic parties; the Administration and Congress as the bodies that deliver.
+
+## The ledger
+
+`/ledger/` is the money in and out of the federal government, every fiscal year since 2018: receipts by source on the left, outlays by budget function on the right, and what was borrowed to cover the gap, drawn in the same colour as interest on the debt, as on LedgerGov.UK. Each year has its own page (`/ledger/2026/`) with every Treasury line against the year before, and the promises on this site that name one of the lines (`PROMISES_ON` in `scripts/ledger.ts`).
+
+Every figure is a line of the Monthly Treasury Statement, Table 9, as the Bureau of the Fiscal Service published it in each September statement; the debt is Debt to the Penny. `pnpm ledger:fetch` writes them to `data/ledger.json`, which is committed and published at `/data/ledger.json`; the build never calls the API. The groups only add the Treasury's lines up, and the build stops if they do not add up to its totals. A year still running shows as "so far". The weekly desk refreshes the file after each monthly statement (`docs/desk/WEEKLY.md`, step 2b).
+
+## Then again
+
+`/then-again/` holds pairs of statements by the same person, each in exact words with its date and a link to a published record, where the later one cannot be true or carried out at the same time as the earlier one, read as written. Both are on the record; the reader decides. The test is on the page, and it is the same for everyone with an actor file. A quote heard only on video is not used. If the speaker explained the change, the explanation is shown beside the pair.
+
+Each pair is `content/then-again/<id>.yaml` (format in `scripts/then-again.ts`); its quotes are checked character for character against saved sources in `content/sources/`, like a card's. A pair is published once the editor approves it:
+
+```bash
+pnpm pairs approve trump-example-2025 --by "Pavel Guzhikov"
+```
+
+The same page lists, from the cards, every promise that set its own date and where it stands now, everyone's promises in the same columns (no step since, too vague to track, own dates passed and not delivered), and the promises still at "Promised", oldest first.
 
 ## Add a promise
 

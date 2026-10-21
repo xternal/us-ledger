@@ -1,0 +1,38 @@
+format: usledger-then-again/1
+id: trump-august-tariff-deadline-2025
+actor_id: donald-trump
+subject: "Whether the 1 August 2025 tariff date would be extended"
+first:
+  date: "2025-07-08"
+  venue: social
+  where: "Post on Truth Social, about the tariff letters sent to other countries"
+  text: "There has been no change to this date, and there will be no change. In other words, all money will be due and payable starting AUGUST 1, 2025 - No extensions will be granted."
+  source_url: https://truthsocial.com/@realDonaldTrump/posts/114818149310161097
+  source_text:
+    file: truth-2025-07-08.txt
+    span: [1015, 1189]
+later:
+  date: "2025-07-31"
+  venue: social
+  where: "Post on Truth Social after a telephone call with President Claudia Sheinbaum of Mexico"
+  text: "We have agreed to extend, for a 90 Day period, the exact same Deal as we had for the last short period of time, namely, that Mexico will continue to pay a 25% Fentanyl Tariff, 25% Tariff on Cars, and 50% Tariff on Steel, Aluminum, and Copper."
+  source_url: https://truthsocial.com/@realDonaldTrump/posts/114948452793702817
+  source_text:
+    file: truth-2025-07-31.txt
+    span: [1153, 1395]
+explanation:
+  date: "2025-07-31"
+  venue: social
+  where: "Same post"
+  text: "The complexities of a Deal with Mexico are somewhat different than other Nations because of both the problems, and assets, of the Border."
+  source_url: https://truthsocial.com/@realDonaldTrump/posts/114948452793702817
+  source_text:
+    file: truth-2025-07-31.txt
+    span: [1015, 1152]
+note: "On 7 July he had called the date firm, but not entirely firm (DCPD-202500754)."
+recorded_on: "2026-10-21"
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

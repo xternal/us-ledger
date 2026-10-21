@@ -33,6 +33,8 @@ jobs:
       - run: pnpm validate
       # Judgement words in our own text (quotes are skipped).
       - run: pnpm lint:words
+      # Then again: every quote at its span in the saved source, our words linted, approvals by a listed editor.
+      - run: pnpm pairs check
       # Every colour against WCAG AA, and what the page counter counts.
       - run: pnpm contrast
       - run: pnpm test

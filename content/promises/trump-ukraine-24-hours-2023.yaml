@@ -1,0 +1,59 @@
+format: openpromises/1
+id: trump-ukraine-24-hours-2023
+headline:
+  en: "Ukraine war settled in one day, 24 hours"
+actor_id: donald-trump
+made_on: "2023-05-10"
+venue: interview
+venue_label:
+  en: CNN town hall at Saint Anselm College, Goffstown, New Hampshire, moderated by Kaitlan Collins, as a candidate
+area: peace
+status: failed
+status_note:
+  en: "The President took office on 20 January 2025. On 23 January he said soldiers were being killed on a daily basis and that it would be nice to end the war; on 12 February he announced that US and Russian teams would start negotiations. On 25 June 2025, asked about the pledge, he said: \"Of course it was sarcastic.\" There is no ceasefire or peace agreement between Russia and Ukraine; on 23 September 2026 the Secretary of State said a limited energy and grain ceasefire \"doesn't end the war\"."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "A settlement needs the agreement of Russia and Ukraine; the US can mediate and press both."
+origin: manual
+sources:
+  - title: "Remarks at a document signing ceremony and an exchange with reporters, 23 January 2025"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202500166/html/DCPD-202500166.htm
+  - title: "Statement on the President's telephone conversation with President Putin of Russia, 12 February 2025"
+    url: https://www.govinfo.gov/content/pkg/DCPD-202500257/html/DCPD-202500257.htm
+  - title: "News conference at the NATO summit in The Hague, 25 June 2025: \"Of course it was sarcastic\""
+    url: https://www.govinfo.gov/content/pkg/DCPD-202500720/html/DCPD-202500720.htm
+  - title: "Secretary of State Marco Rubio: remarks to the press (23 September 2026)"
+    url: https://www.state.gov/releases/office-of-the-spokesman/2026/09/secretary-of-state-marco-rubio-remarks-to-press-16
+versions:
+  - version: 1
+    text: "If I’m president, I will have that war settled in one day, 24 hours."
+    recorded_on: "2026-10-21"
+    source_url: https://www.cnn.com/2023/05/11/politics/transcript-cnn-town-hall-trump/index.html
+    quote_checked_on: null
+    source_text:
+      file: cnn-2023-05-10-town-hall.txt
+      span: [456, 524]
+    parameters:
+      who:
+        en: Russia and Ukraine, through meetings with President Putin and President Zelenskyy
+      when:
+        en: "\"In one day, 24 hours\", as President. Asked how, he said he would meet Putin and Zelenskyy and \"within 24 hours that war will be settled\". He took office at noon on 20 January 2025."
+      deadline: "2025-01-21"
+events:
+  - date: "2023-05-10"
+    type: promised
+    text:
+      en: "At a CNN town hall in New Hampshire, asked whether he would give Ukraine weapons and funding, the candidate says that if he is President he will have the war settled in one day, 24 hours"
+  - date: "2025-01-23"
+    type: failed
+    text:
+      en: "Three days into the term, the President says soldiers are being killed on a daily basis and that it would be nice to end the war; he has not met President Putin"
+    evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500166/html/DCPD-202500166.htm
+replies: []
+corrections: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

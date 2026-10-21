@@ -1,0 +1,38 @@
+format: usledger-then-again/1
+id: trump-powell-firing-2025
+actor_id: donald-trump
+subject: "Whether to remove Jerome Powell as Chair of the Federal Reserve"
+first:
+  date: "2025-04-17"
+  venue: social
+  where: "Post on Truth Social"
+  text: "Too Late should have lowered Interest Rates, like the ECB, long ago, but he should certainly lower them now. Powell’s termination cannot come fast enough!"
+  source_url: https://truthsocial.com/@realDonaldTrump/posts/114352766082542122
+  source_text:
+    file: truth-2025-04-17.txt
+    span: [1129, 1283]
+later:
+  date: "2025-04-22"
+  venue: press_conference
+  where: "Exchange with reporters at the swearing-in of Paul S. Atkins as Chairman of the Securities and Exchange Commission, Oval Office, the White House, asked whether he had the power to fire Jerome Powell"
+  text: "I don't want to talk about that, because I have no intention of firing him."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202500504/html/DCPD-202500504.htm
+  source_text:
+    file: dcpd-202500504.txt
+    span: [470, 545]
+explanation:
+  date: "2025-04-22"
+  venue: press_conference
+  where: "Same exchange, asked to clarify after a reporter said his economic adviser Kevin Hassett had described the White House studying the idea"
+  text: "None whatsoever. Never did. The press runs away with things."
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202500504/html/DCPD-202500504.htm
+  source_text:
+    file: dcpd-202500504.txt
+    span: [809, 869]
+note: "Asked about the post the same day, he said Powell would leave if he asked him to (Daily Compilation of Presidential Documents, DCPD-202500491)."
+recorded_on: "2026-10-21"
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-21"
+    approves: true

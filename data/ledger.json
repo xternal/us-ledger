@@ -1,0 +1,865 @@
+{
+  "note": "Written by scripts/ledger-fetch.ts from the Treasury's Fiscal Data API. Dollars, as published.",
+  "fetched_on": "2026-10-21",
+  "sources": {
+    "mts": {
+      "title": "Monthly Treasury Statement, Table 9: Summary of Receipts by Source, and Outlays by Function of the U.S. Government",
+      "publisher": "Bureau of the Fiscal Service, US Department of the Treasury",
+      "url": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
+      "api": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9"
+    },
+    "debt": {
+      "title": "Debt to the Penny",
+      "publisher": "Bureau of the Fiscal Service, US Department of the Treasury",
+      "url": "https://fiscaldata.treasury.gov/datasets/debt-to-the-penny/",
+      "api": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny"
+    }
+  },
+  "latest_statement": "2026-09-30",
+  "debt_now": {
+    "date": "2026-10-19",
+    "total": 40396401120485.05,
+    "public": 32533474452928.98
+  },
+  "years": [
+    {
+      "fy": 2018,
+      "through": "2018-09-30",
+      "complete": true,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2018-09-30&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 1683537216744.8,
+        "Corporation Income Taxes": 204733303759.09,
+        "Employment and General Retirement": 1121154972925.63,
+        "Unemployment Insurance": 45041614844.75,
+        "Other Retirement": 4502824328.88,
+        "Excise Taxes": 94988171025.65,
+        "Estate and Gift Taxes": 22983076198.43,
+        "Customs Duties": 41298963821.8,
+        "Miscellaneous Receipts": 110505101069.17,
+        "Total": 3328745244718.2
+      },
+      "outlays": {
+        "National Defense": 664669552390.37,
+        "International Affairs": 48974860965.43,
+        "General Science, Space, and Technology": 31590872541.13,
+        "Energy": 2220889406.03,
+        "Natural Resources and Environment": 37329501342.42,
+        "Agriculture": 23739378610.47,
+        "Commerce and Housing Credit": -9857539440.26,
+        "Transportation": 93170089549.13,
+        "Community and Regional Development": 44250688003.89,
+        "Education, Training, Employment, and Social Services": 93877468395.18,
+        "Health": 518508364566.03,
+        "Medicare": 588706453191.01,
+        "Income Security": 495802270172.32,
+        "Social Security": 987795949710.47,
+        "Veterans Benefits and Services": 178852753221.84,
+        "Administration of Justice": 61473646311,
+        "General Government": 19808539515.26,
+        "Net Interest": 324697247981.35,
+        "Undistributed Offsetting Receipts": -97869489848.76,
+        "Total": 4107741496584.31
+      },
+      "debt": {
+        "date": "2018-09-28",
+        "total": 21516058183180.23,
+        "public": 15761154524132.45
+      }
+    },
+    {
+      "fy": 2019,
+      "through": "2019-09-30",
+      "complete": true,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2019-09-30&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 1717857487901.92,
+        "Corporation Income Taxes": 230244746813.76,
+        "Employment and General Retirement": 1197393962693.75,
+        "Unemployment Insurance": 40933978371.21,
+        "Other Retirement": 4758923741.46,
+        "Excise Taxes": 98914554367.88,
+        "Estate and Gift Taxes": 16671532322.28,
+        "Customs Duties": 70783723012.49,
+        "Miscellaneous Receipts": 84636700924.45,
+        "Total": 3462195610149.2
+      },
+      "outlays": {
+        "National Defense": 687602824303.59,
+        "International Affairs": 52747521527.98,
+        "General Science, Space, and Technology": 32463560111.6,
+        "Energy": 5108741690.03,
+        "Natural Resources and Environment": 35872830042.26,
+        "Agriculture": 40157741444.93,
+        "Commerce and Housing Credit": -26139299484.15,
+        "Transportation": 96220213803.14,
+        "Community and Regional Development": 29147825843.47,
+        "Education, Training, Employment, and Social Services": 134965928822.64,
+        "Health": 584764101328.67,
+        "Medicare": 650997403730.82,
+        "Income Security": 515433103680.44,
+        "Social Security": 1044415951892.3,
+        "Veterans Benefits and Services": 200036255254.31,
+        "Administration of Justice": 65962820513.31,
+        "General Government": 19413178175.57,
+        "Net Interest": 375606338036.69,
+        "Undistributed Offsetting Receipts": -98193404237.02,
+        "Total": 4446583636480.58
+      },
+      "debt": {
+        "date": "2019-09-30",
+        "total": 22719401753433.78,
+        "public": 16809092325171.8
+      }
+    },
+    {
+      "fy": 2020,
+      "through": "2020-09-30",
+      "complete": true,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2020-09-30&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 1608661926485.33,
+        "Corporation Income Taxes": 211844662323.66,
+        "Employment and General Retirement": 1261650036143.35,
+        "Unemployment Insurance": 43103787706.28,
+        "Other Retirement": 5200612525.77,
+        "Excise Taxes": 86782067345.86,
+        "Estate and Gift Taxes": 17624156021.78,
+        "Customs Duties": 68550229845.51,
+        "Miscellaneous Receipts": 116537527367.8,
+        "Total": 3419955005765.34
+      },
+      "outlays": {
+        "National Defense": 726151468010.1,
+        "International Affairs": 67660337596.65,
+        "General Science, Space, and Technology": 34058562158.16,
+        "Energy": 7167805888.48,
+        "Natural Resources and Environment": 40690620067.97,
+        "Agriculture": 49152682966.88,
+        "Commerce and Housing Credit": 571656751609.85,
+        "Transportation": 146156220373.84,
+        "Community and Regional Development": 83619153717.85,
+        "Education, Training, Employment, and Social Services": 236722686775.1,
+        "Health": 748292683863.54,
+        "Medicare": 776224012762.94,
+        "Income Security": 1262558242934.46,
+        "Social Security": 1095817057877.81,
+        "Veterans Benefits and Services": 218673996984.9,
+        "Administration of Justice": 72102351855.48,
+        "General Government": 176824813727.46,
+        "Net Interest": 344704683968.99,
+        "Undistributed Offsetting Receipts": -106361878486.82,
+        "Total": 6551872254653.64
+      },
+      "debt": {
+        "date": "2020-09-30",
+        "total": 26945391194615.15,
+        "public": 21018952080385.63
+      }
+    },
+    {
+      "fy": 2021,
+      "through": "2021-09-30",
+      "complete": true,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2021-09-30&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 2044377037669.21,
+        "Corporation Income Taxes": 371831354722.44,
+        "Employment and General Retirement": 1251857750842.89,
+        "Unemployment Insurance": 56601808949.47,
+        "Other Retirement": 5629367791.3,
+        "Excise Taxes": 75271184579.46,
+        "Estate and Gift Taxes": 27140075206.15,
+        "Customs Duties": 79984829486.3,
+        "Miscellaneous Receipts": 133285449480.19,
+        "Total": 4045978858727.41
+      },
+      "outlays": {
+        "National Defense": 754848780225.38,
+        "International Affairs": 46945792210.06,
+        "General Science, Space, and Technology": 35576131922.19,
+        "Energy": 6073949307.02,
+        "Natural Resources and Environment": 42073470154.73,
+        "Agriculture": 49505166665.21,
+        "Commerce and Housing Credit": 304147041496.02,
+        "Transportation": 154791903949.63,
+        "Community and Regional Development": 46517131963.19,
+        "Education, Training, Employment, and Social Services": 296592622616.46,
+        "Health": 796762309961.83,
+        "Medicare": 696460520815.17,
+        "Income Security": 1648844849395.31,
+        "Social Security": 1134592529731.97,
+        "Veterans Benefits and Services": 234277678862.47,
+        "Administration of Justice": 72151912146.55,
+        "General Government": 269591523905.31,
+        "Net Interest": 352264012863.77,
+        "Undistributed Offsetting Receipts": -123859681175.44,
+        "Total": 6818157647016.83
+      },
+      "debt": {
+        "date": "2021-09-30",
+        "total": 28428918570048.68,
+        "public": 22282900363084.77
+      }
+    },
+    {
+      "fy": 2022,
+      "through": "2022-09-30",
+      "complete": true,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2022-09-30&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 2632145029572.13,
+        "Corporation Income Taxes": 424865169899.91,
+        "Employment and General Retirement": 1410735251952.13,
+        "Unemployment Insurance": 66497452818.74,
+        "Other Retirement": 6294427995.5,
+        "Excise Taxes": 87726258304.53,
+        "Estate and Gift Taxes": 32550398044.75,
+        "Customs Duties": 99907565997.1,
+        "Miscellaneous Receipts": 135397489336.21,
+        "Total": 4896119043921
+      },
+      "outlays": {
+        "National Defense": 766657430794.22,
+        "International Affairs": 71677717697.11,
+        "General Science, Space, and Technology": 37481994712.02,
+        "Energy": -9057949948.31,
+        "Natural Resources and Environment": 39631194669.85,
+        "Agriculture": 34887007441.3,
+        "Commerce and Housing Credit": -19493449616.43,
+        "Transportation": 131573173362.58,
+        "Community and Regional Development": 72062522229.93,
+        "Education, Training, Employment, and Social Services": 676593222021.53,
+        "Health": 914466284012.76,
+        "Medicare": 755094428009.37,
+        "Income Security": 865449106216.47,
+        "Social Security": 1218674437413.83,
+        "Veterans Benefits and Services": 274409836598.5,
+        "Administration of Justice": 72090892981.5,
+        "General Government": 128653970841.24,
+        "Net Interest": 475120812162.87,
+        "Undistributed Offsetting Receipts": -234465034724.34,
+        "Total": 6271507596876
+      },
+      "debt": {
+        "date": "2022-09-30",
+        "total": 30928911613306.73,
+        "public": 24299192620158.51
+      }
+    },
+    {
+      "fy": 2023,
+      "through": "2023-09-30",
+      "complete": true,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2023-09-30&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 2176480648910.74,
+        "Corporation Income Taxes": 419583849964.32,
+        "Employment and General Retirement": 1558147763130.71,
+        "Unemployment Insurance": 49402230149.42,
+        "Other Retirement": 6903778727.32,
+        "Excise Taxes": 75803570858.15,
+        "Estate and Gift Taxes": 33668147783.93,
+        "Customs Duties": 80337268464.15,
+        "Miscellaneous Receipts": 38956481931.8,
+        "Total": 4439283739920.54
+      },
+      "outlays": {
+        "National Defense": 820734092776.06,
+        "International Affairs": 69306106586.44,
+        "General Science, Space, and Technology": 41376198693.09,
+        "Energy": -334128106.88,
+        "Natural Resources and Environment": 45889922815.09,
+        "Agriculture": 35554318672.58,
+        "Commerce and Housing Credit": 99954455188.26,
+        "Transportation": 127234007406.41,
+        "Community and Regional Development": 88904859613.16,
+        "Education, Training, Employment, and Social Services": -3125242892.64,
+        "Health": 889296678110.57,
+        "Medicare": 847544067210.3,
+        "Income Security": 774168449954.23,
+        "Social Security": 1354318827503.37,
+        "Veterans Benefits and Services": 301606396605.34,
+        "Administration of Justice": 81173433144.5,
+        "General Government": 33573494402.53,
+        "Net Interest": 659182313583.33,
+        "Undistributed Offsetting Receipts": -131926210814.43,
+        "Total": 6134432040451.31
+      },
+      "debt": {
+        "date": "2023-09-29",
+        "total": 33167334044723.16,
+        "public": 26330142473191.94
+      }
+    },
+    {
+      "fy": 2024,
+      "through": "2024-09-30",
+      "complete": true,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2024-09-30&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 2426066988325.89,
+        "Corporation Income Taxes": 529866802637.57,
+        "Employment and General Retirement": 1652997812476.74,
+        "Unemployment Insurance": 48606716906.94,
+        "Other Retirement": 7953956052.72,
+        "Excise Taxes": 101435326697.24,
+        "Estate and Gift Taxes": 31615876108.98,
+        "Customs Duties": 77036909944.89,
+        "Miscellaneous Receipts": 43155255587.28,
+        "Total": 4918735644738.25
+      },
+      "outlays": {
+        "National Defense": 874040585085.73,
+        "International Affairs": 71992379484.96,
+        "General Science, Space, and Technology": 41562428368.18,
+        "Energy": 13789670148.44,
+        "Natural Resources and Environment": 56891590715.51,
+        "Agriculture": 34746670947.9,
+        "Commerce and Housing Credit": 35567576543.4,
+        "Transportation": 137122245411.69,
+        "Community and Regional Development": 87766196368.41,
+        "Education, Training, Employment, and Social Services": 305026199447.41,
+        "Health": 911683804349.74,
+        "Medicare": 874134335792.92,
+        "Income Security": 671075997542.26,
+        "Social Security": 1460913705752.69,
+        "Veterans Benefits and Services": 325362727505.67,
+        "Administration of Justice": 85034018367.2,
+        "General Government": 29928288919.59,
+        "Net Interest": 881650995035.46,
+        "Undistributed Offsetting Receipts": -146737781974.87,
+        "Total": 6751551633812.29
+      },
+      "debt": {
+        "date": "2024-09-30",
+        "total": 35464673929171.69,
+        "public": 28307312290783
+      }
+    },
+    {
+      "fy": 2025,
+      "through": "2025-09-30",
+      "complete": true,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2025-09-30&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 2656044447275.63,
+        "Corporation Income Taxes": 452089303419.78,
+        "Employment and General Retirement": 1685631506240.23,
+        "Unemployment Insurance": 54048570145.06,
+        "Other Retirement": 8613735577.56,
+        "Excise Taxes": 105936465307.63,
+        "Estate and Gift Taxes": 29462045090.45,
+        "Customs Duties": 194865739872.82,
+        "Miscellaneous Receipts": 47924573386.27,
+        "Total": 5234616386315.43
+      },
+      "outlays": {
+        "National Defense": 916648676662.05,
+        "International Affairs": 45169891179.7,
+        "General Science, Space, and Technology": 42084437535.94,
+        "Energy": 20892010637.8,
+        "Natural Resources and Environment": 88312257165.92,
+        "Agriculture": 49337681356.37,
+        "Commerce and Housing Credit": -28620513919.81,
+        "Transportation": 145804369616.67,
+        "Community and Regional Development": 84529870131.32,
+        "Education, Training, Employment, and Social Services": 69194134949.41,
+        "Health": 978877168639.95,
+        "Medicare": 996719243004.76,
+        "Income Security": 701583598129.63,
+        "Social Security": 1580685783033.83,
+        "Veterans Benefits and Services": 377161882980.59,
+        "Administration of Justice": 85180458290,
+        "General Government": 36278602219.52,
+        "Net Interest": 970358886994.32,
+        "Undistributed Offsetting Receipts": -150224771558.67,
+        "Total": 7009973667049.3
+      },
+      "debt": {
+        "date": "2025-09-30",
+        "total": 37637553494935.61,
+        "public": 30277766440770.58
+      }
+    },
+    {
+      "fy": 2026,
+      "through": "2026-09-30",
+      "complete": true,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2026-09-30&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 2845526866159.55,
+        "Corporation Income Taxes": 381414689057.62,
+        "Employment and General Retirement": 1754273234159.58,
+        "Unemployment Insurance": 49090010812.43,
+        "Other Retirement": 8431476188.91,
+        "Excise Taxes": 105995126578.38,
+        "Estate and Gift Taxes": 38720146356.13,
+        "Customs Duties": 173218614643.4,
+        "Miscellaneous Receipts": 46656595004.81,
+        "Total": 5403326758960.81
+      },
+      "outlays": {
+        "National Defense": 965160356821.48,
+        "International Affairs": 48014568338.42,
+        "General Science, Space, and Technology": 39876759073.93,
+        "Energy": 20970860009.28,
+        "Natural Resources and Environment": 57098136028.25,
+        "Agriculture": 52566167744.02,
+        "Commerce and Housing Credit": -15465292145.92,
+        "Transportation": 142864249326.25,
+        "Community and Regional Development": 62429584486.16,
+        "Education, Training, Employment, and Social Services": 107551403356.47,
+        "Health": 1025587234576.31,
+        "Medicare": 1072626018868.53,
+        "Income Security": 694224470394.36,
+        "Social Security": 1667097265194.46,
+        "Veterans Benefits and Services": 416204104589.87,
+        "Administration of Justice": 109915442478.9,
+        "General Government": 32343463387.61,
+        "Net Interest": 1051753969311.11,
+        "Undistributed Offsetting Receipts": -155018778526.26,
+        "Total": 7395799983313.23
+      },
+      "debt": {
+        "date": "2026-09-30",
+        "total": 40171825101340.31,
+        "public": 32425012546390.57
+      }
+    }
+  ],
+  "customs_by_month": [
+    {
+      "month": "2017-10",
+      "amount": 3239205174.82
+    },
+    {
+      "month": "2017-11",
+      "amount": 3100329508.62
+    },
+    {
+      "month": "2017-12",
+      "amount": 3106714454.49
+    },
+    {
+      "month": "2018-01",
+      "amount": 3188077417.64
+    },
+    {
+      "month": "2018-02",
+      "amount": 2674432730.52
+    },
+    {
+      "month": "2018-03",
+      "amount": 3083614616.63
+    },
+    {
+      "month": "2018-04",
+      "amount": 3447986150.19
+    },
+    {
+      "month": "2018-05",
+      "amount": 2968376062.71
+    },
+    {
+      "month": "2018-06",
+      "amount": 3509606217.59
+    },
+    {
+      "month": "2018-07",
+      "amount": 4158946941.71
+    },
+    {
+      "month": "2018-08",
+      "amount": 4249193056.85
+    },
+    {
+      "month": "2018-09",
+      "amount": 4572481490.03
+    },
+    {
+      "month": "2018-10",
+      "amount": 5550559303.59
+    },
+    {
+      "month": "2018-11",
+      "amount": 6284730076.91
+    },
+    {
+      "month": "2018-12",
+      "amount": 5991866011.13
+    },
+    {
+      "month": "2019-01",
+      "amount": 6627975607.91
+    },
+    {
+      "month": "2019-02",
+      "amount": 5076213977.06
+    },
+    {
+      "month": "2019-03",
+      "amount": 5162674211.25
+    },
+    {
+      "month": "2019-04",
+      "amount": 5237442303.69
+    },
+    {
+      "month": "2019-05",
+      "amount": 4934217168.03
+    },
+    {
+      "month": "2019-06",
+      "amount": 5605992676.29
+    },
+    {
+      "month": "2019-07",
+      "amount": 6473264133.32
+    },
+    {
+      "month": "2019-08",
+      "amount": 7005301536.43
+    },
+    {
+      "month": "2019-09",
+      "amount": 6833486006.88
+    },
+    {
+      "month": "2019-10",
+      "amount": 7757405617.51
+    },
+    {
+      "month": "2019-11",
+      "amount": 6940235991.01
+    },
+    {
+      "month": "2019-12",
+      "amount": 6448987274.74
+    },
+    {
+      "month": "2020-01",
+      "amount": 6917631811.75
+    },
+    {
+      "month": "2020-02",
+      "amount": 6286242573.35
+    },
+    {
+      "month": "2020-03",
+      "amount": 4814749992.11
+    },
+    {
+      "month": "2020-04",
+      "amount": 4113560502.16
+    },
+    {
+      "month": "2020-05",
+      "amount": 3832899414.36
+    },
+    {
+      "month": "2020-06",
+      "amount": 4480241632.31
+    },
+    {
+      "month": "2020-07",
+      "amount": 5012827681.79
+    },
+    {
+      "month": "2020-08",
+      "amount": 5896052805.3
+    },
+    {
+      "month": "2020-09",
+      "amount": 6049394549.12
+    },
+    {
+      "month": "2020-10",
+      "amount": 6155928279.56
+    },
+    {
+      "month": "2020-11",
+      "amount": 5965298349.11
+    },
+    {
+      "month": "2020-12",
+      "amount": 6047110081.33
+    },
+    {
+      "month": "2021-01",
+      "amount": 5870767385.11
+    },
+    {
+      "month": "2021-02",
+      "amount": 6323345583.92
+    },
+    {
+      "month": "2021-03",
+      "amount": 6275426244.54
+    },
+    {
+      "month": "2021-04",
+      "amount": 7128113887.03
+    },
+    {
+      "month": "2021-05",
+      "amount": 6432510562.52
+    },
+    {
+      "month": "2021-06",
+      "amount": 7149802016.54
+    },
+    {
+      "month": "2021-07",
+      "amount": 7508859269.97
+    },
+    {
+      "month": "2021-08",
+      "amount": 7270443116.84
+    },
+    {
+      "month": "2021-09",
+      "amount": 7857224709.83
+    },
+    {
+      "month": "2021-10",
+      "amount": 7770037973.54
+    },
+    {
+      "month": "2021-11",
+      "amount": 7816220157.21
+    },
+    {
+      "month": "2021-12",
+      "amount": 8186607425.89
+    },
+    {
+      "month": "2022-01",
+      "amount": 8586604577.46
+    },
+    {
+      "month": "2022-02",
+      "amount": 8048536267
+    },
+    {
+      "month": "2022-03",
+      "amount": 8151250444.13
+    },
+    {
+      "month": "2022-04",
+      "amount": 9162389967.96
+    },
+    {
+      "month": "2022-05",
+      "amount": 8095390673.38
+    },
+    {
+      "month": "2022-06",
+      "amount": 8363581564.68
+    },
+    {
+      "month": "2022-07",
+      "amount": 8530321539.33
+    },
+    {
+      "month": "2022-08",
+      "amount": 8455571828.81
+    },
+    {
+      "month": "2022-09",
+      "amount": 8741053577.71
+    },
+    {
+      "month": "2022-10",
+      "amount": 8163250209.25
+    },
+    {
+      "month": "2022-11",
+      "amount": 7171471870.09
+    },
+    {
+      "month": "2022-12",
+      "amount": 6552387161.58
+    },
+    {
+      "month": "2023-01",
+      "amount": 6837686960.86
+    },
+    {
+      "month": "2023-02",
+      "amount": 6349062416.75
+    },
+    {
+      "month": "2023-03",
+      "amount": 6151606563.07
+    },
+    {
+      "month": "2023-04",
+      "amount": 6349693066.66
+    },
+    {
+      "month": "2023-05",
+      "amount": 6373091749.05
+    },
+    {
+      "month": "2023-06",
+      "amount": 6475488282.78
+    },
+    {
+      "month": "2023-07",
+      "amount": 6909949193.88
+    },
+    {
+      "month": "2023-08",
+      "amount": 6325140881.04
+    },
+    {
+      "month": "2023-09",
+      "amount": 6678440109.14
+    },
+    {
+      "month": "2023-10",
+      "amount": 6902737488.69
+    },
+    {
+      "month": "2023-11",
+      "amount": 6296206194.39
+    },
+    {
+      "month": "2023-12",
+      "amount": 5744452854.98
+    },
+    {
+      "month": "2024-01",
+      "amount": 6476625976.12
+    },
+    {
+      "month": "2024-02",
+      "amount": 6208388230.55
+    },
+    {
+      "month": "2024-03",
+      "amount": 6064284893.66
+    },
+    {
+      "month": "2024-04",
+      "amount": 6366508727.77
+    },
+    {
+      "month": "2024-05",
+      "amount": 5224661701.85
+    },
+    {
+      "month": "2024-06",
+      "amount": 6323344668.86
+    },
+    {
+      "month": "2024-07",
+      "amount": 7133488190.71
+    },
+    {
+      "month": "2024-08",
+      "amount": 7046951548.96
+    },
+    {
+      "month": "2024-09",
+      "amount": 7249259468.35
+    },
+    {
+      "month": "2024-10",
+      "amount": 7297256976.25
+    },
+    {
+      "month": "2024-11",
+      "amount": 6711869037.96
+    },
+    {
+      "month": "2024-12",
+      "amount": 6814380564.22
+    },
+    {
+      "month": "2025-01",
+      "amount": 7341415936.58
+    },
+    {
+      "month": "2025-02",
+      "amount": 7246812675.38
+    },
+    {
+      "month": "2025-03",
+      "amount": 8167908459.56
+    },
+    {
+      "month": "2025-04",
+      "amount": 15633917348.71
+    },
+    {
+      "month": "2025-05",
+      "amount": 22172564539.21
+    },
+    {
+      "month": "2025-06",
+      "amount": 26631664231.77
+    },
+    {
+      "month": "2025-07",
+      "amount": 27670054031.4
+    },
+    {
+      "month": "2025-08",
+      "amount": 29502942749.54
+    },
+    {
+      "month": "2025-09",
+      "amount": 29674953322.24
+    },
+    {
+      "month": "2025-10",
+      "amount": 31353501081.11
+    },
+    {
+      "month": "2025-11",
+      "amount": 30755952020.41
+    },
+    {
+      "month": "2025-12",
+      "amount": 27892382035.2
+    },
+    {
+      "month": "2026-01",
+      "amount": 27742448220.24
+    },
+    {
+      "month": "2026-02",
+      "amount": 26593808711.49
+    },
+    {
+      "month": "2026-03",
+      "amount": 22154874400.7
+    },
+    {
+      "month": "2026-04",
+      "amount": 22124133547.43
+    },
+    {
+      "month": "2026-05",
+      "amount": -42304566.23
+    },
+    {
+      "month": "2026-06",
+      "amount": -25555668440.83
+    },
+    {
+      "month": "2026-07",
+      "amount": -8546441906.97
+    },
+    {
+      "month": "2026-08",
+      "amount": 12835527290.42
+    },
+    {
+      "month": "2026-09",
+      "amount": 5910402249.78
+    }
+  ]
+}
