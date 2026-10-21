@@ -1,5 +1,6 @@
 import { next, waitUntil } from "@vercel/functions";
-import { counts, countedPath, DAY_MS, dayKey, VIEWS_DAYS, VIEWS_PATH, viewsFile, type ViewsFile } from "./views.ts";
+// ".js": Vercel compiles each file to JavaScript and keeps the import as written, as on RussiaLedger.com.
+import { counts, countedPath, DAY_MS, dayKey, VIEWS_DAYS, VIEWS_PATH, viewsFile, type ViewsFile } from "./views.js";
 
 /**
  * Routing Middleware (vercel.json, "proxy"), as on RussiaLedger.com: adds one to today's count for a page a reader
