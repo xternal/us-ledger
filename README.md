@@ -4,7 +4,7 @@
 
 The 2024 Republican Platform, "Make America Great Again!", opens with twenty promises "that we will accomplish very quickly when we win the White House and Republican Majorities in the House and Senate". Republicans won all three in November 2024. This site takes the platform at its word: the twenty are its areas, in the platform's order, so the yardstick is the platform's own, never ours. Every later promise by the President, the Vice President or the officials who speak for the Administration is filed under the one it serves, or under "Not among the 20".
 
-It runs on [OpenPromises](https://github.com/xternal/openpromises) 0.15, the engine behind [LedgerGov.UK](https://ledgergov.uk), [BoroughBook.UK](https://boroughbook.uk) and [RussiaLedger.com](https://russialedger.com), with the same rules:
+It runs on [OpenPromises](https://github.com/xternal/openpromises) 0.16, the engine behind [LedgerGov.UK](https://ledgergov.uk), [BoroughBook.UK](https://boroughbook.uk) and [RussiaLedger.com](https://russialedger.com), with the same rules:
 
 1. **Exact words.** A promise is what the speaker said, copied from the transcript, the order, the post or the platform, with a link to it. Opinions and insults are not promises.
 2. **Evidence moves status.** Every step after "promised" links to its document: a signed order, a law, a budget line, an official statistic. A deadline that passes with no evidence of delivery is recorded automatically (`openpromises deadlines`).
