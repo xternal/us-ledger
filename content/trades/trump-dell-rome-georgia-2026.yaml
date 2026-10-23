@@ -35,4 +35,8 @@ prices:
   name: "Dell"
   file: "nasdaq-dell.csv"
 recorded_on: "2026-10-23"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-23"
+    approves: true

@@ -217,4 +217,8 @@ left_out:
   - lead: "Nvidia, before the semiconductor document signing on 6 August 2026"
     why: "The President did not name Nvidia in the remarks."
 recorded_on: "2026-10-23"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-23"
+    approves: true
