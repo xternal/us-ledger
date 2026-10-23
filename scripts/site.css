@@ -487,3 +487,32 @@ a.fs-tile__q:hover { text-decoration: underline; }
 }
 .fs + .hero { margin-top: 2rem; border-top: 1px solid var(--op-line); }
 .hero h2 { margin: 0.35rem 0 1rem; font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.5rem); line-height: 1.05; }
+
+/* Trades charts (scripts/trades-view.ts): inline SVG, thin marks, a recessive grid, the numbers in a table under each. */
+.chart { margin: 0.75rem 0 1rem; max-width: 52rem; }
+.chart--small { margin: 0.75rem 0 0; max-width: 36rem; }
+.chart__svg { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--sans); }
+.chart__grid { stroke: var(--ul-grid); stroke-width: 1; }
+.chart__axis { stroke: var(--op-line-strong); stroke-width: 1.5; }
+.chart__tick { fill: var(--op-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.chart--small .chart__tick { font-size: 15px; }
+.chart__mark { fill: var(--op-ink); font-size: 12px; font-weight: 600; }
+.chart--small .chart__mark { font-size: 15px; }
+.chart__hit { fill: transparent; }
+.chart__hit:hover { fill: var(--op-sunk); fill-opacity: 0.5; }
+.chart__range { fill-opacity: 0.35; }
+.chart__line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart__line--stock { stroke: var(--ul-buy); stroke-width: 2.5; }
+.chart__line--index { stroke: var(--op-faint); }
+.chart__words { stroke: var(--op-accent); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.chart__trade { fill: var(--ul-buy); stroke: var(--op-bg); stroke-width: 2; }
+.chart__end { fill: var(--op-muted); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.chart__end--stock { fill: var(--op-ink); }
+.chart--small .chart__end { font-size: 16px; }
+.chart__legend { list-style: none; margin: 0 0 0.4rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: 0.85rem; color: var(--op-muted); }
+.chart__legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
+.chart__swatch { width: 0.8rem; height: 0.8rem; border-radius: 3px; }
+.chart__swatch--light { opacity: 0.35; }
+.chart__swatch--line { height: 3px; width: 1.2rem; border-radius: 2px; }
+.chart__data { margin-top: 0.4rem; font-size: 0.9rem; }
+.chart__data summary { cursor: pointer; color: var(--op-muted); }

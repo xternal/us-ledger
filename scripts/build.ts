@@ -47,7 +47,8 @@ import { clip, HEIGHT, shareImage, WIDTH, type Climb, type Share } from "./share
 import { bn, cents, fyName, fySpan, ledgerPath, promiseLines, readLedger, tn, type Year } from "./ledger.ts";
 import { customsChart, facts, flowChart, linesTable, longUk, yearFacts, yearNav, yearsChart, yearTable } from "./ledger-view.ts";
 import { approved, daysApart, readPairs, type Pair, type Said as PairSaid } from "./then-again.ts";
-import { approved as tradeApproved, change, INDEX, measure, readAbout, readMatches, type Match, type Quote } from "./trades.ts";
+import { approved as tradeApproved, around, change, INDEX, measure, readAbout, readMatches, readRows, type Match, type Quote } from "./trades.ts";
+import { moneyByMonth, monthsOf, tradesByMonth, usdM, versus } from "./trades-view.ts";
 import { FAMILY, MAKER, THIS_SITE } from "./family.ts";
 import { latestForecast, logbook, watchTiles, type LogEntry, type WatchPick } from "./home.ts";
 import { NOT_FOUND_FILE, notFoundBody, notFoundDescription, notFoundTitle } from "./notfound.ts";
@@ -1624,10 +1625,26 @@ async function main() {
         ? `Five trading days after the words, ${x.prices.name} had moved ${f(m.stock)} from its last close before them; the ${INDEX.name}, ${f(m.index)}.`
         : `Five trading days after the words, the ${INDEX.name} had moved ${f(m.index)} from its last close before them.`;
     };
-    const matchItem = (x: Match) => h("li", { key: x.id, className: "match-item" }, h("h3", null, h("a", { href: tradesPath(x.id) }, x.subject)), chain(x, false), h("p", { className: "match-item__result" }, result5(x)));
+    /** The stock against the S&P 500 around the words, both 100 at the last close before them. */
+    const versusOf = (x: Match, small: boolean) => {
+      const { points, zero } = around(contentDir, x);
+      const m = measure(contentDir, x);
+      return versus(points, zero, {
+        name: x.prices.name,
+        trade: x.trade.date,
+        tradeLabel: what(x),
+        small,
+        title: `${x.prices.name ? `${x.prices.name} and the ${INDEX.name}` : `The ${INDEX.name}`}, each 100 at the close on ${longDate(w, m.index.before.date)}, the last before the words, from ${longDate(w, points[0]!.date)} to ${longDate(w, points.at(-1)!.date)}`,
+      });
+    };
+    const matchItem = (x: Match) =>
+      h("li", { key: x.id, className: "match-item" }, h("h3", null, h("a", { href: tradesPath(x.id) }, x.subject)), chain(x, false), versusOf(x, true), h("p", { className: "match-item__result" }, result5(x)));
 
     const count = ab.count;
     const reports = ab.filings;
+    const months = monthsOf(readRows(contentDir), count.year);
+    const busiest = months.reduce((a, b) => (b.purchases + b.sales > a.purchases + a.sales ? b : a));
+    const year = months.reduce((t, m) => ({ bought: [t.bought[0] + m.bought[0], t.bought[1] + m.bought[1]], sold: [t.sold[0] + m.sold[0], t.sold[1] + m.sold[1]] }), { bought: [0, 0], sold: [0, 0] });
     const tradesDescription = clip(
       `${count.number.toLocaleString("en-US")} transactions in the President's accounts in ${count.year}, from his own reports; ${plural(matches.length, "trade")} that came within days of his words, with the closes before and after, and the White House's account.`,
       200,
@@ -1672,6 +1689,7 @@ async function main() {
             "ul",
             null,
             h("li", null, h("a", { href: "#figures" }, "The figures")),
+            h("li", null, h("a", { href: "#months" }, "Month by month")),
             h("li", null, h("a", { href: "#matches" }, "Trade, then words")),
             h("li", null, h("a", { href: "#bill" }, "The House bill")),
             h("li", null, h("a", { href: "#reports" }, "The reports")),
@@ -1713,6 +1731,30 @@ async function main() {
               ),
             ),
           ),
+        ),
+        h(
+          "section",
+          { id: "months", className: "home-section", "aria-labelledby": "months-h" },
+          h("h2", { id: "months-h" }, `Month by month, ${count.year}`),
+          h(
+            "p",
+            { className: "section-lede" },
+            `All ${count.number.toLocaleString("en-US")} rows of the annual report, by the month of the trade. ${months.reduce((a, m) => a + m.purchases, 0).toLocaleString("en-US")} purchases and ${months.reduce((a, m) => a + m.sales, 0).toLocaleString("en-US")} sales; the busiest month was ${new Date(`${busiest.month}-15T12:00:00Z`).toLocaleDateString("en-US", { month: "long", timeZone: "UTC" })}, with ${(busiest.purchases + busiest.sales).toLocaleString("en-US")}.`,
+          ),
+          h("h3", null, "Bought and sold: how many"),
+          tradesByMonth(
+            months,
+            matches.filter((x) => x.words.date.startsWith(String(count.year))).map((x) => ({ month: x.words.date.slice(0, 7), label: "▼" })),
+            `Purchases and sales in the President's accounts each month of ${count.year}, by count`,
+          ),
+          h("p", { className: "note" }, "▼ marks a month with one of the trades below. Hover or tap a month for its numbers."),
+          h("h3", null, "Bought and sold: how much"),
+          h(
+            "p",
+            { className: "section-lede" },
+            `The reports give each amount as a range, so each month is a range too: the solid part is the least the month's trades can add up to, the light part the most. Over the year, purchases of ${usdM(year.bought[0])} to ${usdM(year.bought[1])} and sales of ${usdM(year.sold[0])} to ${usdM(year.sold[1])}. The reports give no prices, so how much the accounts gained or lost cannot be worked out from them.`,
+          ),
+          moneyByMonth(months, `What the President's accounts bought and sold each month of ${count.year}, as the least and the most the reports' ranges allow`),
         ),
         h(
           "section",
@@ -1817,6 +1859,9 @@ async function main() {
           h("h1", null, x.subject),
           chain(x, true),
           h("p", { className: "match-item__result" }, result5(x)),
+          h("h2", null, x.prices.name ? `${x.prices.name} against the ${INDEX.name}` : `The ${INDEX.name}`),
+          h("p", { className: "section-lede" }, `Ten trading days either side of the last close before the words, each line 100 at that close: above 100 is higher than it was, below is lower.${x.prices.name ? ` The grey line is what the same money would have done in the index.` : ""} Prices move on other news too, such as a company's own results: the chart shows when, not why.`),
+          versusOf(x, false),
           x.note ? h("p", { className: "note" }, x.note) : null,
           h("h2", null, "What the White House says"),
           ...ab.white_house.map((q) => quoteBlock(q, "said--later")),

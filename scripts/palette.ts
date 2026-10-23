@@ -8,6 +8,8 @@
  * and the colour only repeats it: `bar` for a step on the way, `good` for the top, `bad` for an ending.
  * The ledger's flows are blue for money in, a warm grey for money out, and orange for the gap, borrowing and the
  * interest it costs (dark mode: the chart blue #6f9fe8 and the orange #e07a45).
+ * Trades: blue for purchases, orange for sales, a pair the dataviz validator passes for colour-blind separation in
+ * both modes (dark mode a step darker than the ledger's, inside its lightness band); the S&P 500 is drawn in `faint`.
  */
 
 export interface Mode {
@@ -33,6 +35,9 @@ export interface Mode {
   moneyIn: string;
   moneyOut: string;
   gap: string;
+  /** Trades: purchases and sales. */
+  buy: string;
+  sell: string;
 }
 
 export const light: Mode = {
@@ -54,6 +59,8 @@ export const light: Mode = {
   moneyIn: "#3a6bb3",
   moneyOut: "#857a69",
   gap: "#b5561b",
+  buy: "#3a6bb3",
+  sell: "#b5561b",
 };
 
 export const dark: Mode = {
@@ -75,6 +82,8 @@ export const dark: Mode = {
   moneyIn: "#6f9fe8",
   moneyOut: "#9d9281",
   gap: "#e07a45",
+  buy: "#6493de",
+  sell: "#d8743f",
 };
 
 const vars = (m: Mode) =>
@@ -97,6 +106,8 @@ const vars = (m: Mode) =>
     `--ul-in: ${m.moneyIn};`,
     `--ul-out: ${m.moneyOut};`,
     `--ul-gap: ${m.gap};`,
+    `--ul-buy: ${m.buy};`,
+    `--ul-sell: ${m.sell};`,
   ]
     .map((l) => `  ${l}`)
     .join("\n");

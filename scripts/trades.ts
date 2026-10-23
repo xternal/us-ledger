@@ -308,6 +308,9 @@ export function readAbout(contentDir: string, config: Config, actorIds: Set<stri
       need(sum === c.number, `count.number should be ${sum}, the sum of the last row of each account under "${c.text}"`);
     }
     need(/^https:\/\//.test(c.filing?.url ?? ""), "count.filing.url should be an https address");
+    const rows = readRows(contentDir);
+    need(rows.length === c.number, `count.number should be ${rows.length}, the rows in ${ROWS_FILE}`);
+    need(rows.every((r) => r.date.startsWith(String(c.year))), `every row in ${ROWS_FILE} should be dated in ${c.year}`);
   }
   for (const [i, f] of (about.filings ?? []).entries()) {
     need(ISO.test(f.posted ?? ""), `filings[${i}].posted should be a date`);
@@ -339,6 +342,35 @@ export function readAbout(contentDir: string, config: Config, actorIds: Set<stri
   }
   for (const r of about.reviews ?? []) need(editors.has(r.by), `reviews: "${r.by}" is not in content/editors.yaml`);
   return { about, file: `${DIR}/about.yaml`, problems };
+}
+
+/** Every row of Part 7 of the annual report the count is taken from, in the report's order. */
+export const ROWS_FILE = "oge-278e-2026-part7-rows.txt";
+export function readRows(contentDir: string): Row[] {
+  const path = join(contentDir, "sources", ROWS_FILE);
+  if (!existsSync(path)) return [];
+  return readFileSync(path, "utf8")
+    .split("\n")
+    .map(parseRow)
+    .filter((r): r is Row => !!r);
+}
+
+/** The closes around a match's words: ten trading days before the last close before them to ten after, the stock's
+ * (if any) beside the S&P 500's, and where that last close sits in the list. */
+export function around(contentDir: string, m: Match, span = 10) {
+  const afterClose = minutesOf(m.words.time.text)! >= CLOSE;
+  const index = readCloses(contentDir, INDEX.file);
+  const stock = m.prices.symbol && m.prices.file ? readCloses(contentDir, m.prices.file) : null;
+  const days = stock ?? index;
+  const w = windowOf(days, m.words.date, afterClose)!;
+  const at = days.findIndex((c) => c.date === w.before.date);
+  const from = Math.max(0, at - span);
+  const byDate = new Map(index.map((c) => [c.date, c.close]));
+  const points = days
+    .slice(from, at + span + 1)
+    .filter((c) => byDate.has(c.date))
+    .map((c) => ({ date: c.date, stock: stock ? c.close : undefined, index: byDate.get(c.date)! }));
+  return { points, zero: points.findIndex((p) => p.date === w.before.date) };
 }
 
 /** A match or the page is published once an editor has approved it. */
