@@ -21,7 +21,7 @@ It does four things: new promises by the President, the officials who speak for 
 The coordinator gives you the main checkout's path. Never work in it.
 
 ```bash
-export PATH="$HOME/.nvm/versions/node/v22.22.0/bin:$PATH"
+export PATH="$HOME/.nvm/versions/node/v22.23.4/bin:$PATH"
 git -C <main checkout> fetch origin --prune
 git -C <main checkout> worktree remove --force ../us-ledger-desk-run   # only if a leftover one exists
 git -C <main checkout> worktree add --detach ../us-ledger-desk-run origin/main
