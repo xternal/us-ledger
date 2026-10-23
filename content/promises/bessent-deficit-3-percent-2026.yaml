@@ -26,7 +26,7 @@ versions:
     text: "If we can constrain spending and grow our economy, we have the ability to pay down debt and get back to 3% target which I believe we can achieve something with a three in front of it by the end of President Trump's term."
     recorded_on: "2026-10-23"
     source_url: https://archive.org/details/CSPAN_20260603_143600_The_Hearing_Room_Treasury_Secretary_Scott_Bessent_Testifies_on_U.S._Economy
-    quote_checked_on: null
+    quote_checked_on: "2026-10-23"
     parameters:
       who:
         en: "Federal taxpayers, and everyone whose borrowing costs follow the government's"
@@ -58,4 +58,8 @@ events:
     type: promised
     text:
       en: "The Treasury Secretary tells the Senate Finance Committee the deficit can come down to something with a three in front of it, as a share of GDP, by the end of President Trump's term"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-23"
+    approves: true
