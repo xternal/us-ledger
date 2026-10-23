@@ -16,6 +16,7 @@ import {
   absolute,
   actorJsonLd,
   areaLabel,
+  baselineText,
   cardDescription,
   cardItemList,
   cardJsonLd,
@@ -25,6 +26,7 @@ import {
   daysBetween,
   lastUpdated,
   longDate,
+  metricText,
   paths,
   publishFiles,
   relatedCards,
@@ -94,6 +96,55 @@ const sectionOf = (path: string) =>
             ? "about"
             : null;
 const trim = (path: string) => (path.length > 1 ? path.replace(/\/$/, "") : path);
+
+/**
+ * A card's target beside the forecast published before the promise (OpenPromises decision 36), on one scale, with
+ * the gap in words. Shown only when a version has both a target (parameters.metric) and a forecast (parameters.baseline).
+ */
+function targetAndForecast(v: CardView, w: ReturnType<typeof words>): ReactNode {
+  const { metric, baseline } = v.current.parameters ?? {};
+  if (!metric || !baseline || metric.unit !== baseline.unit) return null;
+  const pct = metric.unit.startsWith("%");
+  const n = (x: number) => new Intl.NumberFormat(w.m.intl, { maximumFractionDigits: 1 }).format(x);
+  const short = (x: number) => `${n(x)}${pct ? "%" : ` ${metric.unit}`}`;
+  const max = Math.ceil(Math.max(metric.target, baseline.value) * 1.25);
+  const at = (x: number) => `${Math.min(100, Math.max(0, (x / max) * 100))}%`;
+  const below = metric.direction !== "at_least";
+  const met = below ? (metric.direction === "below" ? baseline.value < metric.target : baseline.value <= metric.target) : baseline.value >= metric.target;
+  const gap = Math.abs(baseline.value - metric.target);
+  const gapText = met
+    ? "The forecast at the time already met the target."
+    : `The target is ${n(gap)} ${pct ? "percentage points" : metric.unit} ${below ? "below" : "above"} the forecast at the time.`;
+  const id = `op-target-${v.id}`;
+  const edge = (x: number) => (x / max > 0.75 ? "end" : x / max < 0.2 ? "start" : undefined);
+  return h(
+    "section",
+    { className: "op-section", "aria-labelledby": id },
+    h("h2", { id }, "The target and the forecast at the time"),
+    h(
+      "figure",
+      { className: "gap" },
+      h(
+        "div",
+        { className: "gap__scale", "aria-hidden": "true" },
+        h("span", { className: "gap__track" }),
+        h("span", { className: "gap__zone", style: below ? { left: 0, width: at(metric.target) } : { left: at(metric.target), right: 0 } }),
+        h("span", { className: "gap__line", style: { left: at(metric.target) } }),
+        h("span", { className: "gap__label gap__label--target", style: { left: at(metric.target) }, "data-edge": edge(metric.target) }, `Target: ${metric.direction === "at_least" ? "at least" : metric.direction === "at_most" ? "at most" : "below"} ${short(metric.target)}`),
+        h("span", { className: "gap__mark", style: { left: at(baseline.value) } }),
+        h("span", { className: "gap__label gap__label--forecast", style: { left: at(baseline.value) }, "data-edge": edge(baseline.value) }, `Forecast: ${short(baseline.value)}`),
+        h("span", { className: "gap__end gap__end--min" }, short(0)),
+        h("span", { className: "gap__end gap__end--max" }, short(max)),
+      ),
+      h(
+        "figcaption",
+        null,
+        h("strong", null, gapText),
+        ` ${metricText(metric, w)}. The forecast: ${baselineText(baseline, w)}.`,
+      ),
+    ),
+  );
+}
 
 /** Keeps the menu's current item in view on narrow screens, without moving the page. */
 const NAV_SCRIPT = `(()=>{const c=document.querySelector('.site-nav [aria-current]');if(c){const u=c.closest('ul');if(u.scrollWidth>u.clientWidth)u.scrollLeft=c.offsetLeft-(u.clientWidth-c.offsetWidth)/2}})();`;
@@ -554,7 +605,7 @@ async function main() {
         Fragment,
         null,
         h(Breadcrumbs, { config, items: crumbs }),
-        h(PromiseCard, { view: v, config, today, related: relatedCards(v, views), actions: h("a", { href: `${p.card(v.id, L)}/story/` }, "The whole story in one line") }),
+        h(PromiseCard, { view: v, config, today, related: relatedCards(v, views), actions: h("a", { href: `${p.card(v.id, L)}/story/` }, "The whole story in one line") }, targetAndForecast(v, w)),
       ),
     });
     page({

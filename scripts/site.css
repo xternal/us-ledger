@@ -304,3 +304,22 @@ main { padding-bottom: 1rem; }
 .since span { font-size: 0.85rem; color: var(--op-muted); }
 .pair__promise { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.5rem; padding: 0.7rem 1rem; background: var(--op-surface); border-radius: var(--op-radius-small); max-width: 46rem; }
 .nums thead th:first-child { background: var(--op-surface); }
+
+/* A card's target beside the forecast at the time (OpenPromises decision 36): one scale, the target's zone, the forecast's mark. */
+.gap { margin: 0; padding: 1rem 1.25rem 0.9rem; background: var(--op-surface); border: 1px solid var(--op-line); border-radius: var(--op-radius); }
+.gap__scale { position: relative; height: 5.25rem; margin: 0 0.25rem; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.gap__track, .gap__zone { position: absolute; top: 2.1rem; height: 0.7rem; border-radius: 999px; }
+.gap__track { left: 0; right: 0; background: var(--op-sunk); box-shadow: inset 0 0 0 1px var(--op-line); }
+.gap__zone { background: color-mix(in srgb, var(--op-good) 28%, transparent); }
+.gap__line { position: absolute; top: 1.7rem; height: 1.5rem; width: 3px; margin-left: -1.5px; border-radius: 2px; background: var(--op-good); }
+.gap__mark { position: absolute; top: 1.85rem; width: 1.2rem; height: 1.2rem; margin-left: -0.6rem; border-radius: 50%; background: var(--op-ink); box-shadow: 0 0 0 3px var(--op-surface); }
+.gap__label { position: absolute; transform: translateX(-50%); white-space: nowrap; font-weight: 600; }
+.gap__label[data-edge="end"] { transform: translateX(-100%); }
+.gap__label[data-edge="start"] { transform: none; }
+.gap__label--forecast { top: 0.1rem; color: var(--op-ink); }
+.gap__label--target { top: 3.35rem; color: var(--op-good); }
+.gap__end { position: absolute; top: 3.35rem; color: var(--op-muted); }
+.gap__end--min { left: 0; }
+.gap__end--max { right: 0; }
+.gap figcaption { margin-top: 0.4rem; font-size: 0.9rem; color: var(--op-muted); max-width: 42rem; line-height: 1.5; }
+.gap figcaption strong { display: block; margin-bottom: 0.2rem; color: var(--op-ink); font-size: 1rem; }

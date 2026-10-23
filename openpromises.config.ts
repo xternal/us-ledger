@@ -37,6 +37,8 @@ export default defineConfig({
     responsibleRequired: true,
     ids: { bioguide_id: "https://bioguide.congress.gov/search/bio/{id}" },
   },
+  // Indicator targets (parameters.metric), so a card can show its number and the forecast at the time (decision 36).
+  modules: ["metrics"],
   venues: ["platform", "campaign_rally", "debate", "interview", "speech", "press_conference", "social", "executive_order", "statement", "testimony"],
   areas: {
     kind: "enum",
@@ -118,6 +120,16 @@ export default defineConfig({
   // President is where a mistake costs most, so publishing by checks alone is not used here. The editor declares
   // no US party, and never approves a card about their own party.
   editorial: { approvals: 1, publish: "approved", partyConflict: true },
+  // A target and the forecast at the time (decision 36). Every unit on this site so far is a percentage ("% of GDP"),
+  // which English writes against the number ("4%"), and a forecaster is named with "the" ("the Congressional Budget Office").
+  messages: {
+    en: {
+      "metric.at_least": "At least {target}{unit} by {date}",
+      "metric.at_most": "At most {target}{unit} by {date}",
+      "metric.below": "Below {target}{unit} by {date}",
+      "baseline.text": "{value}{unit} by {date}, the {by}'s forecast of {published}, before the promise",
+    },
+  },
   quotes: {
     archive: "optional",
     require: "editor",
