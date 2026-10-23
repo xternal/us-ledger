@@ -1,6 +1,27 @@
-# S&P 500 index, daily close, from 1 April 2025 to 22 October 2026 (FRED series SP500, S&P Dow Jones Indices LLC). A day with no value is a market holiday.
+# S&P 500 index, daily close, from 3 March 2025 to 22 October 2026 (FRED series SP500, S&P Dow Jones Indices LLC). A day with no value is a market holiday.
 # Copied on 23 October 2026 from https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500 (Federal Reserve Bank of St. Louis); the column names changed to date and close, nothing else.
 date,close
+2025-03-03,5849.72
+2025-03-04,5778.15
+2025-03-05,5842.63
+2025-03-06,5738.52
+2025-03-07,5770.20
+2025-03-10,5614.56
+2025-03-11,5572.07
+2025-03-12,5599.30
+2025-03-13,5521.52
+2025-03-14,5638.94
+2025-03-17,5675.12
+2025-03-18,5614.66
+2025-03-19,5675.29
+2025-03-20,5662.89
+2025-03-21,5667.56
+2025-03-24,5767.57
+2025-03-25,5776.65
+2025-03-26,5712.20
+2025-03-27,5693.31
+2025-03-28,5580.94
+2025-03-31,5611.85
 2025-04-01,5633.07
 2025-04-02,5670.97
 2025-04-03,5396.52
