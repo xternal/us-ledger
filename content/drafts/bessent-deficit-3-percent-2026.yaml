@@ -1,0 +1,61 @@
+format: openpromises/1
+id: bessent-deficit-3-percent-2026
+headline:
+  en: "Deficit under 4% of GDP by 2029"
+actor_id: scott-bessent
+made_on: "2026-06-03"
+venue: testimony
+venue_label:
+  en: Senate Finance Committee hearing on the Treasury's budget for fiscal year 2027
+area: other
+status: promised
+status_note:
+  en: "The federal deficit was $1,992 billion in fiscal year 2026, October 2025 to September 2026, against $1,775 billion in fiscal year 2025 (Monthly Treasury Statement, September 2026). In February 2026, before the promise, the Congressional Budget Office projected 5.6% of GDP for fiscal year 2028 under the laws then in force."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "The deficit follows from the spending and tax laws Congress passes and from the economy; the Treasury reports it."
+origin: manual
+sources:
+  - title: "Congressional Budget Office: The Budget and Economic Outlook: 2026 to 2036 (11 February 2026)"
+    url: https://www.cbo.gov/publication/61882
+  - title: "Monthly Treasury Statement: summary of receipts and outlays (Bureau of the Fiscal Service)"
+    url: https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/summary-of-receipts-and-outlays-of-the-u-s-government
+versions:
+  - version: 1
+    text: "If we can constrain spending and grow our economy, we have the ability to pay down debt and get back to 3% target which I believe we can achieve something with a three in front of it by the end of President Trump's term."
+    recorded_on: "2026-10-23"
+    source_url: https://archive.org/details/CSPAN_20260603_143600_The_Hearing_Room_Treasury_Secretary_Scott_Bessent_Testifies_on_U.S._Economy
+    quote_checked_on: null
+    parameters:
+      who:
+        en: "Federal taxpayers, and everyone whose borrowing costs follow the government's"
+      when:
+        en: "By the end of President Trump's term on 20 January 2029, measured on fiscal year 2028 (October 2027 to September 2028), the last full fiscal year of the term"
+      deadline: "2029-01-20"
+      funded_by: null
+      metric:
+        series_id: cbo-total-deficit-share-of-gdp
+        target: 4
+        direction: below
+        unit: "% of GDP"
+        by: "2028-09-30"
+      baseline:
+        value: 5.6
+        unit: "% of GDP"
+        for: "2028-09-30"
+        by:
+          kind: official
+          name: Congressional Budget Office
+        published_on: "2026-02-11"
+        source:
+          title: "CBO, The Budget and Economic Outlook: 2026 to 2036, Figure 1-1"
+          url: https://www.cbo.gov/publication/61882
+        note:
+          en: "The total deficit in fiscal year 2028: 5.64% of GDP, under the laws in force in February 2026, with no new legislation."
+events:
+  - date: "2026-06-03"
+    type: promised
+    text:
+      en: "The Treasury Secretary tells the Senate Finance Committee the deficit can come down to something with a three in front of it, as a share of GDP, by the end of President Trump's term"
+reviews: []
