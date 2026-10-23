@@ -97,24 +97,40 @@ const sectionOf = (path: string) =>
             : null;
 const trim = (path: string) => (path.length > 1 ? path.replace(/\/$/, "") : path);
 
-/**
- * A card's target beside the forecast published before the promise (OpenPromises decision 36), on one scale, with
- * the gap in words. Shown only when a version has both a target (parameters.metric) and a forecast (parameters.baseline).
- */
-function targetAndForecast(v: CardView, w: ReturnType<typeof words>): ReactNode {
+/** A card's target and the forecast published before the promise, as numbers on one scale and the gap in words (OpenPromises decision 36). */
+function forecastGap(v: CardView, w: ReturnType<typeof words>) {
   const { metric, baseline } = v.current.parameters ?? {};
   if (!metric || !baseline || metric.unit !== baseline.unit) return null;
   const pct = metric.unit.startsWith("%");
   const n = (x: number) => new Intl.NumberFormat(w.m.intl, { maximumFractionDigits: 1 }).format(x);
   const short = (x: number) => `${n(x)}${pct ? "%" : ` ${metric.unit}`}`;
   const max = Math.ceil(Math.max(metric.target, baseline.value) * 1.25);
-  const at = (x: number) => `${Math.min(100, Math.max(0, (x / max) * 100))}%`;
   const below = metric.direction !== "at_least";
   const met = below ? (metric.direction === "below" ? baseline.value < metric.target : baseline.value <= metric.target) : baseline.value >= metric.target;
   const gap = Math.abs(baseline.value - metric.target);
-  const gapText = met
-    ? "The forecast at the time already met the target."
-    : `The target is ${n(gap)} ${pct ? "percentage points" : metric.unit} ${below ? "below" : "above"} the forecast at the time.`;
+  return {
+    metric,
+    baseline,
+    max,
+    below,
+    short,
+    targetLabel: `Target: ${metric.direction === "at_least" ? "at least" : metric.direction === "at_most" ? "at most" : "below"} ${short(metric.target)}`,
+    forecastLabel: `Forecast: ${short(baseline.value)}`,
+    words: met
+      ? "The forecast at the time already met the target."
+      : `The target is ${n(gap)} ${pct ? "percentage points" : metric.unit} ${below ? "below" : "above"} the forecast at the time.`,
+  };
+}
+
+/**
+ * A card's target beside the forecast published before the promise (OpenPromises decision 36), on one scale, with
+ * the gap in words. Shown only when a version has both a target (parameters.metric) and a forecast (parameters.baseline).
+ */
+function targetAndForecast(v: CardView, w: ReturnType<typeof words>): ReactNode {
+  const g = forecastGap(v, w);
+  if (!g) return null;
+  const { metric, baseline, max, below, short } = g;
+  const at = (x: number) => `${Math.min(100, Math.max(0, (x / max) * 100))}%`;
   const id = `op-target-${v.id}`;
   const edge = (x: number) => (x / max > 0.75 ? "end" : x / max < 0.2 ? "start" : undefined);
   return h(
@@ -130,16 +146,16 @@ function targetAndForecast(v: CardView, w: ReturnType<typeof words>): ReactNode 
         h("span", { className: "gap__track" }),
         h("span", { className: "gap__zone", style: below ? { left: 0, width: at(metric.target) } : { left: at(metric.target), right: 0 } }),
         h("span", { className: "gap__line", style: { left: at(metric.target) } }),
-        h("span", { className: "gap__label gap__label--target", style: { left: at(metric.target) }, "data-edge": edge(metric.target) }, `Target: ${metric.direction === "at_least" ? "at least" : metric.direction === "at_most" ? "at most" : "below"} ${short(metric.target)}`),
+        h("span", { className: "gap__label gap__label--target", style: { left: at(metric.target) }, "data-edge": edge(metric.target) }, g.targetLabel),
         h("span", { className: "gap__mark", style: { left: at(baseline.value) } }),
-        h("span", { className: "gap__label gap__label--forecast", style: { left: at(baseline.value) }, "data-edge": edge(baseline.value) }, `Forecast: ${short(baseline.value)}`),
+        h("span", { className: "gap__label gap__label--forecast", style: { left: at(baseline.value) }, "data-edge": edge(baseline.value) }, g.forecastLabel),
         h("span", { className: "gap__end gap__end--min" }, short(0)),
         h("span", { className: "gap__end gap__end--max" }, short(max)),
       ),
       h(
         "figcaption",
         null,
-        h("strong", null, gapText),
+        h("strong", null, g.words),
         ` ${metricText(metric, w)}. The forecast: ${baselineText(baseline, w)}.`,
       ),
     ),
@@ -375,10 +391,14 @@ async function main() {
         const e = latest(v);
         return e?.text?.[L] && c.kind !== "off" ? `${longDate(w, e.date)}: ${e.text[L]}` : undefined;
       })(),
+      gap: (() => {
+        const g = forecastGap(v, w);
+        return g && { target: g.metric.target, forecast: g.baseline.value, max: g.max, below: g.below, targetLabel: g.targetLabel, forecastLabel: `${g.forecastLabel}, ${g.baseline.by.name}`, words: g.words, sub: `${label(v.card.status)} · the forecast was published on ${longDate(w, g.baseline.published_on)}, before the promise` };
+      })() ?? undefined,
       footer: `Updated ${longDate(w, updated([v]))} · usledger.org`,
     };
   };
-  const promiseAlt = (v: CardView) => `${headline(v)}: “${clip(v.current.text, 200)}” Status: ${label(v.card.status)}.`;
+  const promiseAlt = (v: CardView) => `${headline(v)}: “${clip(v.current.text, 200)}” Status: ${label(v.card.status)}.${forecastGap(v, w) ? ` ${forecastGap(v, w)!.words}` : ""}`;
   const chartShare = (kicker: string, title: string): Share => ({
     kind: "chart",
     kicker,
