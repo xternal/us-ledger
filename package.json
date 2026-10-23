@@ -17,7 +17,7 @@
     "build": "node scripts/build.ts",
     "openpromises:provenance": "node scripts/openpromises-provenance.ts",
     "contrast": "node scripts/contrast.ts",
-    "test": "node --test \"edge/*.test.ts\"",
+    "test": "node --test \"edge/*.test.ts\" \"scripts/*.test.ts\"",
     "check": "pnpm validate && pnpm lint:words && pnpm pairs check && pnpm contrast && pnpm test && pnpm build",
     "preview": "node scripts/build.ts --preview"
   },
