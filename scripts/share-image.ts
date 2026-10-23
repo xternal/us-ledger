@@ -31,7 +31,9 @@ export type Share =
   /** One year: money in and money out as two bars split into their largest parts. */
   | { kind: "flow"; kicker: string; title: string; ins: Part[]; outs: Part[]; footer: string }
   /** Two dated statements by one person, the later saying the opposite of the earlier. */
-  | { kind: "pair"; kicker: string; subject: string; first: Said; later: Said; gap: string; footer: string };
+  | { kind: "pair"; kicker: string; subject: string; first: Said; later: Said; gap: string; footer: string }
+  /** A trade, the President's words, and the closes after them, each step with its date. */
+  | { kind: "chain"; kicker: string; subject: string; trade: string; words: Said; moves: Move[]; footer: string };
 /** A target and the forecast published before the promise, on one scale (OpenPromises decision 36). */
 export interface Gap {
   target: number;
@@ -50,6 +52,12 @@ export interface Part {
   label: string;
   amount: number;
   kind: "in" | "gap" | "out" | "interest";
+}
+/** A close against the one before the words: the stock's, and the S&P 500's over the same days. */
+export interface Move {
+  label: string;
+  stock?: string;
+  index: string;
 }
 export interface Said {
   date: string;
@@ -206,7 +214,31 @@ function said(label: string, s: Said, accent: string) {
   );
 }
 
+/** The closes after the words, side by side: the stock's move large, the index's under it. */
+function moves(ms: Move[]) {
+  return box(
+    { gap: 18 },
+    ...ms.map((m) =>
+      box(
+        { flexDirection: "column", gap: 4, flexGrow: 1, flexBasis: 0, padding: "14px 20px", border: `2px solid ${c.grid}`, borderRadius: 10 },
+        text({ fontSize: 20, color: c.muted }, m.label),
+        m.stock ? text({ fontFamily: "Serif", fontSize: 40, fontWeight: 600, color: c.ink }, m.stock) : null,
+        text({ fontSize: m.stock ? 21 : 40, fontWeight: m.stock ? 400 : 600, fontFamily: m.stock ? "Sans" : "Serif", color: m.stock ? c.muted : c.ink }, m.index),
+      ),
+    ),
+  );
+}
+
 function tree(s: Share) {
+  if (s.kind === "chain")
+    return frame(
+      s.kicker,
+      s.footer,
+      text({ fontSize: 26, color: c.muted }, clip(s.subject, 90)),
+      text({ fontSize: 24, fontWeight: 600, color: c.ink, paddingLeft: 28 }, clip(s.trade, 90)),
+      said("Said", s.words, c.accent),
+      moves(s.moves),
+    );
   if (s.kind === "years")
     return frame(
       s.kicker,

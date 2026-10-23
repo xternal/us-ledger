@@ -13,12 +13,13 @@
     "lint:words": "openpromises lint",
     "stats": "openpromises stats",
     "pairs": "node scripts/then-again.ts",
+    "trades": "node scripts/trades.ts",
     "ledger:fetch": "node scripts/ledger-fetch.ts",
     "build": "node scripts/build.ts",
     "openpromises:provenance": "node scripts/openpromises-provenance.ts",
     "contrast": "node scripts/contrast.ts",
     "test": "node --test \"edge/*.test.ts\" \"scripts/*.test.ts\"",
-    "check": "pnpm validate && pnpm lint:words && pnpm pairs check && pnpm contrast && pnpm test && pnpm build",
+    "check": "pnpm validate && pnpm lint:words && pnpm pairs check && pnpm trades check && pnpm contrast && pnpm test && pnpm build",
     "preview": "node scripts/build.ts --preview"
   },
   "devDependencies": {

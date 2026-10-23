@@ -1,0 +1,38 @@
+format: usledger-trades/1
+id: trump-intel-stake-2025
+actor_id: donald-trump
+subject: "Intel, and a 10 percent stake for the United States"
+trade:
+  asset: "Intel Corp."
+  date: "2025-08-18"
+  filing:
+    title: "Annual report for 2025 (OGE Form 278e), Part 7: Transactions"
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/69AEAA9D7455ACD585258E27002DDEE1/$FILE/Donald-J-Trump-2026-278ANNUAL.pdf
+    page: 365
+    filed: "2026-07-01"
+  text: "INVESTMENT ACCOUNT #6 | 1532 | INTEL CORP | Purchase | 8/18/2025 | $250,001 - $500,000"
+  source_text:
+    file: oge-278e-2026-part7.txt
+    span: [76530, 76616]
+  scope: "in every account of the report"
+words:
+  date: "2025-08-22"
+  venue: press_conference
+  where: "Oval Office, announcing the location of the 2026 FIFA World Cup draw, answering a question about reports that the Administration was considering taking a stake in Intel"
+  text: "I think the United States should be given 10 percent of Intel."
+  source_text:
+    file: dcpd-202500864.txt
+    span: [823, 885]
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202500864/html/DCPD-202500864.htm
+  time:
+    text: "NOTE: The President spoke at 1:04 p.m."
+    source_text:
+      file: dcpd-202500864.txt
+      span: [926, 964]
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500864/html/DCPD-202500864.htm
+prices:
+  symbol: "INTC"
+  name: "Intel"
+  file: "nasdaq-intc.csv"
+recorded_on: "2026-10-23"
+reviews: []

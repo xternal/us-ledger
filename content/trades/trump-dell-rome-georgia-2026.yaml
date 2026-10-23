@@ -1,0 +1,38 @@
+format: usledger-trades/1
+id: trump-dell-rome-georgia-2026
+actor_id: donald-trump
+subject: "Dell, in a speech in Rome, Georgia"
+trade:
+  asset: "Dell Technologies Inc. Class C"
+  date: "2026-02-10"
+  filing:
+    title: "Periodic Transaction Report (OGE Form 278-T) of 8 May 2026"
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T(2).pdf
+    page: 2
+    filed: "2026-05-14"
+  text: "28 | DELL TECHNOLOGIES INC CL C | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000"
+  source_text:
+    file: oge-278t-2026-05-08.txt
+    span: [2027, 2113]
+  scope: "on the same page of the report"
+words:
+  date: "2026-02-19"
+  venue: speech
+  where: "Remarks on the national economy at the Coosa Steel Corporation, Rome, Georgia, thanking Michael and Susan Dell for their gift to the Trump Accounts for children"
+  text: "I also want to thank Michael and Susan Dell. Dell—go out and buy a Dell computer, because I'll tell—they don't care about that. They care about this. They make a great product."
+  source_text:
+    file: dcpd-202600123.txt
+    span: [311, 487]
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202600123/html/DCPD-202600123.htm
+  time:
+    text: "NOTE: The President spoke at 4:31 p.m."
+    source_text:
+      file: dcpd-202600123.txt
+      span: [1104, 1142]
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202600123/html/DCPD-202600123.htm
+prices:
+  symbol: "DELL"
+  name: "Dell"
+  file: "nasdaq-dell.csv"
+recorded_on: "2026-10-23"
+reviews: []

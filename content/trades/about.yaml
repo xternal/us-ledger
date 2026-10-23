@@ -1,0 +1,220 @@
+format: usledger-trades-about/1
+id: about
+actor_id: donald-trump
+count:
+  number: 21285
+  year: 2025
+  text: "The last row of each account (the eight add up to 21,285 rows):"
+  source_text:
+    file: oge-278e-2026-part7.txt
+    span: [982, 1045]
+  source_url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/69AEAA9D7455ACD585258E27002DDEE1/$FILE/Donald-J-Trump-2026-278ANNUAL.pdf
+  filing:
+    title: "Annual report for 2025 (OGE Form 278e), Part 7: Transactions"
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/69AEAA9D7455ACD585258E27002DDEE1/$FILE/Donald-J-Trump-2026-278ANNUAL.pdf
+    filed: "2026-07-01"
+    pages: 927
+# OGE's list of the President's reports since the term began (extapps2.oge.gov, Presidential and Vice Presidential disclosures), as posted.
+filings:
+  - posted: "2025-08-19"
+    title: "Periodic Transaction Report (OGE Form 278-T), amended"
+    pages: 10
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/024D876AAE518C5085258CEB006E7E2E/$FILE/Donald-J-Trump-08.12.2025-278T(2)%20AMENDED.pdf
+  - posted: "2025-08-19"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 4
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/5315A095A2EE1B9185258CEB006E7E36/$FILE/Donald-J-Trump-08.12.2025-278T(3).pdf
+  - posted: "2025-08-19"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 22
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/E9C024E25C9E4B2085258CEB006E7E23/$FILE/Donald-J-Trump-08.12.2025-278T.pdf
+  - posted: "2025-09-06"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 3
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/322B8A28DB21CC9285258CFD002C0D0B/$FILE/Donald%20J.%20Trump%209.3.25%20278-T.pdf
+  - posted: "2025-11-15"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 4
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/AA799A2729B4D1BE85258D430031A320/$FILE/Donald%20J.%20Trump%2010.17.2025%20278-T.pdf
+  - posted: "2025-11-15"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 4
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/18353894FE440B3685258D430031A337/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T%20(2).pdf
+  - posted: "2025-11-15"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 5
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/2C89623DC721F62585258D430031A32A/$FILE/Donald%20J.%20Trump%2010.20.2025%20278-T.pdf
+  - posted: "2025-11-22"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 3
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/903A217DC18563EC85258D4A0031B044/$FILE/Donald%20J.%20Trump%2011.14.2025%20278-T.pdf
+  - posted: "2025-12-20"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 6
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/87BFE542A2751E0285258D6600346FCD/$FILE/Donald%20J.%20Trump%2012.18.2025%20278-T.pdf
+  - posted: "2026-01-16"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 8
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/268353939B7DACB585258D81003471B1/$FILE/Donald-J-Trump%201.14.2026-278T.pdf
+  - posted: "2026-03-04"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 8
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/174165F6E1E120B185258DB000347F54/$FILE/Donald%20J.%20Trump%202.26.2026%20278-T%20(1).pdf
+  - posted: "2026-03-04"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 5
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/BCF60D94B8F1E59285258DB000347F61/$FILE/Donald%20J.%20Trump%202.26.2026%20278-T%20(2).pdf
+  - posted: "2026-04-25"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 8
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/CD75555856A7D2E485258DE4002DD4A0/$FILE/Donald-J-Trump-4.20.2026-278T.pdf
+  - posted: "2026-05-14"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 113
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T(2).pdf
+  - posted: "2026-05-14"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 5
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/5326D3AF5BE7C25385258DF7002DD1B7/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T.pdf
+  - posted: "2026-07-01"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 37
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/F9CA13B970439E8F85258E27002DDF15/$FILE/Donald-J-Trump-06.25.2026-278T%20(2).pdf
+  - posted: "2026-07-01"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 44
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/AC43530823BD60D485258E27002DDEF7/$FILE/Donald-J-Trump-06.25.2026-278T.pdf
+  - posted: "2026-07-01"
+    title: "Annual report for 2025 (OGE Form 278e)"
+    pages: 927
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/69AEAA9D7455ACD585258E27002DDEE1/$FILE/Donald-J-Trump-2026-278ANNUAL.pdf
+  - posted: "2026-08-22"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 34
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/2BF91F890F718ACB85258E5B002DE16B/$FILE/Donald-J-Trump-08.12.2026-278T.pdf
+  - posted: "2026-09-22"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 37
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/E590116FC9631E9885258E7A002DE209/$FILE/Donald-J-Trump-09.8.2026-278T.pdf
+  - posted: "2026-10-08"
+    title: "Periodic Transaction Report (OGE Form 278-T)"
+    pages: 18
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/0BDCCCE7DE13AEFA85258E8A002DE2B5/$FILE/Donald-J-Trump.09.17.2026-278T.pdf
+form:
+  by: "Office of Government Ethics, OGE Form 278-T"
+  date: "2026-05-13"
+  where: "The form's own summary of what it discloses, page 113 of the report of 8 May 2026"
+  text: "The 278-T discloses purchases, sales, or exchanges of securities in excess of $1,000 made on behalf of the filer, the filer's spouse, or dependent child."
+  source_text:
+    file: oge-278t-2026-05-08.txt
+    span: [910, 1063]
+  source_url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T(2).pdf
+review:
+  by: "Reviewing official, Office of Government Ethics"
+  date: "2026-06-30"
+  where: "Comment on the first page of the annual report for 2025"
+  text: "The filer paid late filing fees related to transactions not previously reported on 278-Ts."
+  source_text:
+    file: oge-278e-2026-part7.txt
+    span: [878, 968]
+  source_url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/69AEAA9D7455ACD585258E27002DDEE1/$FILE/Donald-J-Trump-2026-278ANNUAL.pdf
+press:
+  - figure: "between $79m and $270m"
+    by: "The Guardian"
+    date: "2026-09-22"
+    where: "A Guardian analysis of the report covering July 2026"
+    text: "Donald Trump made more than a thousand stock sales and purchases worth between $79m and $270m in July, according to a Guardian analysis of his latest financial disclosure released Tuesday."
+    source_text:
+      file: guardian-2026-09-22.txt
+      span: [295, 483]
+    source_url: https://www.theguardian.com/us-news/2026/sep/22/trump-stock-trades-july-filing
+  - figure: "more trades than all of Congress combined"
+    by: "The Guardian, citing Bloomberg"
+    date: "2026-09-22"
+    where: "The Guardian, on a Bloomberg analysis"
+    text: "The president made more trades than all of Congress combined between the start of his second term and June, a Bloomberg analysis found."
+    source_text:
+      file: guardian-2026-09-22.txt
+      span: [1658, 1793]
+    source_url: https://www.theguardian.com/us-news/2026/sep/22/trump-stock-trades-july-filing
+white_house:
+  - by: "Davis Ingle, White House spokesperson"
+    date: "2026-09-22"
+    where: "Quoted by The Guardian"
+    text: "All holdings are maintained in discretionary accounts and invested through computer-based model portfolios that automatically replicate recognized indexes, such as the Schwab 1000"
+    source_text:
+      file: guardian-2026-09-22.txt
+      span: [992, 1171]
+    source_url: https://www.theguardian.com/us-news/2026/sep/22/trump-stock-trades-july-filing
+  - by: "Davis Ingle, White House spokesperson"
+    date: "2026-09-22"
+    where: "Quoted by The Guardian"
+    text: "Neither President Trump nor any member of his family has any ability to direct, influence, or provide input regarding how the portfolio is invested or when investments are bought or sold. All investment decisions are made entirely by independent managers."
+    source_text:
+      file: guardian-2026-09-22.txt
+      span: [1222, 1477]
+    source_url: https://www.theguardian.com/us-news/2026/sep/22/trump-stock-trades-july-filing
+bill:
+  number: "H.R. 7008"
+  title: "Stop Insider Trading Act"
+  sponsor: "Rep. Bryan Steil, Republican of Wisconsin"
+  url: https://www.govinfo.gov/content/pkg/BILLS-119hr7008eh/html/BILLS-119hr7008eh.htm
+  status_url: https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr7008.xml
+  text:
+    - by: "House of Representatives"
+      date: "2026-07-22"
+      where: "H.R. 7008 as passed by the House: who the bill covers (section 2, new 5 U.S.C. 13151)"
+      text: "``(1) Covered individual.--The term `covered individual' means any of the following: ``(A) A Member of Congress, as defined in section 13101. ``(B) A dependent child (as defined in section 13101) or a spouse of a Member of Congress."
+      source_text:
+        file: hr7008-eh.txt
+        span: [469, 701]
+      source_url: https://www.govinfo.gov/content/pkg/BILLS-119hr7008eh/html/BILLS-119hr7008eh.htm
+    - by: "House of Representatives"
+      date: "2026-07-22"
+      where: "H.R. 7008 as passed by the House: what it bars (section 2, new 5 U.S.C. 13152(a))"
+      text: "no covered individual may purchase a covered investment."
+      source_text:
+        file: hr7008-eh.txt
+        span: [831, 887]
+      source_url: https://www.govinfo.gov/content/pkg/BILLS-119hr7008eh/html/BILLS-119hr7008eh.htm
+  actions:
+    - label: "Introduced in the House"
+      by: "Congress, bill status"
+      date: "2026-01-12"
+      where: "Bill status of H.R. 7008"
+      text: "2026-01-12 | Introduced in House"
+      source_text:
+        file: billstatus-hr7008.txt
+        span: [394, 426]
+      source_url: https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr7008.xml
+    - label: "Passed by the House, 232 to 198"
+      by: "Congress, bill status"
+      date: "2026-07-22"
+      where: "Bill status of H.R. 7008"
+      text: "2026-07-22 | On passage Passed by the Yeas and Nays: 232 - 198 (Roll no. 280)."
+      source_text:
+        file: billstatus-hr7008.txt
+        span: [428, 506]
+      source_url: https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr7008.xml
+    - label: "In the Senate, 53 to 47 to proceed to it, short of the 60 that cloture needs"
+      by: "Congress, bill status"
+      date: "2026-09-30"
+      where: "Bill status of H.R. 7008"
+      text: "2026-09-30 | Cloture on the motion to proceed to the measure not invoked in Senate by Yea-Nay Vote. 53 - 47."
+      source_text:
+        file: billstatus-hr7008.txt
+        span: [573, 681]
+      source_url: https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr7008.xml
+left_out:
+  - lead: "Posts on Truth Social praising companies days after purchases of their stock, among them those counted by CNN on 16 July 2026"
+    why: "No copy of the posts could be saved from Truth Social or the Internet Archive for this check; each needs its post saved before it can be matched."
+  - lead: "Micron, praised in an interview with Fox News on 26 March 2026"
+    why: "The interview is not in the Daily Compilation of Presidential Documents, and no official transcript was found."
+  - lead: "Boeing, before a sale of aircraft to China"
+    why: "No official record of the President's words on it was found in the Daily Compilation."
+  - lead: "Apple, at the White House on 6 August 2025"
+    why: "The compilation gives the time of the remarks as 5:11 a.m., while the remarks open with \"This afternoon\", so the rule for which close comes first cannot be applied; the purchases were after the remarks."
+  - lead: "Nvidia, before the semiconductor document signing on 6 August 2026"
+    why: "The President did not name Nvidia in the remarks."
+recorded_on: "2026-10-23"
+reviews: []

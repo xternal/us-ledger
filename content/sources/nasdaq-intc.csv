@@ -1,0 +1,33 @@
+# Intel Corporation (INTC), closing prices in US dollars, every trading day from 2025-08-01 to 2025-09-12.
+# Copied on 23 October 2026 from Nasdaq's historical quotes (https://www.nasdaq.com/market-activity/stocks/intc/historical), data at https://api.nasdaq.com/api/quote/INTC/historical?assetclass=stocks; only the date and the close, the dollar sign dropped.
+date,close
+2025-08-01,19.31
+2025-08-04,19.50
+2025-08-05,20.19
+2025-08-06,20.41
+2025-08-07,19.77
+2025-08-08,19.95
+2025-08-11,20.65
+2025-08-12,21.81
+2025-08-13,22.22
+2025-08-14,23.86
+2025-08-15,24.56
+2025-08-18,23.66
+2025-08-19,25.31
+2025-08-20,23.54
+2025-08-21,23.50
+2025-08-22,24.80
+2025-08-25,24.55
+2025-08-26,24.35
+2025-08-27,24.85
+2025-08-28,24.93
+2025-08-29,24.35
+2025-09-02,24.21
+2025-09-03,24.00
+2025-09-04,24.61
+2025-09-05,24.49
+2025-09-08,24.48
+2025-09-09,24.44
+2025-09-10,24.77
+2025-09-11,24.61
+2025-09-12,24.08

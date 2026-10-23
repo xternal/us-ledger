@@ -345,6 +345,47 @@ main { padding-bottom: 1rem; }
 .pair__promise { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.5rem; padding: 0.7rem 1rem; background: var(--op-surface); border-radius: var(--op-radius-small); max-width: 46rem; }
 .nums thead th:first-child { background: var(--op-surface); }
 
+/* Trades: a trade and the President's words as five steps left to right (a column on narrow screens): the trade, the
+   close before the words, the words, the first close after and the fifth; the stock's close large, the index's under it. */
+.beside { display: grid; gap: 1.5rem 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); align-items: start; }
+.beside h3 { margin: 0 0 0.6rem; font-size: 1.05rem; }
+.beside .said { margin-bottom: 0.75rem; }
+.beside .said blockquote { font-size: 1.1rem; }
+.matches { list-style: none; margin: 1rem 0; padding: 0; display: grid; gap: 1.25rem; }
+.match-item { padding: 1rem 1.2rem 1.1rem; background: var(--op-surface); border: 1px solid var(--op-line); border-radius: var(--op-radius); }
+.match-item h3 { margin: 0 0 0.75rem; font-size: 1.15rem; }
+.match-item h3 a { color: var(--op-ink); }
+.match-item__result { margin: 0.75rem 0 0; font-weight: 600; max-width: 46rem; }
+.chain { list-style: none; margin: 1rem 0; padding: 0; display: grid; grid-template-columns: 1.15fr 0.8fr 1.6fr 0.8fr 0.8fr; gap: 0.5rem; counter-reset: step; }
+.chain__step { position: relative; padding: 0.75rem 0.9rem; background: var(--op-bg); border: 1px solid var(--op-line); border-top: 4px solid var(--op-line-strong); border-radius: var(--op-radius-small); font-size: 0.9rem; min-width: 0; }
+.chain__step--trade { border-top-color: var(--op-ink); }
+.chain__step--words { border-top-color: var(--op-accent); }
+.chain__step p { margin: 0 0 0.35rem; }
+.chain__label { font-size: 0.78rem; color: var(--op-muted); }
+.chain__label span { display: block; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--op-ink); }
+.chain__what { font-weight: 600; }
+.chain__gap { font-size: 0.82rem; font-weight: 600; color: var(--op-accent); }
+.chain__flag { display: inline-block; padding: 0.05rem 0.45rem; border: 1px solid var(--op-line-strong); border-radius: 999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; }
+.chain__context, .chain__src { font-size: 0.8rem; color: var(--op-muted); }
+.chain__row code { display: block; margin-top: 0.2rem; font-size: 0.75rem; overflow-wrap: anywhere; }
+.chain__row span { font-size: 0.8rem; color: var(--op-muted); }
+.chain blockquote { margin: 0.3rem 0 0.5rem; font-family: var(--serif); font-size: 1.05rem; line-height: 1.35; }
+.chain blockquote p { margin: 0; }
+.chain__close { font-variant-numeric: tabular-nums; }
+.chain__close strong { display: block; font-family: var(--serif); font-size: 1.15rem; }
+.chain__close span { font-size: 0.82rem; color: var(--op-muted); }
+.chain__close .chain__index-only { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--op-ink); }
+@media (max-width: 62rem) {
+  .chain { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .chain__step { border-top-width: 1px; border-left: 4px solid var(--op-line-strong); border-radius: 0; margin-top: -1px; }
+  .chain__step--trade { border-left-color: var(--op-ink); }
+  .chain__step--words { border-left-color: var(--op-accent); }
+}
+.bill-steps { margin: 1rem 0; padding-left: 1.2rem; max-width: 46rem; }
+.bill-steps li { margin-bottom: 0.5rem; }
+.bill-steps time { color: var(--op-muted); font-size: 0.9rem; margin-right: 0.3rem; }
+.bill-steps span { color: var(--op-muted); font-size: 0.9rem; }
+
 /* A card's target beside the forecast at the time (OpenPromises decision 36): one scale, the target's zone, the forecast's mark. */
 .gap { margin: 0; padding: 1rem 1.25rem 0.9rem; background: var(--op-surface); border: 1px solid var(--op-line); border-radius: var(--op-radius); }
 .gap__scale { position: relative; height: 5.25rem; margin: 0 0.25rem; font-size: 0.8rem; font-variant-numeric: tabular-nums; }

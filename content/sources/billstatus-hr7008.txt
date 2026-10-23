@@ -1,0 +1,12 @@
+Bill status of H.R. 7008, 119th Congress (BILLSTATUS-119hr7008.xml), last updated on 2026-10-01.
+Copied on 23 October 2026 from https://www.govinfo.gov/bulkdata/BILLSTATUS/119/hr/BILLSTATUS-119hr7008.xml; only these fields, as published: the title, the sponsor and three of the actions, each as its date and text joined by " | ".
+
+Stop Insider Trading Act
+
+Sponsor: Rep. Steil, Bryan [R-WI-1]
+
+2026-01-12 | Introduced in House
+
+2026-07-22 | On passage Passed by the Yeas and Nays: 232 - 198 (Roll no. 280). (text of amendment in the nature of a substitute: CR H5143-5144)
+
+2026-09-30 | Cloture on the motion to proceed to the measure not invoked in Senate by Yea-Nay Vote. 53 - 47. Record Vote Number: 253.
