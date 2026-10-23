@@ -47,6 +47,7 @@ import { clip, HEIGHT, shareImage, WIDTH, type Climb, type Share } from "./share
 import { bn, cents, fyName, fySpan, ledgerPath, promiseLines, readLedger, tn, type Year } from "./ledger.ts";
 import { customsChart, facts, flowChart, linesTable, longUk, yearFacts, yearNav, yearsChart, yearTable } from "./ledger-view.ts";
 import { approved, daysApart, readPairs, type Pair, type Said as PairSaid } from "./then-again.ts";
+import { approved as tradeApproved, change, INDEX, measure, readAbout, readMatches, type Match, type Quote } from "./trades.ts";
 import { FAMILY, MAKER, THIS_SITE } from "./family.ts";
 import { latestForecast, logbook, watchTiles, type LogEntry, type WatchPick } from "./home.ts";
 import { NOT_FOUND_FILE, notFoundBody, notFoundDescription, notFoundTitle } from "./notfound.ts";
@@ -85,7 +86,7 @@ export function climbOf(config: Config, v: CardView, n: number): Climb {
 
 /**
  * The menu's sections, and which one a page belongs to: a card's page and an area's are under Promises, a fiscal
- * year's under Ledger, a pair's under Then again, a person's under People.
+ * year's under Ledger, a pair's under Then again, a match's under Trades, a person's under People.
  */
 const sectionOf = (path: string) =>
   path.startsWith("/promise")
@@ -94,6 +95,8 @@ const sectionOf = (path: string) =>
         ? "ledger"
         : path.startsWith("/then-again")
           ? "then-again"
+        : path.startsWith("/trades")
+          ? "trades"
         : path.startsWith("/actor")
           ? "people"
           : path.startsWith("/about")
@@ -245,6 +248,24 @@ async function main() {
     return `${[y ? plural(y, "year") : "", m ? plural(m, "month") : ""].filter(Boolean).join(" and ")} later`;
   };
 
+  // Trades (scripts/trades.ts): the page is published once the editor approves content/trades/about.yaml, and each
+  // match once the editor approves it; the preview shows them all.
+  const tradesAbout = readAbout(contentDir, config, new Set(result.actors.keys()));
+  const matchChecks = readMatches(contentDir, config, new Set(result.actors.keys()));
+  const brokenTrades = [...(tradesAbout?.problems.length ? [tradesAbout] : []), ...matchChecks.filter((x) => x.problems.length)];
+  if (brokenTrades.length) {
+    for (const x of brokenTrades) for (const m of x.problems) console.error(`${x.file}: ${m}`);
+    throw new Error(`${brokenTrades.length} trades files have problems: run node scripts/trades.ts check`);
+  }
+  const tradesLive = !!tradesAbout && (PREVIEW || tradeApproved(tradesAbout.about));
+  const matches = tradesLive
+    ? matchChecks
+        .map((x) => x.match)
+        .filter((x) => PREVIEW || tradeApproved(x))
+        .sort((a, b) => b.words.date.localeCompare(a.words.date) || a.id.localeCompare(b.id))
+    : [];
+  const tradesPath = (id?: string) => (id ? `/trades/${id}/` : "/trades/");
+
   rmSync(OUT, { recursive: true, force: true });
   const write = (path: string, body: string | Buffer) => {
     const file = join(OUT, path.replace(/^\//, ""));
@@ -256,11 +277,13 @@ async function main() {
 
   // Promises first: the current administration's. The ledger second: the money in and out since fiscal year 2018.
   // Five items, Method last, the same word in the same place as on the other sites of the family (Pavel, 23 October
-  // 2026). Areas are reached from Promises, and their pages highlight it.
+  // 2026). Areas are reached from Promises, and their pages highlight it. Trades, this site's own, comes after Then
+  // again once the editor has approved its page (Pavel, 23 October 2026).
   const nav = [
     { key: "promises", href: p.promises(L), label: "Promises" },
     { key: "ledger", href: ledgerPath(), label: "Ledger" },
     { key: "then-again", href: "/then-again/", label: "Then again" },
+    ...(tradesLive ? [{ key: "trades", href: tradesPath(), label: "Trades" }] : []),
     { key: "people", href: "/actor/", label: "People" },
     { key: "about", href: "/about/", label: "Method" },
   ];
@@ -1503,6 +1526,314 @@ async function main() {
     });
   }
 
+  // Trades (scripts/trades.ts): the trades in the President's accounts from his reports to the Office of Government
+  // Ethics, the White House's account beside them, and each trade that came within days of his words, as a chain read
+  // left to right. The closes are read from the saved price files by one rule; the page says when, never why.
+  if (tradesLive && tradesAbout) {
+    const ab = tradesAbout.about;
+    const trump = result.actors.get(ab.actor_id)!;
+    const usd = (n: number) => `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    const pts = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const pct = (x: number) => `${x >= 0 ? "+" : "−"}${Math.abs(x).toFixed(1)}%`;
+    const range = (a: string) => a.replace(" - ", " to ");
+    const plural = (n: number, one: string, many = `${one}s`) => `${n.toLocaleString("en-US")} ${n === 1 ? one : many}`;
+    const before = (n: number) => (n === 0 ? "The same day as the words" : n > 0 ? `${plural(n, "day")} before the words` : `${plural(-n, "day")} after the words`);
+    const clock = (x: Match) => {
+      const t = /(\d{1,2}:\d{2} [ap]\.m\.)/.exec(x.words.time.text)?.[1];
+      return t ? `${t}, ${measure(contentDir, x).afterClose ? "after" : "before"} the 4 p.m. close` : "";
+    };
+    const what = (x: Match) => {
+      const m = measure(contentDir, x);
+      return x.trade.asset ? `${m.row.type === "sale" ? "Sale" : "Purchase"} of ${x.trade.asset}, ${range(m.row.amount)}` : `${plural(m.day.purchases, "purchase")} and ${plural(m.day.sales, "sale")}`;
+    };
+    const quoteBlock = (q: Quote, cls = "") =>
+      h(
+        "article",
+        { className: `said ${cls}` },
+        h("p", { className: "said__when" }, h("span", null, q.by), " ", h("time", { dateTime: q.date }, longDate(w, q.date))),
+        h("blockquote", { cite: q.source_url }, h("p", null, `“${q.text}”`)),
+        h("p", { className: "said__where" }, q.where, " · ", h("a", { href: q.source_url }, "Source")),
+      );
+
+    /** One match as five steps: the trade, the close before the words, the words, the close after, five closes on. */
+    const chain = (x: Match, full: boolean) => {
+      const m = measure(contentDir, x);
+      const name = x.prices.name;
+      const close = (k: "before" | "after" | "fifth") => {
+        const s = m.stock?.[k];
+        const i = m.index[k];
+        const move = (from: number, to: number) => (k === "before" ? "" : ` ${pct(change(from, to))}`);
+        return h(
+          "p",
+          { className: "chain__close" },
+          s ? h("strong", null, `${name} ${usd(s.close)}${move(m.stock!.before.close, s.close)}`) : null,
+          h("span", { className: s ? undefined : "chain__index-only" }, `${INDEX.name} ${pts(i.close)}${move(m.index.before.close, i.close)}`),
+        );
+      };
+      const step = (cls: string, label: string, date: string, ...body: ReactNode[]) =>
+        h("li", { className: `chain__step chain__step--${cls}` }, h("p", { className: "chain__label" }, h("span", null, label), " ", h("time", { dateTime: date }, longDate(w, date))), ...body);
+      const day = `${plural(m.day.all, "transaction")} dated ${longDate(w, x.trade.date)} ${x.trade.scope}: ${plural(m.day.purchases, "purchase")}, ${plural(m.day.sales, "sale")}`;
+      return h(
+        "ol",
+        { className: "chain", "aria-label": `${x.subject}: the trade, the closes and the words, in order` },
+        step(
+          "trade",
+          "Trade",
+          x.trade.date,
+          h("p", { className: "chain__what" }, what(x)),
+          h("p", { className: "chain__gap" }, before(m.gap)),
+          m.row.label === "UNSOLICITED" ? h("p", { className: "chain__flag" }, "Marked UNSOLICITED in the report") : null,
+          full ? h("p", { className: "chain__context" }, `${day}.`, ...m.days.map((d) => ` ${d.all ? plural(d.all, "transaction") : "None"} dated ${longDate(w, d.date)}.`)) : null,
+          full ? h("p", { className: "chain__row" }, h("span", null, "The row, as the report lists it: "), h("code", null, x.trade.text)) : null,
+          h("p", { className: "chain__src" }, h("a", { href: `${x.trade.filing.url}#page=${x.trade.filing.page}` }, `${x.trade.filing.title}, page ${x.trade.filing.page}`)),
+        ),
+        step("close", "Close before the words", m.index.before.date, close("before")),
+        step(
+          "words",
+          "The words",
+          x.words.date,
+          h("blockquote", { cite: x.words.source_url }, h("p", null, `“${x.words.text}”`)),
+          h("p", { className: "chain__src" }, x.words.where, clock(x) ? ` · ${clock(x)}` : "", " · ", h("a", { href: x.words.source_url }, "Source")),
+          full && x.words.time.note ? h("p", { className: "chain__context" }, x.words.time.note) : null,
+        ),
+        step("close", "First close after", m.index.after.date, close("after")),
+        step("close", "Five trading days later", m.index.fifth.date, close("fifth")),
+      );
+    };
+    const movesOf = (x: Match) => {
+      const m = measure(contentDir, x);
+      return (["after", "fifth"] as const).map((k) => ({
+        label: k === "after" ? `First close after, ${longDate(w, m.index[k].date)}` : `Five trading days later, ${longDate(w, m.index[k].date)}`,
+        stock: m.stock ? `${x.prices.name} ${pct(change(m.stock.before.close, m.stock[k].close))}` : undefined,
+        index: `${INDEX.name} ${pct(change(m.index.before.close, m.index[k].close))}`,
+      }));
+    };
+    const matchShare = (x: Match): Share => ({
+      kind: "chain",
+      kicker: `Trades · ${actorName(trump)}`,
+      subject: x.subject,
+      trade: `${longDate(w, x.trade.date)}: ${what(x)}`,
+      words: { date: longDate(w, x.words.date), words: x.words.text },
+      moves: movesOf(x),
+      footer: "The report and the words on the record, with sources · usledger.org",
+    });
+    const result5 = (x: Match) => {
+      const m = measure(contentDir, x);
+      const f = (s: { before: { close: number }; fifth: { close: number } }) => pct(change(s.before.close, s.fifth.close));
+      return m.stock
+        ? `Five trading days after the words, ${x.prices.name} had moved ${f(m.stock)} from its last close before them; the ${INDEX.name}, ${f(m.index)}.`
+        : `Five trading days after the words, the ${INDEX.name} had moved ${f(m.index)} from its last close before them.`;
+    };
+    const matchItem = (x: Match) => h("li", { key: x.id, className: "match-item" }, h("h3", null, h("a", { href: tradesPath(x.id) }, x.subject)), chain(x, false), h("p", { className: "match-item__result" }, result5(x)));
+
+    const count = ab.count;
+    const reports = ab.filings;
+    const tradesDescription = clip(
+      `${count.number.toLocaleString("en-US")} transactions in the President's accounts in ${count.year}, from his own reports; ${plural(matches.length, "trade")} that came within days of his words, with the closes before and after, and the White House's account.`,
+      200,
+    );
+    page({
+      path: tradesPath(),
+      title: "Trades",
+      socialTitle: "Trades: the President's accounts, from his own reports",
+      description: tradesDescription,
+      share: pageShare(`Trades · ${actorName(trump)}`, `${count.number.toLocaleString("en-US")} transactions in ${count.year}`, `From his reports to the Office of Government Ethics, with the White House's account beside them, and ${plural(matches.length, "trade")} within days of his words.`),
+      alt: `${count.number.toLocaleString("en-US")} transactions in the President's accounts in ${count.year}, from his own reports.`,
+      wide: true,
+      script: ONPAGE_SCRIPT,
+      ld: matches.length
+        ? [{ "@context": "https://schema.org", "@type": "ItemList", name: "Trades", url: absolute(config, tradesPath()), itemListElement: matches.map((x, i) => ({ "@type": "ListItem", position: i + 1, url: absolute(config, tradesPath(x.id)), name: x.subject })) }]
+        : undefined,
+      body: h(
+        Fragment,
+        null,
+        h(
+          "section",
+          { className: "ledger-hero", "aria-labelledby": "trades-h" },
+          h("p", { className: "kicker" }, "From the President's own reports to the Office of Government Ethics"),
+          h("h1", { id: "trades-h" }, "Trades"),
+          h(
+            "p",
+            { className: "lede" },
+            `Securities bought and sold in ${actorName(trump)}'s accounts since 20 January 2025, as his reports list them, and the trades that came within days of something he said in office: the trade, the stock's close before his words, the words, and the closes after, with the S&P 500 over the same days. The reports say when; they do not say why. The White House's account of who makes the trades is beside the figures.`,
+          ),
+          h(
+            "ul",
+            { className: "tally" },
+            h("li", null, h("strong", null, count.number.toLocaleString("en-US")), ` transactions in ${count.year}`),
+            h("li", null, h("strong", null, String(reports.length)), " reports posted by OGE"),
+            h("li", null, h("strong", null, String(matches.length)), ` ${matches.length === 1 ? "trade" : "trades"} within days of his words`),
+          ),
+        ),
+        h(
+          "nav",
+          { className: "onpage", "aria-label": "On this page" },
+          h(
+            "ul",
+            null,
+            h("li", null, h("a", { href: "#figures" }, "The figures")),
+            h("li", null, h("a", { href: "#matches" }, "Trade, then words")),
+            h("li", null, h("a", { href: "#bill" }, "The House bill")),
+            h("li", null, h("a", { href: "#reports" }, "The reports")),
+            h("li", null, h("a", { href: "#test" }, "The test")),
+          ),
+        ),
+        h(
+          "section",
+          { id: "figures", className: "home-section", "aria-labelledby": "figures-h" },
+          h("h2", { id: "figures-h" }, "The figures, and the White House's account"),
+          h(
+            "div",
+            { className: "beside" },
+            h(
+              "div",
+              null,
+              h("h3", null, "What the reports show"),
+              h(
+                "p",
+                null,
+                h("strong", null, count.number.toLocaleString("en-US")),
+                ` transactions are listed in Part 7 of the President's annual report for ${count.year}, posted by OGE on ${longDate(w, count.filing.filed)}. Part 7 numbers each account's rows from 1; the last numbers add up to ${count.number.toLocaleString("en-US")}. `,
+                h("a", { href: count.filing.url }, "The report (PDF, ", String(count.filing.pages), " pages)"),
+              ),
+              quoteBlock(ab.review),
+              ...ab.press.map((q) => quoteBlock(q)),
+            ),
+            h(
+              "div",
+              null,
+              h("h3", null, "What the White House says"),
+              ...ab.white_house.map((q) => quoteBlock(q, "said--later")),
+              h("h3", null, "Who made the trades, as the reports say"),
+              quoteBlock(ab.form),
+              h(
+                "p",
+                { className: "note" },
+                "The reports do not name who placed each order. Some rows in the 2026 reports carry the word UNSOLICITED in their description; the form does not say what it means, and this site does not read it either way.",
+              ),
+            ),
+          ),
+        ),
+        h(
+          "section",
+          { id: "matches", className: "home-section", "aria-labelledby": "matches-h" },
+          h("h2", { id: "matches-h" }, "Trade, then words"),
+          h(
+            "p",
+            { className: "section-lede" },
+            "Each trade below came within 14 days of the President's words about the same company or the same policy. Both ends have a primary source: the report on one side, the Daily Compilation of Presidential Documents on the other. Latest words first.",
+          ),
+          matches.length ? h("ol", { className: "matches" }, matches.map(matchItem)) : h("p", null, "No match is published yet. Each is checked against its sources and approved by the editor first."),
+        ),
+        h(
+          "section",
+          { id: "bill", className: "home-section", "aria-labelledby": "bill-h" },
+          h("h2", { id: "bill-h" }, `${ab.bill.number}, the ${ab.bill.title}`),
+          h("p", { className: "section-lede" }, `Sponsored by ${ab.bill.sponsor}. Who it covers, and what it bars, in its own words as the House passed it:`),
+          ...ab.bill.text.map((q) => quoteBlock(q)),
+          h(
+            "ol",
+            { className: "bill-steps" },
+            ab.bill.actions.map((a) => h("li", { key: a.date }, h("time", { dateTime: a.date }, longDate(w, a.date)), " ", h("strong", null, a.label), h("span", null, ` “${a.text.replace(/^\d{4}-\d{2}-\d{2} \| /, "")}” `), h("a", { href: a.source_url }, "Source"))),
+          ),
+        ),
+        h(
+          "section",
+          { id: "reports", className: "home-section", "aria-labelledby": "reports-h" },
+          h("h2", { id: "reports-h" }, "The reports"),
+          h("p", { className: "section-lede" }, `Every report of the President's that OGE has posted since the term began, ${plural(reports.length, "report")}, oldest first, as OGE lists them.`),
+          h(
+            "div",
+            { className: "table-scroll" },
+            h(
+              "table",
+              { className: "nums dates" },
+              h("thead", null, h("tr", null, h("th", { scope: "col" }, "Posted"), h("th", { scope: "col" }, "Report"), h("th", { scope: "col" }, "Pages"))),
+              h(
+                "tbody",
+                null,
+                reports.map((f) => h("tr", { key: f.url }, h("td", null, longDate(w, f.posted)), h("th", { scope: "row" }, h("a", { href: f.url }, f.title)), h("td", null, String(f.pages)))),
+              ),
+            ),
+          ),
+        ),
+        h(
+          "section",
+          { id: "test", className: "home-section", "aria-labelledby": "test-h" },
+          h("h2", { id: "test-h" }, "The test"),
+          h(
+            "ul",
+            { className: "rules" },
+            h("li", null, "A trade is listed only from the President's own report to OGE, with the page it is on. Where a report is a scan, the row is copied from the page image, and the saved copy says so."),
+            h("li", null, "The words are the President's own, from the Daily Compilation of Presidential Documents, with the time it gives. A trade and the words are at most 14 days apart, in either order."),
+            h(
+              "li",
+              null,
+              "The closes follow one rule for every match: the last close before the words, the first close after them, and the fifth close after them, with the S&P 500 over the same days. Words after the 4 p.m. close are counted from that day's close. Stock closes are Nasdaq's; the S&P 500 is FRED's.",
+            ),
+            h("li", null, "Reports give a range for each amount, not a price, so no gain or loss in dollars is worked out here: only how the stock and the index moved."),
+            h("li", null, "Each match shows how many other trades the report lists on the same day, because a single row can be one of hundreds."),
+            h("li", null, "Every quote and every row is checked character for character against a saved copy of its source, every close against its saved price file, and the editor approves each match before it is published."),
+          ),
+          ab.left_out.length
+            ? h(
+                Fragment,
+                null,
+                h("h3", null, "Leads left out, and why"),
+                h("ul", { className: "rules" }, ab.left_out.map((x) => h("li", { key: x.lead }, h("strong", null, x.lead), `: ${x.why}`))),
+              )
+            : null,
+        ),
+      ),
+    });
+    for (const x of matches) {
+      const review = x.reviews?.find((r) => r.approves);
+      const others = matches.filter((o) => o.id !== x.id);
+      page({
+        path: tradesPath(x.id),
+        title: `${x.subject}: trade, then words`,
+        socialTitle: `${actorName(trump)}: ${x.subject}`,
+        description: clip(`${longDate(w, x.trade.date)}: ${what(x)}. ${longDate(w, x.words.date)}: “${x.words.text}” ${result5(x)}`, 200),
+        share: matchShare(x),
+        alt: `${longDate(w, x.trade.date)}: ${what(x)}. ${longDate(w, x.words.date)}: “${clip(x.words.text, 140)}” ${result5(x)}`,
+        type: "article",
+        ld: [
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: `${actorName(trump)}: ${x.subject}`,
+            url: absolute(config, tradesPath(x.id)),
+            datePublished: review?.on ?? x.recorded_on,
+            about: { "@type": "Person", name: actorName(trump) },
+            hasPart: [{ "@type": "Quotation", text: x.words.text, dateCreated: x.words.date, spokenByCharacter: { "@type": "Person", name: actorName(trump) }, isBasedOn: x.words.source_url }],
+            isBasedOn: x.trade.filing.url,
+          },
+        ],
+        body: h(
+          Fragment,
+          null,
+          h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Trades", href: tradesPath() }, { name: x.subject, href: tradesPath(x.id) }] }),
+          h("p", { className: "kicker" }, h("a", { href: p.actor(trump.id, L) }, actorName(trump)), roleOf(trump) ? `, ${roleOf(trump)}` : ""),
+          h("h1", null, x.subject),
+          chain(x, true),
+          h("p", { className: "match-item__result" }, result5(x)),
+          x.note ? h("p", { className: "note" }, x.note) : null,
+          h("h2", null, "What the White House says"),
+          ...ab.white_house.map((q) => quoteBlock(q, "said--later")),
+          h(
+            "p",
+            { className: "updated" },
+            `Recorded on ${longDate(w, x.recorded_on)}`,
+            review ? `; approved by ${review.by} on ${longDate(w, review.on)}` : "; not yet approved",
+            ". The row and the quote are checked character for character against saved copies of their sources, and the closes against saved price files. The record shows when; it does not show why.",
+          ),
+          others.length ? h(Fragment, null, h("h2", null, "More trades within days of his words"), h("ol", { className: "matches" }, others.map(matchItem))) : null,
+          h("p", null, h("a", { href: tradesPath() }, "Every match, the figures and the reports")),
+        ),
+      });
+    }
+  }
+
   page({
     path: "/about/",
     title: "Method",
@@ -1538,6 +1869,14 @@ async function main() {
           h("a", { href: "/then-again/" }, "Then again"),
           " pairs a statement with what the same person said later, when the two cannot both stand as written. Both quotes are exact, dated and sourced; the editor approves each pair, and the test is the same for everyone.",
         ),
+        tradesLive
+          ? h(
+              "li",
+              null,
+              h("a", { href: tradesPath() }, "Trades"),
+              " lists the trades in the President's accounts from his own reports to the Office of Government Ethics, with the White House's account beside them, and each trade within days of his words, with the closes before and after by one fixed rule. The record shows when, not why.",
+            )
+          : null,
         h("li", null, "We count page views: one number per page per day, published at ", h("a", { href: "/views.json" }, "/views.json"), ". Nothing about the reader is stored: not the address, country, device, browser or where they came from. Crawlers and link previews are not counted."),
       ),
       h(
@@ -1570,7 +1909,7 @@ async function main() {
         f.path === "/llms.txt"
           ? String(f.body).replace(
               /\n## Promise cards\n/,
-              `\n## The site\n\n- [Home](${absolute(config, "/")}): the first screen: the Treasury's figures for fiscal year ${lastYear.fy}, the promises at a glance, the latest target with the forecast at the time, Then again, four promises to watch picked by fixed rules, and a logbook of what was added, moved, corrected or checked; then the platform's twenty\n- [Promises by area](${absolute(config, "/promises/area/")}): the platform's twenty areas, in its order, empty ones too\n- [Method](${absolute(config, "/about/")}): how a promise is recorded and how its status moves\n\n## The ledger\n\n- [The ledger: money in and out, fiscal years ${years[0]!.fy} to ${years.at(-1)!.fy}](${absolute(config, ledgerPath())}): receipts by source and outlays by function from the Monthly Treasury Statement, with what was borrowed\n${years.map((y) => `- [Fiscal year ${y.fy}${y.complete ? "" : " so far"}](${absolute(config, ledgerPath(y.fy))}): ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed`).join("\n")}\n- [The ledger as JSON](${absolute(config, "/data/ledger.json")})\n\n## Then again\n\n- [Then again](${absolute(config, pairPath())}): statements and what the same person said later, in exact words with dates and sources; the dates promises set themselves; promises with no step since\n${pairs.map((x) => `- [${x.subject}](${absolute(config, pairPath(x.id))}): ${actorName(speaker(x))}, ${x.first.date} and ${x.later.date}`).join("\n")}\n\n## Promise cards\n`,
+              `\n## The site\n\n- [Home](${absolute(config, "/")}): the first screen: the Treasury's figures for fiscal year ${lastYear.fy}, the promises at a glance, the latest target with the forecast at the time, Then again, four promises to watch picked by fixed rules, and a logbook of what was added, moved, corrected or checked; then the platform's twenty\n- [Promises by area](${absolute(config, "/promises/area/")}): the platform's twenty areas, in its order, empty ones too\n- [Method](${absolute(config, "/about/")}): how a promise is recorded and how its status moves\n\n## The ledger\n\n- [The ledger: money in and out, fiscal years ${years[0]!.fy} to ${years.at(-1)!.fy}](${absolute(config, ledgerPath())}): receipts by source and outlays by function from the Monthly Treasury Statement, with what was borrowed\n${years.map((y) => `- [Fiscal year ${y.fy}${y.complete ? "" : " so far"}](${absolute(config, ledgerPath(y.fy))}): ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed`).join("\n")}\n- [The ledger as JSON](${absolute(config, "/data/ledger.json")})\n\n## Then again\n\n- [Then again](${absolute(config, pairPath())}): statements and what the same person said later, in exact words with dates and sources; the dates promises set themselves; promises with no step since\n${pairs.map((x) => `- [${x.subject}](${absolute(config, pairPath(x.id))}): ${actorName(speaker(x))}, ${x.first.date} and ${x.later.date}`).join("\n")}${tradesLive && tradesAbout ? `\n\n## Trades\n\n- [Trades](${absolute(config, tradesPath())}): ${tradesAbout.about.count.number.toLocaleString("en-US")} transactions in the President's accounts in ${tradesAbout.about.count.year}, from his reports to the Office of Government Ethics; the White House's account; the House bill ${tradesAbout.about.bill.number}; and trades within days of his words, with the closes before and after\n${matches.map((x) => `- [${x.subject}](${absolute(config, tradesPath(x.id))}): trade ${x.trade.date}, words ${x.words.date}`).join("\n")}` : ""}\n\n## Promise cards\n`,
             )
           : f.body;
       write(f.path, body);

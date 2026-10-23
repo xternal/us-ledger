@@ -1,0 +1,23 @@
+# Thermo Fisher Scientific Inc. (TMO), closing prices in US dollars, every trading day from 2026-03-02 to 2026-03-27.
+# Copied on 23 October 2026 from Nasdaq's historical quotes (https://www.nasdaq.com/market-activity/stocks/tmo/historical), data at https://api.nasdaq.com/api/quote/TMO/historical?assetclass=stocks; only the date and the close, the dollar sign dropped.
+date,close
+2026-03-02,508.58
+2026-03-03,508.10
+2026-03-04,512.69
+2026-03-05,518.84
+2026-03-06,501.97
+2026-03-09,509.97
+2026-03-10,500.08
+2026-03-11,495.72
+2026-03-12,475.89
+2026-03-13,464.37
+2026-03-16,470.00
+2026-03-17,472.71
+2026-03-18,464.69
+2026-03-19,470.21
+2026-03-20,474.39
+2026-03-23,478.12
+2026-03-24,490.29
+2026-03-25,490.77
+2026-03-26,488.85
+2026-03-27,473.36

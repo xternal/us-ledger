@@ -1,0 +1,55 @@
+Periodic Transaction Report of Donald J. Trump (OGE Form 278-T), signed for the Office of Government Ethics on 13 May 2026 and posted on 14 May 2026, 113 pages (https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T(2).pdf).
+Transcribed on 23 October 2026 from the images of the pages: the PDF is a scan, and its machine-read text layer is not reliable enough to quote. Only these passages, each copied from the page image character for character: the form's own summary, from page 113; and the rows of the table of transactions on page 2 dated 2/10/2026 and on page 38 dated 3/11/2026, every such row on those pages and no other. The fields of each row are joined by " | ": the row's number, the description, the type, the date, whether the notification was received over 30 days ago, and the amount.
+
+Page 113, Summary of Contents:
+
+The 278-T discloses purchases, sales, or exchanges of securities in excess of $1,000 made on behalf of the filer, the filer's spouse, or dependent child.
+
+Page 2 of 113, every row dated 2/10/2026:
+
+3 | SERVICENOW INC COM | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+4 | NVIDIA CORP | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+6 | ADOBE INC | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+7 | WORKDAY INCCL A | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+10 | BROADCOM INC COM | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+11 | SYNOPSYS INC COM | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+12 | CDW CORP | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+18 | MOTOROLA SOLUTIONS INC | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+21 | TRANSDIGM GROUP INC | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+23 | JABIL INC | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+24 | COSTCO WHOLESALE CORP NEW | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+25 | AXON ENTERPRISE INC COM | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+28 | DELL TECHNOLOGIES INC CL C | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+29 | BOEING COMPANY COM | purchase | 2/10/2026 | Yes | $1,000,001 - $5,000,000
+
+Page 38 of 113, every row dated 3/11/2026:
+
+1187 | ROCKWELL AUTOMATION INC NEW UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1188 | PRICE T ROWE GROUP INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1189 | NEXTERA ENERGY INC COM UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1190 | ELECTRONIC ARTS UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1191 | SEAGATE TECHNOLOGY HLDGS UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1192 | CDW CORP UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1193 | PALANTIR TECHNOLOGIES INC CL A UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1194 | CADENCE DESIGN SYSTEM UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1195 | AMGEN INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1196 | ROBINHOOD MKTS INC CL A UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1197 | MOTOROLA SOLUTIONS INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1198 | SYNOPSYS INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1200 | MORGAN STANLEY UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1203 | WALT DISNEY CO (HOLDING CO) DISNEY COM UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1204 | MERCK & CO INC COM UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1205 | DUPONT DE NEMOURS INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1206 | COCA COLA CO COM UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1207 | MCDONALDS CORP UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1208 | INTL BUSINESS MACH UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1209 | AUTODESK INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1210 | PALO ALTO NETWORKS INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1211 | S&P GLOBAL INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1212 | ENTERGY CORP NEW UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1213 | ARISTA NETWORKS INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1214 | PUBLIC SERVICE ENTERPRSE GROUP INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1215 | THERMO FISHER SCIENTIFIC INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1216 | SALESFORCE, INC. UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1217 | GILEAD SCIENCES INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000
+1218 | EDWARDS LIFESCIENCES CORP UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000

@@ -37,7 +37,7 @@ pnpm preview         # the same with drafts, in public-preview/, never deployed
 
 - The twenty platform promises are approved by the editor and published. Each quote is matched character for character against a stored copy of the official PDF (`content/sources/rnc-2024-platform.txt`, a `source_text` span on every card), so the quote check passes by machine.
 - Every card has a status with its evidence: 10 delivering, 2 funded, 1 legislated, 3 in plan and 4 unscoreable. No later promise by the President or an official is recorded yet.
-- Menu (23 October 2026, as on the sister sites): Promises (the current administration's), the Ledger (money in and out since fiscal year 2018), Then again, People, Method. Areas are a row of links on Promises, and their pages highlight Promises. The header is one 48px row, with the family switcher beside the logo.
+- Menu (23 October 2026, as on the sister sites): Promises (the current administration's), the Ledger (money in and out since fiscal year 2018), Then again, People, Method. Trades joins after Then again once the editor approves its page. Areas are a row of links on Promises, and their pages highlight Promises. The header is one 48px row, with the family switcher beside the logo.
 - The home page opens with a first screen of cards (`scripts/home.ts`, rules tested in `scripts/home.test.ts`): the Treasury's figures for the last fiscal year, the promises at a glance, the latest target with the forecast at the time, Then again, four promises to watch and the logbook. Then it leads with the twenty: a chart of how far each has climbed, then one entry each with the platform's words, its step and the latest dated evidence. Each person's page has the engine's key promises, timeline, promises by month and every area.
 - Every page has its own title, description, canonical address and a 1200x630 share image drawn from its content (`scripts/share-image.ts`); `robots.txt` welcomes search and AI crawlers, with `sitemap.xml` and `llms.txt`.
 - Page views are counted on the host (`edge/count.ts`, Routing Middleware): one number per page per UTC day in Upstash Redis, nothing about readers, crawlers and previews skipped. The totals for the last 30 days are public at `/views.json`, in the same format as the sister sites', and Pavel's visits report (the `site-visits` repository) reads them. Without the store connected, nothing is counted and `/views.json` lists no days.
@@ -62,6 +62,17 @@ pnpm pairs approve trump-example-2025 --by "Pavel Guzhikov"
 ```
 
 The same page lists, from the cards, every promise that set its own date and where it stands now, everyone's promises in the same columns (no step since, too vague to track, own dates passed and not delivered), and the promises still at "Promised", oldest first.
+
+## Trades
+
+`/trades/` lists the securities trades in the President's accounts since 20 January 2025, from his own reports to the Office of Government Ethics (OGE Forms 278e and 278-T, as OGE posts them), with the White House's account of who makes the trades beside the figures, in its words, and the House bill on stock trading (H.R. 7008), which covers Members of Congress and not the President. Then each trade that came within 14 days of the President's words about the same company or policy, as a chain read left to right: the trade as the report lists it, the stock's close before the words, the words, the first close after them and the fifth, each with the S&P 500 over the same days. The closes follow one rule for every match and are read from saved price files (Nasdaq for stocks, FRED for the S&P 500), never typed in. The page says when, never why; each match shows how many other trades the report lists on the same day.
+
+The page is `content/trades/about.yaml`, and each match is `content/trades/<id>.yaml` (formats in `scripts/trades.ts`). Every quote and every report row is checked character for character against saved sources in `content/sources/`: where a report is a scan, the rows are copied from the page images, and the saved copy says so. The count of transactions is the sum of the last row of each account in Part 7 of the annual report, checked by machine. `pnpm trades check` runs in `pnpm check`. The page, its menu item and its llms.txt section are published once the editor approves `about`; each match once the editor approves it:
+
+```bash
+pnpm trades approve about --by "Pavel Guzhikov"
+pnpm trades approve trump-intel-stake-2025 --by "Pavel Guzhikov"
+```
 
 ## Add a promise
 

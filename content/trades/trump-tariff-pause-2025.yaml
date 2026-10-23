@@ -1,0 +1,37 @@
+format: usledger-trades/1
+id: trump-tariff-pause-2025
+actor_id: donald-trump
+subject: "The 90-day pause in the April 2025 tariffs"
+trade:
+  date: "2025-04-08"
+  filing:
+    title: "Annual report for 2025 (OGE Form 278e), Part 7: Transactions"
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/69AEAA9D7455ACD585258E27002DDEE1/$FILE/Donald-J-Trump-2026-278ANNUAL.pdf
+    page: 393
+    filed: "2026-07-01"
+  text: "INVESTMENT ACCOUNT #7 | 242 | FB FINL CORP | Purchase | 4/8/2025 | $50,001 - $100,000"
+  source_text:
+    file: oge-278e-2026-part7.txt
+    span: [1948, 2033]
+  scope: "in every account of the report"
+  days: ["2025-04-09"]
+words:
+  date: "2025-04-09"
+  venue: statement
+  where: "Statement on United States Tariff Adjustments, issued by the President"
+  text: "I have authorized a 90-day pause and a substantially lowered reciprocal tariff during this period of 10 percent, also effective immediately."
+  source_text:
+    file: dcpd-202500452.txt
+    span: [1106, 1246]
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202500452/html/DCPD-202500452.htm
+  time:
+    text: "NOTE: The President spoke at 3:55 p.m."
+    source_text:
+      file: dcpd-202500451.txt
+      span: [1131, 1169]
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202500451/html/DCPD-202500451.htm
+    note: "The statement carries no time. At remarks that began at 3:55 p.m. the same day, before the market closed, a reporter asked the President about the pause: it had been announced by then."
+prices: {}
+note: "The 327 purchases on 8 April 2025 were all in Investment Account #7, in amounts of $1,001 to $250,000 each. The row shown is the first of them in the report."
+recorded_on: "2026-10-23"
+reviews: []

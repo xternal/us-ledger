@@ -1,0 +1,39 @@
+format: usledger-trades/1
+id: trump-thermo-fisher-cincinnati-2026
+actor_id: donald-trump
+subject: "Thermo Fisher, on a tour of its plant in Cincinnati"
+trade:
+  asset: "Thermo Fisher Scientific Inc."
+  date: "2026-03-11"
+  filing:
+    title: "Periodic Transaction Report (OGE Form 278-T) of 8 May 2026"
+    url: https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index/405E4EC4E27BE8D185258DF7002DD1C0/$FILE/Trump%2C%20Donald%20J.-05.08.2026-278T(2).pdf
+    page: 38
+    filed: "2026-05-14"
+  text: "1215 | THERMO FISHER SCIENTIFIC INC UNSOLICITED | purchase | 3/11/2026 | Yes | $15,001 - $50,000"
+  source_text:
+    file: oge-278t-2026-05-08.txt
+    span: [4454, 4550]
+  scope: "on the same page of the report"
+words:
+  date: "2026-03-11"
+  venue: speech
+  where: "Remarks during a tour of Thermo Fisher Scientific, Cincinnati, Ohio"
+  text: "But this is a great honor being here. It's a great company. I've known it for a long time, and you have done a fantastic job."
+  source_text:
+    file: dcpd-202600164.txt
+    span: [608, 733]
+  source_url: https://www.govinfo.gov/content/pkg/DCPD-202600164/html/DCPD-202600164.htm
+  time:
+    text: "NOTE: The President spoke at 2:50 p.m."
+    source_text:
+      file: dcpd-202600164.txt
+      span: [769, 807]
+    source_url: https://www.govinfo.gov/content/pkg/DCPD-202600164/html/DCPD-202600164.htm
+prices:
+  symbol: "TMO"
+  name: "Thermo Fisher"
+  file: "nasdaq-tmo.csv"
+note: "The report gives the day of the purchase, not the hour, so whether it came before or after the tour is not on the record."
+recorded_on: "2026-10-23"
+reviews: []
