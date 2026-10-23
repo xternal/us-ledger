@@ -85,7 +85,7 @@ const legend = (items: { label: string; swatch: string; light?: boolean; line?: 
 /** Purchases above the line and sales below it, a column for each month. `marks` names months with a match. */
 export function tradesByMonth(months: Month[], marks: { month: string; label: string }[], title: string): ReactNode {
   const H = 300;
-  const [left, right, top, bottom] = [52, 12, 26, 26];
+  const [left, right, top, bottom] = [84, 12, 30, 30];
   const up = Math.max(...months.map((m) => m.purchases));
   const down = Math.max(...months.map((m) => m.sales));
   const t = ticks(Math.max(up, down));
@@ -132,7 +132,7 @@ export function tradesByMonth(months: Month[], marks: { month: string; label: st
 /** What was bought and sold each month, as ranges: solid to the least, light to the most the reports allow. */
 export function moneyByMonth(months: Month[], title: string): ReactNode {
   const H = 300;
-  const [left, right, top, bottom] = [60, 12, 12, 26];
+  const [left, right, top, bottom] = [78, 12, 12, 30];
   const max = Math.max(...months.flatMap((m) => [m.bought[1], m.sold[1]]));
   const t = ticks(max);
   const y = (v: number) => H - bottom - (v / t.at(-1)!) * (H - top - bottom);
@@ -249,5 +249,61 @@ export function versus(points: Point[], zero: number, o: { name?: string; trade?
       h("text", { x: x(last), y: H - 8, className: "chart__tick", textAnchor: "end" }, dateShort(points[last]!.date)),
     ),
     o.small ? null : table(o.title, ["Close", ...(o.name ? [`${o.name} (100 = before the words)`] : []), "S&P 500 (100 = before the words)"], points.map((p, i) => [dateShort(p.date), ...(st[i] !== undefined ? [fmt(st[i]!)] : []), fmt(ix[i]!)])),
+  );
+}
+
+export interface Guess {
+  label: string;
+  /** Around the words, above the S&P 500: a range in dollars, or null where it cannot be measured. */
+  above: [number, number] | null;
+  /** From the close on the day of the trade to the fifth close after the words. */
+  held: [number, number] | null;
+}
+const usdK = (x: number) => `${x < 0 ? "−" : x > 0 ? "+" : ""}$${Math.abs(x) >= 1e6 ? `${(Math.abs(x) / 1e6).toFixed(2)}m` : `${Math.round(Math.abs(x) / 1000).toLocaleString("en-US")}k`}`;
+export const guessRange = ([lo, hi]: [number, number]) => `${usdK(lo)} to ${usdK(hi)}`;
+
+/** Each match as two range bars about zero, in dollars: above the index around the words, and since the trade's day. */
+export function guessChart(rows: Guess[], title: string): ReactNode {
+  const rowH = 76;
+  const [left, right, top, bottom] = [44, 44, 8, 34];
+  const H = top + rowH * rows.length + bottom;
+  const vals = rows.flatMap((r) => [...(r.above ?? []), ...(r.held ?? [])]).concat(0);
+  const t = ticks(Math.max(...vals.map(Math.abs)));
+  const lim = t.at(-1)!;
+  const lo = Math.min(...vals) < 0 ? -lim : 0;
+  const x = (v: number) => left + ((v - lo) / (lim - lo)) * (W - left - right);
+  const tickVals = [...t.filter((v) => v > 0).map((v) => -v).filter((v) => v >= lo).reverse(), ...t];
+  const bar = (r: [number, number] | null, y: number, cls: string, what: string, label: string) =>
+    r
+      ? h(
+          "g",
+          null,
+          h("title", null, `${label}, ${what}: ${guessRange(r)}`),
+          h("rect", { x: x(r[0]), y, width: Math.max(3, x(r[1]) - x(r[0])), height: 14, rx: 3, className: cls }),
+          h("text", { x: x(r[1]) + 6, y: y + 12, className: "chart__tick" }, guessRange(r)),
+        )
+      : h("text", { x: x(0) + 6, y: y + 11, className: "chart__tick" }, "not measurable here");
+  return h(
+    "figure",
+    { className: "chart" },
+    legend([
+      { label: "Around the words, above the S&P 500", swatch: "var(--ul-buy)" },
+      { label: "From the day of the trade", swatch: "var(--op-faint)" },
+    ]),
+    h(
+      "svg",
+      { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": title, className: "chart__svg" },
+      ...tickVals.map((v) => h(Fragment, { key: v }, h("line", { x1: x(v), x2: x(v), y1: top, y2: H - bottom, className: v === 0 ? "chart__axis" : "chart__grid" }), h("text", { x: x(v), y: H - 8, className: `chart__tick${v !== 0 && Math.abs(v) !== lim ? " chart__tick--minor" : ""}`, textAnchor: "middle" }, v === 0 ? "$0" : usdK(v)))),
+      ...rows.map((r, i) =>
+        h(
+          "g",
+          { key: r.label },
+          h("text", { x: 0, y: top + rowH * i + 16, className: "chart__mark" }, r.label),
+          bar(r.above, top + rowH * i + 26, "chart__guess chart__guess--above", "around the words, above the S&P 500", r.label),
+          bar(r.held, top + rowH * i + 48, "chart__guess chart__guess--held", "from the day of the trade", r.label),
+        ),
+      ),
+    ),
+    table(title, ["Trade", "Around the words, above the S&P 500", "From the day of the trade"], rows.map((r) => [r.label, r.above ? guessRange(r.above) : "Not measurable here", r.held ? guessRange(r.held) : "—"])),
   );
 }

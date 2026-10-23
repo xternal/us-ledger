@@ -47,8 +47,8 @@ import { clip, HEIGHT, shareImage, WIDTH, type Climb, type Share } from "./share
 import { bn, cents, fyName, fySpan, ledgerPath, promiseLines, readLedger, tn, type Year } from "./ledger.ts";
 import { customsChart, facts, flowChart, linesTable, longUk, yearFacts, yearNav, yearsChart, yearTable } from "./ledger-view.ts";
 import { approved, daysApart, readPairs, type Pair, type Said as PairSaid } from "./then-again.ts";
-import { approved as tradeApproved, around, change, INDEX, measure, readAbout, readMatches, readRows, type Match, type Quote } from "./trades.ts";
-import { moneyByMonth, monthsOf, tradesByMonth, usdM, versus } from "./trades-view.ts";
+import { approved as tradeApproved, around, change, estimate, INDEX, measure, readAbout, readMatches, readRows, type Match, type Quote } from "./trades.ts";
+import { guessChart, guessRange, moneyByMonth, monthsOf, tradesByMonth, usdM, versus } from "./trades-view.ts";
 import { FAMILY, MAKER, THIS_SITE } from "./family.ts";
 import { latestForecast, logbook, watchTiles, type LogEntry, type WatchPick } from "./home.ts";
 import { NOT_FOUND_FILE, notFoundBody, notFoundDescription, notFoundTitle } from "./notfound.ts";
@@ -1640,6 +1640,28 @@ async function main() {
     const matchItem = (x: Match) =>
       h("li", { key: x.id, className: "match-item" }, h("h3", null, h("a", { href: tradesPath(x.id) }, x.subject)), chain(x, false), versusOf(x, true), h("p", { className: "match-item__result" }, result5(x)));
 
+    /** The educated guess for a match, in words: the two windows, each with what it assumes. */
+    const guessOf = (x: Match) => {
+      const e = estimate(contentDir, x);
+      const m = measure(contentDir, x);
+      const fifth = longDate(w, m.index.fifth.date);
+      return h(
+        "dl",
+        { className: "guess" },
+        h("dt", null, "Around the words", e.proxy ? `, with the ${INDEX.name} standing in for the ${plural(m.day.purchases, "stock")}` : `, above the ${INDEX.name}`),
+        h(
+          "dd",
+          null,
+          e.proxy
+            ? `${range(`$${e.amount[0].toLocaleString("en-US")} - $${e.amount[1].toLocaleString("en-US")}`)} bought on ${longDate(w, x.trade.date)}, the sum of the day's ranges. From the last close before the words to ${fifth}, the ${INDEX.name} moved ${pct(e.around)}: on that measure, ${guessRange(e.onAround!)}. The stocks' own prices are not saved here, so the index stands in for them, and nothing is left to set against it.`
+            : `${x.prices.name} moved ${pct(e.around)} from the last close before the words to ${fifth}; the ${INDEX.name}, ${pct(e.index)}. The difference, ${pct(e.above!)}, on ${range(`$${e.amount[0].toLocaleString("en-US")} - $${e.amount[1].toLocaleString("en-US")}`)}: ${guessRange(e.onAbove!)}.`,
+        ),
+        e.held !== null
+          ? h(Fragment, null, h("dt", null, "From the day of the trade"), h("dd", null, `From the close on ${longDate(w, x.trade.date)} to ${fifth}: ${pct(e.held)}, or ${guessRange(e.onHeld!)}.`))
+          : null,
+        h("dd", null, "An estimate from the record alone: it takes the trade at that day's close and the position as held through the window, which the reports neither confirm nor rule out, and it does not say why prices moved."),
+      );
+    };
     const count = ab.count;
     const reports = ab.filings;
     const months = monthsOf(readRows(contentDir), count.year);
@@ -1691,6 +1713,7 @@ async function main() {
             h("li", null, h("a", { href: "#figures" }, "The figures")),
             h("li", null, h("a", { href: "#months" }, "Month by month")),
             h("li", null, h("a", { href: "#matches" }, "Trade, then words")),
+            h("li", null, h("a", { href: "#guess" }, "An educated guess")),
             h("li", null, h("a", { href: "#bill" }, "The House bill")),
             h("li", null, h("a", { href: "#reports" }, "The reports")),
             h("li", null, h("a", { href: "#test" }, "The test")),
@@ -1767,6 +1790,41 @@ async function main() {
           ),
           matches.length ? h("ol", { className: "matches" }, matches.map(matchItem)) : h("p", null, "No match is published yet. Each is checked against its sources and approved by the editor first."),
         ),
+        matches.length
+          ? h(
+              "section",
+              { id: "guess", className: "home-section", "aria-labelledby": "guess-h" },
+              h("h2", { id: "guess-h" }, "An educated guess: what the positions gained or lost"),
+              h(
+                "p",
+                { className: "section-lede" },
+                `For each trade above, the amount the report gives times how the price moved, in two windows: around the words, from the last close before them to the fifth close after, less the ${INDEX.name}'s move over the same days; and from the close on the day of the trade to the same fifth close. Both are ranges, because the reports give ranges.`,
+              ),
+              (() => {
+                const stocks = matches.filter((x) => x.prices.symbol);
+                const sum = (k: "onAbove" | "onHeld") =>
+                  stocks.map((x) => estimate(contentDir, x)[k]).reduce<[number, number]>((s, r) => (r ? [s[0] + r[0], s[1] + r[1]] : s), [0, 0]);
+                const rows = stocks.map((x) => {
+                  const e = estimate(contentDir, x);
+                  return { label: x.prices.name!, above: e.onAbove, held: e.onHeld };
+                });
+                return h(
+                  Fragment,
+                  null,
+                  guessChart([...rows, { label: "Together", above: sum("onAbove"), held: sum("onHeld") }], `Estimated gain or loss on each trade with a stock of its own, in dollars, in two windows`),
+                  ...matches.filter((x) => !x.prices.symbol).map((x) => h(Fragment, { key: x.id }, h("h3", null, h("a", { href: tradesPath(x.id) }, x.subject)), guessOf(x))),
+                );
+              })(),
+              h(
+                "ul",
+                { className: "rules" },
+                h("li", null, "It assumes each trade was made at that day's close and held through the window. The reports give the day, not the price, and say nothing of when a position was sold."),
+                h("li", null, "The amount is the report's range, never a single figure: the low end of every estimate uses the range's low end, the high end its high end."),
+                h("li", null, `Taking off the ${INDEX.name}'s move leaves what the stock did beyond the market on those days. It does not separate the President's words from the company's own news, which can fall in the same days.`),
+                h("li", null, "Prices are Nasdaq's closes and FRED's S&P 500, the same saved files as the chains above."),
+              ),
+            )
+          : null,
         h(
           "section",
           { id: "bill", className: "home-section", "aria-labelledby": "bill-h" },
@@ -1862,6 +1920,8 @@ async function main() {
           h("h2", null, x.prices.name ? `${x.prices.name} against the ${INDEX.name}` : `The ${INDEX.name}`),
           h("p", { className: "section-lede" }, `Ten trading days either side of the last close before the words, each line 100 at that close: above 100 is higher than it was, below is lower.${x.prices.name ? ` The grey line is what the same money would have done in the index.` : ""} Prices move on other news too, such as a company's own results: the chart shows when, not why.`),
           versusOf(x, false),
+          h("h2", null, "An educated guess"),
+          guessOf(x),
           x.note ? h("p", { className: "note" }, x.note) : null,
           h("h2", null, "What the White House says"),
           ...ab.white_house.map((q) => quoteBlock(q, "said--later")),

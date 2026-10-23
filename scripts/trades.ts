@@ -373,6 +373,32 @@ export function around(contentDir: string, m: Match, span = 10) {
   return { points, zero: points.findIndex((p) => p.date === w.before.date) };
 }
 
+/**
+ * An educated guess, from the record alone, of what a match's position gained or lost: the amount the report gives
+ * (a range, or the sum of the day's ranges for a whole day of trades) times how the stock moved. Two windows:
+ *   around   from the last close before the words to the fifth close after them, the rule's window; with the
+ *            S&P 500's move over the same days taken off ("above the index") when the match has a stock of its own
+ *   held     from the close on the day of the trade to the same fifth close: what the trade itself did by then
+ * It assumes the position was bought at that day's close and held through the window, which the reports neither
+ * confirm nor rule out; it says nothing about why prices moved.
+ */
+export function estimate(contentDir: string, m: Match) {
+  const ms = measure(contentDir, m);
+  const saved = readFileSync(join(contentDir, "sources", m.trade.source_text.file), "utf8");
+  const day = blockRows(saved, m.trade.source_text.span[0]).filter((r) => r.date === m.trade.date && r.type === ms.row.type);
+  const amount = (m.trade.asset ? [ms.row] : day).map((r) => r.amount.split(" - ").map((x) => Number(x.replace(/[$,]/g, "")))).reduce<[number, number]>((s, [a, b]) => [s[0] + a!, s[1] + b!], [0, 0]);
+  const own = ms.stock ?? ms.index;
+  const closes = readCloses(contentDir, m.prices.symbol && m.prices.file ? m.prices.file : INDEX.file);
+  const bought = closes.find((c) => c.date === m.trade.date)?.close;
+  const around = change(own.before.close, own.fifth.close);
+  const index = change(ms.index.before.close, ms.index.fifth.close);
+  const above = ms.stock ? around - index : null;
+  const held = bought ? change(bought, own.fifth.close) : null;
+  const sign = ms.row.type === "sale" ? -1 : 1;
+  const dollars = (pct: number | null) => (pct === null ? null : ([(sign * amount[0] * pct) / 100, (sign * amount[1] * pct) / 100].sort((x, y) => x - y) as [number, number]));
+  return { amount, around, index, above, held, onAround: dollars(around), onAbove: dollars(above), onHeld: dollars(held), proxy: !ms.stock };
+}
+
 /** A match or the page is published once an editor has approved it. */
 export const approved = (x: { reviews?: Review[] }) => (x.reviews ?? []).some((r) => r.kind === "editor" && r.approves);
 export const daysApart = (a: string, b: string) => Math.round((Date.parse(`${b}T12:00:00Z`) - Date.parse(`${a}T12:00:00Z`)) / 86_400_000);
