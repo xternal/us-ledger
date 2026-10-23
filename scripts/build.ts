@@ -49,6 +49,7 @@ import { customsChart, facts, flowChart, linesTable, longUk, yearFacts, yearNav,
 import { approved, daysApart, readPairs, type Pair, type Said as PairSaid } from "./then-again.ts";
 import { FAMILY, MAKER, THIS_SITE } from "./family.ts";
 import { latestForecast, logbook, watchTiles, type LogEntry, type WatchPick } from "./home.ts";
+import { NOT_FOUND_FILE, notFoundBody, notFoundDescription, notFoundTitle } from "./notfound.ts";
 
 const ROOT = join(import.meta.dirname, "..");
 /** `--preview` builds drafts too, into public-preview/, so the editor sees a page before approving it; never deployed. */
@@ -187,6 +188,9 @@ interface Page {
   type?: "website" | "article";
   wide?: boolean;
   script?: string;
+  /** The page for an address with no page: written to 404.html, noindex, no canonical, not in the sitemap, and its
+   * share card is the home page's. */
+  notFound?: boolean;
 }
 
 async function main() {
@@ -291,17 +295,19 @@ async function main() {
   );
 
   const page = (pg: Page) => {
-    const image = `/og${pg.path === "/" ? "/home" : trim(pg.path)}.png`;
-    images.push({ path: image, share: pg.share });
-    pages.push(pg.path);
+    const image = `/og${pg.path === "/" || pg.notFound ? "/home" : trim(pg.path)}.png`;
+    if (!pg.notFound) {
+      images.push({ path: image, share: pg.share });
+      pages.push(pg.path);
+    }
     const title = pg.fullTitle ?? (pg.title === name ? name : `${pg.title} · ${name}`);
     const social = pg.socialTitle ?? pg.title;
-    const url = absolute(config, pg.path);
+    const url = absolute(config, pg.notFound ? "/" : pg.path);
     const section = sectionOf(pg.path);
     const meta = (property: string, content: string) => h("meta", { key: property, property, content });
     const named = (n: string, content: string) => h("meta", { key: n, name: n, content });
     write(
-      pg.path.endsWith("/") ? `${pg.path}index.html` : `${pg.path}/index.html`,
+      pg.notFound ? NOT_FOUND_FILE : pg.path.endsWith("/") ? `${pg.path}index.html` : `${pg.path}/index.html`,
       "<!doctype html>\n" +
         renderToStaticMarkup(
           h(
@@ -314,8 +320,8 @@ async function main() {
               h("meta", { name: "viewport", content: "width=device-width, initial-scale=1" }),
               h("title", null, title),
               named("description", pg.description),
-              PREVIEW ? named("robots", "noindex, nofollow") : null,
-              h("link", { rel: "canonical", href: url }),
+              PREVIEW ? named("robots", "noindex, nofollow") : pg.notFound ? named("robots", "noindex") : null,
+              pg.notFound ? null : h("link", { rel: "canonical", href: url }),
               h("meta", { name: "theme-color", content: light.bg, media: "(prefers-color-scheme: light)" }),
               h("meta", { name: "theme-color", content: dark.bg, media: "(prefers-color-scheme: dark)" }),
               meta("og:type", pg.type ?? "website"),
@@ -1543,6 +1549,17 @@ async function main() {
         ".",
       ),
     ),
+  });
+
+  // An address with no page (scripts/notfound.ts): Vercel serves public/404.html with status 404.
+  page({
+    path: NOT_FOUND_FILE,
+    notFound: true,
+    title: notFoundTitle(),
+    description: notFoundDescription(),
+    share: pageShare(notFoundTitle(), name, notFoundDescription()),
+    alt: chartAlt,
+    body: notFoundBody({ home: "/", main: { href: p.promises(L), label: "Promises" } }),
   });
 
   if (!PREVIEW) {
