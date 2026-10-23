@@ -47,6 +47,8 @@ import { clip, HEIGHT, shareImage, WIDTH, type Climb, type Share } from "./share
 import { bn, cents, fyName, fySpan, ledgerPath, promiseLines, readLedger, tn, type Year } from "./ledger.ts";
 import { customsChart, facts, flowChart, linesTable, longUk, yearFacts, yearNav, yearsChart, yearTable } from "./ledger-view.ts";
 import { approved, daysApart, readPairs, type Pair, type Said as PairSaid } from "./then-again.ts";
+import { FAMILY, MAKER, THIS_SITE } from "./family.ts";
+import { latestForecast, logbook, watchTiles, type LogEntry, type WatchPick } from "./home.ts";
 
 const ROOT = join(import.meta.dirname, "..");
 /** `--preview` builds drafts too, into public-preview/, so the editor sees a page before approving it; never deployed. */
@@ -80,11 +82,12 @@ export function climbOf(config: Config, v: CardView, n: number): Climb {
   return { n, step, kind };
 }
 
-/** The menu's sections, and which one a page belongs to: a card's page is under Promises, an area's under Areas. */
+/**
+ * The menu's sections, and which one a page belongs to: a card's page and an area's are under Promises, a fiscal
+ * year's under Ledger, a pair's under Then again, a person's under People.
+ */
 const sectionOf = (path: string) =>
-  path.startsWith("/promises/area")
-    ? "areas"
-    : path.startsWith("/promise")
+  path.startsWith("/promise")
       ? "promises"
       : path.startsWith("/ledger")
         ? "ledger"
@@ -162,8 +165,8 @@ function targetAndForecast(v: CardView, w: ReturnType<typeof words>): ReactNode 
   );
 }
 
-/** Keeps the menu's current item in view on narrow screens, without moving the page. */
-const NAV_SCRIPT = `(()=>{const c=document.querySelector('.site-nav [aria-current]');if(c){const u=c.closest('ul');if(u.scrollWidth>u.clientWidth)u.scrollLeft=c.offsetLeft-(u.clientWidth-c.offsetWidth)/2}})();`;
+/** Keeps the current item of the menu and of the area row in view on narrow screens, without moving the page. */
+const NAV_SCRIPT = `(()=>{for(const c of document.querySelectorAll('.site-nav [aria-current],.area-filter [aria-current]')){const u=c.closest('ul');if(u.scrollWidth>u.clientWidth)u.scrollLeft=c.offsetLeft-(u.clientWidth-c.offsetWidth)/2}})();`;
 /** On the home page, marks the section in view in the "On this page" menu as the reader scrolls. */
 const ONPAGE_SCRIPT = `(()=>{const n=document.querySelector('.onpage');if(!n||!('IntersectionObserver'in window))return;const u=n.querySelector('ul'),links=[...n.querySelectorAll('a')],by=new Map(links.map(a=>[a.hash.slice(1),a]));const io=new IntersectionObserver(es=>{for(const e of es){if(!e.isIntersecting)continue;const a=by.get(e.target.id);if(!a)continue;links.forEach(l=>l.removeAttribute('aria-current'));a.setAttribute('aria-current','true');if(u.scrollWidth>u.clientWidth)u.scrollLeft=a.offsetLeft-16}},{rootMargin:'-40% 0px -55% 0px'});by.forEach((a,id)=>{const s=document.getElementById(id);if(s)io.observe(s)})})();`;
 
@@ -228,6 +231,15 @@ async function main() {
     .sort((a, b) => b.later.date.localeCompare(a.later.date) || a.id.localeCompare(b.id));
   const pairPath = (id?: string) => (id ? `/then-again/${id}/` : "/then-again/");
   const speaker = (x: Pair) => result.actors.get(x.actor_id)!;
+  const ago = (x: Pair) => daysApart(x.first.date, x.later.date);
+  const laterBy = (n: number) => {
+    if (n === 1) return "The next day";
+    if (n < 60) return `${n} days later`;
+    const months = Math.round(n / 30.44);
+    const [y, m] = [Math.floor(months / 12), months % 12];
+    const plural = (k: number, unit: string) => `${k} ${unit}${k === 1 ? "" : "s"}`;
+    return `${[y ? plural(y, "year") : "", m ? plural(m, "month") : ""].filter(Boolean).join(" and ")} later`;
+  };
 
   rmSync(OUT, { recursive: true, force: true });
   const write = (path: string, body: string | Buffer) => {
@@ -239,14 +251,44 @@ async function main() {
   const pages: string[] = [];
 
   // Promises first: the current administration's. The ledger second: the money in and out since fiscal year 2018.
+  // Five items, Method last, the same word in the same place as on the other sites of the family (Pavel, 23 October
+  // 2026). Areas are reached from Promises, and their pages highlight it.
   const nav = [
     { key: "promises", href: p.promises(L), label: "Promises" },
     { key: "ledger", href: ledgerPath(), label: "Ledger" },
     { key: "then-again", href: "/then-again/", label: "Then again" },
     { key: "people", href: "/actor/", label: "People" },
-    { key: "areas", href: "/promises/area/", label: "Areas" },
-    { key: "about", href: "/about/", label: "How it works" },
+    { key: "about", href: "/about/", label: "Method" },
   ];
+
+  /**
+   * The family of sites behind a small button beside the logo (Pavel, 23 October 2026): every ledger on the same
+   * open engine, and the maker's site. A <details> element, so it opens without JavaScript and keeps its place for
+   * keyboards and screen readers. Plain links: no query string, nothing counted.
+   */
+  const familySwitcher = h(
+    "details",
+    { className: "family" },
+    h(
+      "summary",
+      { "aria-label": "The other sites of the family" },
+      h("svg", { "aria-hidden": "true", viewBox: "0 0 14 14", width: 14, height: 14 }, h("path", { d: "M3 5l4 4 4-4", fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" })),
+    ),
+    h(
+      "div",
+      { className: "family__panel" },
+      h("p", null, "Public money and promises, one ledger per country or place, on the same open engine."),
+      h(
+        "ul",
+        null,
+        FAMILY.map((s) => {
+          const here = s.name === THIS_SITE;
+          return h("li", { key: s.name }, h("a", { href: s.href, "aria-current": here ? "page" : undefined }, h("b", null, s.name, here ? h("span", { className: "family__here" }, "you are here") : null), h("span", null, s.about)));
+        }),
+      ),
+      h("a", { className: "family__maker", href: MAKER.href }, `Made by ${MAKER.name} · ${MAKER.short}`),
+    ),
+  );
 
   const page = (pg: Page) => {
     const image = `/og${pg.path === "/" ? "/home" : trim(pg.path)}.png`;
@@ -313,15 +355,20 @@ async function main() {
                   "div",
                   { className: "wrap" },
                   h(
-                    "a",
-                    { href: "/", className: "brand", "aria-current": pg.path === "/" ? "page" : undefined },
+                    "div",
+                    { className: "brand-wrap" },
                     h(
-                      "svg",
-                      { className: "brand__mark", viewBox: "0 0 32 32", width: 30, height: 30, "aria-hidden": "true", focusable: "false" },
-                      h("path", { d: MARK_PATH, fill: "none", stroke: "currentColor", strokeWidth: 2.2, strokeLinecap: "round" }),
-                      h("circle", { ...MARK_DOT, r: 2, style: { fill: "var(--ul-bar)" } }),
+                      "a",
+                      { href: "/", className: "brand", "aria-current": pg.path === "/" ? "page" : undefined },
+                      h(
+                        "svg",
+                        { className: "brand__mark", viewBox: "0 0 32 32", width: 26, height: 26, "aria-hidden": "true", focusable: "false" },
+                        h("path", { d: MARK_PATH, fill: "none", stroke: "currentColor", strokeWidth: 2.2, strokeLinecap: "round" }),
+                        h("circle", { ...MARK_DOT, r: 2, style: { fill: "var(--ul-bar)" } }),
+                      ),
+                      h("span", null, "USLedger", h("span", { className: "brand__tld" }, ".org")),
                     ),
-                    h("span", null, "USLedger", h("span", { className: "brand__tld" }, ".org")),
+                    familySwitcher,
                   ),
                   h(
                     "nav",
@@ -411,6 +458,169 @@ async function main() {
   const chartAlt = `A bar for each of the twenty promises of the 2024 Republican Platform, as tall as the step it has reached: ${tally(platform)}.`;
   const pageShare = (kicker: string, title: string, sub: string): Share => ({ kind: "page", kicker, title, sub, footer: `Updated ${longDate(w, updated(views))} · usledger.org` });
 
+  // The ledger: the money in and out, every fiscal year since 2018, from the Treasury's own statements
+  // (scripts/ledger.ts). Read here because the home page's first screen opens with its figures.
+  const { file: ledgerFile, years } = readLedger(ROOT);
+  const fullYears = years.filter((y) => y.complete);
+  const lastYear = fullYears.at(-1)!;
+  const prevYear = fullYears.at(-2);
+
+  /**
+   * The home page's first screen (Pavel, 23 October 2026, as on LedgerGov.UK): a one-line headline, the Treasury's
+   * figures for the last full fiscal year, then cards that each lead on: the promises at a glance, the latest target
+   * with the forecast at the time, Then again, four promises to watch and the logbook. Every figure is from the data
+   * with its source, and the tiles and the logbook are picked by fixed rules (scripts/home.ts).
+   */
+  const firstScreen = () => {
+    const flow = (y: Year, key: string) => [...y.ins, ...y.outs].find((f) => f.key === key)?.amount ?? 0;
+    const money = (x: number) => (Math.abs(x) >= 1e12 ? tn(x, 2) : bn(x));
+    const kpis: { l: string; v: string; s: string }[] = [
+      { l: `Spent, fiscal year ${lastYear.fy}`, v: money(lastYear.outlays), s: fySpan(lastYear) },
+      { l: "Taken in", v: money(lastYear.receipts), s: "taxes and other receipts" },
+      { l: "Borrowed", v: money(lastYear.borrowed), s: `${cents(lastYear.borrowed, lastYear.outlays)} of every dollar spent` },
+      { l: "Tariffs", v: money(flow(lastYear, "customs")), s: prevYear ? `${money(flow(prevYear, "customs"))} in ${prevYear.fy}` : "customs duties, net of refunds" },
+      { l: "Interest on the debt", v: money(flow(lastYear, "interest")), s: `${cents(flow(lastYear, "interest"), lastYear.outlays)} of every dollar spent` },
+      { l: "Debt today", v: tn(ledgerFile.debt_now.total, 2), s: `on ${longUk(ledgerFile.debt_now.date)}` },
+    ];
+    const counts = statusCounts(views, config);
+    const tiles = watchTiles(config, views, today);
+    const forecast = latestForecast(views);
+    const gap = forecast ? forecastGap(forecast, w) : null;
+    const log = logbook({
+      config,
+      views,
+      pairs,
+      today,
+      actorName: (id) => actorName(result.actors.get(id)!),
+      headline,
+      label,
+      cardPath: (id) => p.card(id, L),
+      actorPath: (id) => p.actor(id, L),
+      pairPath,
+      promisesPath: p.promises(L),
+    });
+    const latestPair = pairs[0];
+    const TILES = [
+      { key: "delivered", label: "Latest delivered", tone: "good", none: "No promise has been delivered yet." },
+      { key: "notMet", label: "Latest not met", tone: "bad", none: "No promise has failed yet." },
+      { key: "dueNext", label: "Due next", tone: "moved", none: "No open promise has a date of its own ahead." },
+      { key: "forward", label: "Latest step forward", tone: "new", none: "No promise has moved a step yet." },
+    ] as const;
+    const tile = (t: (typeof TILES)[number], pick: WatchPick | null) =>
+      pick
+        ? h(
+            "a",
+            { key: t.key, className: "fs-card fs-tile", href: p.card(pick.view.id, L) },
+            h("span", { className: `fs-tag t-${t.tone}` }, t.label),
+            h("span", { className: "fs-tile__q" }, headline(pick.view)),
+            h("span", { className: "fs-quiet" }, `${actorName(pick.view.actor)}, ${t.key === "dueNext" ? "due " : ""}${longDate(w, pick.date)}`),
+          )
+        : h("div", { key: t.key, className: "fs-card fs-tile fs-tile--none" }, h("span", { className: `fs-tag t-${t.tone}` }, t.label), h("span", { className: "fs-quiet" }, t.none));
+    const logRow = (l: LogEntry, i: number) =>
+      h(
+        "li",
+        { key: `${l.date}-${i}` },
+        h("time", { className: "fs-log__date", dateTime: l.date }, longDate(w, l.date)),
+        h("span", { className: `fs-tag t-${l.tone}` }, l.label),
+        h("a", { href: l.href }, h("span", { className: "visually-hidden" }, `${l.label}: `), l.text),
+      );
+    return h(
+      "div",
+      { className: "fs", id: "first-screen" },
+      h(
+        "div",
+        { className: "fs-title" },
+        h("h1", null, `Where ${tn(lastYear.outlays)} of federal money went, and ${views.length} promises to watch`),
+        h("p", null, `Day ${day} of the President's term · from the Treasury's own statements and the speakers' exact words`),
+      ),
+      h(
+        "section",
+        { className: "fs-kpis", "aria-labelledby": "fs-kpis-h" },
+        h("h2", { id: "fs-kpis-h", className: "visually-hidden" }, `The federal government's money, fiscal year ${lastYear.fy}`),
+        h(
+          "ul",
+          { className: "kpis" },
+          kpis.map((k) => h("li", { key: k.l, className: "kpi" }, h("span", { className: "kpi__l" }, k.l), h("strong", { className: "kpi__v" }, k.v), h("span", { className: "kpi__s" }, k.s))),
+        ),
+        h(
+          "p",
+          { className: "fs-source" },
+          "Monthly Treasury Statement, September ",
+          String(lastYear.fy),
+          "; the debt from Debt to the Penny. ",
+          h("a", { href: ledgerPath() }, "Where it went, line by line ", h("span", { "aria-hidden": "true" }, "→")),
+        ),
+      ),
+      h(
+        "div",
+        { className: "fs-row3" },
+        h(
+          "section",
+          { className: "fs-card", "aria-labelledby": "fs-promises-h" },
+          h("div", { className: "fs-head" }, h("h2", { id: "fs-promises-h" }, h("a", { href: p.promises(L) }, `${views.length} promises on record`)), h("span", null, `${platform.length} from the 2024 Republican Platform`)),
+          h(
+            "div",
+            { className: "fs-bar", "aria-hidden": "true" },
+            counts.map((c) => h("span", { key: c.status, "data-kind": climbOf(config, { card: { status: c.status } } as CardView, 0).kind, "data-status": c.status, style: { flexGrow: c.count } })),
+          ),
+          h(
+            "ul",
+            { className: "fs-counts", "aria-label": "Where they stand" },
+            counts.map((c) =>
+              h("li", { key: c.status }, h("i", { "aria-hidden": "true", "data-kind": climbOf(config, { card: { status: c.status } } as CardView, 0).kind, "data-status": c.status }), h("b", null, String(c.count)), ` ${label(c.status).toLowerCase()}`),
+            ),
+          ),
+          h("a", { className: "fs-more", href: p.promises(L) }, "Every promise, by person, status or area ", h("span", { "aria-hidden": "true" }, "→")),
+        ),
+        forecast && gap
+          ? h(
+              "section",
+              { className: "fs-card", "aria-labelledby": "fs-forecast-h" },
+              h("div", { className: "fs-head" }, h("h2", { id: "fs-forecast-h" }, "The target and the forecast at the time"), h("span", null, `${actorName(forecast.actor)}, ${longDate(w, forecast.card.made_on)}`)),
+              h("a", { className: "fs-tile__q", href: p.card(forecast.id, L) }, headline(forecast)),
+              h(
+                "div",
+                { className: "fs-gap", "aria-hidden": "true" },
+                h("span", { className: "fs-gap__track" }),
+                h("span", { className: "fs-gap__zone", style: gap.below ? { left: 0, width: `${(gap.metric.target / gap.max) * 100}%` } : { left: `${(gap.metric.target / gap.max) * 100}%`, right: 0 } }),
+                h("span", { className: "fs-gap__mark fs-gap__mark--target", style: { left: `${(gap.metric.target / gap.max) * 100}%` } }),
+                h("span", { className: "fs-gap__mark fs-gap__mark--forecast", style: { left: `${(gap.baseline.value / gap.max) * 100}%` } }),
+              ),
+              h(
+                "dl",
+                { className: "fs-gap__nums" },
+                h("div", null, h("dt", null, "Target"), h("dd", null, gap.targetLabel.replace(/^Target: /, ""))),
+                h("div", null, h("dt", null, `Forecast, ${gap.baseline.by.name}`), h("dd", null, gap.short(gap.baseline.value))),
+              ),
+              h("p", { className: "fs-quiet" }, gap.words, ` The forecast was published on ${longDate(w, gap.baseline.published_on)}, before the promise.`),
+            )
+          : null,
+        h(
+          "section",
+          { className: "fs-card", "aria-labelledby": "fs-then-h" },
+          h("div", { className: "fs-head" }, h("h2", { id: "fs-then-h" }, h("a", { href: pairPath() }, "Then again")), h("span", null, `${pairs.length} ${pairs.length === 1 ? "pair" : "pairs"} on record`)),
+          latestPair
+            ? h(
+                "a",
+                { className: "fs-pair", href: pairPath(latestPair.id) },
+                h("span", { className: "fs-tile__q" }, latestPair.subject),
+                h("span", { className: "fs-quiet" }, `${actorName(speaker(latestPair))}, ${longDate(w, latestPair.first.date)}: “${clip(latestPair.first.text, 90)}”`),
+                h("span", { className: "fs-quiet" }, `${laterBy(ago(latestPair))}: “${clip(latestPair.later.text, 90)}”`),
+              )
+            : h("p", { className: "fs-quiet" }, "No pair is published yet."),
+          h("a", { className: "fs-more", href: pairPath() }, "Every pair, and the dates promises set themselves ", h("span", { "aria-hidden": "true" }, "→")),
+        ),
+      ),
+      views.length ? h("section", { className: "fs-tiles", "aria-label": "Promises to watch" }, TILES.map((t) => tile(t, tiles[t.key]))) : null,
+      h(
+        "section",
+        { className: "fs-card fs-log", "aria-labelledby": "fs-log-h" },
+        h("div", { className: "fs-head" }, h("h2", { id: "fs-log-h" }, "Logbook ", h("span", null, "added, moved, corrected or checked, newest first")), h("a", { href: "/feeds/all.xml" }, "Every change (Atom) ", h("span", { "aria-hidden": "true" }, "→"))),
+        h("ol", null, log.map(logRow)),
+      ),
+    );
+  };
+
   // Home: the platform's twenty first, by rule, as a chart and a ledger; then the promises on the first screen,
   // chosen by rule (decision 30); then how a status moves and the questions people ask.
   const day = daysBetween(TERM_START, today) + 1;
@@ -459,6 +669,7 @@ async function main() {
     body: h(
       Fragment,
       null,
+      firstScreen(),
       h(
         "section",
         { className: "hero", "aria-labelledby": "hero-h" },
@@ -466,7 +677,7 @@ async function main() {
           "div",
           { className: "hero__text" },
           h("p", { className: "kicker" }, `2024 Republican Platform · Day ${day} of the President's term`),
-          h("h1", { id: "hero-h" }, "Twenty promises, and where each one stands"),
+          h("h2", { id: "hero-h" }, "Twenty promises, and where each one stands"),
           h(
             "p",
             { className: "lede" },
@@ -586,7 +797,7 @@ async function main() {
           ", when a step it reached is reversed. ",
           h("strong", null, label("unscoreable")),
           " means too vague to track. ",
-          h("a", { href: "/about/" }, "How it works"),
+          h("a", { href: "/about/" }, "Method"),
         ),
       ),
       h(
@@ -598,6 +809,26 @@ async function main() {
     ),
   });
 
+  /**
+   * Areas, as a row of links on Promises and on each area's page, the one in view marked: Areas left the menu
+   * (Pavel, 23 October 2026), so this is how a reader narrows the promises to one of the platform's twenty. Only areas
+   * with a promise are listed; the areas page lists them all, empty ones too.
+   */
+  const areaFilter = (current?: string) =>
+    h(
+      "nav",
+      { className: "area-filter", "aria-label": "Promises by area" },
+      h(
+        "ul",
+        null,
+        h("li", null, h("a", { href: p.promises(L), "aria-current": current ? undefined : "page" }, "All ", h("span", null, String(views.length)))),
+        coverage(config, views)
+          .filter((c) => c.count)
+          .map((c) => h("li", { key: c.area }, h("a", { href: p.area(c.area, L), "aria-current": current === c.area ? "page" : undefined }, areaLabel(config, c.area, L), " ", h("span", null, String(c.count))))),
+        h("li", null, h("a", { href: "/promises/area/", className: "area-filter__all" }, "Every area, empty ones too")),
+      ),
+    );
+
   page({
     path: p.promises(L),
     title: "Every promise",
@@ -605,7 +836,14 @@ async function main() {
     share: chartShare("Every promise", `Every promise on ${name}, and where each one stands`),
     alt: chartAlt,
     ld: collectionJsonLd({ path: p.promises(L), name: "Every promise", description: `Every promise on ${name}`, views }, ld),
-    body: h(Fragment, null, h("h1", null, "Every promise"), h("p", { className: "lede" }, `${views.length} ${views.length === 1 ? "promise" : "promises"}, newest first: ${tally(views)}.`), h(PromiseList, { views, today, actors: result.actors, config, empty: "No promise is published yet." })),
+    body: h(
+      Fragment,
+      null,
+      h("h1", null, "Every promise"),
+      h("p", { className: "lede" }, `${views.length} ${views.length === 1 ? "promise" : "promises"}, newest first: ${tally(views)}.`),
+      areaFilter(),
+      h(PromiseList, { views, today, actors: result.actors, config, empty: "No promise is published yet." }),
+    ),
   });
 
   for (const v of views) {
@@ -722,6 +960,7 @@ async function main() {
     body: h(
       Fragment,
       null,
+      h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Promises", href: p.promises(L) }, { name: "Areas", href: "/promises/area/" }] }),
       h("h1", null, "Promises by area"),
       h("p", { className: "lede" }, "The areas are the twenty promises of the 2024 Republican Platform, in its order, so the yardstick is the platform's own; everything else is under “Not among the 20”."),
       h(AreaCoverage, { views, config, headingLevel: 2 }),
@@ -740,12 +979,13 @@ async function main() {
       description,
       share: own ? promiseShare(own, `Area ${areaName.replace(/^\d+\.\s*/, "")}`) : pageShare("Area", areaName, inArea.length ? `${inArea.length} promises: ${statusMix(inArea, config, w)}` : "No promise is recorded in this area yet."),
       alt: own ? promiseAlt(own) : `${areaName} on ${name}.`,
-      ld: collectionJsonLd({ path: p.area(area, L), name: areaName, description, views: inArea, breadcrumb: [{ name: "Areas", path: "/promises/area/" }] }, ld),
+      ld: collectionJsonLd({ path: p.area(area, L), name: areaName, description, views: inArea, breadcrumb: [{ name: "Promises", path: p.promises(L) }, { name: "Areas", path: "/promises/area/" }] }, ld),
       body: h(
         Fragment,
         null,
-        h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Areas", href: "/promises/area/" }, { name: areaName, href: p.area(area, L) }] }),
+        h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Promises", href: p.promises(L) }, { name: "Areas", href: "/promises/area/" }, { name: areaName, href: p.area(area, L) }] }),
         h("h1", null, areaName),
+        areaFilter(area),
         h(PromiseList, { views: inArea, today, actors: result.actors, config, empty: "No promise is recorded in this area." }),
       ),
     });
@@ -753,9 +993,6 @@ async function main() {
 
   // The ledger: the money in and out, every fiscal year since 2018, from the Treasury's own statements
   // (scripts/ledger.ts). One page for all the years, and one for each year.
-  const { file: ledgerFile, years } = readLedger(ROOT);
-  const fullYears = years.filter((y) => y.complete);
-  const lastYear = fullYears.at(-1)!;
   const byId = new Map(views.map((v) => [v.id, v]));
   const mtsSource = ledgerFile.sources.mts;
   const yearShare = (y: Year, kicker: string): Share => ({
@@ -959,15 +1196,6 @@ async function main() {
 
   // Then again (scripts/then-again.ts): statements, and what the same person said later; then the dates promises
   // set themselves, and the promises with no step since. The same test and the same lists for everyone.
-  const ago = (x: Pair) => daysApart(x.first.date, x.later.date);
-  const laterBy = (n: number) => {
-    if (n === 1) return "The next day";
-    if (n < 60) return `${n} days later`;
-    const months = Math.round(n / 30.44);
-    const [y, m] = [Math.floor(months / 12), months % 12];
-    const plural = (k: number, unit: string) => `${k} ${unit}${k === 1 ? "" : "s"}`;
-    return `${[y ? plural(y, "year") : "", m ? plural(m, "month") : ""].filter(Boolean).join(" and ")} later`;
-  };
   const saidBlock = (s: PairSaid, label: string, cls: string) =>
     h(
       "article",
@@ -1271,14 +1499,16 @@ async function main() {
 
   page({
     path: "/about/",
-    title: "How it works",
+    title: "Method",
+    socialTitle: "Method: how USLedger.org works",
     description: "How USLedger.org records promises: exact words with their source, a status that moves only on documents, nothing rewritten, costs with who made them, and one standard for everyone.",
-    share: pageShare("How it works", "Exact words. A status that moves only on evidence.", "Nothing rewritten; costs with who made them; the same rules and words for every person, party and government."),
+    share: pageShare("Method", "Exact words. A status that moves only on evidence.", "Nothing rewritten; costs with who made them; the same rules and words for every person, party and government."),
     alt: "How USLedger.org works: exact words, and a status that moves only on evidence.",
     body: h(
       Fragment,
       null,
-      h("h1", null, "How it works"),
+      h("h1", null, "Method"),
+      h("p", { className: "lede" }, "How a promise gets here, and how it moves."),
       h(
         "ul",
         { className: "rules" },
@@ -1323,7 +1553,7 @@ async function main() {
         f.path === "/llms.txt"
           ? String(f.body).replace(
               /\n## Promise cards\n/,
-              `\n## The ledger\n\n- [The ledger: money in and out, fiscal years ${years[0]!.fy} to ${years.at(-1)!.fy}](${absolute(config, ledgerPath())}): receipts by source and outlays by function from the Monthly Treasury Statement, with what was borrowed\n${years.map((y) => `- [Fiscal year ${y.fy}${y.complete ? "" : " so far"}](${absolute(config, ledgerPath(y.fy))}): ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed`).join("\n")}\n- [The ledger as JSON](${absolute(config, "/data/ledger.json")})\n\n## Then again\n\n- [Then again](${absolute(config, pairPath())}): statements and what the same person said later, in exact words with dates and sources; the dates promises set themselves; promises with no step since\n${pairs.map((x) => `- [${x.subject}](${absolute(config, pairPath(x.id))}): ${actorName(speaker(x))}, ${x.first.date} and ${x.later.date}`).join("\n")}\n\n## Promise cards\n`,
+              `\n## The site\n\n- [Home](${absolute(config, "/")}): the first screen: the Treasury's figures for fiscal year ${lastYear.fy}, the promises at a glance, the latest target with the forecast at the time, Then again, four promises to watch picked by fixed rules, and a logbook of what was added, moved, corrected or checked; then the platform's twenty\n- [Promises by area](${absolute(config, "/promises/area/")}): the platform's twenty areas, in its order, empty ones too\n- [Method](${absolute(config, "/about/")}): how a promise is recorded and how its status moves\n\n## The ledger\n\n- [The ledger: money in and out, fiscal years ${years[0]!.fy} to ${years.at(-1)!.fy}](${absolute(config, ledgerPath())}): receipts by source and outlays by function from the Monthly Treasury Statement, with what was borrowed\n${years.map((y) => `- [Fiscal year ${y.fy}${y.complete ? "" : " so far"}](${absolute(config, ledgerPath(y.fy))}): ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed`).join("\n")}\n- [The ledger as JSON](${absolute(config, "/data/ledger.json")})\n\n## Then again\n\n- [Then again](${absolute(config, pairPath())}): statements and what the same person said later, in exact words with dates and sources; the dates promises set themselves; promises with no step since\n${pairs.map((x) => `- [${x.subject}](${absolute(config, pairPath(x.id))}): ${actorName(speaker(x))}, ${x.first.date} and ${x.later.date}`).join("\n")}\n\n## Promise cards\n`,
             )
           : f.body;
       write(f.path, body);
