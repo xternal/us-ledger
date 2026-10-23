@@ -57,6 +57,21 @@ export interface Pair {
 
 const ISO = /^\d{4}-\d{2}-\d{2}$/;
 
+/** A quote's address and its words at the span it names in the saved source: an empty list means both check out. */
+export function quoteProblems(contentDir: string, s: Pick<Said, "text" | "source_url" | "source_text">, name: string): string[] {
+  const problems: string[] = [];
+  if (!/^https:\/\//.test(s.source_url ?? "")) problems.push(`${name}.source_url should be an https address`);
+  const src = join(contentDir, "sources", s.source_text?.file ?? "");
+  if (!s.source_text?.file || !existsSync(src)) return [...problems, `${name}.source_text.file is missing from content/sources/`];
+  const [a, b] = s.source_text.span ?? [];
+  const saved = readFileSync(src, "utf8");
+  if (typeof s.text !== "string" || !s.text || typeof a !== "number" || typeof b !== "number" || saved.slice(a, b) !== s.text) {
+    const at = s.text ? saved.indexOf(s.text) : -1;
+    problems.push(at < 0 ? `${name}.text is not in ${s.source_text.file} word for word` : `${name}.source_text.span should be [${at}, ${at + s.text.length}]`);
+  }
+  return problems;
+}
+
 /** Every pair, with the problems found in each: an empty list means it passes. */
 export function readPairs(contentDir: string, config: Config, actorIds: Set<string>): { pair: Pair; file: string; problems: string[] }[] {
   const dir = join(contentDir, DIR);
@@ -83,15 +98,7 @@ export function readPairs(contentDir: string, config: Config, actorIds: Set<stri
         need(ISO.test(s.date ?? ""), `${name}.date should be a date`);
         need((config.venues as readonly string[]).includes(s.venue), `${name}.venue "${s.venue}" is not one of the configured venues`);
         need(typeof s.where === "string" && s.where.length > 0, `${name}.where is missing`);
-        need(/^https:\/\//.test(s.source_url ?? ""), `${name}.source_url should be an https address`);
-        const src = join(contentDir, "sources", s.source_text?.file ?? "");
-        if (!s.source_text?.file || !existsSync(src)) return problems.push(`${name}.source_text.file is missing from content/sources/`);
-        const [a, b] = s.source_text.span ?? [];
-        const saved = readFileSync(src, "utf8");
-        if (typeof a !== "number" || typeof b !== "number" || saved.slice(a, b) !== s.text) {
-          const at = saved.indexOf(s.text);
-          problems.push(at < 0 ? `${name}.text is not in ${s.source_text.file} word for word` : `${name}.source_text.span should be [${at}, ${at + s.text.length}]`);
-        }
+        problems.push(...quoteProblems(contentDir, s, name));
         for (const word of lintText(s.where, lex)) problems.push(`${name}.where: "${word}" passes judgement`);
       };
       said(pair.first, "first");
