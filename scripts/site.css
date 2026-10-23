@@ -516,11 +516,6 @@ a.fs-tile__q:hover { text-decoration: underline; }
 .chart__swatch--line { height: 3px; width: 1.2rem; border-radius: 2px; }
 .chart__data { margin-top: 0.4rem; font-size: 0.9rem; }
 .chart__data summary { cursor: pointer; color: var(--op-muted); }
-.chart__guess--above { fill: var(--ul-buy); }
-.chart__guess--held { fill: var(--op-faint); }
-.guess { max-width: 46rem; }
-.guess dt { font-weight: 600; margin-top: 0.6rem; }
-.guess dd { margin: 0.15rem 0 0; color: var(--op-muted); }
 /* On a phone the 720-wide drawings shrink by half: their text grows to stay readable. */
 @media (max-width: 40rem) {
   .chart__tick, .chart__mark, .chart__end { font-size: 22px; }
