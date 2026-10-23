@@ -36,4 +36,8 @@ prices:
   file: "nasdaq-tmo.csv"
 note: "The report gives the day of the purchase, not the hour, so whether it came before or after the tour is not on the record."
 recorded_on: "2026-10-23"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-23"
+    approves: true

@@ -34,4 +34,8 @@ words:
 prices: {}
 note: "The 327 purchases on 8 April 2025 were all in Investment Account #7, in amounts of $1,001 to $250,000 each. The row shown is the first of them in the report."
 recorded_on: "2026-10-23"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-10-23"
+    approves: true
