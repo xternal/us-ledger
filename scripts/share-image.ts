@@ -23,7 +23,7 @@ export interface Climb {
 }
 
 export type Share =
-  | { kind: "promise"; kicker: string; headline: string; words: string; steps: string[]; step: number; status: string; note?: string; latest?: string; footer: string }
+  | { kind: "promise"; kicker: string; headline: string; words: string; steps: string[]; step: number; status: string; note?: string; latest?: string; gap?: Gap; footer: string }
   | { kind: "chart"; kicker: string; title: string; climb: Climb[]; steps: string[]; tally: string; footer: string }
   | { kind: "page"; kicker: string; title: string; sub: string; footer: string }
   /** The ledger: each year as a bar, receipts and the part borrowed. */
@@ -32,6 +32,20 @@ export type Share =
   | { kind: "flow"; kicker: string; title: string; ins: Part[]; outs: Part[]; footer: string }
   /** Two dated statements by one person, the later saying the opposite of the earlier. */
   | { kind: "pair"; kicker: string; subject: string; first: Said; later: Said; gap: string; footer: string };
+/** A target and the forecast published before the promise, on one scale (OpenPromises decision 36). */
+export interface Gap {
+  target: number;
+  forecast: number;
+  /** The scale's top; it starts at 0. */
+  max: number;
+  /** The target is a ceiling (below, at most) rather than a floor (at least). */
+  below: boolean;
+  targetLabel: string;
+  forecastLabel: string;
+  words: string;
+  /** Under the words: where the promise stands, and when the forecast was published. */
+  sub: string;
+}
 export interface Part {
   label: string;
   amount: number;
@@ -99,6 +113,31 @@ function meter(steps: string[], step: number, status: string, note?: string) {
         text({ fontSize: 21, fontWeight: i === step ? 600 : 400, color: i === step ? c.ink : c.faint }, s),
       ),
     ),
+  );
+}
+
+/** The target's zone and the forecast's mark on one scale, labelled, with the gap in words: the page's figure, drawn for sharing. */
+function gapScale(g: Gap) {
+  const at = (x: number) => (Math.min(1, Math.max(0, x / g.max)) * (WIDTH - 128));
+  const t = at(g.target);
+  const f = at(g.forecast);
+  const label = (x: number, top: number, colour: string, s: string) => {
+    const right = x > (WIDTH - 128) * 0.6;
+    return text({ position: "absolute", top, ...(right ? { right: WIDTH - 128 - x } : { left: x }), fontSize: 24, fontWeight: 600, color: colour, whiteSpace: "nowrap" }, s);
+  };
+  return box(
+    { flexDirection: "column", gap: 6 },
+    box(
+      { position: "relative", height: 92 },
+      box({ position: "absolute", top: 36, left: 0, right: 0, height: 16, borderRadius: 8, background: c.grid }),
+      box({ position: "absolute", top: 36, height: 16, borderRadius: 8, background: c.good, opacity: 0.35, ...(g.below ? { left: 0, width: t } : { left: t, right: 0 }) }),
+      box({ position: "absolute", top: 26, left: t - 3, width: 6, height: 36, borderRadius: 3, background: c.good }),
+      box({ position: "absolute", top: 25, left: f - 19, width: 38, height: 38, borderRadius: 19, background: c.ink, border: `6px solid ${c.bg}` }),
+      label(f, -2, c.ink, g.forecastLabel),
+      label(t, 62, c.good, g.targetLabel),
+    ),
+    text({ fontSize: 26, fontWeight: 600, color: c.ink }, g.words),
+    text({ fontSize: 22, color: c.muted }, g.sub),
   );
 }
 
@@ -198,10 +237,10 @@ function tree(s: Share) {
       s.kicker,
       s.footer,
       text({ fontFamily: "Serif", fontSize: 64, fontWeight: 600, lineHeight: 1.05, letterSpacing: -1 }, clip(s.headline, 60)),
-      box({ borderLeft: `6px solid ${c.accent}`, paddingLeft: 22 }, text({ fontSize: 28, fontWeight: 600, lineHeight: 1.3, color: c.muted, letterSpacing: 0.5 }, `“${clip(s.words, 150)}”`)),
-      box({ height: 8 }),
-      meter(s.steps, s.step, s.status, s.note),
-      s.latest ? text({ fontSize: 23, lineHeight: 1.35, color: c.muted }, clip(s.latest, 130)) : null,
+      box({ borderLeft: `6px solid ${c.accent}`, paddingLeft: 22 }, text({ fontSize: 28, fontWeight: 600, lineHeight: 1.3, color: c.muted, letterSpacing: 0.5 }, `“${clip(s.words, s.gap ? 95 : 150)}”`)),
+      s.gap ? null : box({ height: 8 }),
+      s.gap ? gapScale(s.gap) : meter(s.steps, s.step, s.status, s.note),
+      s.gap ? null : s.latest ? text({ fontSize: 23, lineHeight: 1.35, color: c.muted }, clip(s.latest, 130)) : null,
     );
   if (s.kind === "chart")
     return frame(
