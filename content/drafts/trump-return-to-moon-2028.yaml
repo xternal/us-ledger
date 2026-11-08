@@ -1,0 +1,42 @@
+format: openpromises/1
+id: trump-return-to-moon-2028
+headline:
+  en: "Americans back on the Moon by 2028"
+actor_id: donald-trump
+made_on: "2026-11-03"
+venue: statement
+venue_label:
+  en: "Proclamation \"The American Declaration of Freedom in Space\""
+area: other
+status: promised
+status_note:
+  en: "The proclamation says the Artemis II mission carried astronauts around the Moon in April 2026, and that Artemis III will undertake a test flight campaign in the summer of 2027. No one has landed on the Moon since Apollo 17 in December 1972."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "NASA, an agency of the Administration, runs the Artemis missions; Congress appropriates its budget."
+origin: llm_intake
+sources:
+  - title: "The White House: The American Declaration of Freedom in Space, a proclamation (3 November 2026)"
+    url: https://www.whitehouse.gov/presidential-actions/2026/11/the-american-declaration-of-freedom-in-space/
+versions:
+  - version: 1
+    text: "We will return to the Moon by 2028, lay the foundation for a permanent American lunar presence, and hasten the day when an American becomes the first human to set foot on the red dunes of Mars."
+    recorded_on: "2026-11-08"
+    source_url: https://www.whitehouse.gov/presidential-actions/2026/11/the-american-declaration-of-freedom-in-space/
+    quote_checked_on: null
+    source_text:
+      file: whitehouse-2026-11-03-freedom-in-space.txt
+      span: [831, 1024]
+    parameters:
+      who:
+        en: "American astronauts, landing on the Moon"
+      when:
+        en: "By 2028: the words give the year, not a date"
+      deadline: "2028-12-31"
+events:
+  - date: "2026-11-03"
+    type: promised
+    text:
+      en: "In a proclamation on space, the President says the United States will return to the Moon by 2028"
+reviews: []
