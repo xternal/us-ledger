@@ -1,0 +1,46 @@
+format: openpromises/1
+id: jeffries-restore-snap-2026
+headline:
+  en: "Restore SNAP funding in the first 100 days"
+actor_id: hakeem-jeffries
+made_on: "2026-11-04"
+venue: statement
+venue_label:
+  en: "Letter to House Democrats announcing his candidacy for Speaker (published by the House Democratic Leader's office)"
+area: other
+status: promised
+status_note:
+  en: "Public Law 119-21 (4 July 2025) changes the Supplemental Nutrition Assistance Program (SNAP) in subtitle A of title I: among other things, section 10102 changes the work requirements for able-bodied adults, section 10105 requires states to pay a share of benefits, and section 10106 changes how administrative costs are shared. The words do not say which of the changes would be reversed. On 7 November 2026, on MS NOW, Jeffries said: \"We're going to work hard to reverse the Medicaid cuts, reverse the SNAP cuts.\""
+responsible:
+  actor_id: us-congress
+  note:
+    en: "The words commit House Democrats in the 120th Congress, which meets on 3 January 2027. A law needs both chambers and the President's signature, or two-thirds of each chamber to override a veto."
+origin: llm_intake
+sources:
+  - title: "Leader Jeffries: Dear Colleague Announcing Candidacy for Speaker of the House (4 November 2026, Office of the Democratic Leader)"
+    url: https://democraticleader.house.gov/media/press-releases/dear-colleague-announcing-candidacy-speaker-house
+  - title: "Leader Jeffries on MS NOW's PoliticsNation, 7 November 2026 (transcript, Office of the Democratic Leader)"
+    url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-ms-now-it-was-incredible-victory-american-people-and-decisive
+  - title: "Public Law 119-21, subtitle A of title I (Nutrition), sections 10101 to 10108"
+    url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+versions:
+  - version: 1
+    text: "During the first 100 days, House Democrats must act to reverse the Medicaid cuts, restore SNAP funding, extend the Affordable Care Act tax credits, eradicate the Trump tariffs and stop the reckless war of choice in Iran."
+    recorded_on: "2026-11-08"
+    source_url: https://democraticleader.house.gov/media/press-releases/dear-colleague-announcing-candidacy-speaker-house
+    quote_checked_on: null
+    source_text:
+      file: jeffries-2026-11-04-dear-colleague.txt
+      span: [567, 787]
+    parameters:
+      who:
+        en: "People who receive SNAP benefits, and the states that run the program"
+      when:
+        en: "In the first 100 days of the 120th Congress, which meets on 3 January 2027, with the Democratic House majority the letter takes as won on 3 November 2026 (results not yet certified when this was recorded)"
+      deadline: null
+events:
+  - date: "2026-11-04"
+    type: promised
+    text:
+      en: "In a letter to House Democrats seeking their votes for Speaker, Jeffries says House Democrats must act in the first 100 days to restore SNAP funding"
+reviews: []
