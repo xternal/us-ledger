@@ -1,0 +1,44 @@
+format: openpromises/1
+id: jeffries-no-deportation-funding-2026
+headline:
+  en: "No money for the Administration's deportation operations"
+actor_id: hakeem-jeffries
+made_on: "2026-11-10"
+venue: interview
+venue_label:
+  en: "PBS News Hour (transcript published by the House Democratic Leader's office)"
+area: deportation
+status: promised
+status_note:
+  en: "Public Law 119-21 (4 July 2025) already appropriates, to remain available until 30 September 2029, $45,000,000,000 to U.S. Immigration and Customs Enforcement for detention capacity (section 90003) and $29,850,000,000 to it for hiring, removals and other purposes (section 100052). The words do not say whether they cover only new appropriations or also the regular yearly funding of U.S. Immigration and Customs Enforcement."
+responsible:
+  actor_id: us-congress
+  note:
+    en: "The words commit House Democrats in the 120th Congress, which meets on 3 January 2027, with the House majority the elections of 3 November 2026 gave them (results not yet all certified when this was recorded). A law needs both chambers and the President's signature, or two-thirds of each chamber to override a veto."
+origin: llm_intake
+sources:
+  - title: "Leader Jeffries on PBS News Hour, 10 November 2026 (transcript, Office of the Democratic Leader)"
+    url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-pbs-we-will-visit-accountability-wrongdoers
+  - title: "Public Law 119-21, section 90003 (Detention capacity) and section 100052 (Appropriation for U.S. Immigration and Customs Enforcement)"
+    url: https://www.govinfo.gov/content/pkg/PLAW-119publ21/html/PLAW-119publ21.htm
+versions:
+  - version: 1
+    text: "We're not going to provide a dime to the administration's violent mass deportation machine."
+    recorded_on: "2026-11-15"
+    source_url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-pbs-we-will-visit-accountability-wrongdoers
+    quote_checked_on: null
+    source_text:
+      file: jeffries-2026-11-10-pbs.txt
+      span: [787, 878]
+    parameters:
+      who:
+        en: "The Administration's immigration enforcement and removal operations: no money for them (\"not a dime\")"
+      when:
+        en: "Not said. Answering a question on immigration and \"this White House\", after the elections of 3 November 2026; the 120th Congress, with a Democratic House majority, meets on 3 January 2027"
+      deadline: null
+events:
+  - date: "2026-11-10"
+    type: promised
+    text:
+      en: "Asked on PBS News Hour what can be done on immigration with the White House, Jeffries says House Democrats will not provide money for the Administration's deportation operations"
+reviews: []
