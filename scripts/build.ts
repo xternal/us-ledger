@@ -1972,7 +1972,7 @@ async function main() {
     "/robots.txt",
     PREVIEW
       ? "# A preview with drafts: never indexed.\nUser-agent: *\nDisallow: /\n"
-      : `# ${name} is public open data: search engines and AI crawlers are welcome.\nUser-agent: *\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nSitemap: ${absolute(config, "/sitemap.xml")}\n`,
+      : `# ${name} is public open data: search engines and AI crawlers are welcome.\nUser-agent: *\nAllow: /\n\nUser-agent: GPTBot\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: ClaudeBot\nAllow: /\n\nUser-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: Claude-User\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Perplexity-User\nAllow: /\n\nUser-agent: Google-Extended\nAllow: /\n\nUser-agent: Applebot-Extended\nAllow: /\n\nSitemap: ${absolute(config, "/sitemap.xml")}\n`,
   );
 
   // Share images, a few at a time.
