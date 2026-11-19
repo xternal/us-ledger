@@ -21,7 +21,7 @@ const book = (views: readonly CardView[], today = TODAY) =>
     label: (s) => s,
     cardPath: (id) => `/promise/${id}`,
     actorPath: (id) => `/actor/${id}`,
-    pairPath: (id) => (id ? `/then-again/${id}/` : "/then-again/"),
+    pairPath: (id) => (id ? `/then-again/${id}` : "/then-again"),
     promisesPath: "/promises",
     max: 1000,
   });

@@ -191,7 +191,7 @@ export function fySpan(y: Pick<Year, "fy" | "through">): string {
   const month = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
   return `October ${y.fy - 1} to ${month(y.through)}`;
 }
-export const ledgerPath = (fy?: number) => (fy ? `/ledger/${fy}/` : "/ledger/");
+export const ledgerPath = (fy?: number) => (fy ? `/ledger/${fy}` : "/ledger");
 
 /**
  * The promises on this site that are about a line of the ledger, by the Treasury's line name ("borrowed" for the

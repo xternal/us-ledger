@@ -52,6 +52,7 @@ import { moneyByMonth, monthsOf, tradesByMonth, usdM, versus } from "./trades-vi
 import { FAMILY, MAKER, THIS_SITE } from "./family.ts";
 import { latestForecast, logbook, watchTiles, type LogEntry, type WatchPick } from "./home.ts";
 import { NOT_FOUND_FILE, notFoundBody, notFoundDescription, notFoundTitle } from "./notfound.ts";
+import { INDEXNOW_KEY } from "./indexnow.ts";
 
 const ROOT = join(import.meta.dirname, "..");
 /** `--preview` builds drafts too, into public-preview/, so the editor sees a page before approving it; never deployed. */
@@ -195,6 +196,10 @@ interface Page {
   /** The page for an address with no page: written to 404.html, noindex, no canonical, not in the sitemap, and its
    * share card is the home page's. */
   notFound?: boolean;
+  /** The trail above the page, after the site's name; also written as a BreadcrumbList for search engines. */
+  crumbs?: { name: string; path: string }[];
+  /** When what the page shows last changed (YYYY-MM-DD): shown at its foot and given to the sitemap as lastmod. */
+  updated?: string;
 }
 
 async function main() {
@@ -237,7 +242,7 @@ async function main() {
     .map((x) => x.pair)
     .filter((x) => PREVIEW || approved(x))
     .sort((a, b) => b.later.date.localeCompare(a.later.date) || a.id.localeCompare(b.id));
-  const pairPath = (id?: string) => (id ? `/then-again/${id}/` : "/then-again/");
+  const pairPath = (id?: string) => (id ? `/then-again/${id}` : "/then-again");
   const speaker = (x: Pair) => result.actors.get(x.actor_id)!;
   const ago = (x: Pair) => daysApart(x.first.date, x.later.date);
   const laterBy = (n: number) => {
@@ -265,7 +270,7 @@ async function main() {
         .filter((x) => PREVIEW || tradeApproved(x))
         .sort((a, b) => b.words.date.localeCompare(a.words.date) || a.id.localeCompare(b.id))
     : [];
-  const tradesPath = (id?: string) => (id ? `/trades/${id}/` : "/trades/");
+  const tradesPath = (id?: string) => (id ? `/trades/${id}` : "/trades");
 
   rmSync(OUT, { recursive: true, force: true });
   const write = (path: string, body: string | Buffer) => {
@@ -274,7 +279,7 @@ async function main() {
     writeFileSync(file, body);
   };
   const images: { path: string; share: Share }[] = [];
-  const pages: string[] = [];
+  const pages: { path: string; updated?: string }[] = [];
 
   // Promises first: the current administration's. The ledger second: the money in and out since fiscal year 2018.
   // Five items, Method last, the same word in the same place as on the other sites of the family (Pavel, 23 October
@@ -283,10 +288,10 @@ async function main() {
   const nav = [
     { key: "promises", href: p.promises(L), label: "Promises" },
     { key: "ledger", href: ledgerPath(), label: "Ledger" },
-    { key: "then-again", href: "/then-again/", label: "Then again" },
+    { key: "then-again", href: "/then-again", label: "Then again" },
     ...(tradesLive ? [{ key: "trades", href: tradesPath(), label: "Trades" }] : []),
-    { key: "people", href: "/actor/", label: "People" },
-    { key: "about", href: "/about/", label: "Method" },
+    { key: "people", href: "/actor", label: "People" },
+    { key: "about", href: "/about", label: "Method" },
   ];
 
   /**
@@ -322,11 +327,22 @@ async function main() {
     const image = `/og${pg.path === "/" || pg.notFound ? "/home" : trim(pg.path)}.png`;
     if (!pg.notFound) {
       images.push({ path: image, share: pg.share });
-      pages.push(pg.path);
+      pages.push({ path: trim(pg.path), updated: pg.updated });
     }
     const title = pg.fullTitle ?? (pg.title === name ? name : `${pg.title} · ${name}`);
     const social = pg.socialTitle ?? pg.title;
-    const url = absolute(config, pg.notFound ? "/" : pg.path);
+    // One address per page, without a trailing slash (vercel.json "trailingSlash": false redirects the other form).
+    const url = absolute(config, pg.notFound ? "/" : trim(pg.path));
+    const crumbLd: LdData[] = pg.crumbs?.length
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [{ name, path: "/" }, ...pg.crumbs].map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: absolute(config, trim(c.path)) })),
+          },
+        ]
+      : [];
+    const allLd = [...(pg.ld ?? []), ...crumbLd];
     const section = sectionOf(pg.path);
     const meta = (property: string, content: string) => h("meta", { key: property, property, content });
     const named = (n: string, content: string) => h("meta", { key: n, name: n, content });
@@ -372,7 +388,7 @@ async function main() {
               h("link", { rel: "stylesheet", href: "/tokens.css" }),
               h("link", { rel: "stylesheet", href: "/site.css" }),
               h("link", { rel: "alternate", type: "application/atom+xml", title: `${name}: every change`, href: "/feeds/all.xml" }),
-              pg.ld?.length ? h(JsonLd, { data: pg.ld }) : null,
+              allLd.length ? h(JsonLd, { data: allLd }) : null,
             ),
             h(
               "body",
@@ -414,7 +430,12 @@ async function main() {
                 ),
               ),
               PREVIEW ? h("p", { className: "preview-banner", role: "note" }, "Preview: drafts included. Nothing on this page is published or approved.") : null,
-              h("main", { id: "main", className: pg.wide ? "wrap wrap--wide" : "wrap" }, pg.body),
+              h(
+                "main",
+                { id: "main", className: pg.wide ? "wrap wrap--wide" : "wrap" },
+                pg.body,
+                pg.updated ? h("p", { className: "page-updated" }, "Updated ", h("time", { dateTime: pg.updated }, longDate(w, pg.updated)), " · every figure and quote links to its source") : null,
+              ),
               h(
                 "footer",
                 { className: "site-footer" },
@@ -491,6 +512,14 @@ async function main() {
   // The ledger: the money in and out, every fiscal year since 2018, from the Treasury's own statements
   // (scripts/ledger.ts). Read here because the home page's first screen opens with its figures.
   const { file: ledgerFile, years } = readLedger(ROOT);
+  // When each part of the site last changed, from its own records: a card's last event or review, the Treasury
+  // figures' fetch date, an editor's approval of a pair or a match. Shown at the foot of a page and used as lastmod.
+  const approvedOn = (x: { reviews?: { approves?: boolean; on?: string }[]; recorded_on?: string }) =>
+    (x.reviews ?? []).filter((r) => r.approves && r.on).map((r) => ((r.on as unknown) instanceof Date ? (r.on as unknown as Date).toISOString().slice(0, 10) : String(r.on))).sort().at(-1) ?? x.recorded_on;
+  const newest = (...ds: (string | undefined)[]) => ds.filter((d): d is string => !!d).sort().at(-1);
+  const pairsUpdated = newest(...pairs.map(approvedOn));
+  const tradesUpdated = tradesLive ? newest(tradesAbout && approvedOn(tradesAbout.about), ...matches.map(approvedOn)) : undefined;
+  const siteUpdated = newest(updated(views), ledgerFile.fetched_on, pairsUpdated, tradesUpdated)!;
   const fullYears = years.filter((y) => y.complete);
   const lastYear = fullYears.at(-1)!;
   const prevYear = fullYears.at(-2);
@@ -691,8 +720,30 @@ async function main() {
     alt: chartAlt,
     wide: true,
     script: ONPAGE_SCRIPT,
+    updated: siteUpdated,
     ld: [
-      { "@context": "https://schema.org", "@type": "WebSite", name, url: absolute(config, "/"), description: config.site.description[L], inLanguage: L },
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": absolute(config, "/#organization"),
+        name,
+        url: absolute(config, "/"),
+        logo: absolute(config, "/apple-touch-icon.png"),
+        description: config.site.description[L],
+        founder: { "@type": "Person", name: MAKER.name, url: MAKER.href },
+        sameAs: ["https://github.com/xternal/us-ledger"],
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": absolute(config, "/#website"),
+        name,
+        url: absolute(config, "/"),
+        description: config.site.description[L],
+        inLanguage: L,
+        publisher: { "@id": absolute(config, "/#organization") },
+        dateModified: siteUpdated,
+      },
       cardItemList(platform, ld),
       { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
     ],
@@ -827,7 +878,7 @@ async function main() {
           ", when a step it reached is reversed. ",
           h("strong", null, label("unscoreable")),
           " means too vague to track. ",
-          h("a", { href: "/about/" }, "Method"),
+          h("a", { href: "/about" }, "Method"),
         ),
       ),
       h(
@@ -855,7 +906,7 @@ async function main() {
         coverage(config, views)
           .filter((c) => c.count)
           .map((c) => h("li", { key: c.area }, h("a", { href: p.area(c.area, L), "aria-current": current === c.area ? "page" : undefined }, areaLabel(config, c.area, L), " ", h("span", null, String(c.count))))),
-        h("li", null, h("a", { href: "/promises/area/", className: "area-filter__all" }, "Every area, empty ones too")),
+        h("li", null, h("a", { href: "/promises/area", className: "area-filter__all" }, "Every area, empty ones too")),
       ),
     );
 
@@ -866,6 +917,8 @@ async function main() {
     share: chartShare("Every promise", `Every promise on ${name}, and where each one stands`),
     alt: chartAlt,
     ld: collectionJsonLd({ path: p.promises(L), name: "Every promise", description: `Every promise on ${name}`, views }, ld),
+    crumbs: [{ name: "Promises", path: p.promises(L) }],
+    updated: updated(views),
     body: h(
       Fragment,
       null,
@@ -893,18 +946,20 @@ async function main() {
         Fragment,
         null,
         h(Breadcrumbs, { config, items: crumbs }),
-        h(PromiseCard, { view: v, config, today, related: relatedCards(v, views), actions: h("a", { href: `${p.card(v.id, L)}/story/` }, "The whole story in one line") }, targetAndForecast(v, w)),
+        h(PromiseCard, { view: v, config, today, related: relatedCards(v, views), actions: h("a", { href: `${p.card(v.id, L)}/story` }, "The whole story in one line") }, targetAndForecast(v, w)),
       ),
     });
     page({
-      path: `${p.card(v.id, L)}/story/`,
+      path: `${p.card(v.id, L)}/story`,
+      crumbs: [...crumbs.slice(1).map((c) => ({ name: c.name, path: c.href })), { name: "Story", path: `${p.card(v.id, L)}/story` }],
+      updated: lastUpdated(v.card, today) ?? undefined,
       title: `${headline(v)}: the story`,
       socialTitle: `${headline(v)}: the whole story`,
       description: clip(`Every dated step of “${headline(v)}”, from the day it was promised to today, each with its document. Status: ${label(v.card.status)}.`, 200),
       share: promiseShare(v, "The whole story, step by step"),
       alt: promiseAlt(v),
       type: "article",
-      body: h(Fragment, null, h(Breadcrumbs, { config, items: [...crumbs, { name: "Story", href: `${p.card(v.id, L)}/story/` }] }), h(PromiseStory, { view: v, config, today, headingLevel: 2 })),
+      body: h(Fragment, null, h(Breadcrumbs, { config, items: [...crumbs, { name: "Story", href: `${p.card(v.id, L)}/story` }] }), h(PromiseStory, { view: v, config, today, headingLevel: 2 })),
     });
   }
 
@@ -923,8 +978,10 @@ async function main() {
       }),
     );
   page({
-    path: "/actor/",
+    path: "/actor",
     title: "People",
+    crumbs: [{ name: "People", path: "/actor" }],
+    updated: updated(views),
     description: `The President, the Vice President, the officials who speak for the Administration, the party leaders in Congress, the parties and the bodies that must deliver, each with every promise on record and where it stands.`,
     share: pageShare("People", "Who promised what", "The President, the Vice President, the officials who speak for the Administration and the party leaders in Congress, each with every area listed, empty ones too."),
     alt: "Who promised what: the President, the Vice President, senior officials and the party leaders in Congress on USLedger.org.",
@@ -957,7 +1014,7 @@ async function main() {
       body: h(
         Fragment,
         null,
-        h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "People", href: "/actor/" }, { name: actorName(a), href: p.actor(a.id, L) }] }),
+        h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "People", href: "/actor" }, { name: actorName(a), href: p.actor(a.id, L) }] }),
         h("h1", null, actorName(a)),
         a.roles?.length ? h("ul", { className: "roles" }, a.roles.map((r, i) => h("li", { key: i }, r.title[L], r.from ? ` from ${longDate(w, r.from)}` : "", r.to ? ` to ${longDate(w, r.to)}` : ""))) : null,
         h("p", { className: "lede" }, summary),
@@ -982,15 +1039,17 @@ async function main() {
   }
 
   page({
-    path: "/promises/area/",
+    path: "/promises/area",
     title: "Areas",
+    crumbs: [{ name: "Promises", path: p.promises(L) }, { name: "Areas", path: "/promises/area" }],
+    updated: updated(views),
     description: "The twenty promises of the 2024 Republican Platform are this site's areas, in its order, with “Not among the 20” for the rest. Every area is listed, empty ones too.",
     share: chartShare("Areas", "Twenty areas, the platform's own, in its order"),
     alt: chartAlt,
     body: h(
       Fragment,
       null,
-      h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Promises", href: p.promises(L) }, { name: "Areas", href: "/promises/area/" }] }),
+      h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Promises", href: p.promises(L) }, { name: "Areas", href: "/promises/area" }] }),
       h("h1", null, "Promises by area"),
       h("p", { className: "lede" }, "The areas are the twenty promises of the 2024 Republican Platform, in its order, so the yardstick is the platform's own; everything else is under “Not among the 20”."),
       h(AreaCoverage, { views, config, headingLevel: 2 }),
@@ -1005,16 +1064,23 @@ async function main() {
       : `${areaName}: ${inArea.length ? `${inArea.length} promises, ${statusMix(inArea, config, w)}` : "no promise recorded yet"}.`;
     page({
       path: p.area(area, L),
+      updated: updated(inArea),
       title: areaName,
       description,
       share: own ? promiseShare(own, `Area ${areaName.replace(/^\d+\.\s*/, "")}`) : pageShare("Area", areaName, inArea.length ? `${inArea.length} promises: ${statusMix(inArea, config, w)}` : "No promise is recorded in this area yet."),
       alt: own ? promiseAlt(own) : `${areaName} on ${name}.`,
-      ld: collectionJsonLd({ path: p.area(area, L), name: areaName, description, views: inArea, breadcrumb: [{ name: "Promises", path: p.promises(L) }, { name: "Areas", path: "/promises/area/" }] }, ld),
+      ld: collectionJsonLd({ path: p.area(area, L), name: areaName, description, views: inArea, breadcrumb: [{ name: "Promises", path: p.promises(L) }, { name: "Areas", path: "/promises/area" }] }, ld),
       body: h(
         Fragment,
         null,
-        h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Promises", href: p.promises(L) }, { name: "Areas", href: "/promises/area/" }, { name: areaName, href: p.area(area, L) }] }),
+        h(Breadcrumbs, { config, items: [{ name, href: "/" }, { name: "Promises", href: p.promises(L) }, { name: "Areas", href: "/promises/area" }, { name: areaName, href: p.area(area, L) }] }),
         h("h1", null, areaName),
+        h(
+          "p",
+          { className: "lede" },
+          own ? `The 2024 Republican Platform's words: “${own.current.text}” Status: ${label(own.card.status).toLowerCase()}. ` : "",
+          inArea.length ? `${inArea.length} ${inArea.length === 1 ? "promise is" : "promises are"} filed under this area: ${statusMix(inArea, config, w)}.` : "No promise is recorded in this area yet.",
+        ),
         areaFilter(area),
         h(PromiseList, { views: inArea, today, actors: result.actors, config, empty: "No promise is recorded in this area." }),
       ),
@@ -1025,6 +1091,8 @@ async function main() {
   // (scripts/ledger.ts). One page for all the years, and one for each year.
   const byId = new Map(views.map((v) => [v.id, v]));
   const mtsSource = ledgerFile.sources.mts;
+  /** The Treasury's bureau that publishes the figures, for the ledger's Dataset records. */
+  const TREASURY = { "@type": "GovernmentOrganization", name: mtsSource.publisher, url: "https://www.fiscal.treasury.gov/" };
   const yearShare = (y: Year, kicker: string): Share => ({
     kind: "flow",
     kicker,
@@ -1096,6 +1164,8 @@ async function main() {
   page({
     path: ledgerPath(),
     title: "The ledger: money in and out",
+    crumbs: [{ name: "Ledger", path: ledgerPath() }],
+    updated: ledgerFile.fetched_on,
     socialTitle: `Where ${tn(lastYear.outlays)} went, and where it came from`,
     description: ledgerDescription,
     share: {
@@ -1117,7 +1187,12 @@ async function main() {
         url: absolute(config, ledgerPath()),
         license: "https://creativecommons.org/publicdomain/zero/1.0/",
         isBasedOn: mtsSource.url,
-        creator: { "@type": "Organization", name: mtsSource.publisher },
+        creator: TREASURY,
+        publisher: { "@id": absolute(config, "/#organization") },
+        dateModified: ledgerFile.fetched_on,
+        isAccessibleForFree: true,
+        keywords: ["federal budget", "receipts", "outlays", "deficit", "Monthly Treasury Statement"],
+        spatialCoverage: "United States",
         temporalCoverage: `${years[0]!.fy - 1}-10-01/${years.at(-1)!.through}`,
         distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: absolute(config, "/data/ledger.json") }],
       },
@@ -1193,6 +1268,27 @@ async function main() {
     page({
       path: ledgerPath(y.fy),
       title: `${title}: money in and out`,
+      crumbs: [{ name: "Ledger", path: ledgerPath() }, { name: title, path: ledgerPath(y.fy) }],
+      updated: ledgerFile.fetched_on,
+      ld: [
+        {
+          "@context": "https://schema.org",
+          "@type": "Dataset",
+          name: `US federal receipts and outlays, ${fyName(y)}${y.complete ? "" : " so far"}`,
+          description: `Receipts by source and outlays by budget function in ${fyName(y)} (${fySpan(y)}), from the Monthly Treasury Statement, Table 9: ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed.`,
+          url: absolute(config, ledgerPath(y.fy)),
+          license: "https://creativecommons.org/publicdomain/zero/1.0/",
+          isBasedOn: mtsSource.url,
+          creator: TREASURY,
+          publisher: { "@id": absolute(config, "/#organization") },
+          dateModified: ledgerFile.fetched_on,
+          isAccessibleForFree: true,
+          spatialCoverage: "United States",
+          temporalCoverage: `${y.fy - 1}-10-01/${y.through}`,
+          isPartOf: { "@type": "Dataset", url: absolute(config, ledgerPath()) },
+          distribution: [{ "@type": "DataDownload", encodingFormat: "application/json", contentUrl: absolute(config, "/data/ledger.json") }],
+        },
+      ],
       socialTitle: `${title}: ${bn(y.outlays)} spent, ${bn(y.borrowed)} borrowed`,
       description: clip(
         `Where the federal government's money came from and went in ${fyName(y)} (${fySpan(y)}): ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed. Every line of the Treasury's statement.`,
@@ -1299,6 +1395,8 @@ async function main() {
   page({
     path: pairPath(),
     title: "Then again",
+    crumbs: [{ name: "Then again", path: pairPath() }],
+    updated: pairsUpdated,
     socialTitle: "Then again: what was said, and what was said later",
     description: thenDescription,
     share: fastest
@@ -1479,6 +1577,8 @@ async function main() {
     page({
       path: pairPath(x.id),
       title: `${x.subject}: then again`,
+      crumbs: [{ name: "Then again", path: pairPath() }, { name: x.subject, path: pairPath(x.id) }],
+      updated: approvedOn(x),
       socialTitle: `${actorName(a)}: ${x.subject}`,
       description: clip(`${actorName(a)}, ${longDate(w, x.first.date)}: “${x.first.text}” ${laterBy(ago(x))}: “${x.later.text}”`, 200),
       share: pairShare(x),
@@ -1491,6 +1591,11 @@ async function main() {
           headline: `${actorName(a)}: ${x.subject}`,
           url: absolute(config, pairPath(x.id)),
           datePublished: review?.on ?? x.recorded_on,
+          dateModified: approvedOn(x),
+          inLanguage: L,
+          image: absolute(config, `/og${pairPath(x.id)}.png`),
+          author: { "@id": absolute(config, "/#organization") },
+          publisher: { "@id": absolute(config, "/#organization") },
           about: { "@type": "Person", name: actorName(a) },
           hasPart: [x.first, x.later].map((s) => ({ "@type": "Quotation", text: s.text, dateCreated: s.date, spokenByCharacter: { "@type": "Person", name: actorName(a) }, isBasedOn: s.source_url })),
         },
@@ -1652,6 +1757,8 @@ async function main() {
     page({
       path: tradesPath(),
       title: "Trades",
+      crumbs: [{ name: "Trades", path: tradesPath() }],
+      updated: tradesUpdated,
       socialTitle: "Trades: the President's accounts, from his own reports",
       description: tradesDescription,
       share: pageShare(`Trades · ${actorName(trump)}`, `${count.number.toLocaleString("en-US")} transactions in ${count.year}`, `From his reports to the Office of Government Ethics, with the White House's account beside them, and ${plural(matches.length, "trade")} within days of his words.`),
@@ -1834,6 +1941,8 @@ async function main() {
       page({
         path: tradesPath(x.id),
         title: `${x.subject}: trade, then words`,
+        crumbs: [{ name: "Trades", path: tradesPath() }, { name: x.subject, path: tradesPath(x.id) }],
+        updated: approvedOn(x),
         socialTitle: `${actorName(trump)}: ${x.subject}`,
         description: clip(`${longDate(w, x.trade.date)}: ${what(x)}. ${longDate(w, x.words.date)}: “${x.words.text}” ${result5(x)}`, 200),
         share: matchShare(x),
@@ -1846,6 +1955,11 @@ async function main() {
             headline: `${actorName(trump)}: ${x.subject}`,
             url: absolute(config, tradesPath(x.id)),
             datePublished: review?.on ?? x.recorded_on,
+            dateModified: approvedOn(x),
+            inLanguage: L,
+            image: absolute(config, `/og${tradesPath(x.id)}.png`),
+            author: { "@id": absolute(config, "/#organization") },
+            publisher: { "@id": absolute(config, "/#organization") },
             about: { "@type": "Person", name: actorName(trump) },
             hasPart: [{ "@type": "Quotation", text: x.words.text, dateCreated: x.words.date, spokenByCharacter: { "@type": "Person", name: actorName(trump) }, isBasedOn: x.words.source_url }],
             isBasedOn: x.trade.filing.url,
@@ -1880,8 +1994,10 @@ async function main() {
   }
 
   page({
-    path: "/about/",
+    path: "/about",
     title: "Method",
+    crumbs: [{ name: "Method", path: "/about" }],
+    ld: [{ "@context": "https://schema.org", "@type": "AboutPage", name: "Method", url: absolute(config, "/about"), isPartOf: { "@id": absolute(config, "/#website") }, about: { "@id": absolute(config, "/#organization") } }],
     socialTitle: "Method: how USLedger.org works",
     description: "How USLedger.org records promises: exact words with their source, a status that moves only on documents, nothing rewritten, costs with who made them, and one standard for everyone.",
     share: pageShare("Method", "Exact words. A status that moves only on evidence.", "Nothing rewritten; costs with who made them; the same rules and words for every person, party and government."),
@@ -1911,7 +2027,7 @@ async function main() {
         h(
           "li",
           null,
-          h("a", { href: "/then-again/" }, "Then again"),
+          h("a", { href: "/then-again" }, "Then again"),
           " pairs a statement with what the same person said later, when the two cannot both stand as written. Both quotes are exact, dated and sourced; the editor approves each pair, and the test is the same for everyone.",
         ),
         tradesLive
@@ -1946,6 +2062,19 @@ async function main() {
     body: notFoundBody({ home: "/", main: { href: p.promises(L), label: "Promises" } }),
   });
 
+  // The site's own sections in full for AI tools, after the engine's cards: the ledger's totals, every pair and
+  // every match in exact words, each with its date and source.
+  const said = (s: { text: string; date: string; source_url: string; where?: string }) => `> ${s.text}\n\n${longDate(w, s.date)}${s.where ? `, ${s.where}` : ""}. Source: ${s.source_url}`;
+  const llmsFullExtra = [
+    `\n\n# The ledger: money in and out, fiscal years ${years[0]!.fy} to ${lastYear.fy}\n\nThe federal government's receipts and outlays from the Monthly Treasury Statement, Table 9 (${mtsSource.url}), published by the ${mtsSource.publisher}; fetched on ${longDate(w, ledgerFile.fetched_on)}. Page: ${absolute(config, ledgerPath())}. Data: ${absolute(config, "/data/ledger.json")}.\n\n| Fiscal year | Period | Receipts | Outlays | Borrowed |\n|---|---|---|---|---|\n${years.map((y) => `| [${y.fy}${y.complete ? "" : " so far"}](${absolute(config, ledgerPath(y.fy))}) | ${fySpan(y)} | ${bn(y.receipts)} | ${bn(y.outlays)} | ${bn(y.borrowed)} |`).join("\n")}`,
+    pairs.length
+      ? `\n\n# Then again\n\nA statement and what the same person said later, when the two cannot both stand as written. Both quotes are exact, dated and sourced; an editor approved each pair. Page: ${absolute(config, pairPath())}.\n\n${pairs.map((x) => `## ${x.subject}\n\n${actorName(speaker(x))}. ${absolute(config, pairPath(x.id))}\n\nThen:\n\n${said(x.first)}\n\nLater:\n\n${said(x.later)}`).join("\n\n")}`
+      : "",
+    tradesLive && matches.length
+      ? `\n\n# Trades\n\nTrades in the President's accounts from his reports to the Office of Government Ethics that came within days of something he said in office. The record shows when, not why. Page: ${absolute(config, tradesPath())}.\n\n${matches.map((x) => `## ${x.subject}\n\n${absolute(config, tradesPath(x.id))}\n\nTrade, ${longDate(w, x.trade.date)}: ${x.trade.text} (${x.trade.filing.title}, ${x.trade.filing.url})\n\nWords:\n\n${said(x.words)}`).join("\n\n")}`
+      : "",
+  ].join("") + "\n";
+
   if (!PREVIEW) {
     const files = publishFiles({ config, views, today, actors: result.actors });
     for (const f of files) {
@@ -1954,19 +2083,30 @@ async function main() {
         f.path === "/llms.txt"
           ? String(f.body).replace(
               /\n## Promise cards\n/,
-              `\n## The site\n\n- [Home](${absolute(config, "/")}): the first screen: the Treasury's figures for fiscal year ${lastYear.fy}, the promises at a glance, the latest target with the forecast at the time, Then again, four promises to watch picked by fixed rules, and a logbook of what was added, moved, corrected or checked; then the platform's twenty\n- [Promises by area](${absolute(config, "/promises/area/")}): the platform's twenty areas, in its order, empty ones too\n- [Method](${absolute(config, "/about/")}): how a promise is recorded and how its status moves\n\n## The ledger\n\n- [The ledger: money in and out, fiscal years ${years[0]!.fy} to ${years.at(-1)!.fy}](${absolute(config, ledgerPath())}): receipts by source and outlays by function from the Monthly Treasury Statement, with what was borrowed\n${years.map((y) => `- [Fiscal year ${y.fy}${y.complete ? "" : " so far"}](${absolute(config, ledgerPath(y.fy))}): ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed`).join("\n")}\n- [The ledger as JSON](${absolute(config, "/data/ledger.json")})\n\n## Then again\n\n- [Then again](${absolute(config, pairPath())}): statements and what the same person said later, in exact words with dates and sources; the dates promises set themselves; promises with no step since\n${pairs.map((x) => `- [${x.subject}](${absolute(config, pairPath(x.id))}): ${actorName(speaker(x))}, ${x.first.date} and ${x.later.date}`).join("\n")}${tradesLive && tradesAbout ? `\n\n## Trades\n\n- [Trades](${absolute(config, tradesPath())}): ${tradesAbout.about.count.number.toLocaleString("en-US")} transactions in the President's accounts in ${tradesAbout.about.count.year}, from his reports to the Office of Government Ethics; the White House's account; the House bill ${tradesAbout.about.bill.number}; and trades within days of his words, with the closes before and after\n${matches.map((x) => `- [${x.subject}](${absolute(config, tradesPath(x.id))}): trade ${x.trade.date}, words ${x.words.date}`).join("\n")}` : ""}\n\n## Promise cards\n`,
+              `\n## The site\n\n- [Home](${absolute(config, "/")}): the first screen: the Treasury's figures for fiscal year ${lastYear.fy}, the promises at a glance, the latest target with the forecast at the time, Then again, four promises to watch picked by fixed rules, and a logbook of what was added, moved, corrected or checked; then the platform's twenty\n- [Promises by area](${absolute(config, "/promises/area")}): the platform's twenty areas, in its order, empty ones too\n- [Method](${absolute(config, "/about")}): how a promise is recorded and how its status moves\n\n## The ledger\n\n- [The ledger: money in and out, fiscal years ${years[0]!.fy} to ${years.at(-1)!.fy}](${absolute(config, ledgerPath())}): receipts by source and outlays by function from the Monthly Treasury Statement, with what was borrowed\n${years.map((y) => `- [Fiscal year ${y.fy}${y.complete ? "" : " so far"}](${absolute(config, ledgerPath(y.fy))}): ${bn(y.receipts)} in, ${bn(y.outlays)} out, ${bn(y.borrowed)} borrowed`).join("\n")}\n- [The ledger as JSON](${absolute(config, "/data/ledger.json")})\n\n## Then again\n\n- [Then again](${absolute(config, pairPath())}): statements and what the same person said later, in exact words with dates and sources; the dates promises set themselves; promises with no step since\n${pairs.map((x) => `- [${x.subject}](${absolute(config, pairPath(x.id))}): ${actorName(speaker(x))}, ${x.first.date} and ${x.later.date}`).join("\n")}${tradesLive && tradesAbout ? `\n\n## Trades\n\n- [Trades](${absolute(config, tradesPath())}): ${tradesAbout.about.count.number.toLocaleString("en-US")} transactions in the President's accounts in ${tradesAbout.about.count.year}, from his reports to the Office of Government Ethics; the White House's account; the House bill ${tradesAbout.about.bill.number}; and trades within days of his words, with the closes before and after\n${matches.map((x) => `- [${x.subject}](${absolute(config, tradesPath(x.id))}): trade ${x.trade.date}, words ${x.words.date}`).join("\n")}` : ""}\n\n## Promise cards\n`,
             )
-          : f.body;
+          : f.path === "/llms-full.txt"
+            ? String(f.body) + llmsFullExtra
+            : f.body;
       write(f.path, body);
     }
     // The engine's sitemap lists the promise pages; ours lists the rest, and sitemap.xml points to both.
     const listed = new Set(sitemapEntries(views, config, today).map((e) => e.loc));
-    const rest = pages.map((pg) => absolute(config, pg)).filter((u) => !listed.has(u) && !listed.has(u.replace(/\/$/, "")));
-    write("/sitemap-pages.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rest.map((u) => `  <url><loc>${u}</loc></url>`).join("\n")}\n</urlset>\n`);
+    const rest = pages.map((pg) => ({ loc: absolute(config, pg.path), lastmod: pg.updated })).filter((e) => !listed.has(e.loc));
+    write(
+      "/sitemap-pages.xml",
+      `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rest.map((e) => `  <url><loc>${e.loc}</loc>${e.lastmod ? `<lastmod>${e.lastmod}</lastmod>` : ""}</url>`).join("\n")}\n</urlset>\n`,
+    );
     write(
       "/sitemap.xml",
-      `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[p.sitemap(), "/sitemap-pages.xml"].map((s) => `  <sitemap><loc>${absolute(config, s)}</loc></sitemap>`).join("\n")}\n</sitemapindex>\n`,
+      `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[p.sitemap(), "/sitemap-pages.xml"].map((s) => `  <sitemap><loc>${absolute(config, s)}</loc><lastmod>${siteUpdated}</lastmod></sitemap>`).join("\n")}\n</sitemapindex>\n`,
     );
+  }
+  if (!PREVIEW) {
+    // IndexNow (scripts/indexnow.ts): the key file the search engines check, and the commit this build is of, so the
+    // ping after a push waits for the deploy that carries it.
+    write(`/${INDEXNOW_KEY}.txt`, INDEXNOW_KEY);
+    write("/version.txt", `${process.env.VERCEL_GIT_COMMIT_SHA ?? "local"}\n`);
   }
   write(
     "/robots.txt",
