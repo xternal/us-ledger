@@ -31,6 +31,7 @@ h3 { font-size: 1.2rem; }
 main { padding-bottom: 1rem; }
 .lede { font-size: 1.15rem; max-width: 42rem; }
 .note, .updated, .section-lede { color: var(--op-muted); max-width: 42rem; }
+.page-updated { margin: 2.5rem 0 0; font-size: 0.875rem; color: var(--op-muted); }
 .updated { font-size: 0.9rem; margin: 1rem 0 0; }
 
 /* Header: one row, 48px (Pavel, 23 October 2026): the logo with the family switcher, then the menu with the current

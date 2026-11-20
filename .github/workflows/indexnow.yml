@@ -1,0 +1,25 @@
+name: IndexNow
+
+# After a push to main, Vercel deploys the site; once the live site serves this commit, tell IndexNow (Bing, and
+# through it ChatGPT and Copilot search) which pages changed. Standard library only: no install, about a minute.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: true
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: node scripts/indexnow.ts --wait ${{ github.sha }}
