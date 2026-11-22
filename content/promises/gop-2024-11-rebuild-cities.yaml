@@ -10,7 +10,7 @@ venue_label:
 area: cities
 status: delivering
 status_note:
-  en: "DC police data: violent crime fell 29% in 2025 (2,475 offenses, against 3,475 in 2024), but from 1 January to 19 October 2026 it is 12% higher than a year earlier (2,294 against 2,050), with homicides down 27% and assaults with a dangerous weapon up 41% (MPD, as of 20 October 2026, preliminary, DC Code definitions). On 20 November 2025 a federal court found the National Guard deployment in Washington unlawful and stayed its own order. \"Clean\" and \"beautiful\" have no official measure, and no city other than Washington has comparable federal steps on this card."
+  en: "DC police data: violent crime fell 29% in 2025 (2,475 offenses, against 3,475 in 2024), but from 1 January to 19 November 2026 it is 11% higher than a year earlier (2,521 against 2,271), with homicides down 26% (89 against 120) (MPD, as of 20 November 2026, preliminary, DC Code definitions). On 20 November 2025 a federal court found the National Guard deployment in Washington unlawful and stayed its own order. \"Clean\" and \"beautiful\" have no official measure, and no city other than Washington has comparable federal steps on this card."
 responsible:
   actor_id: us-administration
 origin: manual
@@ -65,6 +65,11 @@ events:
     text:
       en: "A presidential memorandum creates the Memphis Safe Task Force and asks Tennessee's governor to provide National Guard units"
     evidence_url: https://www.govinfo.gov/content/pkg/DCPD-202500916/html/DCPD-202500916.htm
+  - date: "2026-11-20"
+    type: delivering
+    text:
+      en: "DC police preliminary data as of 20 November 2026: 2,521 violent crimes since 1 January, 11% more than a year earlier (2,271), and 89 homicides, 26% fewer (120)"
+    evidence_url: https://mpdc.dc.gov/dailycrime
 replies: []
 corrections: []
 reviews:
