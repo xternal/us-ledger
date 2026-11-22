@@ -1,0 +1,46 @@
+format: openpromises/1
+id: jeffries-end-citizens-united-2026
+headline:
+  en: "End the Citizens United ruling on political spending"
+actor_id: hakeem-jeffries
+made_on: "2026-11-17"
+venue: press_conference
+venue_label:
+  en: "Press conference in the Capitol (remarks published by the House Democratic Leader's office)"
+area: elections
+status: promised
+status_note:
+  en: "In Citizens United v. Federal Election Commission (21 January 2010) the Supreme Court held that the First Amendment bars the government from limiting independent political spending by corporations. A ruling on the Constitution is set aside only by a later ruling of the Court or by an amendment to the Constitution, which Congress proposes by two-thirds of each chamber and three-quarters of the states ratify (Article V). The words do not say which way."
+responsible:
+  actor_id: us-congress
+  note:
+    en: "The words commit House Democrats in the 120th Congress, which meets on 3 January 2027, with the House majority the elections of 3 November 2026 gave them. An amendment to the Constitution needs two-thirds of each chamber and ratification by three-quarters of the states, and no signature by the President; a law needs both chambers and the President's signature, or two-thirds of each chamber to override a veto."
+origin: llm_intake
+sources:
+  - title: "Leader Jeffries at a press conference, 17 November 2026 (Office of the Democratic Leader)"
+    url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-were-going-fight-hard-make-life-more-affordable-american
+  - title: "Speaker-designate Jeffries on MS NOW's The Briefing with Jen Psaki, 18 November 2026 (transcript, Office of the Democratic Leader)"
+    url: https://democraticleader.house.gov/media/press-releases/speaker-designate-jeffries-ms-now-weve-got-make-meaningful-dramatic-decisive
+  - title: "Supreme Court: Citizens United v. Federal Election Commission, No. 08-205 (21 January 2010)"
+    url: https://www.supremecourt.gov/opinions/09pdf/08-205.pdf
+versions:
+  - version: 1
+    text: "And we're committed to getting big money out of politics by ending Citizens United."
+    recorded_on: "2026-11-22"
+    source_url: https://democraticleader.house.gov/media/press-releases/leader-jeffries-were-going-fight-hard-make-life-more-affordable-american
+    quote_checked_on: null
+    source_text:
+      file: jeffries-2026-11-17-press-conference.txt
+      span: [985, 1068]
+    parameters:
+      who:
+        en: "The Supreme Court's ruling in Citizens United v. Federal Election Commission (2010): ended"
+      when:
+        en: "Not said in these words. On MS NOW the next day, 18 November 2026, he said House Democrats plan to \"aggressively tackle Citizens United\" \"very early in the new Congress\", which meets on 3 January 2027"
+      deadline: null
+events:
+  - date: "2026-11-17"
+    type: promised
+    text:
+      en: "At a press conference after the elections of 3 November 2026, Jeffries says House Democrats are committed to ending the Citizens United ruling"
+reviews: []
