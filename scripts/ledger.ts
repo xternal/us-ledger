@@ -145,7 +145,7 @@ const sum = (rec: Record<string, number>, lines: string[]) =>
 
 export function readLedger(root: string): { file: LedgerFile; years: Year[] } {
   const file = JSON.parse(readFileSync(join(root, "data", "ledger.json"), "utf8")) as LedgerFile;
-  const years = file.years.map((y): Year => {
+  const years = file.years.map((y): Year | null => {
     const { Total: receipts, ...r } = y.receipts;
     const { Total: outlays, ...o } = y.outlays;
     if (receipts === undefined || outlays === undefined) throw new Error(`FY${y.fy}: no totals`);
@@ -172,9 +172,19 @@ export function readLedger(root: string): { file: LedgerFile; years: Year[] } {
     outs.push({ key: "rest", label: "Everything else", long: `Everything else, net: ${rest.map((l) => LINE_NAMES[l]!.toLowerCase()).join("; ")}`, kind: "out", amount: sum(o, rest), lines: rest });
     const outSum = outs.reduce((t, f) => t + f.amount, 0);
     if (Math.abs(outSum - outlays) > 1e6) throw new Error(`FY${y.fy}: outlay groups add up to ${outSum}, the total is ${outlays}`);
-    if (outs.at(-1)!.amount <= 0) throw new Error(`FY${y.fy}: "everything else" is not positive; split it`);
+    if (outs.at(-1)!.amount <= 0) {
+      // In a year's first month or two, "everything else" can be net negative: the offsetting receipts (about −$55bn in
+      // October 2026) outweigh the small lines netted with them, and a flow below zero cannot be drawn. A year still
+      // running is left off the pages until it can be drawn; its figures stay in data/ledger.json. A complete year
+      // must always be drawable.
+      if (!y.complete) {
+        console.warn(`FY${y.fy} so far (to ${y.through}) is not shown yet: "everything else" is not positive`);
+        return null;
+      }
+      throw new Error(`FY${y.fy}: "everything else" is not positive; split it`);
+    }
     return { fy: y.fy, through: y.through, complete: y.complete, statement: y.statement, receipts, outlays, borrowed, ins, outs, raw: { receipts: r, outlays: o }, debt: y.debt, presidents: presidentsIn(y.fy) };
-  });
+  }).filter((y): y is Year => y !== null);
   return { file, years };
 }
 

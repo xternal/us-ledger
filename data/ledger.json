@@ -1,6 +1,6 @@
 {
   "note": "Written by scripts/ledger-fetch.ts from the Treasury's Fiscal Data API. Dollars, as published.",
-  "fetched_on": "2026-10-21",
+  "fetched_on": "2026-11-22",
   "sources": {
     "mts": {
       "title": "Monthly Treasury Statement, Table 9: Summary of Receipts by Source, and Outlays by Function of the U.S. Government",
@@ -15,11 +15,11 @@
       "api": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny"
     }
   },
-  "latest_statement": "2026-09-30",
+  "latest_statement": "2026-10-31",
   "debt_now": {
-    "date": "2026-10-19",
-    "total": 40396401120485.05,
-    "public": 32533474452928.98
+    "date": "2026-11-19",
+    "total": 40709780700317.02,
+    "public": 32901459975089.26
   },
   "years": [
     {
@@ -425,6 +425,51 @@
         "date": "2026-09-30",
         "total": 40171825101340.31,
         "public": 32425012546390.57
+      }
+    },
+    {
+      "fy": 2027,
+      "through": "2026-10-31",
+      "complete": false,
+      "statement": "https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/accounting/mts/mts_table_9?filter=record_date:eq:2026-10-31&page[size]=200&sort=src_line_nbr",
+      "receipts": {
+        "Individual Income Taxes": 186376346288.16,
+        "Corporation Income Taxes": 18042284142.96,
+        "Employment and General Retirement": 128626348038.47,
+        "Unemployment Insurance": 2150345587.93,
+        "Other Retirement": 697439823.09,
+        "Excise Taxes": 5929495055.21,
+        "Estate and Gift Taxes": 3765792152.82,
+        "Customs Duties": 19217228460.18,
+        "Miscellaneous Receipts": 4134839053.95,
+        "Total": 368940118602.77
+      },
+      "outlays": {
+        "National Defense": 128878982148.27,
+        "International Affairs": 4478544602.39,
+        "General Science, Space, and Technology": 3313779291.48,
+        "Energy": 1875689497.98,
+        "Natural Resources and Environment": 5451587841.93,
+        "Agriculture": 17597908130.98,
+        "Commerce and Housing Credit": 457491731.71,
+        "Transportation": 12984923519.61,
+        "Community and Regional Development": 3595707793.74,
+        "Education, Training, Employment, and Social Services": 13717884894.65,
+        "Health": 93528269732.7,
+        "Medicare": 170045487303.15,
+        "Income Security": 58482931628.59,
+        "Social Security": 142687221456.78,
+        "Veterans Benefits and Services": 54298485848.95,
+        "Administration of Justice": 8723223119.63,
+        "General Government": 5004583094.96,
+        "Net Interest": 103076056306.27,
+        "Undistributed Offsetting Receipts": -55195091463.41,
+        "Total": 773003666480.36
+      },
+      "debt": {
+        "date": "2026-10-30",
+        "total": 40524510013062.41,
+        "public": 32738422032176.85
       }
     }
   ],
@@ -860,6 +905,10 @@
     {
       "month": "2026-09",
       "amount": 5910402249.78
+    },
+    {
+      "month": "2026-10",
+      "amount": 19217228460.18
     }
   ]
 }
