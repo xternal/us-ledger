@@ -1,0 +1,44 @@
+format: openpromises/1
+id: trump-data-centers-in-america-2026
+headline:
+  en: "American companies' data centers only in the US"
+actor_id: donald-trump
+made_on: "2026-11-20"
+venue: press_conference
+venue_label:
+  en: "White House press briefing (the President's words as the White House published them)"
+area: manufacturing
+status: promised
+status_note:
+  en: "No law or executive order that limits where American companies build data centers was found when this was recorded. The White House fact sheet of 18 November 2026 on the President's visit to Asia says a U.S. consortium will develop a sovereign Super Intelligence (SI) cloud for the Malaysian government, and that Brunei's Unified National Networks intends to award U.S. company Vertiv its Rimba Data Centre tender. The words do not say how the limit would be set, or whether it covers data centers already built or under contract abroad."
+responsible:
+  actor_id: us-administration
+  note:
+    en: "The words do not say whether the limit would come by executive action or by a law, which needs both chambers of Congress and the President's signature."
+origin: llm_intake
+sources:
+  - title: "The White House: At Press Briefing, President Trump Touts Historic Wins for Americans, Signals Deal-Making on Healthcare (20 November 2026)"
+    url: https://www.whitehouse.gov/releases/2026/11/at-press-briefing-president-trump-touts-historic-wins-for-americans-signals-deal-making-on-healthcare/
+  - title: "The White House: Fact Sheet: President Donald J. Trump Secures Historic Economic Deals for American Workers and Strengthens America's Leadership in Asia (18 November 2026)"
+    url: https://www.whitehouse.gov/fact-sheets/2026/11/fact-sheet-president-donald-j-trump-secures-historic-economic-deals-for-american-workers-and-strengthens-americas-leadership-in-asia/
+versions:
+  - version: 1
+    text: "We’re not going to allow our companies to build data centers outside of our country."
+    recorded_on: "2026-11-22"
+    source_url: https://www.whitehouse.gov/releases/2026/11/at-press-briefing-president-trump-touts-historic-wins-for-americans-signals-deal-making-on-healthcare/
+    quote_checked_on: null
+    source_text:
+      file: whitehouse-2026-11-20-press-briefing.txt
+      span: [610, 694]
+    parameters:
+      who:
+        en: "American companies' data centers: none built outside the United States"
+      when:
+        en: "Not said. Said at the White House press briefing of 20 November 2026, on the President's return from Asia"
+      deadline: null
+events:
+  - date: "2026-11-20"
+    type: promised
+    text:
+      en: "At a White House press briefing, the President says the Administration will not allow American companies to build data centers outside the United States"
+reviews: []
