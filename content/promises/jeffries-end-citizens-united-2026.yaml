@@ -43,4 +43,8 @@ events:
     type: promised
     text:
       en: "At a press conference after the elections of 3 November 2026, Jeffries says House Democrats are committed to ending the Citizens United ruling"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-11-23"
+    approves: true
