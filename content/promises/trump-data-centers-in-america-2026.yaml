@@ -41,4 +41,8 @@ events:
     type: promised
     text:
       en: "At a White House press briefing, the President says the Administration will not allow American companies to build data centers outside the United States"
-reviews: []
+reviews:
+  - by: Pavel Guzhikov
+    kind: editor
+    "on": "2026-11-23"
+    approves: true
